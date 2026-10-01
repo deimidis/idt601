@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IDT 601 · Ingeniería de Datos — Módulos 1 y 2 (EGPP)</title>
+  <meta name="description" content="Presentaciones y lecciones de los Módulos 1 (Datos) y 2 (Ingesta de Datos) — Ingeniería de Datos IDT 601, Diplomado en Data Driven AI, EGPP 2026." />
+  <style>
+    :root{
+      --bg:#F5F3EB; --card:#FFFFFF; --fg:#2A4D40; --muted:#3D6558; --soft:#7E9A8E;
+      --accent:#507A6E; --gold:#DABC6E; --line:#A9BEBD; --surface:#EAF0ED;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{background:var(--bg);color:var(--fg);font:16px/1.55 "Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:980px;margin:0 auto;padding:36px 20px 72px}
+    .kicker{color:var(--soft);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin:0 0 10px}
+    h1{font-size:34px;line-height:1.15;margin:0 0 10px;letter-spacing:-.02em}
+    .lead{color:var(--muted);font-size:18px;margin:0 0 8px;max-width:70ch}
+    .note{color:var(--muted);font-size:14px;margin:0 0 28px;max-width:70ch}
+    .mod{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px 24px;margin:0 0 20px;box-shadow:0 3px 8px rgba(0,0,0,.05)}
+    .mod h2{font-size:22px;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+    .mod h2::before{content:"";display:inline-block;width:26px;height:6px;background:var(--gold)}
+    .mod .sub{color:var(--muted);font-size:15px;margin:0 0 8px}
+    .ses{border-top:1px solid var(--surface);padding:16px 0 4px}
+    .ses h3{margin:0 0 10px;font-size:15px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+    a.link{display:block;text-decoration:none;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+    a.link:hover{border-color:var(--accent)}
+    a.link .t{display:block;font-weight:700;font-size:15px}
+    a.link .d{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+    a.link .tag{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:4px}
+    footer{color:var(--muted);font-size:12px;text-align:center;margin-top:32px}
+    footer a{color:var(--accent)}
+    @media (max-width:520px){h1{font-size:26px}.wrap{padding:24px 14px 56px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Diplomado en Data Driven AI · EGPP 2026</p>
+    <h1>Ingeniería de Datos (IDT 601)</h1>
+    <p class="lead">Presentaciones y lecciones de los Módulos 1 y 2. Abrí una presentación para proyectar o una lección para practicar.</p>
+    <p class="note">Las presentaciones usan <strong>reveal.js</strong> (necesitan internet). Si no hay conexión, usá el <strong>deck del participante</strong>, que funciona sin internet.</p>
+
+    <section class="mod">
+      <h2>Módulo 1 — Datos</h2>
+      <p class="sub">Sesión 1 · Fuentes, tipos, importancia y calidad de los datos.</p>
+      <div class="ses">
+        <h3>Sesión 1</h3>
+        <div class="grid">
+          <a class="link" href="modulo-1-datos/presentacion_sesion1.html"><span class="tag">Presentación</span><span class="t">Datos: fuentes, tipos y calidad</span><span class="d">reveal.js</span></a>
+          <a class="link" href="modulo-1-datos/deck-sesion-01.html"><span class="tag">Deck</span><span class="t">Deck del participante</span><span class="d">Sin internet</span></a>
+          <a class="link" href="modulo-1-datos/lessons/0001-casos-frontera-tipos-de-datos.html"><span class="tag">Lección 01</span><span class="t">Casos frontera de tipos de datos</span><span class="d">Quiz interactivo</span></a>
+          <a class="link" href="modulo-1-datos/lessons/0002-calidad-de-datos.html"><span class="tag">Lección 02</span><span class="t">Calidad de datos</span><span class="d">Quiz interactivo</span></a>
+          <a class="link" href="modulo-1-datos/reference/tipos-de-datos.html"><span class="tag">Referencia</span><span class="t">Tipos de datos</span><span class="d">Hoja rápida</span></a>
+          <a class="link" href="modulo-1-datos/reference/calidad-de-datos.html"><span class="tag">Referencia</span><span class="t">Calidad de datos</span><span class="d">Hoja rápida</span></a>
+          <a class="link" href="modulo-1-datos/01_Datos.md"><span class="tag">Lectura</span><span class="t">Documento de la unidad</span><span class="d">01_Datos.md</span></a>
+          <a class="link" href="modulo-1-datos/Sesion_01_Datos_Fuentes_Tipos_Calidad.md"><span class="tag">Docente</span><span class="t">Plan de sesión</span><span class="d">Sesión 1</span></a>
+          <a class="link" href="modulo-1-datos/taller_sesion1_guia.md"><span class="tag">Taller</span><span class="t">Guía del taller</span><span class="d">Inventario de datos</span></a>
+          <a class="link" href="modulo-1-datos/taller_sesion1_caso_estudio.md"><span class="tag">Taller</span><span class="t">Caso de estudio</span><span class="d">Inventario de datos</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="mod">
+      <h2>Módulo 2 — Ingesta de Datos</h2>
+      <p class="sub">Sesiones 2 y 3 · Conceptos, métodos, patrones y pipelines de ingesta.</p>
+      <div class="ses">
+        <h3>Sesión 2</h3>
+        <div class="grid">
+          <a class="link" href="modulo-2-ingesta-de-datos/presentacion_sesion2.html"><span class="tag">Presentación</span><span class="t">Ingesta: conceptos y métodos</span><span class="d">reveal.js</span></a>
+          <a class="link" href="modulo-2-ingesta-de-datos/deck-sesion-02.html"><span class="tag">Deck</span><span class="t">Deck del participante</span><span class="d">Sin internet</span></a>
+          <a class="link" href="modulo-2-ingesta-de-datos/lessons/0001-batch-vs-streaming.html"><span class="tag">Lección 01</span><span class="t">¿Batch o streaming?</span><span class="d">Quiz interactivo</span></a>
+          <a class="link" href="modulo-2-ingesta-de-datos/lessons/0002-conector-script-api.html"><span class="tag">Lección 02</span><span class="t">Conector, script o API</span><span class="d">Quiz interactivo</span></a>
+          <a class="link" href="modulo-2-ingesta-de-datos/practica-estudiantes/index.html"><span class="tag">Práctica</span><span class="t">Práctica interactiva</span><span class="d">Sin conexión</span></a>
+          <a class="link" href="modulo-2-ingesta-de-datos/reference/batch-vs-streaming.html"><span class="tag">Referencia</span><span class="t">Batch vs. streaming</span><span class="d">Hoja rápida</span></a>
+          <a class="link" href="modulo-2-ingesta-de-datos/02_Ingesta_de_Datos.md"><span class="tag">Lectura</span><span class="t">Documento de la unidad</span><span class="d">02_Ingesta_de_Datos.md</span></a>
+          <a class="link" href="modulo-2-ingesta-de-datos/Sesion_02_Ingesta_Conceptos_Metodos_Herramientas.md"><span class="tag">Docente</span><span class="t">Plan de sesión 2</span><span class="d">Secuencia y evaluación</span></a>
+          <a class="link" href="modulo-2-ingesta-de-datos/notas-sesion-02.md"><span class="tag">Docente</span><span class="t">Notas del orador</span><span class="d">Sesión 2</span></a>
+          <a class="link" href="modulo-2-ingesta-de-datos/taller_sesion2_practica_online.md"><span class="tag">Taller</span><span class="t">Práctica en línea</span><span class="d">Conectar una fuente</span></a>
+        </div>
+      </div>
+      <div class="ses">
+        <h3>Sesión 3</h3>
+        <div class="grid">
+          <a class="link" href="modulo-2-ingesta-de-datos/presentacion_sesion3.html"><span class="tag">Presentación</span><span class="t">Ingesta: patrones y pipelines</span><span class="d">reveal.js</span></a>
+          <a class="link" href="modulo-2-ingesta-de-datos/deck-sesion-03.html"><span class="tag">Deck</span><span class="t">Deck del participante</span><span class="d">Sin internet</span></a>
+          <a class="link" href="modulo-2-ingesta-de-datos/lessons/0003-patrones-de-ingesta.html"><span class="tag">Lección 03</span><span class="t">Elegir el patrón de ingesta</span><span class="d">Quiz interactivo</span></a>
+          <a class="link" href="modulo-2-ingesta-de-datos/reference/patrones-de-ingesta.html"><span class="tag">Referencia</span><span class="t">Patrones de ingesta</span><span class="d">Hoja rápida</span></a>
+          <a class="link" href="modulo-2-ingesta-de-datos/reference/herramientas-de-ingesta.html"><span class="tag">Referencia</span><span class="t">Herramientas de ingesta</span><span class="d">Hoja rápida</span></a>
+          <a class="link" href="modulo-2-ingesta-de-datos/Sesion_03_Ingesta_Patrones_Pipelines.md"><span class="tag">Docente</span><span class="t">Plan de sesión 3</span><span class="d">Secuencia y evaluación</span></a>
+          <a class="link" href="modulo-2-ingesta-de-datos/notas-sesion-03.md"><span class="tag">Docente</span><span class="t">Notas del orador</span><span class="d">Sesión 3</span></a>
+          <a class="link" href="modulo-2-ingesta-de-datos/taller_sesion3_pipeline_online.md"><span class="tag">Taller</span><span class="t">Pipeline en línea</span><span class="d">Diseñar el pipeline</span></a>
+          <a class="link" href="modulo-2-ingesta-de-datos/datos/FUENTE.md"><span class="tag">Datos</span><span class="t">Fuente de datos (CC-BY)</span><span class="d">Encuesta AGETIC</span></a>
+        </div>
+      </div>
+    </section>
+
+    <footer>Ingeniería de Datos · IDT 601 — EGPP 2026. Material didáctico. Presentaciones con reveal.js (MIT).</footer>
+  </div>
+</body>
+</html>
