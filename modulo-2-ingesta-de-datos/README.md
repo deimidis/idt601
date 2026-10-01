@@ -29,8 +29,8 @@ Materiales de la **Unidad/Bloque 2 — Ingesta de Datos** del módulo *Ingenier�
 
 - Esta carpeta es una **copia de trabajo** de los materiales de la raíz del proyecto. La raíz
   **no se actualiza sola**: si se cambia un material en la raíz, hay que volver a copiarlo aquí.
-- Las presentaciones reveal dependen de `../../../Presentaciones Revealjs/reveal.js`. Si esa
-  carpeta no está disponible, usar el deck autocontenido (`deck-sesion-0N.html`).
+- Las presentaciones reveal usan **reveal.js 6.0.1 vía CDN** y el tema local `assets/theme-egpp.css`.
+  Sin internet, usar el deck autocontenido (`deck-sesion-0N.html`).
 - Los talleres usan **hoja de cálculo** (Google Sheets / Excel en línea) y el dataset de `datos/`.
   Fuente: AGETIC, *Encuesta Final-Profesores de Inclusión Digital* (datos.gob.bo, 2019), licencia CC-BY.
 - Pendiente (fase posterior): **banco de preguntas** para Moodle.

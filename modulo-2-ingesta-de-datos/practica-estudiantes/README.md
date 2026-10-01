@@ -8,25 +8,12 @@ Un **único archivo** (`index.html`) **autocontenido** con dos tests de la Unida
 Cada estudiante entra con su propio dispositivo, responde y ve su **puntaje al final** (con repaso de
 las respuestas). **No se guarda nada**: ni nombres, ni puntajes, ni cookies. Está permitido repetirlo.
 
-## Cómo publicarlo en GitHub Pages
+## Cómo se publica
 
-> No hace falta saber programar. Solo hay que subir el archivo a un repositorio y activar Pages.
+Este archivo forma parte del sitio `idt601` y se publica con él. La portada del sitio enlaza esta
+práctica en <https://deimidis.github.io/idt601/> (Módulo 2 → Práctica interactiva).
 
-1. Crear un repositorio **público** en GitHub (por ejemplo, `practica-ingesta-idt601`).
-2. Subir **el contenido de esta carpeta** (el archivo `index.html`) a la **raíz** del repositorio.
-   - Opción por web: en el repo, botón **Add file → Upload files**, arrastrar `index.html`, **Commit**.
-3. Ir a **Settings → Pages**.
-4. En **Source**, elegir **Deploy from a branch**, rama **main** y carpeta **/ (root)**. Guardar.
-5. Esperar 1–2 minutos. La página queda en:
-   `https://<tu-usuario>.github.io/<nombre-del-repo>/`
-
-Comparte ese enlace con los estudiantes (por Moodle, correo o un código QR). Cada uno lo abre en su
-celular o computadora.
-
-### Si preferís usar el repositorio del módulo
-
-- Subir `index.html` a la raíz del repo del módulo: Pages lo publica directamente.
-- O subirlo dentro de una carpeta `docs/` y elegir **/docs** como carpeta de Pages.
+Para publicar el sitio completo, ver el `README.md` de la raíz del repositorio.
 
 ## Notas
 
