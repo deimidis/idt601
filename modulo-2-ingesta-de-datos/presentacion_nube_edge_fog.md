@@ -1,0 +1,369 @@
+<!-- .slide: class="cover" -->
+<div class="kicker">Ingeniería de Datos · IDT 601 · Contenido extra</div>
+<h1>La nube y sus bordes</h1>
+<p class="lead">Dónde viven y se procesan los datos: del servidor propio a la nube, y de la nube al borde</p>
+<div class="mark">Bloque 2 · Material complementario · EGPP</div>
+<div class="cover-side" aria-hidden="true"><div class="code-stack"><span>dónde</span><span>procesar</span><span>cada dato</span></div></div>
+
+Note:
+- Este es un bloque **complementario**: se usa si sobra tiempo después de la sesión.
+- No introduce herramientas nuevas ni evaluaciones: es una idea de contexto para entender **dónde viven los datos**.
+- Ubicar el tema: venimos de ingesta (mover datos). Ahora miramos **de dónde a dónde** se mueven y **dónde conviene procesarlos**.
+- Enganchar con una pregunta: "¿todo dato tiene que viajar a un centro de datos lejano?".
+- **No olvidar:** avisar que son ~15 minutos y que no hay taller.
+
+---
+
+<div class="topline"><span class="kicker">01 / Idea central</span><span class="mark">Cambió el lugar</span></div>
+<div class="content single">
+  <h2 class="slide-title">El dato cambió de lugar</h2>
+  <p class="body-copy">Durante décadas los datos vivieron en <strong>servidores propios</strong>. Después se mudaron a la <strong>nube</strong>. Hoy, además, se procesan <strong>cerca de donde nacen</strong>: en el borde.</p>
+  <div class="diagram" style="margin-top:26px">
+  <svg viewBox="0 0 1520 300" width="100%" role="img" aria-label="Del servidor propio a la nube y de la nube al borde">
+    <g font-family="Calibri, Segoe UI, Arial, sans-serif">
+      <rect x="20" y="60" width="430" height="170" rx="10" fill="#ffffff" stroke="#a4bfbe" stroke-width="2"/>
+      <text x="235" y="130" text-anchor="middle" font-size="36" fill="#2a4d40" font-weight="600">Servidor propio</text>
+      <text x="235" y="180" text-anchor="middle" font-size="26" fill="#3d6558">en casa (on-premise)</text>
+
+      <rect x="545" y="60" width="430" height="170" rx="10" fill="#ffffff" stroke="#a4bfbe" stroke-width="2"/>
+      <text x="760" y="130" text-anchor="middle" font-size="36" fill="#2a4d40" font-weight="600">Nube</text>
+      <text x="760" y="180" text-anchor="middle" font-size="26" fill="#3d6558">alquilar a escala</text>
+
+      <rect x="1070" y="60" width="430" height="170" rx="10" fill="#ffffff" stroke="#a4bfbe" stroke-width="2"/>
+      <text x="1285" y="130" text-anchor="middle" font-size="36" fill="#2a4d40" font-weight="600">Borde (edge / fog)</text>
+      <text x="1285" y="180" text-anchor="middle" font-size="26" fill="#3d6558">procesar cerca del dato</text>
+
+      <text x="492" y="158" text-anchor="middle" font-size="52" fill="#dabc6e">→</text>
+      <text x="1017" y="158" text-anchor="middle" font-size="52" fill="#dabc6e">→</text>
+    </g>
+  </svg>
+  </div>
+</div>
+<div class="footer"><span>Idea central</span><span>02</span></div>
+
+Note:
+- Recorrer las tres etapas del diagrama: servidor propio → nube → borde.
+- Aclarar que **no es una moda pasajera**: cada etapa resolvió un problema distinto (control, escala y velocidad).
+- Subrayar que conviven: hoy se usan las tres a la vez, según el caso.
+- **No olvidar:** que quede claro que el tema del bloque es **dónde**, no **cómo** se procesan los datos.
+
+---
+
+<div class="topline"><span class="kicker">02 / Antes</span><span class="mark">El dato en casa</span></div>
+<div class="content single">
+  <h2 class="slide-title">Antes: el dato en casa</h2>
+  <div class="split">
+    <div class="split-panel">
+      <h3>Cómo se hacía</h3>
+      <p>Se compraban <strong>servidores</strong> y se montaba un <strong>centro de datos propio</strong> ("on-premise"). La capacidad era <strong>fija</strong>: si faltaba, había que comprar más y esperar.</p>
+    </div>
+    <div class="split-panel">
+      <h3>Qué costaba</h3>
+      <p>Inversión por adelantado, mantenimiento de equipos, energía, refrigeración, seguridad y personal. Crecer era <strong>lento y caro</strong>.</p>
+    </div>
+  </div>
+  <p class="body-copy" style="margin-top:36px">Ventaja real: <strong>control total</strong> y los datos <strong>dentro de casa</strong>. Por eso muchas instituciones todavía guardan así lo más sensible.</p>
+</div>
+<div class="footer"><span>Antes</span><span>03</span></div>
+
+Note:
+- Explicar "on-premise": todo el equipamiento vive dentro de la propia institución.
+- Punto clave: la capacidad se decide **antes** de saber cuánto se va a usar.
+- Rescatar lo bueno (control y datos en casa), porque justifica por qué no desaparece del todo.
+- **No olvidar:** que no suene a "lo viejo es malo"; es una decisión con ventajas y costos.
+
+---
+
+<div class="topline"><span class="kicker">03 / La nube</span><span class="mark">En simple</span></div>
+<div class="content">
+  <div>
+    <h2 class="slide-title">La nube, en simple</h2>
+    <p class="body-copy">En vez de comprar y mantener computadoras, se <strong>alquilan por internet</strong>: cómputo y almacenamiento que se usan cuando hacen falta y se <strong>pagan por uso</strong>.</p>
+    <p class="body-copy">La idea de fondo: ya no se compra capacidad, se <strong>alquila</strong>. Crece cuando hay demanda y se reduce cuando baja (<strong>elasticidad</strong>).</p>
+  </div>
+  <div>
+    <svg viewBox="0 0 720 600" width="100%" role="img" aria-label="Instituciones y personas usan servicios alquilados en la nube">
+      <g font-family="Calibri, Segoe UI, Arial, sans-serif">
+        <rect x="60" y="40" width="600" height="360" rx="18" fill="#eaf0ed" stroke="#a4bfbe" stroke-width="3"/>
+        <text x="360" y="95" text-anchor="middle" font-size="34" fill="#2a4d40" font-weight="600">NUBE</text>
+        <rect x="110" y="130" width="500" height="70" rx="10" fill="#ffffff" stroke="#a4bfbe" stroke-width="2"/>
+        <text x="360" y="176" text-anchor="middle" font-size="28" fill="#3d6558">cómputo</text>
+        <rect x="110" y="220" width="500" height="70" rx="10" fill="#ffffff" stroke="#a4bfbe" stroke-width="2"/>
+        <text x="360" y="266" text-anchor="middle" font-size="28" fill="#3d6558">almacenamiento</text>
+        <rect x="110" y="310" width="500" height="70" rx="10" fill="#ffffff" stroke="#a4bfbe" stroke-width="2"/>
+        <text x="360" y="356" text-anchor="middle" font-size="28" fill="#3d6558">análisis y servicios</text>
+
+        <line x1="360" y1="440" x2="360" y2="490" stroke="#dabc6e" stroke-width="6" stroke-dasharray="10 8"/>
+        <text x="395" y="472" font-size="24" fill="#507a6e">por internet</text>
+
+        <rect x="180" y="500" width="360" height="80" rx="10" fill="#ffffff" stroke="#a4bfbe" stroke-width="2"/>
+        <text x="360" y="550" text-anchor="middle" font-size="28" fill="#2a4d40">instituciones y personas</text>
+      </g>
+    </svg>
+  </div>
+</div>
+<div class="footer"><span>La nube</span><span>04</span></div>
+
+Note:
+- Definir la nube sin jerga: **alquilar recursos por internet** en vez de comprarlos.
+- Insistir en "pago por uso" y "elasticidad": dos ideas que explican por qué ganó la nube.
+- Aclarar un malentendido común: "la nube" **son computadoras de otra persona**, en algún lugar físico.
+- **No olvidar:** decir que sigue haciendo falta saber de datos; la nube cambia **dónde**, no **qué**.
+
+---
+
+<div class="topline"><span class="kicker">04 / Modelos</span><span class="mark">Tres formas</span></div>
+<div class="content single">
+  <h2 class="slide-title">Tres formas de alquilar la nube</h2>
+  <div class="split">
+    <div>
+      <svg viewBox="0 0 720 460" width="100%" role="img" aria-label="Servicios de nube: IaaS, PaaS y SaaS">
+        <g font-family="Calibri, Segoe UI, Arial, sans-serif">
+          <rect x="80" y="40" width="560" height="110" rx="10" fill="#ffffff" stroke="#dabc6e" stroke-width="4"/>
+          <text x="360" y="90" text-anchor="middle" font-size="34" fill="#2a4d40" font-weight="600">SaaS</text>
+          <text x="360" y="128" text-anchor="middle" font-size="24" fill="#3d6558">aplicación lista para usar</text>
+
+          <rect x="80" y="170" width="560" height="110" rx="10" fill="#ffffff" stroke="#a4bfbe" stroke-width="2"/>
+          <text x="360" y="220" text-anchor="middle" font-size="34" fill="#2a4d40" font-weight="600">PaaS</text>
+          <text x="360" y="258" text-anchor="middle" font-size="24" fill="#3d6558">plataforma para desplegar</text>
+
+          <rect x="80" y="300" width="560" height="110" rx="10" fill="#ffffff" stroke="#a4bfbe" stroke-width="2"/>
+          <text x="360" y="350" text-anchor="middle" font-size="34" fill="#2a4d40" font-weight="600">IaaS</text>
+          <text x="360" y="388" text-anchor="middle" font-size="24" fill="#3d6558">servidores y almacenamiento</text>
+
+          <line x1="30" y1="355" x2="30" y2="95" stroke="#507a6e" stroke-width="3"/>
+          <text x="18" y="240" text-anchor="middle" font-size="22" fill="#507a6e" transform="rotate(-90 18 240)">más administrado</text>
+        </g>
+      </svg>
+    </div>
+    <div>
+      <p class="body-copy"><strong>IaaS</strong> — infraestructura (servidores y almacenamiento).<br><br>
+      <strong>PaaS</strong> — plataforma lista para desplegar.<br><br>
+      <strong>SaaS</strong> — aplicación que se usa directamente.</p>
+      <p class="body-copy" style="margin-top:30px">Y según quién accede: nube <strong>pública</strong>, <strong>privada</strong> o <strong>híbrida</strong>.</p>
+    </div>
+  </div>
+</div>
+<div class="footer"><span>Modelos de servicio</span><span>05</span></div>
+
+Note:
+- Explicar de abajo hacia arriba: mientras más arriba, **menos administra el usuario** y **más el proveedor**.
+- IaaS: "alquilo la máquina". PaaS: "alquilo el entorno". SaaS: "alquilo el programa".
+- Mencionar al pasar los modelos de despliegue: pública, privada e híbrida.
+- **No olvidar:** un ejemplo cotidiano de SaaS (correo en línea, un tablero web) para que se entienda rápido.
+
+---
+
+<div class="topline"><span class="kicker">05 / Los datos</span><span class="mark">Ventajas y riesgos</span></div>
+<div class="content single">
+  <h2 class="slide-title">Cómo se manejan los datos en la nube</h2>
+  <div class="split">
+    <div class="split-panel">
+      <h3>Ventajas</h3>
+      <p>Elasticidad (crece con la demanda), costo según uso, alcance global y servicios listos: <strong>almacenes, lagos y análisis</strong> sin montar nada.</p>
+    </div>
+    <div class="split-panel">
+      <h3>Riesgos</h3>
+      <p><strong>Latencia</strong> por la distancia, <strong>dependencia</strong> del proveedor y dudas de <strong>soberanía</strong>: dónde están los datos y bajo qué reglas. El costo también puede crecer sin control.</p>
+    </div>
+  </div>
+</div>
+<div class="footer"><span>Datos en la nube</span><span>06</span></div>
+
+Note:
+- Este slide equilibra: la nube no es gratis ni mágica.
+- Latencia y soberanía son la bisagra hacia el borde: por eso aparecen a continuación.
+- Aclarar "soberanía del dato": en qué país y bajo qué ley se guarda la información.
+- **No olvidar:** conectar explícitamente con el slide siguiente ("si la distancia es un problema, veamos el borde").
+
+---
+
+<div class="topline"><span class="kicker">06 / El límite</span><span class="mark">La distancia cuesta</span></div>
+<div class="content single">
+  <h2 class="slide-title">El problema del borde: la distancia cuesta</h2>
+  <p class="body-copy">Todo dato enviado a la nube hace un <strong>viaje de ida y vuelta</strong>. Cuanto más lejos el centro de datos, más tarda en volver la respuesta.</p>
+  <div class="diagram" style="margin-top:24px">
+  <svg viewBox="0 0 1520 300" width="100%" role="img" aria-label="La latencia crece con la distancia al centro de datos">
+    <g font-family="Calibri, Segoe UI, Arial, sans-serif">
+      <line x1="80" y1="150" x2="1450" y2="150" stroke="#a4bfbe" stroke-width="4"/>
+      <circle cx="120" cy="150" r="14" fill="#507a6e"/>
+      <circle cx="560" cy="150" r="14" fill="#507a6e"/>
+      <circle cx="1000" cy="150" r="14" fill="#507a6e"/>
+      <circle cx="1420" cy="150" r="16" fill="#2a4d40"/>
+
+      <text x="120" y="110" text-anchor="middle" font-size="30" fill="#2a4d40" font-weight="600">Dispositivo</text>
+      <text x="120" y="205" text-anchor="middle" font-size="24" fill="#3d6558">el dato nace</text>
+
+      <text x="560" y="110" text-anchor="middle" font-size="30" fill="#2a4d40" font-weight="600">Edge</text>
+      <text x="560" y="205" text-anchor="middle" font-size="24" fill="#3d6558">~1 ms</text>
+
+      <text x="1000" y="110" text-anchor="middle" font-size="30" fill="#2a4d40" font-weight="600">Fog</text>
+      <text x="1000" y="205" text-anchor="middle" font-size="24" fill="#3d6558">~10 ms</text>
+
+      <text x="1420" y="110" text-anchor="middle" font-size="30" fill="#2a4d40" font-weight="600">Nube</text>
+      <text x="1420" y="205" text-anchor="middle" font-size="24" fill="#3d6558">~100 ms o más</text>
+
+      <text x="760" y="255" text-anchor="middle" font-size="24" fill="#507a6e">a más distancia, más espera</text>
+    </g>
+  </svg>
+  </div>
+</div>
+<div class="footer"><span>El límite</span><span>07</span></div>
+
+Note:
+- Explicar latencia como "tiempo de ida y vuelta"; los valores son ilustrativos, no exactos.
+- Casos donde no se puede esperar: un semáforo, una cámara de seguridad, un marcapasos, una máquina en una fábrica.
+- Idea clave: no todo dato necesita ir a la nube, y a veces **no puede**.
+- **No olvidar:** aclarar que el problema no es "que la nube sea lenta", sino la **distancia física**.
+
+---
+
+<div class="topline"><span class="kicker">07 / Edge</span><span class="mark">En el lugar</span></div>
+<div class="content">
+  <div>
+    <h2 class="slide-title">Edge: procesar en el lugar</h2>
+    <p class="body-copy"><strong>Edge computing</strong> es procesar el dato <strong>cerca de donde se genera</strong> (el propio dispositivo o un equipo muy próximo), sin mandar todo a la nube.</p>
+    <p class="body-copy">Sirve cuando importa la <strong>inmediatez</strong>: responde en milisegundos, mueve menos datos y <strong>protege la privacidad</strong> al no enviarlo todo afuera.</p>
+  </div>
+  <div>
+    <svg viewBox="0 0 720 600" width="100%" role="img" aria-label="El edge procesa en el lugar y solo envía lo necesario a la nube">
+      <g font-family="Calibri, Segoe UI, Arial, sans-serif">
+        <rect x="60" y="120" width="600" height="360" rx="18" fill="#eaf0ed" stroke="#a4bfbe" stroke-width="3"/>
+        <text x="360" y="180" text-anchor="middle" font-size="32" fill="#2a4d40" font-weight="600">EN EL LUGAR</text>
+
+        <rect x="120" y="210" width="220" height="220" rx="12" fill="#ffffff" stroke="#a4bfbe" stroke-width="2"/>
+        <text x="230" y="330" text-anchor="middle" font-size="26" fill="#3d6558">dispositivo /</text>
+        <text x="230" y="365" text-anchor="middle" font-size="26" fill="#3d6558">cámara / sensor</text>
+
+        <rect x="380" y="210" width="220" height="220" rx="12" fill="#ffffff" stroke="#dabc6e" stroke-width="4"/>
+        <text x="490" y="320" text-anchor="middle" font-size="26" fill="#2a4d40" font-weight="600">procesa aquí</text>
+        <text x="490" y="356" text-anchor="middle" font-size="24" fill="#3d6558">decide y alerta</text>
+
+        <text x="360" y="560" text-anchor="middle" font-size="24" fill="#507a6e">solo lo necesario viaja a la nube</text>
+      </g>
+    </svg>
+  </div>
+</div>
+<div class="footer"><span>Edge</span><span>08</span></div>
+
+Note:
+- Definir edge con un ejemplo: la cámara que detecta un rostro o un auto **sin** mandar el video entero.
+- Tres beneficios: menos latencia, menos ancho de banda y más privacidad.
+- Aclarar que no reemplaza a la nube: la complementa (lo histórico sigue en la nube).
+- **No olvidar:** distinguir "procesar en el borde" de "guardar todo en el borde"; el edge decide rápido, no acumula para siempre.
+
+---
+
+<div class="topline"><span class="kicker">08 / Fog</span><span class="mark">Capa intermedia</span></div>
+<div class="content">
+  <div>
+    <svg viewBox="0 0 720 640" width="100%" role="img" aria-label="Capas de procesamiento: dispositivos, edge, fog y nube">
+      <g font-family="Calibri, Segoe UI, Arial, sans-serif">
+        <rect x="40" y="500" width="640" height="90" rx="10" fill="#ffffff" stroke="#a4bfbe" stroke-width="2"/>
+        <text x="360" y="552" text-anchor="middle" font-size="28" fill="#2a4d40">dispositivos y sensores</text>
+
+        <rect x="80" y="380" width="560" height="90" rx="10" fill="#ffffff" stroke="#a4bfbe" stroke-width="2"/>
+        <text x="360" y="432" text-anchor="middle" font-size="28" fill="#2a4d40">edge — en el lugar</text>
+
+        <rect x="120" y="260" width="480" height="90" rx="10" fill="#ffffff" stroke="#dabc6e" stroke-width="4"/>
+        <text x="360" y="312" text-anchor="middle" font-size="28" fill="#2a4d40">fog — regional</text>
+
+        <rect x="160" y="140" width="400" height="90" rx="10" fill="#eaf0ed" stroke="#a4bfbe" stroke-width="2"/>
+        <text x="360" y="192" text-anchor="middle" font-size="28" fill="#2a4d40">nube — central</text>
+
+        <text x="360" y="70" text-anchor="middle" font-size="24" fill="#507a6e">el dato sube agregado, no crudo</text>
+      </g>
+    </svg>
+  </div>
+  <div>
+    <h2 class="slide-title">Fog: una capa intermedia</h2>
+    <p class="body-copy"><strong>Fog computing</strong> es una capa <strong>entre el borde y la nube</strong>: compuertas ("gateways") o pequeños centros que <strong>agrupan, filtran y ordenan</strong> el dato antes de subirlo.</p>
+    <p class="body-copy">Analogía: el <strong>edge</strong> es el mostrador; el <strong>fog</strong>, un depósito regional; la <strong>nube</strong>, el depósito central.</p>
+  </div>
+</div>
+<div class="footer"><span>Fog</span><span>09</span></div>
+
+Note:
+- Explicar el fog como la "capa del medio": no está en el dispositivo ni en el centro de datos, sino cerca de un grupo de dispositivos.
+- Su trabajo: **agrupar y filtrar**. En vez de mandar mil lecturas crudas, manda un resumen.
+- Usar la analogía del mostrador / depósito regional / depósito central.
+- **No olvidar:** aclarar que edge y fog se solapan; la diferencia es la **escala** y la **ubicación** de la capa.
+
+---
+
+<div class="topline"><span class="kicker">09 / Comparación</span><span class="mark">Lado a lado</span></div>
+<div class="content single">
+  <h2 class="slide-title">Nube, fog y edge, lado a lado</h2>
+  <table class="type-table">
+    <thead><tr><th>Dónde</th><th>Procesa</th><th>Latencia</th><th>Conviene para</th></tr></thead>
+    <tbody>
+      <tr><td>Edge</td><td>En el dispositivo o junto a él</td><td>Mínima</td><td>Reacciones inmediatas: alertas y control</td></tr>
+      <tr><td>Fog</td><td>En nodos intermedios regionales</td><td>Baja</td><td>Agrupar y filtrar antes de subir</td></tr>
+      <tr><td>Nube</td><td>En centros de datos lejanos</td><td>Mayor</td><td>Analizar mucho, guardar histórico, entrenar</td></tr>
+    </tbody>
+  </table>
+  <p class="body-copy" style="margin-top:32px">No se elige uno: se <strong>reparten</strong> las tareas según lo que cada capa hace mejor.</p>
+</div>
+<div class="footer"><span>Comparación</span><span>10</span></div>
+
+Note:
+- Leer la tabla como criterios de decisión, no como una competencia.
+- Regla práctica: lo urgente en el edge, lo agregado en el fog, lo histórico y analítico en la nube.
+- Insistir: lo normal es una **arquitectura en capas**, no elegir una sola.
+- **No olvidar:** volver a los ejemplos (semáforo, cámara, tablero) y ubicar cada uno en una capa.
+
+---
+
+<div class="topline"><span class="kicker">10 / Conexión</span><span class="mark">Con la ingesta</span></div>
+<div class="content single">
+  <h2 class="slide-title">Un puente con la ingesta</h2>
+  <p class="body-copy">Decidir <strong>dónde</strong> procesar es parte de diseñar la ingesta. Lo urgente se resuelve en el borde (<strong>streaming</strong>); lo agregado sube al fog; la nube guarda y analiza el histórico (<strong>batch</strong>).</p>
+  <div class="diagram" style="margin-top:24px">
+  <svg viewBox="0 0 1520 320" width="100%" role="img" aria-label="Flujo de datos del borde al fog y a la nube">
+    <g font-family="Calibri, Segoe UI, Arial, sans-serif">
+      <rect x="40" y="70" width="400" height="180" rx="12" fill="#ffffff" stroke="#a4bfbe" stroke-width="2"/>
+      <text x="240" y="135" text-anchor="middle" font-size="32" fill="#2a4d40" font-weight="600">Borde</text>
+      <text x="240" y="180" text-anchor="middle" font-size="24" fill="#3d6558">streaming: decide ya</text>
+      <text x="240" y="215" text-anchor="middle" font-size="24" fill="#3d6558">alertas y control</text>
+
+      <text x="480" y="172" text-anchor="middle" font-size="50" fill="#dabc6e">→</text>
+
+      <rect x="560" y="70" width="400" height="180" rx="12" fill="#ffffff" stroke="#dabc6e" stroke-width="4"/>
+      <text x="760" y="135" text-anchor="middle" font-size="32" fill="#2a4d40" font-weight="600">Fog</text>
+      <text x="760" y="180" text-anchor="middle" font-size="24" fill="#3d6558">agrupa y filtra</text>
+      <text x="760" y="215" text-anchor="middle" font-size="24" fill="#3d6558">envía resúmenes</text>
+
+      <text x="1000" y="172" text-anchor="middle" font-size="50" fill="#dabc6e">→</text>
+
+      <rect x="1080" y="70" width="400" height="180" rx="12" fill="#eaf0ed" stroke="#a4bfbe" stroke-width="2"/>
+      <text x="1280" y="135" text-anchor="middle" font-size="32" fill="#2a4d40" font-weight="600">Nube</text>
+      <text x="1280" y="180" text-anchor="middle" font-size="24" fill="#3d6558">batch: histórico</text>
+      <text x="1280" y="215" text-anchor="middle" font-size="24" fill="#3d6558">analítica y respaldo</text>
+    </g>
+  </svg>
+  </div>
+</div>
+<div class="footer"><span>Conexión con la ingesta</span><span>11</span></div>
+
+Note:
+- Atar el tema complementario con lo ya visto: la ingesta sigue siendo mover datos, pero ahora elegimos **desde dónde y hacia dónde**.
+- Relacionar con batch y streaming: el borde tiende al streaming, la nube al batch.
+- Idea de diseño: "subir poco y bueno" es más barato y más rápido que subir todo crudo.
+- **No olvidar:** este slide es el cierre conceptual; no abrir herramientas nuevas.
+
+---
+
+<!-- .slide: class="dark" -->
+<div class="topline"><span class="kicker">Fin</span><span class="mark">Ingeniería de Datos · IDT 601</span></div>
+<div class="content single">
+  <h2 class="slide-title">Para llevar</h2>
+  <p class="lead">El dato no siempre viaja entero a la nube: se procesa donde tiene sentido.</p>
+  <p class="quote">¿Qué datos de tu institución <em>no pueden esperar</em>?</p>
+</div>
+<div class="footer"><span>EGPP · Escuela de Gestión Pública Plurinacional</span><span>12</span></div>
+
+Note:
+- Cerrar con la pregunta para conversar: qué datos de la institución son urgentes y cuáles pueden esperar.
+- Repetir la idea para llevar: elegir **dónde** procesar es parte de diseñar la ingesta.
+- Enfatizar que las tres capas conviven; no hay que "elegir una".
+- **No olvidar:** agradecer y volver al plan de la sesión principal.

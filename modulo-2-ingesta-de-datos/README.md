@@ -24,6 +24,8 @@ Materiales de la **Unidad/Bloque 2 — Ingesta de Datos** del módulo *Ingenier�
 | `taller_sesion3_pipeline_online.md` | Taller de la sesión 3 (pipeline) en línea: participantes + demostración del docente. |
 | `datos/` | Dataset real de datos abiertos (AGETIC): recorte, CSV completo, diccionario y ficha de fuente. |
 | `assets/` | Tema visual EGPP (`theme-egpp.css`), estilos y `quiz.js`. |
+| `presentacion_nube_edge_fog.(md/html)` | **[EXTRA]** Presentación complementaria: la nube, edge y fog (para si sobra tiempo). |
+| `deck-nube-edge-fog.html` | **[EXTRA]** Deck autocontenido del mismo contenido (funciona sin internet). |
 
 ## Cómo se mantiene
 
