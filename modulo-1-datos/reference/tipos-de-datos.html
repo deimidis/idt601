@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Referencia · Clasificar tipos de datos</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Referencia · Bloque 1 — Datos</p>
+    <h1>Clasificar tipos de datos</h1>
+    <p class="lead">Hoja de referencia rápida: cómo decidir el tipo de un dato y qué hacer con los casos ambiguos.</p>
+
+    <h2>La pregunta que decide</h2>
+    <p>Para clasificar, pregunta primero: <strong>¿qué estructura tiene la parte que voy a procesar?</strong> No qué contiene, sino cómo está organizada.</p>
+
+    <table class="ref">
+      <thead><tr><th>Si la parte que procesas…</th><th>Tipo</th><th>Formato típico</th></tr></thead>
+      <tbody>
+        <tr><td>Vive en filas y columnas con tipo fijo</td><td>Estructurado</td><td>BD, CSV, Excel</td></tr>
+        <tr><td>Tiene etiquetas o pares clave-valor</td><td>Semiestructurado</td><td>JSON, XML</td></tr>
+        <tr><td>Es texto libre, imagen, audio o video</td><td>No estructurado</td><td>.txt, .jpg, .mp3, .mp4</td></tr>
+      </tbody>
+    </table>
+
+    <h2>La regla de oro: un dato puede combinar tipos</h2>
+    <div class="box">
+      <p>El error más común es asignar un solo tipo a todo el elemento. Lo correcto es mirar la <strong>unidad que vas a procesar</strong>.</p>
+      <p>Ejemplo: una encuesta con nota 1–5 <em>y</em> un comentario abierto es <strong>estructurada en la nota</strong> y <strong>no estructurada en el comentario</strong>. Si procesas la nota, es estructurado; si procesas el comentario, es no estructurado. En conjunto: <strong>combinado</strong>.</p>
+    </div>
+
+    <h2>Casos que suelen aparecer</h2>
+    <table class="ref">
+      <thead><tr><th>Caso</th><th>Clasificación</th><th>Por qué</th></tr></thead>
+      <tbody>
+        <tr><td>Formulario web (JSON) con campo de texto libre</td><td>Semiestructurado</td><td>Las etiquetas ordenan; el texto libre es la parte no estructurada</td></tr>
+        <tr><td>Acta escaneada en PDF</td><td>No estructurado</td><td>Es una imagen; no hay texto legible por máquina</td></tr>
+        <tr><td>CSV de recaudación</td><td>Estructurado</td><td>Columnas y tipos fijos</td></tr>
+        <tr><td>Comentarios en redes sociales</td><td>No estructurado</td><td>Texto libre sin estructura</td></tr>
+        <tr><td>Lecturas de un medidor en una tabla</td><td>Estructurado</td><td>Valor numérico con marca de tiempo, en columnas</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Para llevar</h2>
+    <p class="refs">
+      <strong>Estructurado</strong> → se consulta y resume. &nbsp;·&nbsp;
+      <strong>Semiestructurado</strong> → se interpretan etiquetas. &nbsp;·&nbsp;
+      <strong>No estructurado</strong> → técnicas específicas (texto, visión, transcripción).
+    </p>
+
+    <p class="refs">Fuentes: Joyanes, <em>Big Data</em> (Alfaomega); Curto, <em>Fundamentos de big data</em> (UOC, acceso abierto).</p>
+
+    <div class="nav">
+      <a href="../lessons/0001-casos-frontera-tipos-de-datos.html">← Lección 01: casos frontera</a>
+      <span>Workspace: modulo-1-datos</span>
+    </div>
+  </div>
+</body>
+</html>

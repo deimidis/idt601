@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lección 02 · Detectar problemas de calidad de datos</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Lección 02 · Bloque 1 — Datos</p>
+    <h1>Detectar problemas de calidad y ponerles nombre</h1>
+    <p class="lead">Al terminar, podrás mirar cualquier dato, decir qué problema de calidad tiene (completitud, exactitud o actualidad) y explicar por qué importa. Es justo lo que necesitas para guiar el taller de inventario.</p>
+
+    <p class="sidenote">
+      Apoyado en Joyanes, <em>Ciencia de Datos</em> (Alfaomega) y la norma ISO/IEC 25012.
+      <cite><a href="../reference/calidad-de-datos.html">Ver referencia →</a></cite>
+    </p>
+
+    <h2>Una sola pregunta de cribado</h2>
+    <p>No necesitas un catálogo de veinte dimensiones. Para el aula basta con tres lentes y una pregunta rápida: <strong>¿el problema es que el dato falta, que está mal, o que es viejo?</strong></p>
+    <p>Cada respuesta corresponde a una lente: <strong>completitud</strong>, <strong>exactitud</strong> o <strong>actualidad</strong>. Y el remate didáctico: un dato con cualquiera de esos defectos puede ser <strong>peor que no tener dato</strong>, porque da falsa seguridad.</p>
+
+    <div class="box">
+      <p><strong>El error a evitar en clase:</strong> decir "los datos están mal" en general. Si no nombras <em>qué</em> falla, el alumno no puede corregirlo. Nombrar la lente es la mitad de la solución.</p>
+    </div>
+
+    <h2>Practica: nombra la lente</h2>
+    <p>Ante cada caso, elige qué problema de calidad es. Corrección instantánea.</p>
+
+    <div class="quiz">
+      <p class="q">1. En el formulario de reclamos, el 40% no registra la zona del vecino.</p>
+      <div class="opts">
+        <button data-correct="true">Completitud</button>
+        <button>Exactitud</button>
+        <button>Actualidad</button>
+        <button>Ninguno</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> falta un dato necesario. No sabemos dónde ocurre el reclamo → no se puede decidir dónde actuar.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">2. El padrón de contribuyentes no se actualiza desde hace tres años.</p>
+      <div class="opts">
+        <button>Completitud</button>
+        <button>Exactitud</button>
+        <button data-correct="true">Actualidad</button>
+        <button>Ninguno</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> los datos existen y pueden ser correctos, pero son viejos: se decide con una foto desactualizada.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">3. Varios DNI están cargados con el dígito cambiado y algunas direcciones tienen errores de tipeo.</p>
+      <div class="opts">
+        <button>Completitud</button>
+        <button data-correct="true">Exactitud</button>
+        <button>Actualidad</button>
+        <button>Ninguno</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el dato está, pero es incorrecto. La consecuencia típica: se contacta a la persona equivocada.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">4. En la tabla de medidores, algunas filas no tienen el valor de lectura.</p>
+      <div class="opts">
+        <button data-correct="true">Completitud</button>
+        <button>Exactitud</button>
+        <button>Actualidad</button>
+        <button>Ninguno</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> campo vacío. Ojo: no es "actualidad" aunque el medidor sea de tiempo real; el problema es que <em>falta</em> el valor.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">5. Un registro de temperatura marca 999 °C en un día de invierno.</p>
+      <div class="opts">
+        <button>Completitud</button>
+        <button data-correct="true">Exactitud</button>
+        <button>Actualidad</button>
+        <button>Ninguno</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el valor está presente pero es imposible: un dato inexacto (o un centinela mal usado).</div>
+    </div>
+
+    <hr />
+
+    <h2>Fuente principal</h2>
+    <p class="refs">
+      Para profundizar: Joyanes, <em>Ciencia de Datos</em> (Alfaomega, 2024) y, como respaldo formal, la norma <a href="https://www.iso.org/standard/35736.html">ISO/IEC 25012</a> (modelo de calidad de datos).
+    </p>
+
+    <div class="askai">
+      ¿Dudas para llevarlo al aula? Pregúntame — por ejemplo: "¿cómo hago que los alumnos distingan completitud de exactitud sin confundirse?" o "¿qué mejora propongo para un dato desactualizado?".
+    </div>
+
+    <div class="nav">
+      <a href="0001-casos-frontera-tipos-de-datos.html">← Lección 01</a>
+      <a href="../reference/calidad-de-datos.html">Referencia: calidad de datos →</a>
+    </div>
+  </div>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>

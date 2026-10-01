@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Práctica de Ingesta de Datos · IDT 601</title>
+  <meta name="description" content="Tests interactivos de la Unidad 2 (Ingesta de Datos) — Ingeniería de Datos, IDT 601, EGPP." />
+  <style>
+    :root{
+      --bg:#F5F3EB; --card:#FFFFFF; --fg:#2A4D40; --muted:#3D6558;
+      --accent:#507A6E; --accent-2:#DABC6E; --surface:#EAF0ED; --line:#A9BEBD; --ok:#2E7D32; --err:#B3261E;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{background:var(--bg);color:var(--fg);font:16px/1.55 "Helvetica Neue",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:780px;margin:0 auto;padding:28px 18px 64px}
+    .kicker{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin:0 0 8px}
+    h1{font-size:30px;line-height:1.2;margin:0 0 10px;letter-spacing:-.02em}
+    h2{font-size:20px;margin:0 0 10px}
+    p{margin:0 0 12px}
+    .lead{color:var(--muted);font-size:17px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:16px 0;box-shadow:0 3px 8px rgba(0,0,0,.05)}
+    .card h3{margin:0 0 6px;font-size:18px}
+    .card .desc{color:var(--muted);font-size:15px;margin:0 0 14px}
+    .btn{appearance:none;border:0;border-radius:8px;background:var(--accent);color:#fff;font-size:16px;font-weight:600;padding:12px 18px;cursor:pointer;transition:filter .15s}
+    .btn:hover{filter:brightness(1.08)}
+    .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--line)}
+    .btn:disabled{opacity:.5;cursor:default}
+    .opt{display:block;width:100%;text-align:left;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:9px;padding:14px 16px;font-size:16px;margin:0 0 10px;cursor:pointer}
+    .opt:hover{border-color:var(--accent)}
+    .opt.correct{background:#E6F4EA;border-color:var(--ok);font-weight:600}
+    .opt.wrong{background:#FCE8E6;border-color:var(--err)}
+    .opt:disabled{cursor:default}
+    .explain{margin:12px 0 0;padding:12px 14px;border-left:4px solid var(--accent-2);background:var(--surface);border-radius:0 8px 8px 0;color:var(--muted);font-size:15px}
+    .bar{height:8px;background:var(--line);border-radius:99px;overflow:hidden;margin:12px 0 20px}
+    .bar>i{display:block;height:100%;background:var(--accent-2);width:0;transition:width .25s}
+    .meta{color:var(--muted);font-size:14px;display:flex;justify-content:space-between;gap:10px}
+    .score{font-size:44px;font-weight:800;margin:0}
+    .review{border-top:1px solid var(--line);padding-top:12px;margin-top:12px}
+    .review .q{font-weight:600;margin:0 0 4px}
+    .review .a{font-size:14px;color:var(--muted);margin:0}
+    .tag{font-weight:700}
+    .tag.ok{color:var(--ok)} .tag.err{color:var(--err)}
+    footer{color:var(--muted);font-size:12px;text-align:center;margin-top:28px}
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    @media (max-width:480px){h1{font-size:24px}.score{font-size:36px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Ingeniería de Datos · IDT 601 · EGPP</p>
+    <main id="app" aria-live="polite"></main>
+    <footer>Bloque 2 · Ingesta de Datos — práctica interactiva. No se guardan datos: puedes repetirla cuantas veces quieras.</footer>
+  </div>
+
+  <script>
+  (function () {
+    "use strict";
+
+    var TESTS = [
+      {
+        id: "batch",
+        titulo: "Lección 1 · ¿Batch o streaming?",
+        desc: "Decide el modo de ingesta para cada caso y justifícalo por la frescura y el costo.",
+        preguntas: [
+          { q: "El cierre mensual de la nómina de la institución.",
+            o: [ {t:"Batch", c:true}, {t:"Streaming"} ],
+            e: "Puede esperar al cierre del mes; nadie necesita la nómina segundo a segundo." },
+          { q: "Un tablero de emergencias que muestra incidentes en vivo.",
+            o: [ {t:"Batch"}, {t:"Streaming", c:true} ],
+            e: "No puede esperar; cada minuto de desfase cuesta una respuesta." },
+          { q: "La consolidación nocturna de la recaudación diaria de impuestos.",
+            o: [ {t:"Batch", c:true}, {t:"Streaming"} ],
+            e: "Un lote por noche es suficiente y mucho más simple." },
+          { q: "Las lecturas de semáforos inteligentes que ajustan el tránsito.",
+            o: [ {t:"Batch"}, {t:"Streaming", c:true} ],
+            e: "El ajuste debe reaccionar al flujo actual, no a los datos de ayer." },
+          { q: "El informe anual de ejecución presupuestaria.",
+            o: [ {t:"Batch", c:true}, {t:"Streaming"} ],
+            e: "Se arma con cierres periódicos; streaming sería un gasto sin beneficio." },
+          { q: "La alerta de que un trámite superó su plazo legal de respuesta.",
+            o: [ {t:"Batch"}, {t:"Streaming", c:true} ],
+            e: "La alerta debe dispararse cuando ocurre, no en el próximo lote." }
+        ]
+      },
+      {
+        id: "conector",
+        titulo: "Lección 2 · Conector, script o API",
+        desc: "Elige la herramienta de ingesta adecuada para cada caso.",
+        preguntas: [
+          { q: "Traer, sin escribir código, los datos de una hoja de cálculo compartida a un almacén.",
+            o: [ {t:"Conector", c:true}, {t:"Script"}, {t:"API"} ],
+            e: "Fuente conocida y repetida: una pieza ya hecha la resuelve sin programar." },
+          { q: "Limpiar un CSV de recaudación con reglas propias (montos, fechas, duplicados) y cargarlo.",
+            o: [ {t:"Conector"}, {t:"Script", c:true}, {t:"API"} ],
+            e: "Hay transformación a medida; el script da control total, aunque hay que mantenerlo." },
+          { q: "Leer los datos de clima de un servicio público que los expone de forma estandarizada.",
+            o: [ {t:"Conector"}, {t:"Script"}, {t:"API", c:true} ],
+            e: "El sistema ofrece una puerta de acceso estándar; se consulta con su contrato." },
+          { q: "Una fuente poco común para la que la plataforma no trae ninguna pieza hecha.",
+            o: [ {t:"Conector"}, {t:"Script", c:true}, {t:"API"} ],
+            e: "Si no existe conector y la fuente no expone API, se resuelve con código propio." },
+          { q: "Necesito control total sobre qué se mueve y cómo se transforma en el camino.",
+            o: [ {t:"Conector"}, {t:"Script", c:true}, {t:"API"} ],
+            e: "El script es flexible y a medida; su costo es programarlo y mantenerlo." },
+          { q: "Que otro sistema me entregue sus datos de forma estandarizada y automatizable.",
+            o: [ {t:"Conector"}, {t:"Script"}, {t:"API", c:true} ],
+            e: "La API expone datos de un sistema para que otros los lean de forma controlada." },
+          { q: "Lo que hay que entender antes de conectar una API.",
+            o: [ {t:"Su contrato: endpoints, claves y límites", c:true}, {t:"El color de su panel"}, {t:"El tamaño del archivo descargado"} ],
+            e: "Una API exige comprender qué pide, cómo se autentica y hasta dónde permite usar." }
+        ]
+      }
+    ];
+
+    var app = document.getElementById("app");
+    var state = null;
+
+    function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+
+    function renderHome() {
+      state = null;
+      var cards = TESTS.map(function (t, i) {
+        return '<div class="card"><h3>' + esc(t.titulo) + '</h3><p class="desc">' + esc(t.desc) +
+               '</p><p class="meta"><span>' + t.preguntas.length + ' preguntas</span></p>' +
+               '<div class="row"><button class="btn" data-start="' + i + '">Comenzar</button></div></div>';
+      }).join("");
+      app.innerHTML =
+        '<h1>Práctica de Ingesta de Datos</h1>' +
+        '<p class="lead">Elige un test, responde y descubre cómo te fue. Sin registro y sin puntaje guardado: podés repetirlo cuantas veces quieras.</p>' +
+        cards;
+      Array.prototype.forEach.call(app.querySelectorAll("[data-start]"), function (b) {
+        b.addEventListener("click", function () { startTest(parseInt(b.getAttribute("data-start"), 10)); });
+      });
+    }
+
+    function startTest(i) {
+      state = { test: TESTS[i], idx: 0, answers: [], chosen: null, answered: false };
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      var t = state.test, p = t.preguntas[state.idx];
+      var pct = Math.round((state.idx / t.preguntas.length) * 100);
+      var opts = p.o.map(function (o, j) {
+        return '<button class="opt" data-opt="' + j + '">' + esc(o.t) + '</button>';
+      }).join("");
+      app.innerHTML =
+        '<p class="kicker">' + esc(t.titulo) + '</p>' +
+        '<div class="meta"><span>Pregunta ' + (state.idx + 1) + ' de ' + t.preguntas.length + '</span><span>' + pct + '%</span></div>' +
+        '<div class="bar"><i style="width:' + pct + '%"></i></div>' +
+        '<h2>' + esc(p.q) + '</h2>' +
+        '<div id="opts">' + opts + '</div>' +
+        '<div id="fb"></div>' +
+        '<div class="row"><button class="btn ghost" id="quit">Salir</button>' +
+        '<button class="btn" id="next" disabled>Siguiente</button></div>';
+
+      document.getElementById("quit").addEventListener("click", renderHome);
+      Array.prototype.forEach.call(app.querySelectorAll("[data-opt]"), function (b) {
+        b.addEventListener("click", function () { answer(parseInt(b.getAttribute("data-opt"), 10)); });
+      });
+      document.getElementById("next").addEventListener("click", nextQuestion);
+    }
+
+    function answer(j) {
+      if (state.answered) return;
+      state.answered = true;
+      state.chosen = j;
+      state.answers[state.idx] = j;
+      var p = state.test.preguntas[state.idx];
+      var corrects = p.o.map(function (o, k) { return o.c ? k : -1; }).filter(function (k) { return k >= 0; });
+      var isRight = corrects.indexOf(j) >= 0;
+      Array.prototype.forEach.call(app.querySelectorAll("[data-opt]"), function (b) {
+        var k = parseInt(b.getAttribute("data-opt"), 10);
+        b.disabled = true;
+        if (corrects.indexOf(k) >= 0) b.classList.add("correct");
+        if (k === j && !isRight) b.classList.add("wrong");
+      });
+      document.getElementById("fb").innerHTML =
+        '<div class="explain"><strong>' + (isRight ? "¡Correcto!" : "Respuesta correcta: " + esc(p.o[corrects[0]].t)) +
+        '</strong><br>' + esc(p.e) + '</div>';
+      var next = document.getElementById("next");
+      next.disabled = false;
+      next.textContent = (state.idx === state.test.preguntas.length - 1) ? "Ver resultado" : "Siguiente";
+      next.focus();
+    }
+
+    function nextQuestion() {
+      if (state.idx < state.test.preguntas.length - 1) {
+        state.idx++;
+        state.chosen = null;
+        state.answered = false;
+        renderQuestion();
+      } else {
+        renderResults();
+      }
+    }
+
+    function renderResults() {
+      var t = state.test;
+      var score = 0;
+      var review = t.preguntas.map(function (p, i) {
+        var corrects = p.o.map(function (o, k) { return o.c ? k : -1; }).filter(function (k) { return k >= 0; });
+        var chosen = state.answers[i];
+        var ok = corrects.indexOf(chosen) >= 0;
+        if (ok) score++;
+        var your = (chosen === undefined || chosen === null) ? "—" : p.o[chosen].t;
+        var right = corrects.map(function (k) { return p.o[k].t; }).join(" / ");
+        return '<div class="review"><p class="q">' + (i + 1) + '. ' + esc(p.q) + '</p>' +
+               '<p class="a"><span class="tag ' + (ok ? "ok" : "err") + '">' + (ok ? "✔ Correcta" : "✘ Incorrecta") + '</span> · ' +
+               'Tu respuesta: ' + esc(your) + ' · Correcta: ' + esc(right) + '</p></div>';
+      }).join("");
+      var total = t.preguntas.length;
+      var pct = Math.round((score / total) * 100);
+      var msg = pct === 100 ? "¡Excelente! Dominaste la lección."
+              : pct >= 70 ? "¡Muy bien! Te quedó casi todo claro."
+              : pct >= 50 ? "Vas bien; repasa las que fallaron."
+              : "Conviene repasar la lección y volver a intentar.";
+      app.innerHTML =
+        '<p class="kicker">Resultado</p>' +
+        '<h1>' + esc(t.titulo) + '</h1>' +
+        '<div class="card"><p class="score">' + score + ' / ' + total + '</p>' +
+        '<p class="lead">' + pct + '% · ' + msg + '</p></div>' +
+        '<div class="card"><h2>Repaso</h2>' + review + '</div>' +
+        '<div class="row"><button class="btn" id="retry">Reintentar</button>' +
+        '<button class="btn ghost" id="home">Volver al inicio</button></div>';
+      document.getElementById("retry").addEventListener("click", function () { startTest(TESTS.indexOf(t)); });
+      document.getElementById("home").addEventListener("click", renderHome);
+    }
+
+    renderHome();
+  })();
+  </script>
+</body>
+</html>

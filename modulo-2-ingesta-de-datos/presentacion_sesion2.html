@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<title>Sesión 2 — Ingesta de datos: conceptos, métodos y herramientas</title>
+
+		<link rel="stylesheet" href="../../../Presentaciones%20Revealjs/reveal.js/dist/reset.css" />
+		<link rel="stylesheet" href="../../../Presentaciones%20Revealjs/reveal.js/dist/reveal.css" />
+		<link rel="stylesheet" href="assets/theme-egpp.css" />
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown
+					data-separator="\r?\n---\r?\n"
+					data-separator-vertical="\r?\n--\r?\n"
+					data-separator-notes="^Note:">
+				<script type="text/template">
+<!-- .slide: class="cover" -->
+<div class="kicker">Ingeniería de Datos · IDT 601</div>
+<h1>Ingesta: conceptos, métodos y herramientas</h1>
+<p class="lead">¿Cómo llegan los datos desde la fuente hasta el sistema?</p>
+<div class="mark">Bloque 2 · Sesión 2 · EGPP</div>
+<div class="cover-side" aria-hidden="true"><div class="code-stack"><span>ingesta =</span><span>extraer</span><span>+ cargar</span></div></div>
+
+Note:
+- Dar la bienvenida y ubicar el Bloque 2 — Ingesta como continuación del Bloque 1 (fuentes y calidad).
+- Anunciar el recorrido: qué es ingerir, extraer y cargar, batch vs. streaming, herramientas y una práctica de conexión.
+- Aclarar que no hace falta saber programar; el foco está en entender las ideas.
+- **No olvidar:** avisar la pausa de 10 minutos tras batch vs. streaming y que al final hay práctica de conexión.
+
+---
+
+<div class="topline"><span class="kicker">01 / Encuadre</span><span class="mark">Pregunta de arranque</span></div>
+<div class="content single"><h2 class="slide-title">¿Cómo llegan hoy los datos de su área?</h2>
+  <p class="lead">¿Cómo llegan los datos de su área al lugar donde se consultan o analizan?</p>
+  <p class="body-copy">A mano · archivos · correos · sistemas automáticos</p>
+</div>
+<div class="footer"><span>Encuadre</span><span>02</span></div>
+
+Note:
+- Lanzar la pregunta y anotar 4 o 5 respuestas en la pizarra (a mano, archivos, correos, sistemas automáticos).
+- No corregir todavía: solo recolectar; esas respuestas se retoman en la dinámica de batch vs. streaming.
+- Observar en voz alta la variedad: la mayoría de las áreas ingiere de forma manual.
+- **No olvidar:** guardar la lista a la vista para recuperarla en el cierre.
+
+---
+
+<div class="topline"><span class="kicker">02 / Hoja de ruta</span><span class="mark">180 minutos</span></div>
+<div class="content single"><h2 class="slide-title">Una sola sesión, ocho tramos</h2>
+  <table class="type-table">
+    <thead><tr><th>Momento</th><th>Tiempo</th><th>Qué haremos</th></tr></thead>
+    <tbody>
+      <tr><td>Apertura y encuadre</td><td>10 min</td><td>Bienvenida y pregunta de enganche.</td></tr>
+      <tr><td>¿Qué es la ingesta?</td><td>15 min</td><td>Definición y rol en el ciclo de vida.</td></tr>
+      <tr><td>Extracción y carga</td><td>15 min</td><td>Los dos extremos del proceso.</td></tr>
+      <tr><td>Batch vs. streaming</td><td>30 min</td><td>Los dos modos y una dinámica de clasificación.</td></tr>
+      <tr><td>Pausa</td><td>10 min</td><td>Receso.</td></tr>
+      <tr><td>Herramientas</td><td>30 min</td><td>Conectores, scripts y APIs.</td></tr>
+      <tr><td>Práctica</td><td>60 min</td><td>Demostración y conexión a una fuente sencilla.</td></tr>
+      <tr><td>Cierre</td><td>10 min</td><td>Síntesis y puente a la próxima sesión.</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Hoja de ruta</span><span>03</span></div>
+
+Note:
+- Recorrer los seis tramos y fijar el contrato de tiempo: 15+15+30+30+60+10 minutos.
+- Aclarar que "Práctica" agrupa la demostración y la conexión guiada de cada participante.
+- Ubicar la pausa después de batch vs. streaming, antes de herramientas.
+- **No olvidar:** avisar que el cierre reserva 10 minutos para preguntas y que hay una entrega al final.
+
+---
+
+<div class="topline"><span class="kicker">03 / Concepto</span><span class="mark">El puente</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Ingerir es mover los datos</h2><p class="body-copy">Tomar datos de una o varias <strong>fuentes</strong> y <strong>llevarlos</strong> a un lugar donde se puedan <strong>almacenar, procesar o analizar</strong>. Es el <strong>puente</strong> entre la fuente y el destino.</p></div>
+  <div><div class="card"><h3>Ejemplo</h3><p>Una alcaldía reúne cada mes recaudación, trámites y reclamos para armar su informe de gestión. Si nadie los <strong>"trae"</strong>, el informe no existe.</p></div></div>
+</div>
+<div class="footer"><span>Concepto</span><span>04</span></div>
+
+Note:
+- Definir con palabras simples: tomar datos de una o varias fuentes y llevarlos a donde se puedan almacenar, procesar o analizar.
+- Instalar la metáfora del puente entre la fuente y el destino.
+- Contar el ejemplo de la alcaldía: recaudación, trámites y reclamos del mes; si nadie los trae, el informe no existe.
+- Preguntar quién arma hoy un informe juntando datos a mano.
+- **No olvidar:** sin ingesta no hay análisis ni reporte; es el primer paso operativo del ciclo de vida.
+
+---
+
+<div class="topline"><span class="kicker">04 / Tareas</span><span class="mark">Tres pasos</span></div>
+<div class="content single"><h2 class="slide-title">Recolectar, transportar y dejar listo</h2>
+  <div class="flow">
+    <div class="flow-step"><strong>Recolectar</strong><p>Juntar información que ya existe pero está dispersa.</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>Transportar</strong><p>Mover los datos desde su origen hasta un destino confiable.</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>Preparar el terreno</strong><p>Dejar los datos listos para almacenarlos y procesarlos.</p></div>
+  </div>
+  <p class="quote">Por qué importa: evita decisiones a ciegas, ahorra trabajo manual y <em>habilita todo lo demás</em>.</p>
+</div>
+<div class="footer"><span>Tareas de la ingesta</span><span>05</span></div>
+
+Note:
+- Presentar las tres tareas en secuencia: recolectar, transportar y preparar el terreno.
+- Escribir en la pizarra: ingesta = recolectar + transportar + dejar listo.
+- Justificar por qué importa: evita decisiones a ciegas, ahorra trabajo manual y habilita el análisis y el aprendizaje automático.
+- **No olvidar:** aclarar que la ingesta no interpreta ni decide; su valor es que los datos lleguen completos y a tiempo.
+
+---
+
+<div class="topline"><span class="kicker">05 / Extremos</span><span class="mark">Extraer y cargar</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Los dos extremos del proceso</h2><p class="body-copy"><strong>Extracción</strong> — tomar el dato de su origen (base de datos, archivo, formulario, API, sensor).<br><br><strong>Carga</strong> — llevar el dato a su destino (base central, almacén, archivo consolidado).</p></div>
+  <div><div class="card"><h3>El recorrido</h3><div class="code">Fuente → extraer → cargar → Destino</div><p>Entre los extremos casi siempre hay un paso de transformación.</p></div></div>
+</div>
+<div class="footer"><span>Extracción y carga</span><span>06</span></div>
+
+Note:
+- Explicar extracción como tomar el dato de su origen y saber dónde está y cómo acceder.
+- Explicar carga como llevarlo a su destino sabiendo a dónde va y en qué formato queda.
+- Dibujar el recorrido: Fuente → extraer → (transformar) → cargar → Destino.
+- Avisar que la transformación intermedia se verá más adelante en el módulo.
+- **No olvidar:** sin los dos extremos no hay ingesta; extraer sin cargar es quedarse con el dato en la mano.
+
+---
+
+<div class="topline"><span class="kicker">05 / Extremos</span><span class="mark">De cerca</span></div>
+<div class="content single"><h2 class="slide-title">Extracción y carga, de cerca</h2>
+  <div class="split">
+    <div class="split-panel"><h3>Extracción</h3><p>Saber <strong>dónde está</strong> el dato y <strong>cómo acceder</strong>. Ejemplo: descargar el reporte de recaudación desde el sistema de impuestos.</p></div>
+    <div class="split-panel"><h3>Carga</h3><p>Saber <strong>a dónde va</strong> y en <strong>qué formato</strong>. Ejemplo: volcar la recaudación en la base central de la alcaldía.</p></div>
+  </div>
+</div>
+<div class="footer"><span>Extracción y carga</span><span>07</span></div>
+
+Note:
+- Repetir el mensaje clave y contrastarlo con los ejemplos.
+- Mostrar extracción con la descarga del reporte de recaudación desde el sistema de impuestos.
+- Mostrar carga con el volcado de esa recaudación en la base central de la alcaldía.
+- **No olvidar:** el recorrido completo es extraer, transformar y cargar; ninguno se saltea.
+
+---
+
+<div class="topline"><span class="kicker">06 / Modos</span><span class="mark">Batch y streaming</span></div>
+<div class="content single"><h2 class="slide-title">Dos formas de ingerir</h2>
+  <div class="flow">
+    <div class="flow-step"><strong>Por lotes (batch)</strong><p>Acumular y mover en bloques, a intervalos.</p></div>
+    <div class="flow-arrow">vs.</div>
+    <div class="flow-step"><strong>Tiempo real (streaming)</strong><p>Mover cada dato en cuanto llega.</p></div>
+  </div>
+  <p class="quote">La pregunta que decide: ¿cuán <em>frescos</em> deben estar los datos?</p>
+</div>
+<div class="footer"><span>Modos de ingesta</span><span>08</span></div>
+
+Note:
+- Presentar los dos modos: por lotes (acumular y mover en bloques) y en tiempo real (mover cada dato en cuanto llega).
+- Plantear la pregunta que decide: ¿cuán frescos deben estar los datos? y ¿cuánto cuesta mantenerlos así?
+- Anticipar que ninguna es mejor; la elección depende de la frescura necesaria y del costo.
+- **No olvidar:** pedir que escuchen pensando en sus propios casos, porque la dinámica los usará.
+
+---
+
+<div class="topline"><span class="kicker">06 / Modos</span><span class="mark">Batch</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Ingesta por lotes (batch)</h2><p class="body-copy">Los datos se <strong>acumulan</strong> y se mueven <strong>juntos</strong>, a intervalos (cada hora, noche, mes). Es la forma <strong>más común</strong> y la más económica, y tolera bien los errores. Su límite: hay un <strong>desfase</strong>.</p></div>
+  <div><div class="card"><h3>Ejemplo</h3><div class="code">recaudación · cada noche</div><p>Cada noche se consolida la recaudación del día; cada fin de mes se cierran los trámites.</p></div></div>
+</div>
+<div class="footer"><span>Batch</span><span>09</span></div>
+
+Note:
+- Describir el batch: los datos se acumulan y se mueven juntos, a intervalos.
+- Destacar que es la forma más común y económica, y que tolera bien los errores porque el lote se puede reintentar.
+- Nombrar el límite: hay un desfase; los datos no están al instante.
+- Ilustrar con la consolidación nocturna de la recaudación y el cierre mensual de trámites.
+- **No olvidar:** el batch sigue siendo la base de casi toda la operación diaria de la institución.
+
+---
+
+<div class="topline"><span class="kicker">06 / Modos</span><span class="mark">Streaming</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Ingesta en tiempo real (streaming)</h2><p class="body-copy">Cada dato se mueve <strong>en cuanto se genera</strong>, sin esperar a acumular. Se usa cuando la frescura importa y el volumen es continuo. Su costo: es <strong>más compleja y costosa</strong> de operar.</p></div>
+  <div><div class="card"><h3>Ejemplo</h3><div class="code">reclamos · semáforos · medidores</div><p>Un tablero en vivo con los reclamos que entran, o las lecturas de semáforos y medidores minuto a minuto.</p></div></div>
+</div>
+<div class="footer"><span>Streaming</span><span>10</span></div>
+
+Note:
+- Describir el streaming: cada dato se mueve en cuanto se genera, sin esperar a acumular.
+- Explicar cuándo se usa: cuando la frescura importa y el volumen es continuo.
+- Reconocer el costo: más compleja y costosa de operar.
+- Ilustrar con un tablero de reclamos en vivo o lecturas de semáforos y medidores minuto a minuto.
+- **No olvidar:** el streaming se reserva para lo que no puede esperar; no es la opción por defecto.
+
+---
+
+<div class="topline"><span class="kicker">07 / Comparación</span><span class="mark">Lado a lado</span></div>
+<div class="content single"><h2 class="slide-title">Batch y streaming, comparados</h2>
+  <table class="type-table">
+    <thead><tr><th>Criterio</th><th>Batch (por lotes)</th><th>Streaming (tiempo real)</th></tr></thead>
+    <tbody>
+      <tr><td>Cuándo se mueve</td><td>En bloques, a intervalos</td><td>En cuanto llega</td></tr>
+      <tr><td>Frescura</td><td>Horas o días de desfase</td><td>Segundos o menos</td></tr>
+      <tr><td>Costo y complejidad</td><td>Baja</td><td>Alta</td></tr>
+      <tr><td>Tolerancia a errores</td><td>Fácil de reintentar</td><td>Más delicada</td></tr>
+      <tr><td>Uso típico</td><td>Reportes, cierres, históricos</td><td>Alertas, tableros en vivo, sensores</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Comparación</span><span>11</span></div>
+
+Note:
+- Leer la tabla con el grupo, criterio por criterio.
+- Detenerse en la frescura: horas o días en batch frente a segundos o menos en streaming.
+- Traducir a regla práctica: batch para reportes, cierres e históricos; streaming para alertas, tableros y sensores.
+- **No olvidar:** no hay una "mejor": batch cubre casi todo; streaming se reserva para lo urgente.
+
+---
+
+<div class="topline"><span class="kicker">08 / Dinámica</span><span class="mark">¿Batch o streaming?</span></div>
+<div class="content single"><h2 class="slide-title">Decidan cada caso</h2>
+  <div class="cards">
+    <article class="card"><h3>1. En equipos de 3–4</h3><p>Lean la lista de situaciones asignada.</p></article>
+    <article class="card"><h3>2. ¿Batch o streaming?</h3><p>Y sobre todo: ¿por qué? Justifiquen la elección.</p></article>
+    <article class="card"><h3>3. Puesta en común</h3><p>Cada equipo comparte un caso y su justificación.</p></article>
+  </div>
+  <p class="body-copy">Casos: cierre mensual de la nómina · tablero de emergencias en vivo · consolidación nocturna de la recaudación · semáforos inteligentes · informe anual de ejecución presupuestaria · alertas de un trámite fuera de plazo.</p>
+</div>
+<div class="footer"><span>Dinámica</span><span>12</span></div>
+
+Note:
+- Formar equipos de 3–4 y repartir los casos.
+- Pedir por cada caso: ¿batch o streaming? y ¿por qué?
+- Cerrar con puesta en común: cada equipo justifica un caso.
+- Valorar que distingan frescura necesaria (¿puede esperar?) y costo (¿vale la pena el tiempo real?).
+- **No olvidar:** la mayoría son batch; las alertas y los tableros en vivo son streaming.
+
+---
+
+<div class="topline"><span class="kicker">09 / Distinción</span><span class="mark">Dos decisiones</span></div>
+<div class="content single"><h2 class="slide-title">Método y herramienta se eligen por separado</h2>
+  <div class="split">
+    <div class="split-panel"><h3>Método</h3><p>Responde <strong>¿cómo y cuándo</strong> movemos los datos? (batch o streaming).</p></div>
+    <div class="split-panel"><h3>Herramienta</h3><p>Responde <strong>¿con qué</strong> lo hacemos? (conectores, scripts, APIs).</p></div>
+  </div>
+  <p class="quote">Se eligen <em>por separado</em>.</p>
+</div>
+<div class="footer"><span>Método y herramienta</span><span>13</span></div>
+
+Note:
+- Separar las dos decisiones: el método responde al cómo y cuándo; la herramienta, al con qué.
+- Aclarar que se eligen por separado: primero el método, después la herramienta.
+- Señalar el error común: "usar Python" no es un método, es una herramienta.
+- **No olvidar:** esta distinción ordena todo el bloque; mantenerla visible en la pizarra.
+
+---
+
+<div class="topline"><span class="kicker">10 / Herramientas</span><span class="mark">Tres familias</span></div>
+<div class="content single"><h2 class="slide-title">Con qué movemos los datos</h2>
+  <table class="type-table">
+    <thead><tr><th>Herramienta</th><th>¿Qué es?</th><th>¿Cuándo usarla?</th><th>¿Programar?</th></tr></thead>
+    <tbody>
+      <tr><td>Conector</td><td>Pieza ya hecha para una fuente o destino</td><td>Fuentes conocidas y repetidas</td><td>No (configuración)</td></tr>
+      <tr><td>Script</td><td>Código propio a medida</td><td>Casos a medida o transformaciones</td><td>Sí</td></tr>
+      <tr><td>API</td><td>Puerta de acceso estandarizada</td><td>Cuando el sistema la ofrece</td><td>Un poco (llamadas)</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Herramientas</span><span>14</span></div>
+
+Note:
+- Presentar las tres familias: conectores (piezas hechas), scripts (código propio) y APIs (acceso estandarizado).
+- Dar un ejemplo de cada una: conector que lee una hoja de cálculo, script en Python sobre un CSV, API de clima en JSON.
+- Comparar ventaja y límite: el conector depende de que exista; el script hay que mantenerlo; la API exige entender su contrato.
+- **No olvidar:** la mayoría empieza con archivos y scripts y suma conectores y APIs cuando la ingesta se vuelve repetida y crítica.
+
+---
+
+<div class="topline"><span class="kicker">11 / En vivo</span><span class="mark">Demostración</span></div>
+<div class="content single"><h2 class="slide-title">Demostración guiada</h2>
+  <div class="flow">
+    <div class="flow-step"><strong>Extraer</strong><p>Leer la fuente: un CSV o una API pública.</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>Transformar</strong><p>Si aplica.</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>Cargar</strong><p>Ver el resultado en pantalla.</p></div>
+  </div>
+  <div class="card"><h3>Ejemplo</h3><p>Un conector que lee una hoja de cálculo y la vuelca en el almacén; un script en Python que abre un CSV de recaudación y lo inserta en la base central.</p></div>
+</div>
+<div class="footer"><span>Demostración</span><span>15</span></div>
+
+Note:
+- Mostrar en vivo una conexión sencilla: leer un CSV y mostrarlo, o consultar una API pública de clima.
+- Señalar en voz alta los tres momentos: extraer, transformar si aplica, y cargar/ver el resultado.
+- Hacerlo despacio y pensar en voz alta cada paso para que sea replicable.
+- **No olvidar:** verificar que todos entienden el entorno antes de empezar la práctica.
+
+---
+
+<div class="topline"><span class="kicker">12 / Práctica</span><span class="mark">Conectar una fuente</span></div>
+<div class="content single"><h2 class="slide-title">Práctica: conectar una fuente sencilla</h2>
+  <div class="cards">
+    <article class="card"><h3>1. Abre</h3><p>Recibe una fuente sencilla (CSV o API pública) e identifica su formato.</p></article>
+    <article class="card"><h3>2. Carga</h3><p>Llévala a la herramienta del entorno y muestra el resultado.</p></article>
+    <article class="card"><h3>3. Registra</h3><p>Anota qué método (batch) y qué herramienta usaste.</p></article>
+  </div>
+  <p class="body-copy">Fuentes sugeridas: un <strong>CSV</strong> de trámites o recaudación, una <strong>API pública de clima</strong> o una hoja de cálculo compartida.</p>
+</div>
+<div class="footer"><span>Práctica</span><span>16</span></div>
+
+Note:
+- Repartir a cada participante (o pareja) una fuente sencilla: CSV, API pública o hoja compartida.
+- Guiar el primer intento: abrir la fuente, identificar el formato y cargarla en la herramienta del entorno.
+- Pedir que cada uno muestre en pantalla el resultado (filas y columnas o respuesta JSON).
+- Circular y destrabar; valorar que la conexión funcione y que sepan explicar método y herramienta.
+- **No olvidar:** registrar en el cierre qué método (batch) y qué herramienta (script/conector/API) usó cada uno.
+
+---
+
+<div class="topline"><span class="kicker">13 / En resumen</span><span class="mark">Cierre</span></div>
+<div class="content single"><h2 class="slide-title">Ingerir: mover los datos a donde se necesitan</h2>
+  <div class="cards">
+    <article class="card"><h3>Concepto</h3><p>Ingerir es mover los datos de donde están a donde se necesitan.</p></article>
+    <article class="card"><h3>Método</h3><p>Es el cómo y cuándo: batch para casi todo; streaming para lo urgente.</p></article>
+    <article class="card"><h3>Herramienta</h3><p>Es el con qué: conectores, scripts y APIs.</p></article>
+  </div>
+  <p class="quote">Próxima sesión: decisiones de diseño y <em>patrones de implementación de pipelines</em>.</p>
+</div>
+<div class="footer"><span>Fin de la sesión</span><span>17</span></div>
+
+Note:
+- Sintetizar la idea central: ingerir es mover los datos desde donde están hasta donde se necesitan.
+- Repetir la distinción clave: **método** es el cómo y el cuándo; **herramienta** es el con qué.
+- Anticipar la próxima sesión: decisiones de diseño y patrones de implementación de pipelines, con análisis de escenarios.
+- Abrir el espacio para preguntas y agradecer la participación.
+- **No olvidar:** cerrar recordando que una misma ingesta puede resolverse con herramientas distintas según el caso.
+
+---
+
+<!-- .slide: class="dark" -->
+<div class="topline"><span class="kicker">Fin</span><span class="mark">Ingeniería de Datos · IDT 601</span></div>
+<div class="content single">
+  <h2 class="slide-title">Gracias</h2>
+  <p class="lead">Bloque 2 · Sesión 2 · Ingesta de datos</p>
+  <p class="quote">La próxima sesión: patrones de diseño e implementación de pipelines de ingesta.</p>
+</div>
+<div class="footer"><span>EGPP · Escuela de Gestión Pública Plurinacional</span><span>18</span></div>
+
+Note:
+- Agradecer la participación y abrir el espacio de preguntas y dudas.
+- Recordar que la próxima sesión trabaja los patrones de diseño e implementación de pipelines de ingesta.
+- Confirmar día y hora del próximo encuentro y dónde está el material.
+- **No olvidar:** recordar la entrega de la práctica con el método y la herramienta empleados.
+</script></section>
+			</div>
+		</div>
+
+		<script src="../../../Presentaciones%20Revealjs/reveal.js/dist/reveal.js"></script>
+		<script src="../../../Presentaciones%20Revealjs/reveal.js/dist/plugin/notes.js"></script>
+		<script src="../../../Presentaciones%20Revealjs/reveal.js/dist/plugin/markdown.js"></script>
+		<script src="../../../Presentaciones%20Revealjs/reveal.js/dist/plugin/highlight.js"></script>
+		<script>
+			Reveal.initialize({
+				width: 1920,
+				height: 1080,
+				margin: 0,
+				center: false,
+				hash: true,
+				plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+			});
+		</script>
+	</body>
+</html>

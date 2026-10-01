@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lección 02 · Elegir el patrón de ingesta</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Lección 02 · Bloque 2 — Ingesta de Datos</p>
+    <h1>Elegir el patrón correcto</h1>
+    <p class="lead">Al terminar, podrás elegir entre carga completa, incremental, CDC, pull y push, y justificar la elección por el tipo de cambio que esperas.</p>
+
+    <p class="sidenote">
+      Apoyado en Kleppmann, <em>Diseño de aplicaciones con uso intensivo en datos</em> y en la documentación de herramientas de ingesta.
+      <cite><a href="../reference/patrones-de-ingesta.html">Ver referencia →</a></cite>
+    </p>
+
+    <h2>La pregunta que decide</h2>
+    <p>Un <strong>patrón</strong> es una solución probada para un problema recurrente: no hay que inventarlo. La pregunta es <strong>qué cambia en la fuente</strong>: ¿todo, poco a poco, o necesito saber exactamente qué cambió?</p>
+    <p>El error frecuente es usar carga completa cuando los datos crecen: funciona hoy y se vuelve insoportable mañana.</p>
+
+    <div class="box">
+      <p><strong>Regla de oro:</strong> si el conjunto es pequeño o cambia entero, <em>carga completa</em>. Si crece, <em>incremental</em>. Si necesitas el detalle del cambio casi al instante, <em>CDC</em>. Y según quién toma la iniciativa: <em>pull</em> (voy a buscar) o <em>push</em> (me envían).</p>
+    </div>
+
+    <h2>Practica: elige el patrón</h2>
+    <p>Elige una opción. Recibirás la corrección al instante.</p>
+
+    <div class="quiz">
+      <p class="q">1. Un catálogo de códigos de trámites que se vuelve a cargar entero cada mes.</p>
+      <div class="opts">
+        <button data-correct="true">Carga completa</button>
+        <button>Carga incremental</button>
+        <button>CDC</button>
+        <button>Pull</button>
+        <button>Push</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el conjunto es pequeño y se reemplaza entero. No vale la pena rastrear cambios.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">2. Cada día, los trámites nuevos de una alcaldía sobre un histórico que ya tiene millones de filas.</p>
+      <div class="opts">
+        <button>Carga completa</button>
+        <button data-correct="true">Carga incremental</button>
+        <button>CDC</button>
+        <button>Pull</button>
+        <button>Push</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> mover todo el histórico cada día es inviable; se agrega solo lo nuevo del día.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">3. Saber exactamente qué fila cambió en el registro civil, casi en tiempo real.</p>
+      <div class="opts">
+        <button>Carga completa</button>
+        <button>Carga incremental</button>
+        <button data-correct="true">CDC</button>
+        <button>Pull</button>
+        <button>Push</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> la fuente registra y entrega solo los cambios (altas, bajas, modificaciones), con el detalle exacto y a tiempo.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">4. Un script que consulta una API cada noche, cuando la institución lo decide.</p>
+      <div class="opts">
+        <button>Carga completa</button>
+        <button>Carga incremental</button>
+        <button>CDC</button>
+        <button data-correct="true">Pull</button>
+        <button>Push</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el sistema propio toma la iniciativa y va a buscar los datos en el horario que controla.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">5. Una API que notifica automáticamente cuando entra un reclamo nuevo.</p>
+      <div class="opts">
+        <button>Carga completa</button>
+        <button>Carga incremental</button>
+        <button>CDC</button>
+        <button>Pull</button>
+        <button data-correct="true">Push</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> la fuente envía el dato apenas ocurre; no esperamos a consultarla. Frescura alta.</div>
+    </div>
+
+    <hr />
+
+    <h2>La regla que evita rehacer el trabajo</h2>
+    <p>Elige el patrón por <strong>lo que cambia</strong> y por la <strong>garantía de no duplicar</strong>. Una carga que se puede repetir sin duplicar (idempotente) es lo que distingue una ingesta robusta de una que falla en silencio. Recuerda: la verificación (conteos, duplicados, valores sensatos) es parte del pipeline, no un extra.</p>
+
+    <h2>Fuente principal</h2>
+    <p class="refs">
+      Para profundizar: Martin Kleppmann, <em>Diseño de aplicaciones con uso intensivo en datos</em> (procesamiento por lotes y por flujos).
+      Complementa con <a href="https://openaccess.uoc.edu/server/api/core/bitstreams/4efc24a4-9563-4a0b-97d8-b790954ba50d/content">Josep Curto, <em>Fundamentos de big data</em> (FUOC/UOC)</a>.
+    </p>
+
+    <div class="askai">
+      ¿Algo te hace dudar? Pregúntame y lo desarmamos — por ejemplo: "¿incremental y CDC son lo mismo?" o "¿cómo explico pull y push sin confundirlos con batch y streaming?".
+    </div>
+
+    <div class="nav">
+      <a href="0002-conector-script-api.html">← Lección 02: conector, script o API</a>
+      <a href="../reference/patrones-de-ingesta.html">Referencia: patrones →</a>
+    </div>
+  </div>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!-- .slide: class="cover" -->
+<div class="kicker">Ingeniería de Datos · IDT 601</div>
+<h1>Ingesta: patrones de diseño e implementación de pipelines</h1>
+<p class="lead">Decidir bien la ingesta y llevarla a la práctica</p>
+<div class="mark">Bloque 2 · Sesión 3 · EGPP</div>
+<div class="cover-side" aria-hidden="true"><div class="code-stack"><span>pipeline =</span><span>extraer</span><span>→ transformar → cargar</span></div></div>
+
+Note:
+- Dar la bienvenida y ubicar la sesión en el **Bloque 2 — Ingesta de Datos**: ya sabemos qué es ingerir y con qué métodos; hoy decidimos qué considerar y cómo construir un pipeline de punta a punta.
+- Aclarar que el público no es especialista: no hace falta programar para aprovechar la sesión.
+- Enganchar preguntando: "¿qué pasaría si el informe de mañana duplica datos, o si se pierden los trámites de hoy?".
+- Anunciar el recorrido: consideraciones, patrones, el esqueleto del pipeline, taller y cierre.
+- **No olvidar:** presentar las palabras clave del día (frecuencia, volumen, fiabilidad, patrón, idempotencia, CDC, pipeline, verificación).
+
+---
+
+<div class="topline"><span class="kicker">01 / Hoja de ruta</span><span class="mark">180 minutos</span></div>
+<div class="content single"><h2 class="slide-title">Una sola sesión, siete tramos</h2>
+  <table class="type-table">
+    <thead><tr><th>Momento</th><th>Tiempo</th><th>Qué haremos</th></tr></thead>
+    <tbody>
+      <tr><td>Apertura y encuadre</td><td>10 min</td><td>Bienvenida, síntesis del bloque y preguntas de la sesión.</td></tr>
+      <tr><td>Consideraciones</td><td>30 min</td><td>Frecuencia, volumen y fiabilidad.</td></tr>
+      <tr><td>Patrones</td><td>30 min</td><td>Completa, incremental, CDC y pull vs. push.</td></tr>
+      <tr><td>Pausa</td><td>10 min</td><td>Receso.</td></tr>
+      <tr><td>Del diseño al pipeline</td><td>25 min</td><td>Extraer → transformar → cargar → verificar.</td></tr>
+      <tr><td>Taller</td><td>65 min</td><td>Construir un pipeline funcional.</td></tr>
+      <tr><td>Cierre</td><td>10 min</td><td>Puesta en común y puente a la próxima sesión.</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Hoja de ruta</span><span>02</span></div>
+
+Note:
+- Recorrer los tramos y su tiempo: consideraciones (30), patrones (30), pausa (10), del diseño al pipeline (25), taller (65) y cierre (10).
+- Subrayar que el taller es el corazón de la sesión: la mayor parte del tiempo se pasa construyendo, no escuchando.
+- Explicar la lógica de secuencia: primero decidir, luego elegir el patrón, después construir y verificar.
+- **No olvidar:** avisar que hay una pausa de 10 minutos tras el bloque de patrones y que el taller ocupa la mayor parte de la sesión.
+
+---
+
+<div class="topline"><span class="kicker">02 / Encuadre</span><span class="mark">Tres preguntas</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Tres preguntas guían la sesión</h2><p class="body-copy">Conectar una fuente una vez es fácil. Lo difícil es que <strong>funcione todos los días</strong>, sin duplicar y sin perderse datos.</p></div>
+  <div><p class="body-copy">1. ¿<strong>Qué considerar</strong> antes de ingerir?<br>2. ¿<strong>Qué patrón</strong> reutilizable me sirve?<br>3. ¿<strong>Cómo</strong> armo el pipeline completo?</p></div>
+</div>
+<div class="footer"><span>Encuadre</span><span>03</span></div>
+
+Note:
+- Leer las tres preguntas que ordenan la sesión: ¿qué considerar antes de ingerir?, ¿qué patrón reutilizable me sirve?, ¿cómo armo el pipeline completo?.
+- Conectar con la idea: conectar una fuente una vez es fácil; lo difícil es que funcione todos los días sin duplicar y sin perderse datos.
+- Anotar en la pizarra 4 o 5 respuestas del enganche con el grupo.
+- **No olvidar:** decir que esas respuestas ilustran la fiabilidad y se retoman en el taller.
+
+---
+
+<div class="topline"><span class="kicker">03 / Consideraciones</span><span class="mark">Antes de ingerir</span></div>
+<div class="content single"><h2 class="slide-title">Antes de ingerir, responde tres preguntas</h2>
+  <table class="type-table">
+    <thead><tr><th>Pregunta</th><th>Decisión que condiciona</th></tr></thead>
+    <tbody>
+      <tr><td>¿Cada cuánto? (frecuencia)</td><td>Método y periodicidad.</td></tr>
+      <tr><td>¿Cuánto? (volumen)</td><td>Técnica y capacidad.</td></tr>
+      <tr><td>¿Qué pasa si falla? (fiabilidad)</td><td>Reintentos, idempotencia, monitoreo.</td></tr>
+    </tbody>
+  </table>
+  <p class="body-copy">Responderlas evita duplicados y pérdidas.</p>
+</div>
+<div class="footer"><span>Consideraciones</span><span>04</span></div>
+
+Note:
+- Explicar que antes de elegir herramienta o método hay que responder tres preguntas que condicionan todo el diseño.
+- Recorrer la tabla: frecuencia → método y periodicidad; volumen → técnica y capacidad; fiabilidad → reintentos, idempotencia y monitoreo.
+- Señalar que responderlas evita duplicados y pérdidas.
+- **No olvidar:** no se elige herramienta antes de responderlas; el orden importa.
+
+---
+
+<div class="topline"><span class="kicker">03 / Consideraciones</span><span class="mark">Frecuencia y volumen</span></div>
+<div class="content single"><h2 class="slide-title">¿Cada cuánto y cuánto?</h2>
+  <div class="split">
+    <div class="split-panel"><h3>Frecuencia — ¿cada cuánto?</h3><p>Determina el <strong>método</strong> (batch vs. streaming) y la periodicidad. La nómina se procesa una vez al mes; los reclamos, varias veces al día.</p></div>
+    <div class="split-panel"><h3>Volumen — ¿cuánto?</h3><p>Determina el <strong>esfuerzo</strong> y la técnica para no saturar. Consolidar 500 registros mensuales es trivial; miles de medidores cada hora exigen otro diseño.</p></div>
+  </div>
+</div>
+<div class="footer"><span>Consideraciones</span><span>05</span></div>
+
+Note:
+- Explicar la frecuencia con ejemplos: la nómina se procesa una vez al mes; los reclamos, varias veces al día (batch vs. streaming).
+- Explicar el volumen: consolidar 500 registros mensuales es trivial; miles de medidores cada hora exigen otro diseño.
+- Preguntar al grupo: "¿sus datos cambian cada minuto o cada trimestre? ¿crecen o se mantienen estables?".
+- **No olvidar:** aclarar que no hay una frecuencia o un volumen "correctos" en abstracto; dependen de para qué se usará el dato.
+
+---
+
+<div class="topline"><span class="kicker">03 / Consideraciones</span><span class="mark">Fiabilidad</span></div>
+<div class="content single"><h2 class="slide-title">¿Qué pasa si falla?</h2>
+  <p class="body-copy">Determina las <strong>garantías</strong> que debe tener la ingesta. ¿Se puede repetir sin duplicar? ¿Sabemos si algo no llegó?<br><strong>Idempotencia:</strong> repetir una carga no debe producir datos duplicados ni corrompidos.</p>
+  <div class="cards">
+    <article class="card"><h3>Ejemplo</h3><p>Si la carga nocturna falla y se reintenta, el informe no debe contar dos veces la misma recaudación.</p></article>
+  </div>
+</div>
+<div class="footer"><span>Fiabilidad</span><span>06</span></div>
+
+Note:
+- Presentar la fiabilidad como la pregunta ¿qué pasa si falla? y como la que define las garantías de la ingesta.
+- Introducir la **idempotencia**: repetir una carga no debe producir datos duplicados ni corrompidos.
+- Contar el ejemplo de la carga nocturna que falla y se reintenta: no debe contar dos veces la misma recaudación.
+- **No olvidar:** la fiabilidad distingue una ingesta robusta de una que falla en silencio; es la base de la etapa de verificación.
+
+---
+
+<div class="topline"><span class="kicker">04 / Patrones</span><span class="mark">Soluciones probadas</span></div>
+<div class="content single"><h2 class="slide-title">Un patrón es una solución probada y reutilizable</h2>
+  <div class="cards">
+    <article class="card"><h3>Carga completa</h3><div class="code">mover todo</div><p>Se reemplaza el conjunto entero cada vez.</p></article>
+    <article class="card"><h3>Carga incremental</h3><div class="code">solo lo nuevo</div><p>Se mueve lo nuevo o modificado desde la última carga.</p></article>
+    <article class="card"><h3>CDC y pull/push</h3><div class="code">cambios · eventos</div><p>La fuente entrega los cambios o decide quién inicia.</p></article>
+  </div>
+</div>
+<div class="footer"><span>Patrones</span><span>07</span></div>
+
+Note:
+- Definir **patrón**: forma probada y reutilizable de resolver un problema recurrente; no hay que inventar de cero.
+- Presentar los tres grupos: carga completa ("mover todo"), carga incremental ("solo lo nuevo") y CDC con pull/push ("cambios · eventos").
+- Señalar que elegir bien el patrón evita rehacer el trabajo y previene duplicados.
+- **No olvidar:** ningún patrón es mejor en general; cada uno se detalla en las siguientes láminas y depende del escenario.
+
+---
+
+<div class="topline"><span class="kicker">04 / Patrones</span><span class="mark">Completa vs. incremental</span></div>
+<div class="content single"><h2 class="slide-title">Todo o solo lo nuevo</h2>
+  <div class="split">
+    <div class="split-panel"><h3>Carga completa (full load)</h3><p>Se mueve <strong>todo</strong> el conjunto, cada vez, reemplazando lo anterior. <strong>Cuándo:</strong> volúmenes pequeños o datos que cambian por completo. <strong>Ejemplo:</strong> un catálogo de códigos de trámites que se recarga entero cada mes.</p></div>
+    <div class="split-panel"><h3>Carga incremental</h3><p>Se mueve <strong>solo lo nuevo o lo modificado</strong> desde la última carga. <strong>Cuándo:</strong> volúmenes grandes y crecientes. <strong>Ejemplo:</strong> cada día se agregan solo los trámites nuevos, no toda la historia.</p></div>
+  </div>
+</div>
+<div class="footer"><span>Patrones</span><span>08</span></div>
+
+Note:
+- Explicar la carga completa: se mueve todo y se reemplaza lo anterior; ejemplo del catálogo de códigos de trámites que se recarga entero cada mes.
+- Explicar la incremental: solo lo nuevo o modificado desde la última carga; ejemplo de agregar cada día solo los trámites nuevos, no toda la historia.
+- Aclarar cuándo usar cada una: completa con volúmenes pequeños o cambios totales; incremental con volúmenes grandes y crecientes.
+- **No olvidar:** la incremental exige saber qué cambió desde la última vez; esa es su dificultad principal.
+
+---
+
+<div class="topline"><span class="kicker">04 / Patrones</span><span class="mark">CDC · pull · push</span></div>
+<div class="content single"><h2 class="slide-title">Cambios exactos y quién inicia</h2>
+  <div class="split">
+    <div class="split-panel"><h3>Captura de cambios (CDC)</h3><p>La <strong>propia fuente</strong> registra y entrega solo los cambios (altas, bajas, modificaciones). <strong>Cuándo:</strong> saber exactamente qué cambió, casi en tiempo real. <strong>Ejemplo:</strong> el registro civil emite eventos al actualizar un dato.</p></div>
+    <div class="split-panel"><h3>Pull vs. push</h3><p><strong>Pull:</strong> nuestro sistema va a buscar los datos (un script que consulta una API cada noche). <strong>Push:</strong> la fuente nos envía los datos cuando hay novedades (una API que notifica un reclamo).</p></div>
+  </div>
+</div>
+<div class="footer"><span>Patrones</span><span>09</span></div>
+
+Note:
+- Explicar **CDC**: la propia fuente entrega solo los cambios (altas, bajas, modificaciones); ejemplo del registro civil que emite eventos al actualizar un dato.
+- Explicar **pull**: nuestro sistema va a buscar los datos (script que consulta una API cada noche); **push**: la fuente nos envía los datos (API que notifica un reclamo).
+- Relacionar push con más frescura y pull con control del horario y de la carga.
+- **No olvidar:** CDC responde a "qué cambió" y pull/push a "quién inicia"; son dimensiones distintas, no alternativas excluyentes.
+
+---
+
+<div class="topline"><span class="kicker">05 / Comparación</span><span class="mark">Lado a lado</span></div>
+<div class="content single"><h2 class="slide-title">Los patrones, comparados</h2>
+  <table class="type-table">
+    <thead><tr><th>Patrón</th><th>Idea central</th><th>Cuándo usarlo</th></tr></thead>
+    <tbody>
+      <tr><td>Carga completa</td><td>Mover todo y reemplazar</td><td>Datos pequeños o que cambian por completo</td></tr>
+      <tr><td>Carga incremental</td><td>Mover solo lo nuevo</td><td>Volúmenes grandes y crecientes</td></tr>
+      <tr><td>CDC</td><td>La fuente entrega solo los cambios</td><td>Cambios exactos y a tiempo</td></tr>
+      <tr><td>Pull</td><td>Nosotros buscamos los datos</td><td>Control de horario</td></tr>
+      <tr><td>Push</td><td>La fuente envía los datos</td><td>Frescura alta, alertas</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Comparación</span><span>10</span></div>
+
+Note:
+- Leer la tabla con el grupo, patrón por patrón.
+- Pedir que cada uno piense un caso de su institución para cada fila.
+- Reforzar que el patrón se elige según frecuencia, volumen y fiabilidad, no por moda.
+- **No olvidar:** cerrar el bloque anunciando la pausa de 10 minutos y pedir que al volver traigan su escenario pensado.
+
+---
+
+<div class="topline"><span class="kicker">06 / Pipeline</span><span class="mark">Definición</span></div>
+<div class="content single"><h2 class="slide-title">¿Qué es un pipeline de ingesta?</h2>
+  <p class="body-copy">La <strong>secuencia repetible</strong> que lleva los datos desde la fuente hasta el destino. Integra todo el bloque: <strong>método</strong> (batch/streaming), <strong>herramienta</strong> (script/conector/API) y <strong>patrón</strong> (completa/incremental/CDC).</p>
+  <p class="quote">Un pipeline funcional se puede <em>volver a correr</em> mañana y produce lo mismo, sin duplicados ni pérdidas.</p>
+</div>
+<div class="footer"><span>Pipeline</span><span>11</span></div>
+
+Note:
+- Definir pipeline como la **secuencia repetible** que lleva los datos desde la fuente hasta el destino.
+- Subrayar que un pipeline funcional se puede **volver a correr** mañana y produce lo mismo, sin duplicados ni pérdidas.
+- Mostrar que integra **método** (batch/streaming), **herramienta** (script/conector/API) y **patrón** (completa/incremental/CDC).
+- **No olvidar:** un pipeline no es un script suelto: es un proceso repetible y confiable.
+
+---
+
+<div class="topline"><span class="kicker">07 / Pipeline</span><span class="mark">Cuatro etapas</span></div>
+<div class="content single"><h2 class="slide-title">El esqueleto en cuatro etapas</h2>
+  <div class="flow">
+    <div class="flow-step"><strong>Extraer</strong><p>Leer la fuente: archivo, base de datos o API.</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>Transformar</strong><p>Corregir lo mínimo: columnas, formatos, nulos.</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>Cargar</strong><p>Escribir en el destino según el patrón elegido.</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>Verificar</strong><p>Conteos, sin duplicados, valores sensatos.</p></div>
+  </div>
+</div>
+<div class="footer"><span>Pipeline</span><span>12</span></div>
+
+Note:
+- Recorrer las cuatro etapas: extraer (leer archivo, base de datos o API), transformar (corregir lo mínimo: columnas, formatos, nulos), cargar (escribir según el patrón) y verificar (conteos, sin duplicados, valores sensatos).
+- Aclarar que la transformación no tiene que ser exhaustiva: lo justo para que el dato sirva en el destino.
+- Dibujar en la pizarra: Fuente → extraer → transformar → cargar → Destino, con la verificación debajo.
+- **No olvidar:** recordar que la verificación es un control transversal; sin ella el pipeline no es confiable.
+
+---
+
+<div class="topline"><span class="kicker">08 / En la práctica</span><span class="mark">Taller</span></div>
+<div class="content single"><h2 class="slide-title">Implementar el pipeline</h2>
+  <p class="body-copy"><strong>Objetivo:</strong> construir y entregar un pipeline de ingesta funcional, en parejas o equipos de 2–3.</p>
+  <div class="cards">
+    <article class="card"><h3>1. Diseña</h3><p>Lean la guía y la fuente asignada; respondan frecuencia, volumen y fiabilidad y elijan un patrón.</p></article>
+    <article class="card"><h3>2. Construye</h3><p>Implementen extraer → transformar → cargar → verificar sobre la fuente CSV.</p></article>
+    <article class="card"><h3>3. Verifica</h3><p>Prueben el pipeline, corrijan lo que falle y documenten qué hace cada etapa.</p></article>
+  </div>
+  <p class="body-copy">Cada equipo <strong>demuestra su pipeline</strong> al grupo.</p>
+</div>
+<div class="footer"><span>Taller</span><span>13</span></div>
+
+Note:
+- Dar la consigna: construir y entregar un **pipeline de ingesta funcional** en parejas o equipos de 2–3, con 65 minutos de trabajo.
+- Explicar los tres movimientos: diseñar (frecuencia, volumen, fiabilidad y patrón), construir (extraer → transformar → cargar → verificar sobre el CSV) y verificar (probar y documentar cada etapa).
+- Repartir la guía, la fuente CSV y el destino; aclarar que cada equipo **demuestra su pipeline** al grupo.
+- Circular y resolver dudas puntuales; intervenir solo si un equipo no avanza.
+- **No olvidar:** dejar que prueben y se equivoquen; equivocarse y corregir es parte del trabajo.
+
+---
+
+<div class="topline"><span class="kicker">08 / En la práctica</span><span class="mark">Escenarios</span></div>
+<div class="content single"><h2 class="slide-title">Escenarios de caso</h2>
+  <p class="body-copy"><strong>A.</strong> Consolidar diariamente los trámites nuevos de una alcaldía.<br><strong>B.</strong> Alimentar un tablero en vivo de reclamos ciudadanos.<br><strong>C.</strong> Sincronizar cada mes el padrón de contribuyentes completo.<br><strong>D.</strong> Detectar al instante si un trámite supera su plazo legal.<br><strong>E.</strong> Actualizar un inventario de bienes que cambia de a poco, una vez por semana.</p>
+</div>
+<div class="footer"><span>Taller</span><span>14</span></div>
+
+Note:
+- Entregar un escenario por equipo: A) trámites nuevos de una alcaldía; B) tablero en vivo de reclamos; C) padrón de contribuyentes completo cada mes; D) trámite que supera su plazo legal; E) inventario de bienes que cambia de a poco.
+- Pedir que justifiquen la elección con las tres preguntas antes de escribir código.
+- Guiar con preguntas: para A y C, ¿completa o incremental?; para B y D, ¿CDC o push?.
+- **No olvidar:** valorar la coherencia entre patrón, frecuencia y volumen más que la perfección técnica.
+
+---
+
+<div class="topline"><span class="kicker">09 / Evaluación</span><span class="mark">Qué se evalúa</span></div>
+<div class="content single"><h2 class="slide-title">La pauta de evaluación</h2>
+  <div class="cards">
+    <article class="card"><h3>Funciona de extremo a extremo</h3><p>Los datos aparecen en el destino tras correr el pipeline.</p></article>
+    <article class="card"><h3>No duplica ni pierde</h3><p>La verificación confirma conteos e idempotencia.</p></article>
+    <article class="card"><h3>Está documentado</h3><p>Se explica qué hace cada etapa y qué patrón se usó.</p></article>
+  </div>
+</div>
+<div class="footer"><span>Evaluación</span><span>15</span></div>
+
+Note:
+- Explicar el primer criterio: funciona de extremo a extremo; los datos aparecen en el destino tras correr el pipeline.
+- Explicar el segundo: no duplica ni pierde; la verificación confirma conteos e idempotencia.
+- Explicar el tercero: está documentado; se explica qué hace cada etapa y qué patrón se usó.
+- **No olvidar:** estos tres criterios son la pauta de evaluación: pipeline funcional, confiable y reproducible.
+
+---
+
+<div class="topline"><span class="kicker">10 / En resumen</span><span class="mark">Cierre</span></div>
+<div class="content single"><h2 class="slide-title">Decidir, elegir el patrón y construir</h2>
+  <div class="cards">
+    <article class="card"><h3>Considerar</h3><p>Frecuencia, volumen y fiabilidad antes de mover un solo dato.</p></article>
+    <article class="card"><h3>Elegir</h3><p>Completa, incremental, CDC o pull/push según el escenario.</p></article>
+    <article class="card"><h3>Construir</h3><p>Extraer → transformar → cargar → verificar, de forma repetible.</p></article>
+  </div>
+  <p class="quote">Próxima sesión: la <em>arquitectura de datos</em> — conceptos y componentes.</p>
+</div>
+<div class="footer"><span>Fin de la sesión</span><span>16</span></div>
+
+Note:
+- Hacer una puesta en común breve por equipo: qué funcionó, qué fue lo más difícil y qué harían distinto.
+- Sintetizar los tres movimientos del día: responder frecuencia, volumen y fiabilidad; elegir el patrón; construir el pipeline de forma repetible.
+- Anticipar la próxima sesión: la **arquitectura de datos**, conceptos y componentes que ordenan el recorrido del dato.
+- **No olvidar:** abrir el espacio de preguntas y confirmar que los equipos saben cómo entregar su pipeline.
+
+---
+
+<!-- .slide: class="dark" -->
+<div class="topline"><span class="kicker">Fin</span><span class="mark">Ingeniería de Datos · IDT 601</span></div>
+<div class="content single">
+  <h2 class="slide-title">Gracias</h2>
+  <p class="lead">Bloque 2 · Sesión 3 · Patrones y pipelines</p>
+  <p class="quote">La próxima sesión: arquitectura de datos.</p>
+</div>
+<div class="footer"><span>EGPP · Escuela de Gestión Pública Plurinacional</span><span>17</span></div>
+
+Note:
+- Agradecer la participación y reconocer el esfuerzo del taller.
+- Reservar para preguntas, entrega y retroalimentación final de los pipelines.
+- Recordar la ruta de contacto y el lugar donde se sube el entregable, si corresponde.
+- **No olvidar:** no cerrar sin confirmar que todos los equipos entregaron o saben cómo entregar su pipeline.

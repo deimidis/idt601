@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lección 02 · Conector, script o API</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Lección 02 · Bloque 2 — Ingesta de Datos</p>
+    <h1>Conector, script o API: ¿cuál elijo?</h1>
+    <p class="lead">Al terminar, podrás elegir la herramienta de ingesta para cada caso y justificarla según la fuente, la transformación y el esfuerzo de mantenerla.</p>
+
+    <p class="sidenote">
+      Esta es la otra mitad de la decisión: la lección 01 elige el <em>método</em> (batch o streaming); esta elige la <em>herramienta</em>.
+      <cite><a href="../reference/herramientas-de-ingesta.html">Ver referencia →</a></cite>
+    </p>
+
+    <h2>La pregunta que decide</h2>
+    <p>Primero separa las dos decisiones: el <strong>método</strong> responde <em>¿cómo y cuándo movemos los datos?</em> y la <strong>herramienta</strong> responde <em>¿con qué lo hacemos?</em>. Para la herramienta, mira tres cosas: <strong>¿la fuente es conocida o rara?</strong>, <strong>¿necesito transformar a medida?</strong> y <strong>¿el sistema ofrece un acceso estándar?</strong>.</p>
+
+    <div class="box">
+      <p><strong>Regla de oro:</strong> fuente conocida y repetida → <em>conector</em>; caso a medida o transformación propia → <em>script</em>; el sistema expone sus datos → <em>API</em>.</p>
+    </div>
+
+    <h2>Practica: elige la herramienta</h2>
+    <p>Elige una opción. Recibirás la corrección al instante.</p>
+
+    <div class="quiz">
+      <p class="q">1. Traer, sin escribir código, los datos de una hoja de cálculo compartida a un almacén.</p>
+      <div class="opts">
+        <button data-correct="true">Conector</button>
+        <button>Script</button>
+        <button>API</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> es una fuente conocida y repetida; una pieza ya hecha la resuelve sin programar.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">2. Limpiar un CSV de recaudación con reglas propias (montos, fechas, duplicados) y cargarlo.</p>
+      <div class="opts">
+        <button>Conector</button>
+        <button data-correct="true">Script</button>
+        <button>API</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> hay transformación a medida; el script da control total, aunque hay que mantenerlo.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">3. Leer los datos de clima de un servicio público que los expone de forma estandarizada.</p>
+      <div class="opts">
+        <button>Conector</button>
+        <button>Script</button>
+        <button data-correct="true">API</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el sistema ofrece una puerta de acceso estándar; se consulta con su contrato (endpoints, claves).</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">4. Una fuente poco común para la que la plataforma no trae ninguna pieza hecha.</p>
+      <div class="opts">
+        <button>Conector</button>
+        <button data-correct="true">Script</button>
+        <button>API</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> si no existe conector y la fuente no expone API, se resuelve con código propio.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">5. Necesito control total sobre qué se mueve y cómo se transforma en el camino.</p>
+      <div class="opts">
+        <button>Conector</button>
+        <button data-correct="true">Script</button>
+        <button>API</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el script es flexible y a medida; el costo es programarlo y mantenerlo.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">6. Que otro sistema me entregue sus datos de forma estandarizada y automatizable, sin leer archivos a mano.</p>
+      <div class="opts">
+        <button>Conector</button>
+        <button>Script</button>
+        <button data-correct="true">API</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> la API expone datos de un sistema para que otros los lean de forma controlada.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">7. Lo que más importa al usar una API y hay que entender antes de conectar.</p>
+      <div class="opts">
+        <button data-correct="true">Su contrato: endpoints, claves y límites</button>
+        <button>El color de su panel</button>
+        <button>El tamaño del archivo descargado</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> una API exige comprender su contrato (qué pide, cómo se autentica y hasta dónde permite usar).</div>
+    </div>
+
+    <hr />
+
+    <h2>Fuente principal</h2>
+    <p class="refs">
+      Para profundizar: Josep Curto, <a href="https://openaccess.uoc.edu/server/api/core/bitstreams/4efc24a4-9563-4a0b-97d8-b790954ba50d/content"><em>Fundamentos de big data</em> (FUOC/UOC)</a>.
+      Complementa con la documentación de Airbyte, Fivetran y Apache Kafka.
+    </p>
+
+    <div class="askai">
+      ¿Algo te hace dudar? Pregúntame y lo desarmamos — por ejemplo: "¿un conector y una API son lo mismo?" o "¿cuándo conviene migrar de un script a un conector?".
+    </div>
+
+    <div class="nav">
+      <a href="0001-batch-vs-streaming.html">← Lección 01: batch vs. streaming</a>
+      <a href="0003-patrones-de-ingesta.html">Lección 03: elegir el patrón →</a>
+    </div>
+  </div>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>

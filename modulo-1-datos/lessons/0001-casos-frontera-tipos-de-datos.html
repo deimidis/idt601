@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lección 01 · Casos frontera de los tipos de datos</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Lección 01 · Bloque 1 — Datos</p>
+    <h1>Clasificar datos sin dudar: los casos frontera</h1>
+    <p class="lead">Al terminar, podrás clasificar cualquier dato en el momento y justificarlo, incluidos los casos ambiguos que hacen dudar en clase.</p>
+
+    <p class="sidenote">
+      Apoyado en Joyanes, <em>Big Data</em> (Alfaomega) y Curto, <em>Fundamentos de big data</em> (UOC).
+      <cite><a href="../reference/tipos-de-datos.html">Ver referencia →</a></cite>
+    </p>
+
+    <h2>La idea que resuelve casi todo</h2>
+    <p>Los tres tipos —<strong>estructurado</strong>, <strong>semiestructurado</strong> y <strong>no estructurado</strong>— no son cajones cerrados. La clasificación depende de <strong>la unidad que vas a procesar</strong>, no del nombre del archivo ni de la herramienta.</p>
+    <p>Por eso, lo primero no es preguntar "¿qué formato es?" sino <strong>"¿qué parte voy a leer o calcular, y tiene filas y columnas, etiquetas, o es texto/imagen/audio?"</strong>. Un mismo elemento puede ser de dos tipos a la vez.</p>
+
+    <div class="box">
+      <p><strong>Regla de oro:</strong> si dudas, parte el dato en dos y clasifica cada parte. La encuesta con nota <em>y</em> comentario no es "un tipo raro": son <strong>dos tipos</strong> dentro del mismo elemento.</p>
+    </div>
+
+    <h2>Practica: clasifica cada caso</h2>
+    <p>Elige una opción. Recibirás la corrección al instante.</p>
+
+    <div class="quiz">
+      <p class="q">1. La tabla de contribuyentes de una base de datos municipal.</p>
+      <div class="opts">
+        <button data-correct="true">Estructurado</button>
+        <button>Semiestructurado</button>
+        <button>No estructurado</button>
+        <button>Combinado</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> filas y columnas con tipo fijo (nombre, dirección, actividad). El caso base.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">2. Un formulario web que llega como JSON, con un campo <code>descripcion</code> en texto libre.</p>
+      <div class="opts">
+        <button>Estructurado</button>
+        <button data-correct="true">Semiestructurado</button>
+        <button>No estructurado</button>
+        <button>Combinado</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> las etiquetas (clave-valor) le dan orden → semiestructurado. Ojo: <em>contiene</em> texto libre, pero su estructura general es semiestructurada. Aquí es donde aparece la duda.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">3. Una encuesta con nota del 1 al 5 y un comentario abierto al final.</p>
+      <div class="opts">
+        <button>Estructurado</button>
+        <button>Semiestructurado</button>
+        <button>No estructurado</button>
+        <button data-correct="true">Combinado</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> la nota es estructurada; el comentario es no estructurado. En conjunto, <strong>combinado</strong>. Es el caso frontera canónico.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">4. Un acta escaneada guardada como PDF (imagen).</p>
+      <div class="opts">
+        <button>Estructurado</button>
+        <button>Semiestructurado</button>
+        <button data-correct="true">No estructurado</button>
+        <button>Combinado</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> es una imagen; no hay texto legible por máquina sin un paso extra (OCR).</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">5. Lecturas de un medidor de agua guardadas en una tabla, cada hora.</p>
+      <div class="opts">
+        <button data-correct="true">Estructurado</button>
+        <button>Semiestructurado</button>
+        <button>No estructurado</button>
+        <button>Combinado</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> valor numérico + marca de tiempo, en columnas. Aunque llegue "en tiempo real", su forma es estructurada.</div>
+    </div>
+
+    <hr />
+
+    <h2>Fuente principal</h2>
+    <p class="refs">
+      Para profundizar con una fuente abierta y en español:
+      <a href="https://openaccess.uoc.edu/server/api/core/bitstreams/4efc24a4-9563-4a0b-97d8-b790954ba50d/content">Josep Curto, <em>Fundamentos de big data</em> (FUOC/UOC)</a>.
+      Complementa con los capítulos sobre tipos de datos de Joyanes, <em>Big Data</em> (Alfaomega).
+    </p>
+
+    <div class="askai">
+      ¿Algo te hace dudar? Pregúntame y lo desarmamos — por ejemplo: "¿un PDF con texto seleccionable es igual que uno escaneado?" o "¿cómo justifico 'combinado' sin confundir al alumno?".
+    </div>
+
+    <div class="nav">
+      <a href="../reference/tipos-de-datos.html">← Referencia: clasificar tipos</a>
+      <a href="0002-calidad-de-datos.html">Lección 02: calidad de datos →</a>
+    </div>
+  </div>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>

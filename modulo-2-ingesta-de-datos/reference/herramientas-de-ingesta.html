@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Referencia · Herramientas de ingesta</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Referencia · Bloque 2 — Ingesta de Datos</p>
+    <h1>Herramientas de ingesta</h1>
+    <p class="lead">Hoja de referencia rápida: conectores, scripts y APIs, y cuándo conviene cada familia.</p>
+
+    <h2>Las tres familias</h2>
+    <p>El <strong>método</strong> es el cómo y cuándo (batch o streaming); la <strong>herramienta</strong> es el con qué. Tres familias cubren casi todo:</p>
+
+    <table class="ref">
+      <thead><tr><th>Herramienta</th><th>¿Qué es?</th><th>¿Cuándo usarla?</th><th>¿Requiere programar?</th></tr></thead>
+      <tbody>
+        <tr><td>Conector</td><td>Pieza hecha para una fuente/destino</td><td>Fuentes conocidas y repetidas</td><td>No (configuración)</td></tr>
+        <tr><td>Script</td><td>Código propio</td><td>Casos a medida o transformaciones</td><td>Sí</td></tr>
+        <tr><td>API</td><td>Puerta de acceso estandarizada</td><td>Cuando el sistema la ofrece</td><td>Un poco (llamadas)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box">
+      <p><strong>Para llevar:</strong> la mayoría empieza con archivos y scripts, y agrega conectores y APIs cuando la ingesta se vuelve repetida y crítica.</p>
+    </div>
+
+    <h2>Casos que suelen aparecer</h2>
+    <table class="ref">
+      <thead><tr><th>Caso</th><th>Herramienta</th><th>Por qué</th></tr></thead>
+      <tbody>
+        <tr><td>Traer datos de una hoja de cálculo compartida a un almacén</td><td>Conector</td><td>Fuente conocida; se configura sin código</td></tr>
+        <tr><td>Limpiar y cargar un CSV de recaudación a medida</td><td>Script</td><td>Requiere transformaciones propias</td></tr>
+        <tr><td>Leer datos de clima de un servicio público</td><td>API</td><td>El sistema los expone de forma estandarizada</td></tr>
+      </tbody>
+    </table>
+
+    <p class="refs">Fuentes: Curto, <em>Fundamentos de big data</em> (UOC, acceso abierto); documentación de Airbyte, Fivetran y Apache Kafka.</p>
+
+    <div class="nav">
+      <a href="patrones-de-ingesta.html">← Referencia: patrones de ingesta</a>
+      <a href="batch-vs-streaming.html">Batch vs. streaming →</a>
+    </div>
+  </div>
+</body>
+</html>

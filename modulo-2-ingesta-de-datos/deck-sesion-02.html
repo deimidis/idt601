@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="es" data-od-deck-protocol="1">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ingesta de datos: conceptos, métodos y herramientas</title>
+  <style>
+    :root {
+      --bg: #f5f3eb;
+      --fg: #2a4d40;
+      --muted: #3d6558;
+      --accent: #507a6e;
+      --accent-2: #dabc6e;
+      --surface: #a9bebd;
+      --shell: #08090d;
+      --line: #a4bfbe;
+      --logo: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2080%2080%27%3E%3Crect%20x%3D%270%27%20y%3D%270%27%20width%3D%2740%27%20height%3D%2740%27%20fill%3D%27%232A4D40%27%2F%3E%3Crect%20x%3D%2740%27%20y%3D%270%27%20width%3D%2740%27%20height%3D%2740%27%20fill%3D%27%233D6558%27%2F%3E%3Crect%20x%3D%270%27%20y%3D%2740%27%20width%3D%2740%27%20height%3D%2740%27%20fill%3D%27%237E9A8E%27%2F%3E%3Crect%20x%3D%2740%27%20y%3D%2740%27%20width%3D%2740%27%20height%3D%2740%27%20fill%3D%27%23A9BEBD%27%2F%3E%3Ctext%20x%3D%2720%27%20y%3D%2729%27%20fill%3D%27%23FFFFFF%27%20font-family%3D%27Arial%2CHelvetica%2Csans-serif%27%20font-size%3D%2727%27%20font-weight%3D%27bold%27%20text-anchor%3D%27middle%27%3EE%3C%2Ftext%3E%3C%2Fsvg%3E");
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: var(--shell); color: var(--fg); font: 18px/1.5 Calibri, "Segoe UI", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+    .deck-shell { position: fixed; inset: 0; overflow: hidden; }
+    .deck-stage { width: 1920px; height: 1080px; background: var(--bg); position: relative; transform-origin: top left; box-shadow: 0 30px 80px rgba(0,0,0,.35); }
+    .slide { position: absolute; inset: 0; overflow: hidden; }
+    .slide:not(.active) { display: none !important; }
+    :where(.slide.active) { display: flex; flex-direction: column; }
+    .deck-counter { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); display: none; align-items: center; gap: 4px; background: rgba(10,14,26,.92); padding: 6px; border-radius: 999px; border: 1px solid rgba(255,255,255,.08); color: #fff; font: 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; z-index: 1000; }
+    .deck-counter button { width: 36px; height: 36px; background: transparent; color: #fff; border: 0; border-radius: 50%; font-size: 18px; cursor: pointer; }
+    .deck-counter button:hover { background: rgba(255,255,255,.12); }
+    .deck-counter button[disabled] { opacity: .3; cursor: default; }
+    .deck-counter .deck-count { padding: 0 14px; letter-spacing: .22em; }
+    .deck-counter .deck-count .total { color: rgba(255,255,255,.5); }
+    .deck-hint { position: fixed; bottom: 26px; right: 28px; color: rgba(255,255,255,.4); font: 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .2em; text-transform: uppercase; z-index: 999; pointer-events: none; display: none; }
+    @media print {
+      @page { size: 1920px 1080px; margin: 0; }
+      html, body { width: 1920px !important; height: auto !important; overflow: visible !important; background: #fff !important; }
+      .deck-shell { position: static !important; display: block !important; inset: auto !important; }
+      .deck-stage { width: 1920px !important; height: auto !important; transform: none !important; box-shadow: none !important; position: static !important; }
+      .slide { display: flex !important; position: relative !important; inset: auto !important; width: 1920px !important; height: 1080px !important; page-break-after: always; break-after: page; }
+      .slide:last-child { page-break-after: auto; break-after: auto; }
+      .deck-counter, .deck-hint { display: none !important; }
+    }
+  </style>
+  <style>
+    /* Sistema visual editable: cambia data-theme en <html> para alternar estilo. */
+    :root[data-theme="egpp"] { --bg:#f5f3eb; --fg:#2a4d40; --muted:#3d6558; --accent:#507a6e; --accent-2:#dabc6e; --surface:#a9bebd; --line:#a4bfbe; }
+    :root[data-theme="github"] { --bg:#ffffff; --fg:#1f2328; --muted:#57606a; --accent:#0969da; --accent-2:#1a7f37; --surface:#f6f8fa; --line:#d0d7de; }
+    :root[data-theme="datadog"] { --bg:#111318; --fg:#f4f5f7; --muted:#b2b7c2; --accent:#632ca6; --accent-2:#f04f5f; --surface:#1c1f27; --line:#353a47; }
+    .slide { padding: 72px 112px 64px; background: var(--bg); }
+    .slide::after { content: ''; position: absolute; left: 112px; right: 112px; bottom: 32px; height: 4px; background: var(--accent); opacity: .9; }
+    .slide.dark { background: var(--muted); color: #fff; }
+    .slide.dark::after { background: var(--accent-2); }
+    /* Logo como marca de agua de fondo. Para cambiarlo, edita el token --logo en :root
+       (usa url("ruta/al/logo.png") o una data URI). Pon 'none' para ocultarlo. */
+    .slide::before {
+      content: '';
+      position: absolute;
+      right: 48px;
+      bottom: 96px;
+      width: 108px;
+      height: 108px;
+      background: var(--logo) no-repeat center / contain;
+      opacity: .3;
+      pointer-events: none;
+    }
+    .slide.dark::before { opacity: .5; }
+    .kicker { color: var(--accent); font-size: 18px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+    .dark .kicker { color: #ffd28a; }
+    h1, h2, h3 { font-family: "Calibri Light", Calibri, "Segoe UI", sans-serif; font-weight: 300; letter-spacing: -.025em; }
+    h1 { font-size: 116px; line-height: 1.08; max-width: 920px; }
+    h2 { font-size: 64px; line-height: 1.12; max-width: 1240px; }
+    h3 { font-size: 30px; line-height: 1.2; }
+    p { max-width: 65ch; }
+    .lead { font-size: 28px; line-height: 1.45; color: var(--muted); max-width: 820px; }
+    .dark .lead, .dark .muted { color: #e5e7eb; }
+    .topline { display: flex; justify-content: space-between; align-items: center; margin-bottom: 96px; }
+    .mark { color: var(--muted); font-size: 16px; letter-spacing: .08em; text-transform: uppercase; }
+    .dark .mark { color: #d5d8df; }
+    .cover { justify-content: center; padding-left: 176px; background: linear-gradient(90deg, var(--bg) 0 67%, var(--accent) 67% 100%); }
+    .cover .kicker { margin-bottom: 30px; }
+    .cover h1 { margin-bottom: 40px; }
+    .cover .lead { margin-bottom: 56px; }
+    .cover-side { position: absolute; right: 94px; top: 50%; transform: translateY(-50%); width: 430px; color: #fff; }
+    .cover-side .code-stack { border-left: 4px solid var(--accent-2); padding-left: 28px; font: 24px/1.8 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .cover-side .code-stack span { display: block; }
+    .cover-side .code-stack span:nth-child(2) { padding-left: 34px; opacity: .82; }
+    .cover-side .code-stack span:nth-child(3) { padding-left: 70px; opacity: .64; }
+    .content { display: grid; grid-template-columns: 1.02fr .98fr; gap: 84px; align-items: center; flex: 1; min-height: 0; }
+    .content.single { display: block; }
+    .slide-title { margin-bottom: 36px; }
+    .body-copy { font-size: 24px; line-height: 1.55; color: var(--muted); }
+    .body-copy strong { color: var(--fg); font-weight: 600; }
+    .dark .body-copy { color: #e5e7eb; }
+    .dark .body-copy strong { color: #fff; }
+    .number { font-size: 210px; line-height: .86; color: var(--accent); font-family: "Calibri Light", Calibri, sans-serif; letter-spacing: -.06em; }
+    .number-label { margin-top: 28px; font-size: 26px; color: var(--muted); max-width: 360px; }
+    .dark .number-label { color: #e5e7eb; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 44px; }
+    .card { min-height: 300px; padding: 30px; border: 1px solid var(--line); background: var(--surface); border-top: 8px solid var(--accent); }
+    .card:nth-child(2) { border-top-color: var(--accent-2); }
+    .card:nth-child(3) { border-top-color: #70ad47; }
+    .card .code { margin: 22px 0; color: var(--accent); font: 25px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .card p { color: var(--muted); font-size: 20px; line-height: 1.45; }
+    .dark .card { background: var(--surface); border-color: var(--line); }
+    .dark .card p { color: #d6d9e0; }
+    .type-table { width: 100%; border-collapse: collapse; font-size: 22px; margin-top: 36px; }
+    .type-table th, .type-table td { text-align: left; padding: 20px 24px; border-bottom: 1px solid var(--line); }
+    .type-table th { color: var(--accent); font-weight: 600; font-size: 18px; letter-spacing: .06em; text-transform: uppercase; }
+    .type-table td:first-child { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--accent-2); }
+    .flow { display: flex; align-items: center; gap: 16px; margin-top: 48px; }
+    .flow-step { flex: 1; min-height: 180px; padding: 26px; background: var(--surface); border: 1px solid var(--line); }
+    .flow-step strong { display: block; margin-bottom: 16px; color: var(--accent); font-size: 25px; }
+    .flow-step p { font-size: 20px; color: var(--muted); }
+    .flow-arrow { color: var(--accent-2); font-size: 38px; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 42px; }
+    .split-panel { padding: 42px; min-height: 300px; background: var(--surface); border-left: 8px solid var(--accent); }
+    .split-panel:last-child { border-left-color: var(--accent-2); }
+    .split-panel h3 { margin-bottom: 22px; }
+    .split-panel p { font-size: 23px; color: var(--muted); line-height: 1.5; }
+    .quote { max-width: 1100px; margin-top: 86px; font-size: 58px; line-height: 1.22; font-family: "Calibri Light", Calibri, sans-serif; }
+    .quote em { color: var(--accent); font-style: normal; }
+    .footer { position: absolute; bottom: 48px; left: 112px; right: 112px; display: flex; justify-content: space-between; color: var(--muted); font-size: 15px; }
+    .dark .footer { color: #d5d8df; }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="deck-shell">
+    <div class="deck-stage" id="deck-stage">
+      <section class="slide active cover" data-screen-label="01 Ingesta: conceptos, métodos y herramientas">
+        <div class="kicker">Ingeniería de Datos · IDT 601</div>
+        <h1>Ingesta: conceptos, métodos y herramientas</h1>
+        <p class="lead">¿Cómo llegan los datos desde la fuente hasta el sistema?</p>
+        <div class="mark">Bloque 2 · Sesión 2 · EGPP</div>
+        <div class="cover-side" aria-hidden="true"><div class="code-stack"><span>ingesta =</span><span>extraer</span><span>+ cargar</span></div></div>
+      </section>
+
+      <section class="slide" data-screen-label="02 Hoja de ruta">
+        <div class="topline"><span class="kicker">01 / Hoja de ruta</span><span class="mark">180 minutos</span></div>
+        <div class="content single"><h2 class="slide-title">Una sola sesión, seis tramos</h2>
+          <table class="type-table">
+            <thead><tr><th>Tramo</th><th>Tiempo</th><th>Qué haremos</th></tr></thead>
+            <tbody>
+              <tr><td>¿Qué es la ingesta?</td><td>15 min</td><td>Definición y rol en el ciclo de vida.</td></tr>
+              <tr><td>Extracción y carga</td><td>15 min</td><td>Los dos extremos del proceso.</td></tr>
+              <tr><td>Batch vs. streaming</td><td>30 min</td><td>Los dos modos y una dinámica de clasificación.</td></tr>
+              <tr><td>Herramientas</td><td>30 min</td><td>Conectores, scripts y APIs.</td></tr>
+              <tr><td>Práctica</td><td>60 min</td><td>Demostración y conexión a una fuente sencilla.</td></tr>
+              <tr><td>Cierre</td><td>10 min</td><td>Síntesis y puente a la próxima sesión.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="footer"><span>Hoja de ruta</span><span>02</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="03 ¿Qué es la ingesta?">
+        <div class="topline"><span class="kicker">02 / Concepto</span><span class="mark">El puente</span></div>
+        <div class="content">
+          <div><h2 class="slide-title">Ingerir es mover los datos</h2><p class="body-copy">Tomar datos de una o varias <strong>fuentes</strong> y llevarlos a un lugar donde se puedan <strong>almacenar, procesar o analizar</strong>. Es el primer paso operativo del ciclo de vida y el puente entre la fuente y el destino.</p></div>
+          <div><p class="body-copy">Una alcaldía reúne cada mes recaudación, trámites y reclamos para armar su informe de gestión. Si nadie los <strong>"trae"</strong>, el informe no existe.</p></div>
+        </div>
+        <div class="footer"><span>Concepto</span><span>03</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="04 Qué hace la ingesta">
+        <div class="topline"><span class="kicker">03 / Tareas</span><span class="mark">Tres pasos</span></div>
+        <div class="content single"><h2 class="slide-title">Recolectar, transportar y dejar listo</h2>
+          <div class="flow">
+            <div class="flow-step"><strong>Recolectar</strong><p>Juntar información que ya existe pero está dispersa.</p></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step"><strong>Transportar</strong><p>Mover los datos desde su origen hasta un destino confiable.</p></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step"><strong>Preparar</strong><p>Dejar los datos listos para almacenarlos y procesarlos.</p></div>
+          </div>
+          <p class="quote">Sin ingesta <em>no hay</em> análisis ni reporte.</p>
+        </div>
+        <div class="footer"><span>Tareas de la ingesta</span><span>04</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="05 Extracción y carga">
+        <div class="topline"><span class="kicker">04 / Extremos</span><span class="mark">Extraer y cargar</span></div>
+        <div class="content">
+          <div><h2 class="slide-title">Los dos extremos del proceso</h2><p class="body-copy"><strong>Extracción:</strong> tomar el dato de su origen e implicar saber dónde está y cómo acceder.<br><br><strong>Carga:</strong> llevar el dato a su destino, sabiendo a dónde va y en qué formato debe quedar.</p></div>
+          <div><div class="card"><h3>El recorrido</h3><div class="code">Fuente → extraer → cargar → Destino</div><p>Entre los extremos casi siempre hay un paso de transformación: limpiar, renombrar o convertir formatos.</p></div></div>
+        </div>
+        <div class="footer"><span>Extracción y carga</span><span>05</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="06 Dos formas de ingerir">
+        <div class="topline"><span class="kicker">05 / Modos</span><span class="mark">Batch y streaming</span></div>
+        <div class="content single"><h2 class="slide-title">Dos formas de ingerir</h2>
+          <div class="flow">
+            <div class="flow-step"><strong>Por lotes (batch)</strong><p>Acumular y mover en bloques, a intervalos.</p></div>
+            <div class="flow-arrow">vs.</div>
+            <div class="flow-step"><strong>Tiempo real (streaming)</strong><p>Mover cada dato en cuanto llega.</p></div>
+          </div>
+          <p class="quote">La pregunta clave: ¿cuán <em>frescos</em> deben estar los datos?</p>
+        </div>
+        <div class="footer"><span>Modos de ingesta</span><span>06</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="07 Ingesta por lotes">
+        <div class="topline"><span class="kicker">05 / Modos</span><span class="mark">Batch</span></div>
+        <div class="content">
+          <div><h2 class="slide-title">Ingesta por lotes (batch)</h2><p class="body-copy">Los datos se <strong>acumulan</strong> y se mueven <strong>juntos</strong>, a intervalos. Es la forma más común y económica, y tolera bien los errores. Su límite: hay un <strong>desfase</strong>, los datos no están al instante.</p></div>
+          <div><div class="card"><h3>Ejemplo</h3><div class="code">recaudación · cada noche</div><p>Cada noche se consolida la recaudación del día; cada fin de mes se cierran los trámites.</p></div></div>
+        </div>
+        <div class="footer"><span>Batch</span><span>07</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="08 Ingesta en tiempo real">
+        <div class="topline"><span class="kicker">05 / Modos</span><span class="mark">Streaming</span></div>
+        <div class="content">
+          <div><h2 class="slide-title">Ingesta en tiempo real</h2><p class="body-copy">Cada dato se mueve <strong>en cuanto se genera</strong>, sin esperar a acumular. Se usa cuando la frescura importa y el volumen es continuo. Su costo: es <strong>más compleja y costosa</strong> de operar.</p></div>
+          <div><div class="card"><h3>Ejemplo</h3><div class="code">reclamos · semáforos · medidores</div><p>Un tablero en vivo con los reclamos que entran, o las lecturas de semáforos minuto a minuto.</p></div></div>
+        </div>
+        <div class="footer"><span>Streaming</span><span>08</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="09 Batch vs streaming">
+        <div class="topline"><span class="kicker">06 / Comparación</span><span class="mark">Lado a lado</span></div>
+        <div class="content single"><h2 class="slide-title">Batch y streaming, comparados</h2>
+          <table class="type-table">
+            <thead><tr><th>Criterio</th><th>Batch (por lotes)</th><th>Streaming (tiempo real)</th></tr></thead>
+            <tbody>
+              <tr><td>Cuándo se mueve</td><td>En bloques, a intervalos</td><td>En cuanto llega</td></tr>
+              <tr><td>Frescura</td><td>Horas o días de desfase</td><td>Segundos o menos</td></tr>
+              <tr><td>Costo y complejidad</td><td>Baja</td><td>Alta</td></tr>
+              <tr><td>Tolerancia a errores</td><td>Fácil de reintentar</td><td>Más delicada</td></tr>
+              <tr><td>Uso típico</td><td>Reportes, cierres, históricos</td><td>Alertas, tableros en vivo, sensores</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="footer"><span>Comparación</span><span>09</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="10 Método y herramienta">
+        <div class="topline"><span class="kicker">07 / Distinción</span><span class="mark">Dos decisiones</span></div>
+        <div class="content single"><h2 class="slide-title">Método y herramienta se eligen por separado</h2>
+          <div class="split">
+            <div class="split-panel"><h3>Método</h3><p>Responde <strong>¿cómo y cuándo</strong> movemos los datos? Puede ser batch o streaming.</p></div>
+            <div class="split-panel"><h3>Herramienta</h3><p>Responde <strong>¿con qué</strong> lo hacemos? Conectores, scripts o APIs.</p></div>
+          </div>
+        </div>
+        <div class="footer"><span>Método y herramienta</span><span>10</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="11 Herramientas tres familias">
+        <div class="topline"><span class="kicker">08 / Herramientas</span><span class="mark">Tres familias</span></div>
+        <div class="content single"><h2 class="slide-title">Con qué movemos los datos</h2>
+          <div class="cards">
+            <article class="card"><h3>Conectores</h3><div class="code">pieza ya hecha</div><p>Leen de una fuente o escriben en un destino conocidos, sin escribir código.</p></article>
+            <article class="card"><h3>Scripts</h3><div class="code">código propio</div><p>Python o R para casos a medida y transformaciones. Control total.</p></article>
+            <article class="card"><h3>APIs</h3><div class="code">acceso estandarizado</div><p>Puertas que exponen datos de un sistema para que otros los lean.</p></article>
+          </div>
+        </div>
+        <div class="footer"><span>Herramientas</span><span>11</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="12 Herramientas comparadas">
+        <div class="topline"><span class="kicker">08 / Herramientas</span><span class="mark">Lado a lado</span></div>
+        <div class="content single"><h2 class="slide-title">Las tres familias, comparadas</h2>
+          <table class="type-table">
+            <thead><tr><th>Herramienta</th><th>¿Qué es?</th><th>¿Cuándo usarla?</th><th>¿Programar?</th></tr></thead>
+            <tbody>
+              <tr><td>Conector</td><td>Pieza para una fuente o destino</td><td>Fuentes conocidas y repetidas</td><td>No (configuración)</td></tr>
+              <tr><td>Script</td><td>Código propio</td><td>Casos a medida o transformaciones</td><td>Sí</td></tr>
+              <tr><td>API</td><td>Puerta de acceso estandarizada</td><td>Cuando el sistema la ofrece</td><td>Un poco (llamadas)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="footer"><span>Herramientas</span><span>12</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="13 Práctica">
+        <div class="topline"><span class="kicker">09 / En la práctica</span><span class="mark">Conectar una fuente</span></div>
+        <div class="content single"><h2 class="slide-title">Práctica: conectar una fuente sencilla</h2>
+          <div class="cards">
+            <article class="card"><h3>1. Extrae</h3><p>Abre el CSV o la API pública e identifica su formato.</p></article>
+            <article class="card"><h3>2. Carga</h3><p>Lleva los datos a la herramienta del entorno y visualízalos.</p></article>
+            <article class="card"><h3>3. Registra</h3><p>Anota qué método (batch) y qué herramienta usaste.</p></article>
+          </div>
+          <p class="body-copy">Fuentes sugeridas: un <strong>CSV</strong> de trámites o recaudación, una <strong>API pública de clima</strong> o una hoja de cálculo compartida.</p>
+        </div>
+        <div class="footer"><span>Práctica</span><span>13</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="14 Cierre">
+        <div class="topline"><span class="kicker">10 / En resumen</span><span class="mark">Cierre</span></div>
+        <div class="content single"><h2 class="slide-title">Ingerir: extraer y cargar los datos</h2>
+          <div class="cards">
+            <article class="card"><h3>Concepto</h3><p>La ingesta es el puente entre las fuentes y los sistemas que almacenan o analizan.</p></article>
+            <article class="card"><h3>Método</h3><p>Batch para casi todo; streaming para lo urgente y continuo.</p></article>
+            <article class="card"><h3>Herramienta</h3><p>Conectores, scripts y APIs. Se eligen por separado del método.</p></article>
+          </div>
+          <p class="quote">Próxima sesión: patrones de diseño e <em>implementación de pipelines</em> de ingesta.</p>
+        </div>
+        <div class="footer"><span>Fin de la sesión</span><span>14</span></div>
+      </section>
+
+      <section class="slide dark" data-screen-label="15 Gracias">
+        <div class="topline"><span class="kicker">Fin</span><span class="mark">Ingeniería de Datos · IDT 601</span></div>
+        <div class="content single">
+          <h2 class="slide-title">Gracias</h2>
+          <p class="lead">Bloque 2 · Sesión 2 · Ingesta de datos</p>
+          <p class="quote">La próxima sesión: patrones de diseño e implementación de pipelines de ingesta.</p>
+        </div>
+        <div class="footer"><span>EGPP · Escuela de Gestión Pública Plurinacional</span><span>15</span></div>
+      </section>
+    </div>
+  </div>
+  <nav class="deck-counter" role="navigation" aria-label="Navegación de la presentación"><button type="button" id="deck-prev" aria-label="Diapositiva anterior">‹</button><span class="deck-count"><span id="deck-cur">01</span> <span class="total">/ <span id="deck-total">15</span></span></span><button type="button" id="deck-next" aria-label="Siguiente diapositiva">›</button></nav>
+  <div class="deck-hint">← / → · espacio · R reinicia</div>
+  <script>
+    (function () {
+      var stage = document.getElementById('deck-stage');
+      var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+      var prev = document.getElementById('deck-prev');
+      var next = document.getElementById('deck-next');
+      var cur = document.getElementById('deck-cur');
+      var total = document.getElementById('deck-total');
+      var STORE = 'deck:idx:' + (location.pathname || '/');
+      var idx = 0;
+      function fit() { var sw = window.innerWidth, sh = window.innerHeight, pad = 32, s = Math.min((sw - pad) / 1920, (sh - pad) / 1080); if (!isFinite(s) || s <= 0) s = 1; stage.style.transform = 'translate(' + ((sw - 1920 * s) / 2) + 'px,' + ((sh - 1080 * s) / 2) + 'px) scale(' + s + ')'; }
+      function pad2(n) { return (n < 10 ? '0' : '') + n; }
+      function paint() { slides.forEach(function (el, i) { el.classList.toggle('active', i === idx); }); cur.textContent = pad2(idx + 1); total.textContent = pad2(slides.length); prev.toggleAttribute('disabled', idx <= 0); next.toggleAttribute('disabled', idx >= slides.length - 1); try { window.parent.postMessage({type:'od:slide-state', protocolVersion:1, active:idx, count:slides.length}, '*'); } catch (_) {} }
+      function go(i) { idx = Math.max(0, Math.min(slides.length - 1, i)); paint(); try { localStorage.setItem(STORE, String(idx)); } catch (_) {} }
+      function onKey(e) { if (e.__odDeckKeyHandled || e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return; if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.__odDeckKeyHandled = true; e.preventDefault(); go(idx + 1); } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.__odDeckKeyHandled = true; e.preventDefault(); go(idx - 1); } else if (e.key === 'Home' || String(e.key).toLowerCase() === 'r') { e.__odDeckKeyHandled = true; e.preventDefault(); go(0); } else if (e.key === 'End') { e.__odDeckKeyHandled = true; e.preventDefault(); go(slides.length - 1); } }
+      window.addEventListener('message', function (e) { var d = e.data; if (!d || d.type !== 'od:slide') return; if (d.action === 'next') go(idx + 1); else if (d.action === 'prev') go(idx - 1); else if (d.action === 'first') go(0); else if (d.action === 'last') go(slides.length - 1); else if (d.action === 'go' && typeof d.index === 'number') go(Math.floor(d.index)); });
+      window.addEventListener('keydown', onKey, true); document.addEventListener('keydown', onKey, true); prev.addEventListener('click', function () { go(idx - 1); }); next.addEventListener('click', function () { go(idx + 1); });
+      document.addEventListener('click', function (e) { if (e.defaultPrevented || e.button !== undefined && e.button !== 0) return; var t = e.target; while (t && t !== document.body) { if (/^(A|BUTTON|INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable) return; t = t.parentElement; } if (e.clientX < window.innerWidth / 2) go(idx - 1); else go(idx + 1); }, true);
+      try { var saved = parseInt(localStorage.getItem(STORE) || '0', 10); if (!isNaN(saved) && saved >= 0 && saved < slides.length) idx = saved; } catch (_) {}
+      window.addEventListener('resize', fit); try { window.parent.postMessage({type:'od:deck-ready', protocolVersion:1, capabilities:['absolute-navigation','state-events']}, '*'); } catch (_) {} fit(); paint();
+    })();
+  </script>
+</body>
+</html>

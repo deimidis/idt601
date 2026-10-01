@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="es" data-od-deck-protocol="1">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Datos: fuentes, tipos, importancia y calidad</title>
+  <style>
+    :root {
+      --bg: #f5f3eb;
+      --fg: #2a4d40;
+      --muted: #3d6558;
+      --accent: #507a6e;
+      --accent-2: #dabc6e;
+      --surface: #a9bebd;
+      --shell: #08090d;
+      --line: #a4bfbe;
+      --logo: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2080%2080%27%3E%3Crect%20x%3D%270%27%20y%3D%270%27%20width%3D%2740%27%20height%3D%2740%27%20fill%3D%27%232A4D40%27%2F%3E%3Crect%20x%3D%2740%27%20y%3D%270%27%20width%3D%2740%27%20height%3D%2740%27%20fill%3D%27%233D6558%27%2F%3E%3Crect%20x%3D%270%27%20y%3D%2740%27%20width%3D%2740%27%20height%3D%2740%27%20fill%3D%27%237E9A8E%27%2F%3E%3Crect%20x%3D%2740%27%20y%3D%2740%27%20width%3D%2740%27%20height%3D%2740%27%20fill%3D%27%23A9BEBD%27%2F%3E%3Ctext%20x%3D%2720%27%20y%3D%2729%27%20fill%3D%27%23FFFFFF%27%20font-family%3D%27Arial%2CHelvetica%2Csans-serif%27%20font-size%3D%2727%27%20font-weight%3D%27bold%27%20text-anchor%3D%27middle%27%3EE%3C%2Ftext%3E%3C%2Fsvg%3E");
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: var(--shell); color: var(--fg); font: 18px/1.5 Calibri, "Segoe UI", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+    .deck-shell { position: fixed; inset: 0; overflow: hidden; }
+    .deck-stage { width: 1920px; height: 1080px; background: var(--bg); position: relative; transform-origin: top left; box-shadow: 0 30px 80px rgba(0,0,0,.35); }
+    .slide { position: absolute; inset: 0; overflow: hidden; }
+    .slide:not(.active) { display: none !important; }
+    :where(.slide.active) { display: flex; flex-direction: column; }
+    .deck-counter { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); display: none; align-items: center; gap: 4px; background: rgba(10,14,26,.92); padding: 6px; border-radius: 999px; border: 1px solid rgba(255,255,255,.08); color: #fff; font: 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; z-index: 1000; }
+    .deck-counter button { width: 36px; height: 36px; background: transparent; color: #fff; border: 0; border-radius: 50%; font-size: 18px; cursor: pointer; }
+    .deck-counter button:hover { background: rgba(255,255,255,.12); }
+    .deck-counter button[disabled] { opacity: .3; cursor: default; }
+    .deck-counter .deck-count { padding: 0 14px; letter-spacing: .22em; }
+    .deck-counter .deck-count .total { color: rgba(255,255,255,.5); }
+    .deck-hint { position: fixed; bottom: 26px; right: 28px; color: rgba(255,255,255,.4); font: 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .2em; text-transform: uppercase; z-index: 999; pointer-events: none; display: none; }
+    @media print {
+      @page { size: 1920px 1080px; margin: 0; }
+      html, body { width: 1920px !important; height: auto !important; overflow: visible !important; background: #fff !important; }
+      .deck-shell { position: static !important; display: block !important; inset: auto !important; }
+      .deck-stage { width: 1920px !important; height: auto !important; transform: none !important; box-shadow: none !important; position: static !important; }
+      .slide { display: flex !important; position: relative !important; inset: auto !important; width: 1920px !important; height: 1080px !important; page-break-after: always; break-after: page; }
+      .slide:last-child { page-break-after: auto; break-after: auto; }
+      .deck-counter, .deck-hint { display: none !important; }
+    }
+  </style>
+  <style>
+    /* Sistema visual editable: cambia data-theme en <html> para alternar estilo. */
+    :root[data-theme="egpp"] { --bg:#f5f3eb; --fg:#2a4d40; --muted:#3d6558; --accent:#507a6e; --accent-2:#dabc6e; --surface:#a9bebd; --line:#a4bfbe; }
+    :root[data-theme="github"] { --bg:#ffffff; --fg:#1f2328; --muted:#57606a; --accent:#0969da; --accent-2:#1a7f37; --surface:#f6f8fa; --line:#d0d7de; }
+    :root[data-theme="datadog"] { --bg:#111318; --fg:#f4f5f7; --muted:#b2b7c2; --accent:#632ca6; --accent-2:#f04f5f; --surface:#1c1f27; --line:#353a47; }
+    .slide { padding: 72px 112px 64px; background: var(--bg); }
+    .slide::after { content: ''; position: absolute; left: 112px; right: 112px; bottom: 32px; height: 4px; background: var(--accent); opacity: .9; }
+    .slide.dark { background: var(--muted); color: #fff; }
+    .slide.dark::after { background: var(--accent-2); }
+    /* Logo como marca de agua, arriba a la izquierda. Para cambiarlo, edita el token --logo
+       en :root (usa url("ruta/al/logo.png") o una data URI). Pon 'none' para ocultarlo. */
+    .slide::before {
+      content: '';
+      position: absolute;
+      left: 112px;
+      top: 20px;
+      width: 44px;
+      height: 44px;
+      background: var(--logo) no-repeat center / contain;
+      opacity: .3;
+      pointer-events: none;
+    }
+    .slide.dark::before { opacity: .5; }
+    .kicker { color: var(--accent); font-size: 18px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+    .dark .kicker { color: #ffd28a; }
+    h1, h2, h3 { font-family: "Calibri Light", Calibri, "Segoe UI", sans-serif; font-weight: 300; letter-spacing: -.025em; }
+    h1 { font-size: 116px; line-height: 1.08; max-width: 920px; }
+    h2 { font-size: 64px; line-height: 1.12; max-width: 1240px; }
+    h3 { font-size: 30px; line-height: 1.2; }
+    p { max-width: 65ch; }
+    .lead { font-size: 28px; line-height: 1.45; color: var(--muted); max-width: 820px; }
+    .dark .lead, .dark .muted { color: #e5e7eb; }
+    .topline { display: flex; justify-content: space-between; align-items: center; margin-bottom: 96px; }
+    .mark { color: var(--muted); font-size: 16px; letter-spacing: .08em; text-transform: uppercase; }
+    .dark .mark { color: #d5d8df; }
+    .cover { justify-content: center; padding-left: 176px; background: linear-gradient(90deg, var(--bg) 0 67%, var(--accent) 67% 100%); }
+    .cover .kicker { margin-bottom: 30px; }
+    .cover h1 { margin-bottom: 40px; }
+    .cover .lead { margin-bottom: 56px; }
+    .cover-side { position: absolute; right: 94px; top: 50%; transform: translateY(-50%); width: 430px; color: #fff; }
+    .cover-side .code-stack { border-left: 4px solid var(--accent-2); padding-left: 28px; font: 24px/1.8 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .cover-side .code-stack span { display: block; }
+    .cover-side .code-stack span:nth-child(2) { padding-left: 34px; opacity: .82; }
+    .cover-side .code-stack span:nth-child(3) { padding-left: 70px; opacity: .64; }
+    .content { display: grid; grid-template-columns: 1.02fr .98fr; gap: 84px; align-items: center; flex: 1; min-height: 0; }
+    .content.single { display: block; }
+    .slide-title { margin-bottom: 36px; }
+    .body-copy { font-size: 24px; line-height: 1.55; color: var(--muted); }
+    .body-copy strong { color: var(--fg); font-weight: 600; }
+    .dark .body-copy { color: #e5e7eb; }
+    .dark .body-copy strong { color: #fff; }
+    .number { font-size: 210px; line-height: .86; color: var(--accent); font-family: "Calibri Light", Calibri, sans-serif; letter-spacing: -.06em; }
+    .number-label { margin-top: 28px; font-size: 26px; color: var(--muted); max-width: 360px; }
+    .dark .number-label { color: #e5e7eb; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 44px; }
+    .card { min-height: 300px; padding: 30px; border: 1px solid var(--line); background: var(--surface); border-top: 8px solid var(--accent); }
+    .card:nth-child(2) { border-top-color: var(--accent-2); }
+    .card:nth-child(3) { border-top-color: #70ad47; }
+    .card .code { margin: 22px 0; color: var(--accent); font: 25px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .card p { color: var(--muted); font-size: 20px; line-height: 1.45; }
+    .dark .card { background: var(--surface); border-color: var(--line); }
+    .dark .card p { color: #d6d9e0; }
+    .type-table { width: 100%; border-collapse: collapse; font-size: 22px; margin-top: 36px; }
+    .type-table th, .type-table td { text-align: left; padding: 20px 24px; border-bottom: 1px solid var(--line); }
+    .type-table th { color: var(--accent); font-weight: 600; font-size: 18px; letter-spacing: .06em; text-transform: uppercase; }
+    .type-table td:first-child { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--accent-2); }
+    .flow { display: flex; align-items: center; gap: 16px; margin-top: 48px; }
+    .flow-step { flex: 1; min-height: 180px; padding: 26px; background: var(--surface); border: 1px solid var(--line); }
+    .flow-step strong { display: block; margin-bottom: 16px; color: var(--accent); font-size: 25px; }
+    .flow-step p { font-size: 20px; color: var(--muted); }
+    .flow-arrow { color: var(--accent-2); font-size: 38px; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 42px; }
+    .split-panel { padding: 42px; min-height: 300px; background: var(--surface); border-left: 8px solid var(--accent); }
+    .split-panel:last-child { border-left-color: var(--accent-2); }
+    .split-panel h3 { margin-bottom: 22px; }
+    .split-panel p { font-size: 23px; color: var(--muted); line-height: 1.5; }
+    .quote { max-width: 1100px; margin-top: 86px; font-size: 58px; line-height: 1.22; font-family: "Calibri Light", Calibri, sans-serif; }
+    .quote em { color: var(--accent); font-style: normal; }
+    .footer { position: absolute; bottom: 48px; left: 112px; right: 112px; display: flex; justify-content: space-between; color: var(--muted); font-size: 15px; }
+    .dark .footer { color: #d5d8df; }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="deck-shell">
+    <div class="deck-stage" id="deck-stage">
+      <section class="slide active cover" data-screen-label="01 Datos: fuentes, tipos, importancia y calidad">
+        <div class="kicker">Ingeniería de Datos · IDT 601</div>
+        <h1>Datos: fuentes, tipos, importancia y calidad</h1>
+        <p class="lead">¿De dónde salen los datos, qué forma tienen y qué tan buenos son?</p>
+        <div class="mark">Bloque 1 · Sesión 1 · EGPP</div>
+        <div class="cover-side" aria-hidden="true"><div class="code-stack"><span>dato =</span><span>fuente</span><span>+ forma + calidad</span></div></div>
+      </section>
+
+      <section class="slide" data-screen-label="02 Hoja de ruta">
+        <div class="topline"><span class="kicker">01 / Hoja de ruta</span><span class="mark">180 minutos</span></div>
+        <div class="content single"><h2 class="slide-title">Una sola sesión, seis tramos</h2>
+          <table class="type-table">
+            <thead><tr><th>Tramo</th><th>Tiempo</th><th>Qué haremos</th></tr></thead>
+            <tbody>
+              <tr><td>Fuentes</td><td>20 min</td><td>De dónde provienen los datos.</td></tr>
+              <tr><td>Tipos</td><td>35 min</td><td>Estructurado, semiestructurado y no estructurado.</td></tr>
+              <tr><td>Implicaciones</td><td>20 min</td><td>Qué exige tratar cada tipo.</td></tr>
+              <tr><td>Activo y calidad</td><td>45 min</td><td>Por qué valen y cómo medir su calidad.</td></tr>
+              <tr><td>Taller relámpago</td><td>30 min</td><td>Inventario breve de datos.</td></tr>
+              <tr><td>Cierre</td><td>10 min</td><td>Síntesis, dudas y puente a la Sesión 2.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="footer"><span>Hoja de ruta</span><span>02</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="03 Las preguntas">
+        <div class="topline"><span class="kicker">02 / Encuadre</span><span class="mark">Cuatro preguntas</span></div>
+        <div class="content">
+          <div><h2 class="slide-title">Cuatro preguntas guían la sesión</h2><p class="body-copy">Saber responderlas es el primer paso para <strong>gestionar</strong> los datos de una institución.</p></div>
+          <div><p class="body-copy">1. ¿<strong>De dónde</strong> provienen los datos?<br>2. ¿<strong>Qué forma</strong> tienen?<br>3. ¿<strong>Por qué</strong> valen?<br>4. ¿<strong>Qué tan buenos</strong> son?</p></div>
+        </div>
+        <div class="footer"><span>Encuadre</span><span>03</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="04 Fuentes de datos">
+        <div class="topline"><span class="kicker">03 / Fuentes</span><span class="mark">Origen de los datos</span></div>
+        <div class="content single"><h2 class="slide-title">Cinco fuentes alimentan la gestión pública</h2>
+          <table class="type-table">
+            <thead><tr><th>Fuente</th><th>Qué aporta</th><th>Ejemplo local</th></tr></thead>
+            <tbody>
+              <tr><td>Sistemas internos</td><td>Trámites, nóminas, presupuesto, inventarios.</td><td>Registro de licencias de funcionamiento.</td></tr>
+              <tr><td>Web y formularios</td><td>Portales, reclamos y solicitudes en línea.</td><td>Formulario de reclamos del municipio.</td></tr>
+              <tr><td>Sensores y dispositivos</td><td>Cámaras, medidores, GPS, semáforos.</td><td>GPS de patrullas y camiones de basura.</td></tr>
+              <tr><td>Redes sociales y medios</td><td>Menciones, comentarios y publicaciones.</td><td>Página de Facebook de la alcaldía.</td></tr>
+              <tr><td>Encuestas y censos</td><td>Opciones cerradas y respuestas abiertas.</td><td>Encuesta de satisfacción al final del trámite.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="footer"><span>Fuentes</span><span>04</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="05 Los tres tipos">
+        <div class="topline"><span class="kicker">04 / Tipos</span><span class="mark">La forma del dato</span></div>
+        <div class="content single"><h2 class="slide-title">Los datos se clasifican por su estructura</h2>
+          <div class="cards">
+            <article class="card"><h3>Estructurados</h3><div class="code">tabla · filas · columnas</div><p>Viven en tablas y bases de datos. Cada columna tiene un tipo fijo.</p></article>
+            <article class="card"><h3>Semiestructurados</h3><div class="code">{ "clave": "valor" }</div><p>Traen etiquetas legibles, sin tabla rígida. Formatos JSON y XML.</p></article>
+            <article class="card"><h3>No estructurados</h3><div class="code">texto · imagen · audio</div><p>Sin organización fija. Son la mayoría de los datos del mundo.</p></article>
+          </div>
+        </div>
+        <div class="footer"><span>Tipos de datos</span><span>05</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="06 Estructurado">
+        <div class="topline"><span class="kicker">04 / Tipos</span><span class="mark">Estructurado</span></div>
+        <div class="content">
+          <div><h2 class="slide-title">El dato estructurado, de cerca</h2><p class="body-copy">Se organiza en <strong>filas y columnas</strong>. Cada columna tiene un tipo fijo: número, fecha, texto corto o categoría. Se consulta, filtra y resume con facilidad.</p></div>
+          <div><div class="card"><h3>Ejemplo</h3><div class="code">CI · nombre · trámite · fecha · estado</div><p>La tabla de ciudadanos atendidos en una base de datos municipal.</p></div></div>
+        </div>
+        <div class="footer"><span>Tipos de datos</span><span>06</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="07 Semiestructurado">
+        <div class="topline"><span class="kicker">04 / Tipos</span><span class="mark">Semiestructurado</span></div>
+        <div class="content">
+          <div><h2 class="slide-title">El dato semiestructurado, de cerca</h2><p class="body-copy">No vive en una tabla rígida, pero sus <strong>etiquetas</strong> le dan orden. Es el formato típico de los formularios web y las APIs. Hay que <strong>interpretarlo y transformarlo</strong>.</p></div>
+          <div><div class="card"><h3>JSON</h3><div class="code">{ "tramite": "reclamo", "zona": "calle 5" }</div><p>Pares clave-valor que se pueden leer y transformar.</p></div></div>
+        </div>
+        <div class="footer"><span>Tipos de datos</span><span>07</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="08 No estructurado">
+        <div class="topline"><span class="kicker">04 / Tipos</span><span class="mark">No estructurado</span></div>
+        <div class="content">
+          <div><h2 class="slide-title">El dato no estructurado, de cerca</h2><p class="body-copy">Sin organización interna fija: <strong>texto libre, imágenes, audio y video</strong>. Son la mayoría de los datos y los más difíciles de procesar; exigen técnicas específicas antes de analizarse.</p></div>
+          <div><div class="card"><h3>Ejemplo</h3><div class="code">foto · audio · reclamo escrito</div><p>La foto de un bache, una grabación de audiencia o el comentario en redes.</p></div></div>
+        </div>
+        <div class="footer"><span>Tipos de datos</span><span>08</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="09 Lado a lado">
+        <div class="topline"><span class="kicker">05 / Comparación</span><span class="mark">Lado a lado</span></div>
+        <div class="content single"><h2 class="slide-title">Los tres tipos, comparados</h2>
+          <table class="type-table">
+            <thead><tr><th>Tipo</th><th>¿Cómo se ve?</th><th>Formato típico</th><th>Dificultad</th></tr></thead>
+            <tbody>
+              <tr><td>Estructurado</td><td>Tablas de filas y columnas</td><td>BD, CSV, Excel</td><td>Baja</td></tr>
+              <tr><td>Semiestructurado</td><td>Etiquetas / clave-valor</td><td>JSON, XML</td><td>Media</td></tr>
+              <tr><td>No estructurado</td><td>Texto, imagen, audio, video</td><td>.txt, .jpg, .mp3</td><td>Alta</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="footer"><span>Comparación</span><span>09</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="10 Implicaciones">
+        <div class="topline"><span class="kicker">06 / Implicaciones</span><span class="mark">El tratamiento</span></div>
+        <div class="content single"><h2 class="slide-title">Cada tipo se trata de forma distinta</h2>
+          <div class="flow">
+            <div class="flow-step"><strong>Estructurado</strong><p>Se consulta, filtra y resume. Listo para reportes y tableros.</p></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step"><strong>Semiestructurado</strong><p>Se interpretan sus etiquetas. Flexible, exige transformación.</p></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step"><strong>No estructurado</strong><p>Requiere texto, visión o transcripción antes de analizarse.</p></div>
+          </div>
+        </div>
+        <div class="footer"><span>Implicaciones</span><span>10</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="11 Activo estratégico">
+        <div class="topline"><span class="kicker">07 / Valor</span><span class="mark">Activo estratégico</span></div>
+        <div class="content single"><h2 class="slide-title">Los datos son un activo, no un subproducto</h2>
+          <div class="flow">
+            <div class="flow-step"><strong>Describir</strong><p>¿Qué pasó? Trámites por día, zonas, montos y tiempos.</p></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step"><strong>Explicar</strong><p>¿Por qué pasó? Comparar periodos, zonas y grupos.</p></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step"><strong>Predecir</strong><p>¿Qué pasará? Anticipar la demanda y priorizar recursos.</p></div>
+          </div>
+          <p class="quote">Dato + contexto = <em>información</em>; información + decisión = <em>valor</em>.</p>
+        </div>
+        <div class="footer"><span>Valor del dato</span><span>11</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="12 Calidad de datos">
+        <div class="topline"><span class="kicker">08 / Calidad</span><span class="mark">Tres dimensiones</span></div>
+        <div class="content single"><h2 class="slide-title">La calidad se mide con tres lentes</h2>
+          <table class="type-table">
+            <thead><tr><th>Dimensión</th><th>Pregunta</th><th>Ejemplo en gestión pública</th></tr></thead>
+            <tbody>
+              <tr><td>Completitud</td><td>¿Faltan datos?</td><td>El 40% de los reclamos no registra la zona; no se sabe dónde concentrar la atención.</td></tr>
+              <tr><td>Exactitud</td><td>¿Los datos son correctos?</td><td>Cédulas mal cargadas o direcciones con errores llevan a decisiones erradas.</td></tr>
+              <tr><td>Actualidad</td><td>¿Están al día?</td><td>Un padrón de contribuyentes sin actualizar en años decide con una foto vieja.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="footer"><span>Calidad de datos</span><span>12</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="13 Taller relámpago">
+        <div class="topline"><span class="kicker">09 / En la práctica</span><span class="mark">Taller relámpago</span></div>
+        <div class="content single"><h2 class="slide-title">Inventario breve: municipio de Río Verde</h2>
+          <div class="cards">
+            <article class="card"><h3>1. Detecta</h3><p>En equipos de 3–4, identifiquen los datos que maneja la Dirección de Atención Ciudadana.</p></article>
+            <article class="card"><h3>2. Clasifica</h3><p>Por cada dato: fuente, tipo, formato y frecuencia.</p></article>
+            <article class="card"><h3>3. Evalúa</h3><p>Marquen un problema de completitud, exactitud o actualidad y propongan una mejora.</p></article>
+          </div>
+          <p class="body-copy">Puesta en común: cada equipo comparte <strong>un dato bien inventariado</strong> y <strong>un problema de calidad</strong>.</p>
+        </div>
+        <div class="footer"><span>Taller relámpago</span><span>13</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="14 Cierre">
+        <div class="topline"><span class="kicker">10 / En resumen</span><span class="mark">Cierre</span></div>
+        <div class="content single"><h2 class="slide-title">Fuente, tipo y calidad: la base para gestionar datos</h2>
+          <div class="cards">
+            <article class="card"><h3>Fuente</h3><p>Todo dato tiene un origen que anticipa su forma y su calidad.</p></article>
+            <article class="card"><h3>Tipo</h3><p>Estructurado, semiestructurado o no estructurado; cada uno exige un trato distinto.</p></article>
+            <article class="card"><h3>Calidad</h3><p>Completitud, exactitud y actualidad: datos buenos para decidir mejor.</p></article>
+          </div>
+          <p class="quote">Próxima sesión: la <em>ingesta de datos</em> — extraer y cargar información desde las fuentes.</p>
+        </div>
+        <div class="footer"><span>Fin de la sesión</span><span>14</span></div>
+      </section>
+
+      <section class="slide dark" data-screen-label="15 Gracias">
+        <div class="topline"><span class="kicker">Fin</span><span class="mark">Ingeniería de Datos · IDT 601</span></div>
+        <div class="content single">
+          <h2 class="slide-title">Gracias</h2>
+          <p class="lead">Bloque 1 · Sesión 1 · Datos: fuentes, tipos, importancia y calidad</p>
+          <p class="quote">La próxima sesión: ingesta de datos y pipelines.</p>
+        </div>
+        <div class="footer"><span>EGPP · Escuela de Gestión Pública Plurinacional</span><span>15</span></div>
+      </section>
+    </div>
+  </div>
+  <nav class="deck-counter" role="navigation" aria-label="Navegación de la presentación"><button type="button" id="deck-prev" aria-label="Diapositiva anterior">‹</button><span class="deck-count"><span id="deck-cur">01</span> <span class="total">/ <span id="deck-total">15</span></span></span><button type="button" id="deck-next" aria-label="Siguiente diapositiva">›</button></nav>
+  <div class="deck-hint">← / → · espacio · R reinicia</div>
+  <script>
+    (function () {
+      var stage = document.getElementById('deck-stage');
+      var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+      var prev = document.getElementById('deck-prev');
+      var next = document.getElementById('deck-next');
+      var cur = document.getElementById('deck-cur');
+      var total = document.getElementById('deck-total');
+      var STORE = 'deck:idx:' + (location.pathname || '/');
+      var idx = 0;
+      function fit() { var sw = window.innerWidth, sh = window.innerHeight, pad = 32, s = Math.min((sw - pad) / 1920, (sh - pad) / 1080); if (!isFinite(s) || s <= 0) s = 1; stage.style.transform = 'translate(' + ((sw - 1920 * s) / 2) + 'px,' + ((sh - 1080 * s) / 2) + 'px) scale(' + s + ')'; }
+      function pad2(n) { return (n < 10 ? '0' : '') + n; }
+      function paint() { slides.forEach(function (el, i) { el.classList.toggle('active', i === idx); }); cur.textContent = pad2(idx + 1); total.textContent = pad2(slides.length); prev.toggleAttribute('disabled', idx <= 0); next.toggleAttribute('disabled', idx >= slides.length - 1); try { window.parent.postMessage({type:'od:slide-state', protocolVersion:1, active:idx, count:slides.length}, '*'); } catch (_) {} }
+      function go(i) { idx = Math.max(0, Math.min(slides.length - 1, i)); paint(); try { localStorage.setItem(STORE, String(idx)); } catch (_) {} }
+      function onKey(e) { if (e.__odDeckKeyHandled || e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return; if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.__odDeckKeyHandled = true; e.preventDefault(); go(idx + 1); } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.__odDeckKeyHandled = true; e.preventDefault(); go(idx - 1); } else if (e.key === 'Home' || String(e.key).toLowerCase() === 'r') { e.__odDeckKeyHandled = true; e.preventDefault(); go(0); } else if (e.key === 'End') { e.__odDeckKeyHandled = true; e.preventDefault(); go(slides.length - 1); } }
+      window.addEventListener('message', function (e) { var d = e.data; if (!d || d.type !== 'od:slide') return; if (d.action === 'next') go(idx + 1); else if (d.action === 'prev') go(idx - 1); else if (d.action === 'first') go(0); else if (d.action === 'last') go(slides.length - 1); else if (d.action === 'go' && typeof d.index === 'number') go(Math.floor(d.index)); });
+      window.addEventListener('keydown', onKey, true); document.addEventListener('keydown', onKey, true); prev.addEventListener('click', function () { go(idx - 1); }); next.addEventListener('click', function () { go(idx + 1); });
+      document.addEventListener('click', function (e) { if (e.defaultPrevented || e.button !== undefined && e.button !== 0) return; var t = e.target; while (t && t !== document.body) { if (/^(A|BUTTON|INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable) return; t = t.parentElement; } if (e.clientX < window.innerWidth / 2) go(idx - 1); else go(idx + 1); }, true);
+      try { var saved = parseInt(localStorage.getItem(STORE) || '0', 10); if (!isNaN(saved) && saved >= 0 && saved < slides.length) idx = saved; } catch (_) {}
+      window.addEventListener('resize', fit); try { window.parent.postMessage({type:'od:deck-ready', protocolVersion:1, capabilities:['absolute-navigation','state-events']}, '*'); } catch (_) {} fit(); paint();
+    })();
+  </script>
+</body>
+</html>

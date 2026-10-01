@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lección 01 · ¿Batch o streaming?</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Lección 01 · Bloque 2 — Ingesta de Datos</p>
+    <h1>Decidir sin dudar: ¿batch o streaming?</h1>
+    <p class="lead">Al terminar, podrás decidir el modo de ingesta de cualquier caso y justificarlo con dos criterios: frescura necesaria y costo de operarlo.</p>
+
+    <p class="sidenote">
+      Apoyado en Kleppmann, <em>Diseño de aplicaciones con uso intensivo en datos</em> y Curto, <em>Fundamentos de big data</em> (UOC).
+      <cite><a href="../reference/batch-vs-streaming.html">Ver referencia →</a></cite>
+    </p>
+
+    <h2>La pregunta que decide</h2>
+    <p>No hay un modo "mejor". Hay una pregunta: <strong>¿cuán frescos deben estar los datos, y cuánto cuesta mantenerlos así?</strong>. Si los datos pueden esperar (horas o días), la respuesta casi siempre es <strong>batch</strong>. Si no pueden esperar (segundos), es <strong>streaming</strong>.</p>
+    <p>El error frecuente es elegir streaming por prestigio. Operarlo cuesta más <em>siempre</em>, y la mayoría de los reportes institucionales no necesitan frescura de segundos.</p>
+
+    <div class="box">
+      <p><strong>Regla de oro:</strong> batch cubre casi todo lo que una institución necesita; streaming se reserva para lo que <em>no puede esperar</em> (alertas, tableros en vivo, sensores).</p>
+    </div>
+
+    <h2>Practica: clasifica cada caso</h2>
+    <p>Elige una opción. Recibirás la corrección al instante.</p>
+
+    <div class="quiz">
+      <p class="q">1. El cierre mensual de la nómina de la institución.</p>
+      <div class="opts">
+        <button data-correct="true">Batch</button>
+        <button>Streaming</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> puede esperar al cierre del mes; nadie necesita la nómina segundo a segundo. Frescura baja, costo bajo.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">2. Un tablero de emergencias que muestra incidentes en vivo.</p>
+      <div class="opts">
+        <button>Batch</button>
+        <button data-correct="true">Streaming</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> no puede esperar; cada minuto de desfase cuesta una respuesta. Frescura crítica.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">3. La consolidación nocturna de la recaudación diaria de impuestos.</p>
+      <div class="opts">
+        <button data-correct="true">Batch</button>
+        <button>Streaming</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> un lote por noche es suficiente y mucho más simple. El desfase de horas no molesta.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">4. Las lecturas de semáforos inteligentes que ajustan el tránsito.</p>
+      <div class="opts">
+        <button>Batch</button>
+        <button data-correct="true">Streaming</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el ajuste debe reaccionar al flujo actual; con datos de ayer no sirve.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">5. El informe anual de ejecución presupuestaria.</p>
+      <div class="opts">
+        <button data-correct="true">Batch</button>
+        <button>Streaming</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> se arma con cierres periódicos; streaming sería un gasto sin beneficio.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">6. La alerta de que un trámite superó su plazo legal de respuesta.</p>
+      <div class="opts">
+        <button>Batch</button>
+        <button data-correct="true">Streaming</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> la alerta debe dispararse cuando ocurre, no en el próximo lote. Frescura alta.</div>
+    </div>
+
+    <hr />
+
+    <h2>Fuente principal</h2>
+    <p class="refs">
+      Para profundizar: Martin Kleppmann, <em>Diseño de aplicaciones con uso intensivo en datos</em> (capítulos de procesamiento por lotes y por flujos).
+      Complementa con <a href="https://openaccess.uoc.edu/server/api/core/bitstreams/4efc24a4-9563-4a0b-97d8-b790954ba50d/content">Josep Curto, <em>Fundamentos de big data</em> (FUOC/UOC)</a>.
+    </p>
+
+    <div class="askai">
+      ¿Algo te hace dudar? Pregúntame y lo desarmamos — por ejemplo: "¿qué pasa si el batch corre cada hora, ya no es casi tiempo real?" o "¿cómo justifico streaming sin asustar por el costo?".
+    </div>
+
+    <div class="nav">
+      <a href="../reference/batch-vs-streaming.html">← Referencia: batch vs. streaming</a>
+      <a href="0002-conector-script-api.html">Lección 02: conector, script o API →</a>
+    </div>
+  </div>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>

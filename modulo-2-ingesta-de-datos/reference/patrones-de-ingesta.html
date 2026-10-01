@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Referencia · Patrones de ingesta</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Referencia · Bloque 2 — Ingesta de Datos</p>
+    <h1>Patrones de ingesta</h1>
+    <p class="lead">Hoja de referencia rápida: qué patrón usar según lo que cambia en la fuente y quién toma la iniciativa.</p>
+
+    <h2>La pregunta que decide</h2>
+    <p>Pregunta <strong>qué cambia</strong>: ¿todo (completa), poco a poco (incremental), o necesito el detalle del cambio (CDC)? Y <strong>¿quién inicia?</strong>: nuestro sistema (<em>pull</em>) o la fuente (<em>push</em>).</p>
+
+    <table class="ref">
+      <thead><tr><th>Patrón</th><th>Idea central</th><th>Cuándo usarlo</th></tr></thead>
+      <tbody>
+        <tr><td>Carga completa</td><td>Mover todo y reemplazar</td><td>Datos pequeños o que cambian por completo</td></tr>
+        <tr><td>Carga incremental</td><td>Mover solo lo nuevo</td><td>Volúmenes grandes y crecientes</td></tr>
+        <tr><td>CDC</td><td>La fuente entrega solo los cambios</td><td>Necesidad de cambios exactos y a tiempo</td></tr>
+        <tr><td>Pull</td><td>Nosotros buscamos los datos</td><td>Control de horario, fuentes que no notifican</td></tr>
+        <tr><td>Push</td><td>La fuente envía los datos</td><td>Frescura alta, alertas</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box">
+      <p><strong>Por qué importa:</strong> elegir el patrón correcto evita rehacer el trabajo y previene duplicados. La <em>idempotencia</em> —repetir una carga sin duplicar ni corromper— es la garantía que separa una ingesta robusta de una que falla en silencio.</p>
+    </div>
+
+    <h2>Para llevar</h2>
+    <p class="refs">
+      <strong>Completa</strong> → todo, cada vez. &nbsp;·&nbsp;
+      <strong>Incremental</strong> → solo lo nuevo. &nbsp;·&nbsp;
+      <strong>CDC</strong> → solo el cambio, con detalle. &nbsp;·&nbsp;
+      <strong>Pull</strong> → voy a buscar. &nbsp;·&nbsp;
+      <strong>Push</strong> → me envían.
+    </p>
+
+    <p class="refs">Fuentes: Kleppmann, <em>Diseño de aplicaciones con uso intensivo en datos</em>; documentación de herramientas de ingesta (Kafka, Airbyte, Fivetran).</p>
+
+    <div class="nav">
+      <a href="../lessons/0003-patrones-de-ingesta.html">← Lección 03: elegir el patrón</a>
+      <a href="herramientas-de-ingesta.html">Herramientas de ingesta →</a>
+    </div>
+  </div>
+</body>
+</html>

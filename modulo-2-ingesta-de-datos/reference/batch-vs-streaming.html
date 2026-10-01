@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Referencia · Batch vs. streaming</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Referencia · Bloque 2 — Ingesta de Datos</p>
+    <h1>Batch vs. streaming</h1>
+    <p class="lead">Hoja de referencia rápida: cómo decidir el modo de ingesta y justificarlo con dos criterios.</p>
+
+    <h2>La pregunta que decide</h2>
+    <p>Antes de elegir, pregunta: <strong>¿cuán frescos deben estar los datos, y cuánto cuesta mantenerlos así?</strong>. Si pueden esperar, es <strong>batch</strong>; si no, <strong>streaming</strong>.</p>
+
+    <table class="ref">
+      <thead><tr><th>Criterio</th><th>Batch (por lotes)</th><th>Streaming (tiempo real)</th></tr></thead>
+      <tbody>
+        <tr><td>Cuándo se mueve el dato</td><td>En bloques, a intervalos</td><td>En cuanto llega</td></tr>
+        <tr><td>Frescura</td><td>Horas o días de desfase</td><td>Segundos o menos</td></tr>
+        <tr><td>Costo y complejidad</td><td>Baja</td><td>Alta</td></tr>
+        <tr><td>Tolerancia a errores</td><td>Fácil de reintentar</td><td>Más delicada</td></tr>
+        <tr><td>Uso típico</td><td>Reportes, cierres, históricos</td><td>Alertas, tableros en vivo, sensores</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box">
+      <p><strong>Regla práctica:</strong> batch cubre casi todo lo que una institución necesita; streaming se reserva para lo que <em>no puede esperar</em>.</p>
+    </div>
+
+    <h2>Casos que suelen aparecer</h2>
+    <table class="ref">
+      <thead><tr><th>Caso</th><th>Modo</th><th>Por qué</th></tr></thead>
+      <tbody>
+        <tr><td>Cierre mensual de nómina</td><td>Batch</td><td>Puede esperar al cierre</td></tr>
+        <tr><td>Tablero de emergencias en vivo</td><td>Streaming</td><td>El desfase cuesta respuestas</td></tr>
+        <tr><td>Recaudación diaria consolidada de noche</td><td>Batch</td><td>Un lote nocturno basta</td></tr>
+        <tr><td>Semáforos inteligentes</td><td>Streaming</td><td>Debe reaccionar al flujo actual</td></tr>
+        <tr><td>Informe anual presupuestario</td><td>Batch</td><td>Se arma con cierres periódicos</td></tr>
+        <tr><td>Alerta de plazo legal vencido</td><td>Streaming</td><td>Debe dispararse cuando ocurre</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Para llevar</h2>
+    <p class="refs">
+      <strong>Batch</strong> → simple, económico, con desfase. &nbsp;·&nbsp;
+      <strong>Streaming</strong> → fresco, complejo, más caro.
+    </p>
+
+    <p class="refs">Fuentes: Kleppmann, <em>Diseño de aplicaciones con uso intensivo en datos</em>; Curto, <em>Fundamentos de big data</em> (UOC, acceso abierto).</p>
+
+    <div class="nav">
+      <a href="../lessons/0001-batch-vs-streaming.html">← Lección 01: batch vs. streaming</a>
+      <a href="../lessons/0002-conector-script-api.html">Lección 02: conector, script o API →</a>
+    </div>
+  </div>
+</body>
+</html>

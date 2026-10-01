@@ -1,0 +1,202 @@
+/* ==========================================================================
+   Tema reveal.js — EGPP
+   Derivado del sistema visual del deck custom (Bloque 1 / IDT 601).
+   Los decks custom NO se modifican: este archivo reproduce su diseño.
+
+   Anatomía por slide (clases del deck):
+     section.cover  → portada (degradado + bloque lateral .cover-side)
+     section.dark   → cierre oscuro
+     .topline (kicker + mark) · .content [.single] · componentes · .footer
+
+   Uso:
+     <link rel="stylesheet" href=".../reveal.js/dist/reveal.css">
+     <link rel="stylesheet" href="assets/theme-egpp.css">
+     Reveal.initialize({
+       width: 1920, height: 1080, margin: 0, center: false,
+       hash: true, plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+     });
+   ========================================================================== */
+
+/* ---- Tokens (mismos valores que el deck custom) ---- */
+:root {
+  --bg: #f5f3eb;
+  --fg: #2a4d40;
+  --muted: #3d6558;
+  --accent: #507a6e;
+  --accent-2: #dabc6e;
+  --surface: #a9bebd;
+  --line: #a4bfbe;
+  --shell: #08090d;
+  --logo: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2080%2080%27%3E%3Crect%20x%3D%270%27%20y%3D%270%27%20width%3D%2740%27%20height%3D%2740%27%20fill%3D%27%232A4D40%27%2F%3E%3Crect%20x%3D%2740%27%20y%3D%270%27%20width%3D%2740%27%20height%3D%2740%27%20fill%3D%27%233D6558%27%2F%3E%3Crect%20x%3D%270%27%20y%3D%2740%27%20width%3D%2740%27%20height%3D%2740%27%20fill%3D%27%237E9A8E%27%2F%3E%3Crect%20x%3D%2740%27%20y%3D%2740%27%20width%3D%2740%27%20height%3D%2740%27%20fill%3D%27%23A9BEBD%27%2F%3E%3Ctext%20x%3D%2720%27%20y%3D%2729%27%20fill%3D%27%23FFFFFF%27%20font-family%3D%27Arial%2CHelvetica%2Csans-serif%27%20font-size%3D%2727%27%20font-weight%3D%27bold%27%20text-anchor%3D%27middle%27%3EE%3C%2Ftext%3E%3C%2Fsvg%3E");
+}
+
+/* Variantes de tema (opcional, igual que el deck: <html data-theme="...">) */
+:root[data-theme="egpp"]    { --bg:#f5f3eb; --fg:#2a4d40; --muted:#3d6558; --accent:#507a6e; --accent-2:#dabc6e; --surface:#a9bebd; --line:#a4bfbe; }
+:root[data-theme="github"]  { --bg:#ffffff; --fg:#1f2328; --muted:#57606a; --accent:#0969da; --accent-2:#1a7f37; --surface:#f6f8fa; --line:#d0d7de; }
+:root[data-theme="datadog"] { --bg:#111318; --fg:#f4f5f7; --muted:#b2b7c2; --accent:#632ca6; --accent-2:#f04f5f; --surface:#1c1f27; --line:#353a47; }
+
+/* ---- Lienzo ---- */
+.reveal {
+  background: var(--shell);
+  color: var(--fg);
+  font: 18px/1.5 Calibri, "Segoe UI", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.reveal .slides { text-align: left; }
+
+.reveal .slides > section {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 72px 112px 64px;
+  background: var(--bg);
+  color: var(--fg);
+  overflow: hidden;
+}
+.reveal .slides > section.present {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Línea de cierre inferior */
+.reveal .slides > section::after {
+  content: '';
+  position: absolute;
+  left: 112px; right: 112px; bottom: 32px;
+  height: 4px;
+  background: var(--accent);
+  opacity: .9;
+}
+.reveal .slides > section.dark::after { background: var(--accent-2); }
+
+/* Logo como marca de agua, arriba a la izquierda */
+.reveal .slides > section::before {
+  content: '';
+  position: absolute;
+  left: 112px; top: 20px;
+  width: 44px; height: 44px;
+  background: var(--logo) no-repeat center / contain;
+  opacity: .3;
+  pointer-events: none;
+}
+.reveal .slides > section.dark::before { opacity: .5; }
+
+/* ---- Portada ---- */
+.reveal .slides > section.cover {
+  justify-content: center;
+  padding-left: 176px;
+  background: linear-gradient(90deg, var(--bg) 0 67%, var(--accent) 67% 100%);
+}
+.reveal .slides > section.cover .kicker { margin-bottom: 30px; }
+.reveal .slides > section.cover h1 { margin-bottom: 40px; }
+.reveal .slides > section.cover .lead { margin-bottom: 56px; }
+
+/* ---- Cierre oscuro ---- */
+.reveal .slides > section.dark { background: var(--muted); color: #fff; }
+.reveal .slides > section.dark .kicker { color: #ffd28a; }
+.reveal .slides > section.dark .lead,
+.reveal .slides > section.dark .muted,
+.reveal .slides > section.dark .body-copy,
+.reveal .slides > section.dark .number-label { color: #e5e7eb; }
+.reveal .slides > section.dark .mark,
+.reveal .slides > section.dark .footer { color: #d5d8df; }
+.reveal .slides > section.dark .body-copy strong { color: #fff; }
+.reveal .slides > section.dark .card { background: var(--surface); border-color: var(--line); }
+.reveal .slides > section.dark .card p { color: #d6d9e0; }
+
+/* ---- Tipografía ---- */
+.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+  font-family: "Calibri Light", Calibri, "Segoe UI", sans-serif;
+  font-weight: 300;
+  color: inherit;
+  text-transform: none;
+  letter-spacing: -.025em;
+  line-height: 1.15;
+  margin: 0 0 18px;
+}
+.reveal h1 { font-size: 116px; line-height: 1.08; max-width: 920px; }
+.reveal h2 { font-size: 64px; line-height: 1.12; max-width: 1240px; }
+.reveal h3 { font-size: 30px; line-height: 1.2; }
+.reveal p { color: var(--muted); }
+.reveal strong, .reveal b { color: var(--fg); font-weight: 600; }
+.reveal em { color: var(--accent); font-style: normal; }
+.reveal ul, .reveal ol { color: var(--muted); font-size: 28px; line-height: 1.5; max-width: 70ch; padding-left: 1.25em; }
+.reveal li { color: var(--muted); margin-bottom: 14px; }
+.reveal li:last-child { margin-bottom: 0; }
+.reveal ul li::marker { color: var(--accent-2); }
+.reveal a { color: var(--accent); }
+
+/* Bloques de código */
+.reveal pre { box-shadow: none; width: 100%; }
+.reveal pre code { background: var(--surface); color: var(--fg); font-size: .8em; }
+
+/* ---- Componentes del deck ---- */
+.reveal .kicker { color: var(--accent); font-size: 18px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.reveal .mark { color: var(--muted); font-size: 16px; letter-spacing: .08em; text-transform: uppercase; }
+.reveal .topline { display: flex; justify-content: space-between; align-items: center; margin-bottom: 96px; }
+.reveal .lead { font-size: 28px; line-height: 1.45; color: var(--muted); max-width: 820px; }
+.reveal .muted { color: var(--muted); }
+
+.reveal .content { display: grid; grid-template-columns: 1.02fr .98fr; gap: 84px; align-items: center; flex: 1; min-height: 0; }
+.reveal .content.single { display: block; }
+
+.reveal .slide-title { margin-bottom: 36px; }
+.reveal .body-copy { font-size: 24px; line-height: 1.55; color: var(--muted); max-width: 65ch; }
+.reveal .body-copy strong { color: var(--fg); }
+
+.reveal .number { font-size: 210px; line-height: .86; color: var(--accent); font-family: "Calibri Light", Calibri, sans-serif; letter-spacing: -.06em; }
+.reveal .number-label { margin-top: 28px; font-size: 26px; color: var(--muted); max-width: 360px; }
+
+/* Portada: bloque lateral de código */
+.reveal .cover-side { position: absolute; right: 94px; top: 50%; transform: translateY(-50%); width: 430px; color: #fff; }
+.reveal .cover-side .code-stack { border-left: 4px solid var(--accent-2); padding-left: 28px; font: 24px/1.8 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.reveal .cover-side .code-stack span { display: block; }
+.reveal .cover-side .code-stack span:nth-child(2) { padding-left: 34px; opacity: .82; }
+.reveal .cover-side .code-stack span:nth-child(3) { padding-left: 70px; opacity: .64; }
+
+/* Tarjetas */
+.reveal .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 44px; }
+.reveal .card { min-height: 300px; padding: 30px; border: 1px solid var(--line); background: var(--surface); border-top: 8px solid var(--accent); }
+.reveal .card:nth-child(2) { border-top-color: var(--accent-2); }
+.reveal .card:nth-child(3) { border-top-color: #70ad47; }
+.reveal .card h3 { margin: 0 0 14px; }
+.reveal .card .code { margin: 22px 0; color: var(--accent); font: 25px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.reveal .card p { color: var(--muted); font-size: 20px; line-height: 1.45; margin: 0; }
+
+/* Tablas */
+.reveal table { width: 100%; border-collapse: collapse; font-size: 22px; margin-top: 36px; }
+.reveal table th, .reveal table td { text-align: left; padding: 20px 24px; border-bottom: 1px solid var(--line); }
+.reveal table th { color: var(--accent); font-weight: 600; font-size: 18px; letter-spacing: .06em; text-transform: uppercase; }
+.reveal table td { color: var(--muted); }
+.reveal table td:first-child { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--accent-2); }
+
+/* Flujo */
+.reveal .flow { display: flex; align-items: center; gap: 16px; margin-top: 48px; }
+.reveal .flow-step { flex: 1; min-height: 180px; padding: 26px; background: var(--surface); border: 1px solid var(--line); }
+.reveal .flow-step strong { display: block; margin-bottom: 16px; color: var(--accent); font-size: 25px; }
+.reveal .flow-step p { font-size: 20px; color: var(--muted); }
+.reveal .flow-arrow { color: var(--accent-2); font-size: 38px; }
+
+/* Split */
+.reveal .split { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 42px; }
+.reveal .split-panel { padding: 42px; min-height: 300px; background: var(--surface); border-left: 8px solid var(--accent); }
+.reveal .split-panel:last-child { border-left-color: var(--accent-2); }
+.reveal .split-panel h3 { margin-bottom: 22px; }
+.reveal .split-panel p { font-size: 23px; color: var(--muted); line-height: 1.5; }
+
+/* Cita */
+.reveal .quote { max-width: 1100px; margin-top: 86px; font-size: 44px; line-height: 1.28; font-family: "Calibri Light", Calibri, sans-serif; }
+.reveal .quote em { color: var(--accent); font-style: normal; }
+
+/* Pie de slide */
+.reveal .footer { position: absolute; bottom: 48px; left: 112px; right: 112px; display: flex; justify-content: space-between; color: var(--muted); font-size: 15px; }
+
+/* ---- Chrome de reveal ---- */
+.reveal .progress { color: var(--accent-2); }
+.reveal .controls { color: var(--fg); }
+.reveal .slide-number { color: var(--muted); background: transparent; }
+
+/* ---- Impresión / PDF ---- */
+@media print {
+  .reveal .slides > section { box-shadow: none; }
+}

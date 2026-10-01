@@ -1,0 +1,304 @@
+<!-- .slide: class="cover" -->
+<div class="kicker">Ingeniería de Datos · IDT 601</div>
+<h1>Datos: fuentes, tipos, importancia y calidad</h1>
+<p class="lead">¿De dónde salen los datos, qué forma tienen y qué tan buenos son?</p>
+<div class="mark">Bloque 1 · Sesión 1 · EGPP</div>
+<div class="cover-side" aria-hidden="true"><div class="code-stack"><span>dato =</span><span>fuente</span><span>+ forma + calidad</span></div></div>
+
+Note:
+- Dar la bienvenida y presentarse; ubicar el módulo **IDT 601** y el **Bloque 1 — Datos** como punto de partida de todo el recorrido.
+- Aclarar que el público no es especialista: no hace falta programar, solo aprender a mirar los datos con criterio.
+- Anunciar el recorrido del día: fuentes, tipos, implicaciones, valor del dato, calidad y un **taller relámpago** de inventario.
+- Usar la frase de enganche: "Para gestionar un servicio o para que un sistema aprenda, primero necesitamos datos".
+- **No olvidar:** presentar las reglas de convivencia y avisar que hay una **pausa de 10 minutos** a mitad de la sesión y un taller al final.
+
+---
+
+<div class="topline"><span class="kicker">00 / Presentación</span></div>
+<div class="content single"><h2 class="slide-title">¿Quién soy?</h2>
+    <ul>
+        <li>Licenciado en Ciencias de la Comunicación</li>
+        <li>Maestría en Ciberseguridad</li>
+        <li>Profesor sobre Sociología de la IA</li>
+        <li>Me interesan el software libre y las licencias abertas</li>
+    </ul>
+</div>
+<div class="footer"><span>Presentación</span><span>00</span></div>
+
+
+---
+
+<div class="topline"><span class="kicker">01 / Hoja de ruta</span><span class="mark">180 minutos</span></div>
+<div class="content single"><h2 class="slide-title">Una sola sesión, seis tramos</h2>
+  <table class="type-table">
+    <thead><tr><th>Tramo</th><th>Tiempo</th><th>Qué haremos</th></tr></thead>
+    <tbody>
+      <tr><td>Fuentes</td><td>20 min</td><td>De dónde provienen los datos.</td></tr>
+      <tr><td>Tipos</td><td>35 min</td><td>Estructurado, semiestructurado y no estructurado.</td></tr>
+      <tr><td>Implicaciones</td><td>20 min</td><td>Qué exige tratar cada tipo.</td></tr>
+      <tr><td>Activo y calidad</td><td>45 min</td><td>Por qué valen y cómo medir su calidad.</td></tr>
+      <tr><td>Taller relámpago</td><td>30 min</td><td>Inventario breve de datos.</td></tr>
+      <tr><td>Cierre</td><td>10 min</td><td>Síntesis, dudas y puente a la Sesión 2.</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Hoja de ruta</span><span>02</span></div>
+
+Note:
+- Recorrer los seis tramos de la tabla y encuadrar el tiempo total: **180 minutos**, una sola sesión.
+- Señalar que cada tramo responde a una pregunta y que la teoría se cierra con práctica.
+- Fijar la pausa después del bloque de implicaciones y reservar los últimos 30 minutos para el taller.
+- Prometer que al final cada equipo saldrá con un inventario breve trabajado.
+- **No olvidar:** aclarar que el taller y la puesta en común están incluidos en el tiempo, no son tarea extra.
+
+---
+
+<div class="topline"><span class="kicker">02 / Encuadre</span><span class="mark">Cuatro preguntas</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Cuatro preguntas guían la sesión</h2><p class="body-copy">Saber responderlas es el primer paso para <strong>gestionar</strong> los datos de una institución.</p></div>
+  <div><p class="body-copy">1. ¿<strong>De dónde</strong> provienen los datos?<br>2. ¿<strong>Qué forma</strong> tienen?<br>3. ¿<strong>Por qué</strong> valen?<br>4. ¿<strong>Qué tan buenos</strong> son?</p></div>
+</div>
+<div class="footer"><span>Encuadre</span><span>03</span></div>
+
+Note:
+- Presentar las cuatro preguntas como el hilo conductor: de dónde, qué forma, por qué valen y qué tan buenos son.
+- Hacer el **enganche**: preguntar "¿qué datos genera su institución en un día normal?" y anotar 4 o 5 ejemplos en una pizarra digital (o en el chat).
+- Explicar que esos ejemplos anotados se retoman al final en el taller relámpago.
+- Anticipar las palabras clave que se usarán todo el día: fuente, formato, estructura, tabla, JSON, texto libre y calidad.
+- **No olvidar:** dejar claro que saber responder estas cuatro preguntas es el primer paso para **gestionar** los datos de una institución.
+
+---
+
+<div class="topline"><span class="kicker">03 / Fuentes</span><span class="mark">Origen de los datos</span></div>
+<div class="content single"><h2 class="slide-title">Cinco fuentes alimentan la gestión pública</h2>
+  <table class="type-table">
+    <thead><tr><th>Fuente</th><th>Qué aporta</th><th>Ejemplo local</th></tr></thead>
+    <tbody>
+      <tr><td>Sistemas internos</td><td>Trámites, nóminas, presupuesto, inventarios.</td><td>Registro de licencias de funcionamiento.</td></tr>
+      <tr><td>Web y formularios</td><td>Portales, reclamos y solicitudes en línea.</td><td>Formulario de reclamos del municipio.</td></tr>
+      <tr><td>Sensores y dispositivos</td><td>Cámaras, medidores, GPS, semáforos.</td><td>GPS de patrullas y camiones de basura.</td></tr>
+      <tr><td>Redes sociales y medios</td><td>Menciones, comentarios y publicaciones.</td><td>Página de Facebook de la alcaldía.</td></tr>
+      <tr><td>Encuestas y censos</td><td>Opciones cerradas y respuestas abiertas.</td><td>Encuesta de satisfacción al final del trámite.</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Fuentes</span><span>04</span></div>
+
+Note:
+- Recorrer las cinco fuentes con un ejemplo local boliviano: sistemas internos (registro de licencias), web (formulario de reclamos), sensores (GPS de patrullas y camiones de basura), redes (página de Facebook de la alcaldía) y encuestas (satisfacción al final del trámite).
+- Preguntar al grupo: "¿cuál de estas fuentes usa hoy su institución?" y escuchar dos o tres respuestas.
+- Explicar que cada fuente anticipa la **forma** y la **calidad** del dato que produce.
+- Comentar que los sistemas internos suelen ser ordenados y confiables, mientras las redes son textuales y desordenadas.
+- **No olvidar:** remarcar que sensores y redes sociales también son fuentes de datos institucionales, no solo las bases internas.
+
+---
+
+<div class="topline"><span class="kicker">04 / Tipos</span><span class="mark">La forma del dato</span></div>
+<div class="content single"><h2 class="slide-title">Los datos se clasifican por su estructura</h2>
+  <div class="cards">
+    <article class="card"><h3>Estructurados</h3><div class="code">tabla · filas · columnas</div><p>Viven en tablas y bases de datos. Cada columna tiene un tipo fijo.</p></article>
+    <article class="card"><h3>Semiestructurados</h3><div class="code">{ "clave": "valor" }</div><p>Traen etiquetas legibles, sin tabla rígida. Formatos JSON y XML.</p></article>
+    <article class="card"><h3>No estructurados</h3><div class="code">texto · imagen · audio</div><p>Sin organización fija. Son la mayoría de los datos del mundo.</p></article>
+  </div>
+</div>
+<div class="footer"><span>Tipos de datos</span><span>05</span></div>
+
+Note:
+- Presentar la clasificación por **estructura** como la forma de ordenar todo el universo de datos.
+- Mostrar las tres tarjetas y dar una pista mnemotécnica: tabla, etiquetas, sin forma fija.
+- Advertir que un mismo elemento puede combinar varios tipos: una encuesta mezcla opciones estructuradas y un comentario libre.
+- Anticipar que el tipo de dato condiciona cómo se almacena, procesa y analiza.
+- **No olvidar:** insistir en que no hay un tipo "mejor" que otro; reconocer el tipo es lo que permite elegir la herramienta correcta.
+
+---
+
+<div class="topline"><span class="kicker">04 / Tipos</span><span class="mark">Estructurado</span></div>
+<div class="content">
+  <div><h2 class="slide-title">El dato estructurado, de cerca</h2><p class="body-copy">Se organiza en <strong>filas y columnas</strong>. Cada columna tiene un tipo fijo: número, fecha, texto corto o categoría. Se consulta, filtra y resume con facilidad.</p></div>
+  <div><div class="card"><h3>Ejemplo</h3><div class="code">CI · nombre · trámite · fecha · estado</div><p>La tabla de ciudadanos atendidos en una base de datos municipal.</p></div></div>
+</div>
+<div class="footer"><span>Tipos de datos</span><span>06</span></div>
+
+Note:
+- Explicar que el dato estructurado vive en **filas y columnas**, con un tipo fijo por columna (número, fecha, texto corto, categoría).
+- Usar el ejemplo de la tabla municipal de ciudadanos atendidos: cédula, nombre, trámite, fecha y estado.
+- Señalar que se consulta, filtra y resume con facilidad, por lo que queda listo para reportes y tableros.
+- Mencionar que los formatos típicos son bases de datos, CSV y Excel.
+- **No olvidar:** aclarar que es el tipo de dificultad **baja**, el más fácil de tratar y el punto de partida habitual de la gestión pública.
+
+---
+
+<div class="topline"><span class="kicker">04 / Tipos</span><span class="mark">Semiestructurado</span></div>
+<div class="content">
+  <div><h2 class="slide-title">El dato semiestructurado, de cerca</h2><p class="body-copy">No vive en una tabla rígida, pero sus <strong>etiquetas</strong> le dan orden. Es el formato típico de los formularios web y las APIs. Hay que <strong>interpretarlo y transformarlo</strong>.</p></div>
+  <div><div class="card"><h3>JSON</h3><div class="code">{ "tramite": "reclamo", "zona": "calle 5" }</div><p>Pares clave-valor que se pueden leer y transformar.</p></div></div>
+</div>
+<div class="footer"><span>Tipos de datos</span><span>07</span></div>
+
+Note:
+- Explicar que no vive en una tabla rígida, pero tiene **etiquetas** que le dan orden (pares clave-valor).
+- Mostrar el ejemplo JSON del reclamo: trámite, fecha, ciudadano y descripción.
+- Indicar que es el formato típico de los formularios web y de las **APIs**.
+- Aclarar que es flexible, pero exige **interpretar y transformar** sus etiquetas antes de usarlo.
+- **No olvidar:** recordar que el JSON del slide es justamente el dato de un reclamo, algo cotidiano en atención ciudadana.
+
+---
+
+<div class="topline"><span class="kicker">04 / Tipos</span><span class="mark">No estructurado</span></div>
+<div class="content">
+  <div><h2 class="slide-title">El dato no estructurado, de cerca</h2><p class="body-copy">Sin organización interna fija: <strong>texto libre, imágenes, audio y video</strong>. Son la mayoría de los datos y los más difíciles de procesar; exigen técnicas específicas antes de analizarse.</p></div>
+  <div><div class="card"><h3>Ejemplo</h3><div class="code">foto · audio · reclamo escrito</div><p>La foto de un bache, una grabación de audiencia o el comentario en redes.</p></div></div>
+</div>
+<div class="footer"><span>Tipos de datos</span><span>08</span></div>
+
+Note:
+- Explicar que no tiene organización interna fija: **texto libre, imágenes, audio y video**.
+- Dar los ejemplos del slide: la foto de un bache, la grabación de una audiencia, el reclamo escrito o el comentario en redes.
+- Señalar que son la **mayoría** de los datos del mundo y los más difíciles de procesar directamente.
+- Anticipar que requieren técnicas específicas (procesamiento de texto, visión por computadora, transcripción) antes de analizarlos.
+- **No olvidar:** dejar claro que este tipo es el de dificultad **alta** y que muchas veces es donde se pierde información valiosa de la ciudadanía.
+
+---
+
+<div class="topline"><span class="kicker">05 / Comparación</span><span class="mark">Lado a lado</span></div>
+<div class="content single"><h2 class="slide-title">Los tres tipos, comparados</h2>
+  <table class="type-table">
+    <thead><tr><th>Tipo</th><th>¿Cómo se ve?</th><th>Formato típico</th><th>Dificultad</th></tr></thead>
+    <tbody>
+      <tr><td>Estructurado</td><td>Tablas de filas y columnas</td><td>BD, CSV, Excel</td><td>Baja</td></tr>
+      <tr><td>Semiestructurado</td><td>Etiquetas / clave-valor</td><td>JSON, XML</td><td>Media</td></tr>
+      <tr><td>No estructurado</td><td>Texto, imagen, audio, video</td><td>.txt, .jpg, .mp3</td><td>Alta</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Comparación</span><span>09</span></div>
+
+Note:
+- Leer la tabla comparativa con el grupo, fila por fila, sin apurar.
+- Contrastar cómo se ve cada tipo, su formato típico y su dificultad: baja, media y alta.
+- Reforzar con un mismo caso institucional: un padrón es estructurado, un reclamo web es semiestructurado y una foto es no estructurado.
+- Pedir al grupo que clasifique en voz alta un dato cotidiano que ellos mencionen.
+- **No olvidar:** repetir que no hay un tipo mejor; hay que reconocer cuál es para elegir la herramienta adecuada.
+
+---
+
+<div class="topline"><span class="kicker">06 / Implicaciones</span><span class="mark">El tratamiento</span></div>
+<div class="content single"><h2 class="slide-title">Cada tipo se trata de forma distinta</h2>
+  <div class="flow">
+    <div class="flow-step"><strong>Estructurado</strong><p>Se consulta, filtra y resume. Listo para reportes y tableros.</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>Semiestructurado</strong><p>Se interpretan sus etiquetas. Flexible, exige transformación.</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>No estructurado</strong><p>Requiere texto, visión o transcripción antes de analizarse.</p></div>
+  </div>
+</div>
+<div class="footer"><span>Implicaciones</span><span>10</span></div>
+
+Note:
+- Recorrer el flujo de tratamiento: estructurado se consulta y resume; semiestructurado se interpreta y transforma; no estructurado exige técnicas específicas.
+- Conectar cada tipo con el **esfuerzo** real que demanda tratarlo en una institución.
+- Insistir en la idea puente: el mensaje no es que un tipo sea mejor, sino elegir la herramienta correcta.
+- Anunciar el giro hacia el valor: "después de ver la forma, veamos por qué estos datos valen".
+- **No olvidar:** señalar que el tratamiento distinto es la razón por la que no se puede usar la misma herramienta para todo.
+
+---
+
+<div class="topline"><span class="kicker">07 / Valor</span><span class="mark">Activo estratégico</span></div>
+<div class="content single"><h2 class="slide-title">Los datos son un activo, no un subproducto</h2>
+  <div class="flow">
+    <div class="flow-step"><strong>Describir</strong><p>¿Qué pasó? Trámites por día, zonas, montos y tiempos.</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>Explicar</strong><p>¿Por qué pasó? Comparar periodos, zonas y grupos.</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>Predecir</strong><p>¿Qué pasará? Anticipar la demanda y priorizar recursos.</p></div>
+  </div>
+  <p class="quote">Dato + contexto = <em>información</em>; información + decisión = <em>valor</em>.</p>
+</div>
+<div class="footer"><span>Valor del dato</span><span>11</span></div>
+
+Note:
+- Presentar la secuencia **describir, explicar, predecir**: qué pasó, por qué pasó, qué pasará.
+- Dar el ejemplo: saber cuántos trámites se atienden por día y en qué zonas permite decidir dónde abrir una ventanilla o reforzar cuadrillas.
+- Escribir en la pizarra digital (o compartir pantalla) la fórmula: **Dato + contexto = información; información + decisión = valor**.
+- Hacer el enganche: preguntar "¿qué decisión de su institución mejoraría si tuviera mejores datos?".
+- **No olvidar:** subrayar que los datos **no son un subproducto** del sistema, sino un activo estratégico que sostiene decisiones sobre recursos y servicios.
+
+---
+
+<div class="topline"><span class="kicker">08 / Calidad</span><span class="mark">Tres dimensiones</span></div>
+<div class="content single"><h2 class="slide-title">La calidad se mide con tres lentes</h2>
+  <table class="type-table">
+    <thead><tr><th>Dimensión</th><th>Pregunta</th><th>Ejemplo en gestión pública</th></tr></thead>
+    <tbody>
+      <tr><td>Completitud</td><td>¿Faltan datos?</td><td>El 40% de los reclamos no registra la zona; no se sabe dónde concentrar la atención.</td></tr>
+      <tr><td>Exactitud</td><td>¿Los datos son correctos?</td><td>Cédulas mal cargadas o direcciones con errores llevan a decisiones erradas.</td></tr>
+      <tr><td>Actualidad</td><td>¿Están al día?</td><td>Un padrón de contribuyentes sin actualizar en años decide con una foto vieja.</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Calidad de datos</span><span>12</span></div>
+
+Note:
+- Explicar las tres dimensiones con los ejemplos de gestión pública: completitud (40% de reclamos sin zona), exactitud (cédulas mal cargadas) y actualidad (padrón sin actualizar por años).
+- Preguntar cuál de las tres falla más seguido en sus instituciones.
+- Aclarar el riesgo de cada falla: no se puede focalizar, se decide sobre errores o con información vencida.
+- Anunciar la idea puente: "un dato incompleto, inexacto o desactualizado puede ser peor que no tener dato, porque da falsa seguridad".
+- **No olvidar:** decir que estos tres lentes se aplicarán a cada dato durante el taller relámpago.
+
+---
+
+<div class="topline"><span class="kicker">09 / En la práctica</span><span class="mark">Taller relámpago</span></div>
+<div class="content single"><h2 class="slide-title">Inventario breve: municipio de Río Verde</h2>
+  <div class="cards">
+    <article class="card"><h3>1. Detecta</h3><p>En equipos de 3–4, identifiquen los datos que maneja la Dirección de Atención Ciudadana.</p></article>
+    <article class="card"><h3>2. Clasifica</h3><p>Por cada dato: fuente, tipo, formato y frecuencia.</p></article>
+    <article class="card"><h3>3. Evalúa</h3><p>Marquen un problema de completitud, exactitud o actualidad y propongan una mejora.</p></article>
+  </div>
+  <p class="body-copy">Puesta en común: cada equipo comparte <strong>un dato bien inventariado</strong> y <strong>un problema de calidad</strong>.</p>
+</div>
+<div class="footer"><span>Taller relámpago</span><span>13</span></div>
+
+Note:
+- Dar la consigna: equipos de **3 a 4 personas**, caso del municipio de Río Verde y su Dirección de Atención Ciudadana.
+- Explicar los tres pasos: **detectar** los datos, **clasificar** fuente, tipo, formato y frecuencia, y **evaluar** un problema de calidad con una mejora concreta.
+- Compartir por el chat el caso y la planilla colaborativa en línea; aclarar que se trabaja en salas y que la puesta en común está dentro de los 30 minutos.
+- Circular entre equipos para destrabar dudas de clasificación y orientar la reflexión sobre calidad.
+- **No olvidar:** pedir que las observaciones de calidad sean **específicas**, no genéricas, y recordar que cada equipo comparte un dato bien inventariado y un problema detectado.
+
+---
+
+<div class="topline"><span class="kicker">10 / En resumen</span><span class="mark">Cierre</span></div>
+<div class="content single"><h2 class="slide-title">Fuente, tipo y calidad: la base para gestionar datos</h2>
+  <div class="cards">
+    <article class="card"><h3>Fuente</h3><p>Todo dato tiene un origen que anticipa su forma y su calidad.</p></article>
+    <article class="card"><h3>Tipo</h3><p>Estructurado, semiestructurado o no estructurado; cada uno exige un trato distinto.</p></article>
+    <article class="card"><h3>Calidad</h3><p>Completitud, exactitud y actualidad: datos buenos para decidir mejor.</p></article>
+  </div>
+  <p class="quote">Próxima sesión: la <em>ingesta de datos</em> — extraer y cargar información desde las fuentes.</p>
+</div>
+<div class="footer"><span>Fin de la sesión</span><span>14</span></div>
+
+Note:
+- Sintetizar con la regla de las tres piezas: **fuente, tipo y calidad** como base para gestionar datos.
+- Releer en voz alta el mensaje central: antes de gestionar hay que saber qué se tiene y qué tan bueno es.
+- Anticipar la próxima sesión: la **ingesta de datos** — extraer y cargar información desde las fuentes.
+- Agradecer la participación y recordar la entrega del inventario trabajado.
+- **No olvidar:** cerrar con "conocer la fuente, el tipo y la calidad es el primer paso para gestionar los datos".
+
+---
+
+<!-- .slide: class="dark" -->
+<div class="topline"><span class="kicker">Fin</span><span class="mark">Ingeniería de Datos · IDT 601</span></div>
+<div class="content single">
+  <h2 class="slide-title">Gracias</h2>
+  <p class="lead">Bloque 1 · Sesión 1 · Datos: fuentes, tipos, importancia y calidad</p>
+  <p class="quote">La próxima sesión: ingesta de datos y pipelines.</p>
+</div>
+<div class="footer"><span>EGPP · Escuela de Gestión Pública Plurinacional</span><span>15</span></div>
+
+Note:
+- Agradecer explícitamente al grupo y al equipo de la EGPP por el espacio.
+- Dejar la puerta abierta a dudas puntuales que no hayan surgido en la sesión.
+- Repetir el puente a la **Sesión 2**: ingesta de datos y pipelines.
+- Recordar cómo y cuándo se entrega el inventario del taller.
+- **No olvidar:** cerrar con energía y dejar claro el compromiso de la próxima sesión para que el grupo llegue preparado.
