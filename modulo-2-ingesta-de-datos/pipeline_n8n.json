@@ -1,0 +1,386 @@
+{
+  "name": "Pipeline AGETIC → NocoDB (IDT 601 · Sesión 3)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "Inicio",
+      "name": "Inicio",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://app.nocodb.com/api/v2/tables/TABLE_ID/records",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "pageSize",
+              "value": "1000"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xc-token",
+              "value": "TU_TOKEN"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "Borrar: leer IDs",
+      "name": "Borrar: leer IDs",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -240,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const list = $input.first().json.list || [];\nconst allIds = list.map((r) => ({ Id: r.Id }));\nreturn [{ json: { allIds } }];\n"
+      },
+      "id": "Armar IDs",
+      "name": "Armar IDs",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -20,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "DELETE",
+        "url": "https://app.nocodb.com/api/v2/tables/TABLE_ID/records",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xc-token",
+              "value": "TU_TOKEN"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.allIds }}",
+        "options": {}
+      },
+      "id": "Borrar: eliminar",
+      "name": "Borrar: eliminar",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        200,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://datos.gob.bo/dataset/bf97cf5a-a8d3-4694-926c-2a3da3df40e5/resource/119afffe-8e0a-4657-9cea-40fd6837b90c/download/profesores_fin.csv",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "User-Agent",
+              "value": "Mozilla/5.0"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file",
+              "outputPropertyName": "data"
+            }
+          }
+        }
+      },
+      "id": "Descargar CSV",
+      "name": "Descargar CSV",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        420,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "csv",
+        "binaryPropertyName": "data",
+        "options": {}
+      },
+      "id": "Leer CSV",
+      "name": "Leer CSV",
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        640,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const REN = {\"a0\": \"Fue parte del proyecto\", \"a1\": \"Sexo\", \"a2\": \"Edad\", \"a3\": \"Departamento\", \"a4\": \"Ciudad\", \"b2\": \"Años de experiencia\", \"b3\": \"Tiempo en la unidad educativa\", \"b4\": \"Años en la unidad educativa\", \"b8\": \"Capacitación en TIC\", \"c3\": \"Número de computadoras\", \"d2\": \"Celular inteligente\", \"e7\": \"Tipo de conexión\", \"e8\": \"Lugar de acceso a internet\", \"g1\": \"Sistema operativo\", \"g21\": \"Autocalificación software libre (1–5)\", \"h1\": \"Conoce licencias libres\", \"h3\": \"Conoce datos abiertos\"};\nconst NUM = [\"Edad\", \"Años de experiencia\", \"Años en la unidad educativa\", \"Número de computadoras\", \"Autocalificación software libre (1–5)\"];\nconst clean = (v) => { if (v === undefined || v === null) return ''; const s = String(v).trim(); return (s === 'NA' || s === 'N/A') ? '' : s; };\nconst out = [];\nfor (const item of $input.all()) {\n  const src = item.json; const rec = {};\n  for (const [code, label] of Object.entries(REN)) {\n    let v = clean(src[code]);\n    if (NUM.includes(label)) { if (v === '') v = null; else { const n = Number(v); v = Number.isNaN(n) ? null : n; } }\n    rec[label] = v;\n  }\n  out.push({ json: rec });\n}\nreturn out;\n"
+      },
+      "id": "Transformar",
+      "name": "Transformar",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        860,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "batchSize": 200,
+        "options": {}
+      },
+      "id": "Por lotes",
+      "name": "Por lotes",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1080,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const rows = $input.all().map((i) => i.json);\nreturn [{ json: { rows } }];\n"
+      },
+      "id": "Armar lote",
+      "name": "Armar lote",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1300,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://app.nocodb.com/api/v2/tables/TABLE_ID/records",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xc-token",
+              "value": "TU_TOKEN"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ $json.rows }}",
+        "options": {}
+      },
+      "id": "Insertar lote",
+      "name": "Insertar lote",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1520,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "url": "https://app.nocodb.com/api/v2/tables/TABLE_ID/records",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "pageSize",
+              "value": "1000"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "xc-token",
+              "value": "TU_TOKEN"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "Verificar: leer",
+      "name": "Verificar: leer",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1300,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "jsCode": "const list = $input.first().json.list || [];\nconst si = list.filter((r) => r['Fue parte del proyecto'] === 'Sí').length;\nconst deps = new Set(list.map((r) => r['Departamento']).filter(Boolean)).size;\nreturn [{ json: { filas: list.length, fueron_parte_del_proyecto: si, departamentos: deps } }];\n"
+      },
+      "id": "Resumen",
+      "name": "Resumen",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1520,
+        140
+      ]
+    }
+  ],
+  "connections": {
+    "Inicio": {
+      "main": [
+        [
+          {
+            "node": "Borrar: leer IDs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Borrar: leer IDs": {
+      "main": [
+        [
+          {
+            "node": "Armar IDs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Armar IDs": {
+      "main": [
+        [
+          {
+            "node": "Borrar: eliminar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Borrar: eliminar": {
+      "main": [
+        [
+          {
+            "node": "Descargar CSV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Descargar CSV": {
+      "main": [
+        [
+          {
+            "node": "Leer CSV",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Leer CSV": {
+      "main": [
+        [
+          {
+            "node": "Transformar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Transformar": {
+      "main": [
+        [
+          {
+            "node": "Por lotes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Por lotes": {
+      "main": [
+        [
+          {
+            "node": "Verificar: leer",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Armar lote",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Armar lote": {
+      "main": [
+        [
+          {
+            "node": "Insertar lote",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Insertar lote": {
+      "main": [
+        [
+          {
+            "node": "Por lotes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Verificar: leer": {
+      "main": [
+        [
+          {
+            "node": "Resumen",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "demo-idt601"
+  }
+}

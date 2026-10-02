@@ -26,6 +26,9 @@ Materiales de la **Unidad/Bloque 2 — Ingesta de Datos** del módulo *Ingenier�
 | `assets/` | Tema visual EGPP (`theme-egpp.css`), estilos y `quiz.js`. |
 | `presentacion_nube_edge_fog.(md/html)` | **[EXTRA]** Presentación complementaria: la nube, edge y fog (para si sobra tiempo). |
 | `deck-nube-edge-fog.html` | **[EXTRA]** Deck autocontenido del mismo contenido (funciona sin internet). |
+| `Sesion_03_demo_pipeline_herramientas.md` | **[EXTRA]** Demo docente: pipeline de punta a punta con Colab y n8n (destino NocoDB). |
+| `pipeline_colab.ipynb` | **[EXTRA]** Pipeline en Python/Colab. |
+| `pipeline_n8n.json` | **[EXTRA]** Workflow de n8n (importable). |
 
 ## Cómo se mantiene
 
