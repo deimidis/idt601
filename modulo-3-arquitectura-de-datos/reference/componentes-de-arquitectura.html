@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Referencia · Componentes de una arquitectura</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Referencia · Bloque 3 — Arquitectura de Datos</p>
+    <h1>Los cuatro componentes</h1>
+    <p class="lead">Hoja de referencia rápida: cada componente responde una pregunta distinta. Reconocerlos permite leer y diseñar cualquier arquitectura.</p>
+
+    <h2>La grilla que lo ordena todo</h2>
+    <p>Frente a un esquema, pregúntate <strong>dónde</strong> se guarda cada dato, <strong>cómo</strong> se transforma, <strong>qué</strong> significa y <strong>quién</strong> puede usarlo. Cada pregunta apunta a un componente.</p>
+
+    <table class="ref">
+      <thead><tr><th>Componente</th><th>Pregunta que responde</th><th>Ejemplo</th></tr></thead>
+      <tbody>
+        <tr><td>Almacenamiento</td><td>¿Dónde vive el dato y en qué forma?</td><td>Base de trámites + repositorio de escaneos</td></tr>
+        <tr><td>Procesamiento</td><td>¿Cómo se mueve y transforma?</td><td>Consolidación nocturna de pagos</td></tr>
+        <tr><td>Catálogo</td><td>¿Qué datos existen y qué significan?</td><td>Diccionario que define "DNI"</td></tr>
+        <tr><td>Gobernanza</td><td>¿Quién puede usarlo y con qué reglas?</td><td>Solo Personal modifica el sueldo</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box">
+      <p><strong>Clave:</strong> el catálogo y la gobernanza no son una etapa del flujo: son <em>capas transversales</em> que atraviesan todo el trayecto, de la fuente al uso.</p>
+    </div>
+
+    <h2>Para llevar</h2>
+    <p class="refs">
+      <strong>Almacenamiento</strong> → dónde. &nbsp;·&nbsp;
+      <strong>Procesamiento</strong> → cómo. &nbsp;·&nbsp;
+      <strong>Catálogo</strong> → qué es. &nbsp;·&nbsp;
+      <strong>Gobernanza</strong> → quién y con qué reglas.
+    </p>
+
+    <p class="refs">Fuentes: Kleppmann, <em>Diseño de aplicaciones con uso intensivo en datos</em>; Curto, <em>Fundamentos de big data</em> (UOC).</p>
+
+    <div class="nav">
+      <a href="../lessons/0001-componentes-de-arquitectura.html">← Lección 01: componentes de una arquitectura</a>
+      <a href="patrones-de-arquitectura.html">Patrones de arquitectura →</a>
+    </div>
+  </div>
+</body>
+</html>

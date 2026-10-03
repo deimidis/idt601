@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 640" role="img" aria-label="Esquema de arquitectura sin etiquetas para practicar">
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#507A6E" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="640" fill="#F5F3EB" />
+
+  <!-- Capas transversales -->
+  <rect x="0" y="58" width="1040" height="52" fill="#DABC6E" opacity="0.22" />
+  <text x="20" y="92" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#2A4D40">Capa 1</text>
+  <rect x="0" y="556" width="1040" height="52" fill="#DABC6E" opacity="0.22" />
+  <text x="20" y="590" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#2A4D40">Capa 2</text>
+
+  <!-- Fuentes -->
+  <g font-family="Helvetica, Arial, sans-serif" text-anchor="middle">
+    <rect x="70" y="170" width="150" height="64" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" rx="6" />
+    <text x="145" y="208" font-size="22" fill="#2A4D40">Caja A</text>
+    <rect x="300" y="170" width="150" height="64" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" rx="6" />
+    <text x="375" y="208" font-size="22" fill="#2A4D40">Caja B</text>
+    <rect x="530" y="170" width="150" height="64" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" rx="6" />
+    <text x="605" y="208" font-size="22" fill="#2A4D40">Caja C</text>
+
+    <!-- Flujo -->
+    <rect x="70" y="380" width="200" height="84" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" rx="6" />
+    <text x="170" y="428" font-size="24" fill="#2A4D40">Caja D</text>
+    <rect x="320" y="380" width="200" height="84" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" rx="6" />
+    <text x="420" y="428" font-size="24" fill="#2A4D40">Caja E</text>
+    <rect x="570" y="380" width="200" height="84" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" rx="6" />
+    <text x="670" y="428" font-size="24" fill="#2A4D40">Caja F</text>
+    <rect x="820" y="380" width="180" height="84" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" rx="6" />
+    <text x="910" y="428" font-size="24" fill="#2A4D40">Caja G</text>
+  </g>
+
+  <!-- Flechas verticales: fuentes -> Caja D -->
+  <g stroke="#507A6E" stroke-width="3" fill="none">
+    <path d="M135,234 C135,300 150,320 160,378" marker-end="url(#arw)" />
+    <path d="M375,234 C375,300 190,320 180,378" marker-end="url(#arw)" />
+    <path d="M605,234 C605,300 200,330 200,378" marker-end="url(#arw)" />
+    <!-- Flechas horizontales del flujo -->
+    <path d="M270,422 L318,422" marker-end="url(#arw)" />
+    <path d="M520,422 L568,422" marker-end="url(#arw)" />
+    <path d="M770,422 L818,422" marker-end="url(#arw)" />
+  </g>
+
+  <!-- Rótulos de flechas -->
+  <g font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#3D6558">
+    <text x="88" y="300">Flecha 1</text>
+    <text x="300" y="300">Flecha 2</text>
+    <text x="520" y="300">Flecha 3</text>
+    <text x="280" y="412">Flecha 4</text>
+    <text x="532" y="412">Flecha 5</text>
+    <text x="782" y="412">Flecha 6</text>
+  </g>
+</svg>

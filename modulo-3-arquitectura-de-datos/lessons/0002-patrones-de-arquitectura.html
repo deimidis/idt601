@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lección 02 · Elegir el patrón de arquitectura</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Lección 02 · Bloque 3 — Arquitectura de Datos</p>
+    <h1>Elegir el patrón: warehouse, lake, lakehouse o lambda</h1>
+    <p class="lead">Al terminar, podrás elegir el patrón adecuado para un caso y justificarlo con cuatro criterios: uso, volumen, estructura del dato y necesidad de tiempo real.</p>
+
+    <p class="sidenote">
+      Apoyado en Joyanes, <em>Ciencia de Datos</em> y Kimball &amp; Ross, <em>The Data Warehouse Toolkit</em>.
+      <cite><a href="../reference/patrones-de-arquitectura.html">Ver referencia →</a></cite>
+    </p>
+
+    <h2>La pregunta que decide</h2>
+    <p>No hay un patrón "mejor". Hay una pregunta: <strong>¿qué necesita el caso?</strong> Si se buscan reportes confiables sobre datos ya limpios, la respuesta es un <strong>data warehouse</strong>. Si se necesita guardar todo crudo y diverso sin saber aún el uso, un <strong>data lake</strong>. Si se quieren ambas cosas en un mismo repositorio, un <strong>data lakehouse</strong>. Si se necesitan reportes confiables <em>y</em> alertas inmediatas, <strong>lambda</strong>.</p>
+    <p>El error frecuente es elegir por prestigio: adoptar un lake o lambda "porque suena moderno", cuando un warehouse resolvía el caso con menos complejidad y costo.</p>
+
+    <div class="box">
+      <p><strong>Regla de oro:</strong> no hay un patrón mejor; hay un patrón adecuado para cada caso. Criterios: <em>caso, volumen, estructura del dato y tiempo real</em>.</p>
+    </div>
+
+    <h2>Practica: elige el patrón</h2>
+    <p>Elige una opción. Recibirás la corrección al instante.</p>
+
+    <div class="quiz">
+      <p class="q">1. Reportes mensuales confiables sobre datos ya limpios y estructurados.</p>
+      <div class="opts">
+        <button data-correct="true">Data warehouse</button>
+        <button>Data lake</button>
+        <button>Data lakehouse</button>
+        <button>Lambda</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el warehouse guarda datos procesados y estructurados, listos para reportar. Es su caso de uso típico.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">2. Guardar todo crudo (lecturas de sensores, logs, documentos) sin saber aún para qué se usará.</p>
+      <div class="opts">
+        <button>Data warehouse</button>
+        <button data-correct="true">Data lake</button>
+        <button>Data lakehouse</button>
+        <button>Lambda</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el lake guarda datos crudos y diversos, en cualquier formato, con esquema al leer.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">3. Guardar datos crudos y, a la vez, consultarlos con esquema y gobierno en un mismo repositorio.</p>
+      <div class="opts">
+        <button>Data warehouse</button>
+        <button>Data lake</button>
+        <button data-correct="true">Data lakehouse</button>
+        <button>Lambda</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el lakehouse combina la flexibilidad del lake con la estructura y el gobierno del warehouse.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">4. Reportes confiables por lote y, al mismo tiempo, alertas inmediatas.</p>
+      <div class="opts">
+        <button>Data warehouse</button>
+        <button>Data lake</button>
+        <button>Data lakehouse</button>
+        <button data-correct="true">Lambda</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> lambda suma una capa batch (precisión) y una capa de velocidad (inmediatez). Cubre ambos mundos, a costa de mantener dos lógicas.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">5. Un repositorio de datos crudos, sin gobierno, que nadie logra aprovechar.</p>
+      <div class="opts">
+        <button>Data warehouse</button>
+        <button data-correct="true">Pantano de datos (data swamp)</button>
+        <button>Data lakehouse</button>
+        <button>Lambda</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> es el riesgo típico de un lake sin catálogo ni gobernanza: se acumula todo, pero no se encuentra ni se confía en nada.</div>
+    </div>
+
+    <hr />
+
+    <h2>La regla que evita elegir mal</h2>
+    <p>Antes de elegir, responde por escrito: <strong>¿para qué se usan los datos?</strong>, <strong>¿cuánto volumen hay?</strong>, <strong>¿qué estructura tienen?</strong> y <strong>¿se necesitan en tiempo real?</strong>. El patrón sale de esas cuatro respuestas, no de la moda.</p>
+
+    <h2>Fuente principal</h2>
+    <p class="refs">
+      Para profundizar: Luis Joyanes Aguilar, <em>Ciencia de Datos: Un enfoque práctico</em> (data warehouse, data lake y lakehouse).
+      Complementa con Ralph Kimball y Margy Ross, <em>The Data Warehouse Toolkit</em>.
+    </p>
+
+    <div class="askai">
+      ¿Algo te hace dudar? Pregúntame y lo desarmamos — por ejemplo: "¿puedo empezar con un warehouse y migrar a lakehouse después?" o "¿cuándo lambda no vale la pena?".
+    </div>
+
+    <div class="nav">
+      <a href="0001-componentes-de-arquitectura.html">← Lección 01: componentes de una arquitectura</a>
+      <a href="../reference/patrones-de-arquitectura.html">Referencia: patrones de arquitectura →</a>
+    </div>
+  </div>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>

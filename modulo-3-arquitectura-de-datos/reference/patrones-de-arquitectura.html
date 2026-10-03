@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Referencia · Patrones de arquitectura</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Referencia · Bloque 3 — Arquitectura de Datos</p>
+    <h1>Patrones de arquitectura</h1>
+    <p class="lead">Hoja de referencia rápida: qué guarda cada patrón, para qué sirve y qué riesgo trae.</p>
+
+    <h2>La pregunta que decide</h2>
+    <p>Pregunta <strong>para qué se usan los datos</strong> (reportes confiables, guardar todo, ambos), <strong>cuánto volumen</strong> hay, <strong>qué estructura</strong> tienen y <strong>si se necesitan en tiempo real</strong>. El patrón sale de esas respuestas.</p>
+
+    <table class="ref">
+      <thead><tr><th>Patrón</th><th>Qué guarda</th><th>Foco principal</th><th>Tiempo real</th><th>Riesgo o costo</th></tr></thead>
+      <tbody>
+        <tr><td>Data warehouse</td><td>Datos procesados y limpios</td><td>Reportes confiables</td><td>No</td><td>Poco flexible ante datos nuevos</td></tr>
+        <tr><td>Data lake</td><td>Datos crudos y diversos</td><td>Guardar todo</td><td>No</td><td>Sin gobierno se vuelve un pantano de datos</td></tr>
+        <tr><td>Data lakehouse</td><td>Crudo + esquema y gobierno</td><td>Analizar ambos mundos</td><td>Parcial</td><td>Exige más herramientas y madurez</td></tr>
+        <tr><td>Lambda</td><td>Batch + velocidad</td><td>Reportes y alertas</td><td>Sí</td><td>Dos lógicas que mantener; mayor complejidad</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box">
+      <p><strong>Por qué importa:</strong> no hay un patrón mejor; hay un patrón adecuado para cada caso. Elegir por moda agrega complejidad y costo sin beneficio.</p>
+    </div>
+
+    <h2>Para llevar</h2>
+    <p class="refs">
+      <strong>Warehouse</strong> → datos limpios para reportar. &nbsp;·&nbsp;
+      <strong>Lake</strong> → todo crudo, flexible. &nbsp;·&nbsp;
+      <strong>Lakehouse</strong> → crudo + esquema y gobierno. &nbsp;·&nbsp;
+      <strong>Lambda</strong> → lote + tiempo real.
+    </p>
+
+    <p class="refs">Fuentes: Joyanes, <em>Ciencia de Datos</em>; Kimball &amp; Ross, <em>The Data Warehouse Toolkit</em>; Kleppmann, <em>Diseño de aplicaciones con uso intensivo en datos</em>.</p>
+
+    <div class="nav">
+      <a href="../lessons/0002-patrones-de-arquitectura.html">← Lección 02: elegir el patrón</a>
+      <a href="leer-un-diagrama.html">Leer un diagrama →</a>
+    </div>
+  </div>
+</body>
+</html>

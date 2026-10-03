@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lección 03 · Diseñar una arquitectura</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Lección 03 · Bloque 3 — Arquitectura de Datos</p>
+    <h1>Diseñar la arquitectura: el proceso paso a paso</h1>
+    <p class="lead">Al terminar, podrás ordenar el diseño de una arquitectura en cinco pasos y detectar qué le falta a un diseño incompleto.</p>
+
+    <p class="sidenote">
+      Apoyado en Kleppmann, <em>Diseño de aplicaciones con uso intensivo en datos</em> y Curto, <em>Fundamentos de big data</em> (UOC).
+      <cite><a href="../reference/leer-un-diagrama.html">Ver referencia →</a></cite>
+    </p>
+
+    <h2>El proceso en cinco pasos</h2>
+    <p>Diseñar una arquitectura no es dibujar cajas al azar. Es un proceso ordenado: <strong>1)</strong> entender el caso y las preguntas que debe responder; <strong>2)</strong> mapear las fuentes y su tipo; <strong>3)</strong> definir los componentes (almacenamiento, procesamiento, catálogo, gobernanza); <strong>4)</strong> elegir y justificar el patrón; <strong>5)</strong> documentar el flujo y las reglas.</p>
+    <p>La regla que ordena todo: <strong>primero el plano, después la tecnología</strong>. Si se elige la herramienta antes de entender el caso, el diseño se adapta a la herramienta y no a la institución.</p>
+
+    <div class="box">
+      <p><strong>El plano no es la casa:</strong> el diseño se documenta antes de pensar en productos y licencias. Sin gobernanza, un diseño queda sin dueño ni reglas.</p>
+    </div>
+
+    <h2>Practica: ¿qué paso sigue?</h2>
+    <p>Elige una opción. Recibirás la corrección al instante.</p>
+
+    <div class="quiz">
+      <p class="q">1. El primer paso para diseñar una arquitectura es…</p>
+      <div class="opts">
+        <button data-correct="true">Entender el caso y las preguntas que debe responder</button>
+        <button>Elegir la herramienta</button>
+        <button>Dibujar el diagrama</button>
+        <button>Comprar un data warehouse</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> sin saber qué necesita la institución, cualquier diseño es adivinanza. Todo lo demás depende de este paso.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">2. Después de entender el caso, el siguiente paso es…</p>
+      <div class="opts">
+        <button data-correct="true">Mapear las fuentes de datos y su tipo</button>
+        <button>Elegir el patrón</button>
+        <button>Contratar un proveedor</button>
+        <button>Definir los colores del tablero</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> hay que saber de dónde salen los datos (estructurados, semiestructurados o no estructurados) antes de decidir cómo tratarlos.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">3. Antes de elegir herramientas concretas, hay que…</p>
+      <div class="opts">
+        <button data-correct="true">Definir los componentes y elegir el patrón</button>
+        <button>Publicar el reporte</button>
+        <button>Comprar licencias</button>
+        <button>Capacitar a los usuarios</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> primero el plano (componentes y patrón) y después la tecnología que lo implementa.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">4. ¿Qué no puede faltar en el diseño final?</p>
+      <div class="opts">
+        <button data-correct="true">El catálogo y la gobernanza (capas transversales)</button>
+        <button>Un tablero bonito</button>
+        <button>Un servidor más potente</button>
+        <button>Un chatbot</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> sin catálogo y gobernanza, nadie sabe qué significa cada dato ni quién puede usarlo. Son parte del diseño, no un extra.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">5. Un diseño sin gobernanza…</p>
+      <div class="opts">
+        <button data-correct="true">Queda sin dueño ni reglas: cualquiera usa el dato como quiere</button>
+        <button>No se puede guardar en disco</button>
+        <button>Es más rápido y barato</button>
+        <button>No necesita catálogo</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> la gobernanza define dueños y condiciones de uso. Sin ella, el dato pierde confiabilidad y seguridad.</div>
+    </div>
+
+    <hr />
+
+    <h2>La plantilla que lo documenta</h2>
+    <p>Un diseño completo responde seis secciones: <strong>caso y objetivo</strong>, <strong>fuentes de datos</strong>, <strong>componentes</strong>, <strong>patrón elegido</strong>, <strong>diagrama de flujo</strong> y <strong>reglas de gobernanza</strong>. Si alguna queda vacía, el diseño está incompleto.</p>
+
+    <h2>Fuente principal</h2>
+    <p class="refs">
+      Para profundizar: Martin Kleppmann, <em>Diseño de aplicaciones con uso intensivo en datos</em> (arquitecturas y diseño de sistemas de datos).
+      Complementa con <a href="https://openaccess.uoc.edu/server/api/core/bitstreams/4efc24a4-9563-4a0b-97d8-b790954ba50d/content">Josep Curto, <em>Fundamentos de big data</em> (FUOC/UOC)</a>.
+    </p>
+
+    <div class="askai">
+      ¿Algo te hace dudar? Pregúntame y lo desarmamos — por ejemplo: "¿puedo reutilizar un diseño de otra área?" o "¿cómo sé que el diagrama está completo?".
+    </div>
+
+    <div class="nav">
+      <a href="0002-patrones-de-arquitectura.html">← Lección 02: elegir el patrón</a>
+      <a href="../reference/leer-un-diagrama.html">Referencia: leer un diagrama →</a>
+    </div>
+  </div>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>

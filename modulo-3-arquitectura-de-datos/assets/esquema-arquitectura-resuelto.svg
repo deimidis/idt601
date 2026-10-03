@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1040 640" role="img" aria-label="Esquema de arquitectura resuelto">
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#507A6E" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1040" height="640" fill="#F5F3EB" />
+
+  <!-- Capas transversales -->
+  <rect x="0" y="52" width="1040" height="58" fill="#DABC6E" opacity="0.22" />
+  <text x="20" y="88" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#2A4D40">Catálogo de datos</text>
+  <text x="1030" y="88" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#3D6558">capa transversal · atraviesa todo el flujo</text>
+  <rect x="0" y="550" width="1040" height="58" fill="#DABC6E" opacity="0.22" />
+  <text x="20" y="586" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#2A4D40">Gobernanza</text>
+  <text x="1030" y="586" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#3D6558">capa transversal · atraviesa todo el flujo</text>
+
+  <!-- Fuentes -->
+  <g font-family="Helvetica, Arial, sans-serif" text-anchor="middle">
+    <rect x="60" y="170" width="170" height="72" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" rx="6" />
+    <text x="145" y="200" font-size="18" font-weight="bold" fill="#2A4D40">Sistema de trámites</text>
+    <text x="145" y="224" font-size="15" fill="#3D6558">Fuente · estructurada</text>
+
+    <rect x="295" y="170" width="170" height="72" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" rx="6" />
+    <text x="380" y="200" font-size="18" font-weight="bold" fill="#2A4D40">Formulario web</text>
+    <text x="380" y="224" font-size="15" fill="#3D6558">Fuente · semiestructurada</text>
+
+    <rect x="530" y="170" width="170" height="72" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" rx="6" />
+    <text x="615" y="200" font-size="18" font-weight="bold" fill="#2A4D40">Lecturas de medidores</text>
+    <text x="615" y="224" font-size="15" fill="#3D6558">Fuente · no estructurada</text>
+
+    <!-- Flujo -->
+    <rect x="60" y="380" width="210" height="88" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" rx="6" />
+    <text x="165" y="414" font-size="19" font-weight="bold" fill="#2A4D40">Base operacional</text>
+    <text x="165" y="442" font-size="15" fill="#3D6558">Almacenamiento</text>
+
+    <rect x="315" y="380" width="210" height="88" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" rx="6" />
+    <text x="420" y="414" font-size="19" font-weight="bold" fill="#2A4D40">Proceso nocturno</text>
+    <text x="420" y="442" font-size="15" fill="#3D6558">Procesamiento</text>
+
+    <rect x="570" y="380" width="210" height="88" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" rx="6" />
+    <text x="675" y="414" font-size="19" font-weight="bold" fill="#2A4D40">Data warehouse</text>
+    <text x="675" y="442" font-size="15" fill="#3D6558">Almacenamiento de análisis</text>
+
+    <rect x="825" y="380" width="180" height="88" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" rx="6" />
+    <text x="915" y="414" font-size="19" font-weight="bold" fill="#2A4D40">Reportes y análisis</text>
+    <text x="915" y="442" font-size="15" fill="#3D6558">Uso</text>
+  </g>
+
+  <!-- Flechas -->
+  <g stroke="#507A6E" stroke-width="3" fill="none">
+    <path d="M145,242 C145,320 160,340 168,378" marker-end="url(#arw)" />
+    <path d="M380,242 C380,320 190,340 182,378" marker-end="url(#arw)" />
+    <path d="M615,242 C615,320 200,350 198,378" marker-end="url(#arw)" />
+    <path d="M270,424 L313,424" marker-end="url(#arw)" />
+    <path d="M525,424 L568,424" marker-end="url(#arw)" />
+    <path d="M780,424 L823,424" marker-end="url(#arw)" />
+  </g>
+</svg>

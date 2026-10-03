@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Referencia · Leer un diagrama de arquitectura</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Referencia · Bloque 3 — Arquitectura de Datos</p>
+    <h1>Leer un diagrama de arquitectura</h1>
+    <p class="lead">Hoja de referencia rápida: cinco preguntas que permiten entender cualquier esquema, sin conocer la tecnología.</p>
+
+    <h2>El procedimiento</h2>
+    <p>Recorre el diagrama respondiendo estas preguntas en orden. Si puedes responderlas todas, entendiste la arquitectura.</p>
+
+    <table class="ref">
+      <thead><tr><th>Pregunta</th><th>Qué buscar</th></tr></thead>
+      <tbody>
+        <tr><td>¿Dónde nacen los datos?</td><td>Fuentes: sistemas, formularios, sensores.</td></tr>
+        <tr><td>¿Dónde se guardan?</td><td>Almacenamiento: base operacional, data warehouse, data lake.</td></tr>
+        <tr><td>¿Qué los transforma?</td><td>Procesamiento: procesos por lotes o en tiempo real.</td></tr>
+        <tr><td>¿Dónde está su definición?</td><td>Catálogo: diccionario de datos, metadatos.</td></tr>
+        <tr><td>¿Quién controla el acceso?</td><td>Gobernanza: dueños del dato, reglas, permisos.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box">
+      <p><strong>Clave:</strong> con estas cinco preguntas se puede entender cualquier diagrama de arquitectura, sin conocer la tecnología. Si el catálogo o la gobernanza no aparecen, el diagrama está incompleto.</p>
+    </div>
+
+    <h2>Para llevar</h2>
+    <p class="refs">
+      <strong>Fuentes</strong> → ¿de dónde? &nbsp;·&nbsp;
+      <strong>Almacenamiento</strong> → ¿dónde? &nbsp;·&nbsp;
+      <strong>Procesamiento</strong> → ¿cómo? &nbsp;·&nbsp;
+      <strong>Catálogo</strong> → ¿qué es? &nbsp;·&nbsp;
+      <strong>Gobernanza</strong> → ¿quién?
+    </p>
+
+    <p class="refs">Fuentes: Kleppmann, <em>Diseño de aplicaciones con uso intensivo en datos</em>; Curto, <em>Fundamentos de big data</em> (UOC).</p>
+
+    <div class="nav">
+      <a href="../lessons/0003-diseno-de-arquitectura.html">← Lección 03: diseñar la arquitectura</a>
+      <a href="componentes-de-arquitectura.html">Componentes de una arquitectura →</a>
+    </div>
+  </div>
+</body>
+</html>

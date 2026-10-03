@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lección 01 · Componentes de una arquitectura</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Lección 01 · Bloque 3 — Arquitectura de Datos</p>
+    <h1>Reconocer las piezas: los componentes de una arquitectura</h1>
+    <p class="lead">Al terminar, podrás mirar cualquier diagrama e identificar sus componentes: qué se guarda dónde, qué transforma los datos y quién pone las reglas.</p>
+
+    <p class="sidenote">
+      Apoyado en Kleppmann, <em>Diseño de aplicaciones con uso intensivo en datos</em> y Curto, <em>Fundamentos de big data</em> (UOC).
+      <cite><a href="../reference/componentes-de-arquitectura.html">Ver referencia →</a></cite>
+    </p>
+
+    <h2>La grilla de las cuatro preguntas</h2>
+    <p>Toda arquitectura de datos se arma con cuatro piezas, y cada una responde una pregunta distinta: <strong>almacenamiento</strong> (¿dónde vive el dato?), <strong>procesamiento</strong> (¿cómo se mueve y transforma?), <strong>catálogo</strong> (¿qué datos existen y qué significan?) y <strong>gobernanza</strong> (¿quién puede usarlo y con qué reglas?).</p>
+    <p>El error más frecuente es confundir <strong>almacenamiento</strong> con <strong>procesamiento</strong>: guardar y transformar no son lo mismo. El segundo error es dibujar el catálogo y la gobernanza como una etapa más del flujo, cuando en realidad son <strong>capas transversales</strong> que atraviesan todo el trayecto.</p>
+
+    <div class="box">
+      <p><strong>Regla de oro:</strong> almacenamiento = <em>dónde</em> · procesamiento = <em>cómo</em> · catálogo = <em>qué es</em> · gobernanza = <em>quién y con qué reglas</em>.</p>
+    </div>
+
+    <h2>Practica: ¿qué componente es?</h2>
+    <p>Elige una opción. Recibirás la corrección al instante.</p>
+
+    <div class="quiz">
+      <p class="q">1. La base de datos de trámites donde se registra cada solicitud.</p>
+      <div class="opts">
+        <button data-correct="true">Almacenamiento</button>
+        <button>Procesamiento</button>
+        <button>Catálogo</button>
+        <button>Gobernanza</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> responde "¿dónde vive el dato y en qué forma?". Es la base donde se guarda la información operacional.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">2. El proceso nocturno que une y limpia los pagos del día.</p>
+      <div class="opts">
+        <button>Almacenamiento</button>
+        <button data-correct="true">Procesamiento</button>
+        <button>Catálogo</button>
+        <button>Gobernanza</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> transforma y mueve los datos (limpieza, unión, cálculo). No guarda: prepara el dato para usarlo.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">3. El diccionario que define qué significa "DNI", su formato y su área dueña.</p>
+      <div class="opts">
+        <button>Almacenamiento</button>
+        <button>Procesamiento</button>
+        <button data-correct="true">Catálogo</button>
+        <button>Gobernanza</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> documenta qué datos existen y qué significan. Sin catálogo, dos áreas no hablan del mismo dato con el mismo nombre.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">4. La regla de que solo el área de personal puede modificar el sueldo registrado.</p>
+      <div class="opts">
+        <button>Almacenamiento</button>
+        <button>Procesamiento</button>
+        <button>Catálogo</button>
+        <button data-correct="true">Gobernanza</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> define quién puede usar o modificar el dato y con qué reglas. Es el componente del "quién".</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">5. Un repositorio de documentos escaneados que todavía nadie procesó.</p>
+      <div class="opts">
+        <button data-correct="true">Almacenamiento</button>
+        <button>Procesamiento</button>
+        <button>Catálogo</button>
+        <button>Gobernanza</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> aunque el dato sea crudo y no estructurado, sigue siendo "dónde vive". El procesamiento vendría después.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">6. El catálogo y la gobernanza, que documentan y regulan todo el trayecto de la fuente al uso.</p>
+      <div class="opts">
+        <button>Almacenamiento</button>
+        <button>Procesamiento</button>
+        <button data-correct="true">Capas transversales</button>
+        <button>Fuente</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> no son una etapa del flujo: son capas que lo atraviesan de punta a punta.</div>
+    </div>
+
+    <hr />
+
+    <h2>La frase que lo resume</h2>
+    <p>Escríbela en la pizarra y retómalá en cada diagrama: <strong>dónde / cómo / qué es / quién</strong>. Con esas cuatro preguntas puedes leer cualquier arquitectura, sin conocer la tecnología.</p>
+
+    <h2>Fuente principal</h2>
+    <p class="refs">
+      Para profundizar: Martin Kleppmann, <em>Diseño de aplicaciones con uso intensivo en datos</em> (arquitecturas de sistemas de datos).
+      Complementa con <a href="https://openaccess.uoc.edu/server/api/core/bitstreams/4efc24a4-9563-4a0b-97d8-b790954ba50d/content">Josep Curto, <em>Fundamentos de big data</em> (FUOC/UOC)</a>.
+    </p>
+
+    <div class="askai">
+      ¿Algo te hace dudar? Pregúntame y lo desarmamos — por ejemplo: "¿una hoja de Excel donde se consolidan datos es almacenamiento o procesamiento?" o "¿por qué gobernanza es transversal y no una etapa más?".
+    </div>
+
+    <div class="nav">
+      <a href="../reference/componentes-de-arquitectura.html">← Referencia: componentes de una arquitectura</a>
+      <a href="0002-patrones-de-arquitectura.html">Lección 02: elegir el patrón →</a>
+    </div>
+  </div>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>
