@@ -51,6 +51,22 @@ r.raise_for_status()
 
 > *Este es el paso más "ingeniería de datos" de todo el ejercicio: los datos crudos casi nunca llegan listos.*
 
+### 🔍 Línea por línea
+
+| Línea | Qué hace en lenguaje sencillo |
+|---|---|
+| `AGG_CODES = {'AFE','AFR',...}` | Crea una **lista negra** con los 78 códigos de agrupaciones del Banco Mundial (se verificó contra su API de países el día del ensayo). Los `{'...'}` llaves hace un **set**: se consulta súper rápido. |
+| `df_wb = df_wb_raw[['countryiso3code','country','date','value']].copy()` | De la tabla cruda (con muchísimas columnas) se quedan **solo 4**. El `.copy()` hace una copia para no pisar la tabla original por accidente. |
+| `df_wb.columns = ['codigo_iso3',...]` | Re-etiqueta las 4 columnas con **nombres en español y uniformes** — obligatorio para que luego la fuente A y la B encajen en la misma tabla. |
+| `df_wb['nombre_pais'].apply(lambda x: x['value'])` | En el dato crudo, cada país era un dict `{'id': 'ZWG', 'value': 'World'}`. `apply` recorre fila por fila y el `lambda` (función chiquita de una línea) devuelve **solo el texto del nombre**. |
+| `df_wb['anio'] = df_wb['anio'].astype(int)` | El año llega como texto (`"2025"` — ¡con comillas!). `astype(int)` lo convierte en número de verdad. |
+| `df_wb = df_wb[df_wb['codigo_iso3'] != '']` | **Primera trampa:** descarta filas sin código de país (ej. "Ingreso alto", que llega con el código vacío). |
+| `df_wb = df_wb[~df_wb['codigo_iso3'].isin(AGG_CODES)]` | **Segunda trampa:** `isin` devuelve verdadero/falso si el código está en la lista negra; el `~` invierte: "dejá las que NO están". Botá las 78 agrupaciones (World, etc.). |
+| `.dropna(subset=['poblacion'])` | Borra filas donde la población es "no existe" (el Banco Mundial las manda como null/celda vacía). |
+| `df_wb['fuente'] = 'Banco Mundial'` | Pone en TODAS las filas un mismo valor en la columna nueva `fuente`. Así, luego en NocoDB, se sabe de dónde salió cada dato. |
+| `df_wb = df_wb.reset_index(drop=True)` | Al filtrar, las filas quedan con números salteados (0,1,17,25…). `reset_index` les devuelve la numeración 0,1,2,3… limpia; `drop=True` descarta el número viejo. |
+| `print(f"Países reales...{len(df_wb)}")` | **Chequeo**: si no salen ~217 países (221 - 4 sin código), el filtro se equivocó. Cuenta filas, acepta regresos. |
+
 ---
 
 ## Celda 3 — Extract B: REST Countries v5 🏳️
@@ -74,6 +90,20 @@ for offset in (0, 100, 200):
 > *El "anio" va en 2026 porque la población de REST Countries es "al momento" (se actualiza cada pocas horas), no un dato "del año 2025" como Banco Mundial. Esto explica luego por qué las poblaciones no coinciden al 100%.*
 
 **Resultado:** `df_rc` — una tabla igual de ancha que la del Banco Mundial, lista para apilarse.
+
+### 🔍 Línea por línea
+
+| Línea | Qué hace en lenguaje sencillo |
+|---|---|
+| `filas_rc = [...] for c in paises_rc` | **List comprehension**: recorre cada país `c` de la lista de REST Countries y, por cada uno, construye un dict con la MISMA forma de fila que la fuente A. Es el paso "traducir". |
+| `'codigo_iso3': c['codes']['alpha_3']` | Dentro de cada país, los códigos viven en el bloque `codes`; el de 3 letras es `alpha_3` (`ARG`, `CAN` → la llave ISO3). |
+| `'nombre_pais': c['names']['common']` | Toma el nombre cotidiano del país. (Hay otros: `names.official` o el `native` en el idioma propio — pero `common` es el más razonable y estable). |
+| `'anio': 2026` | Anota el año de la corrida porque la población de v5 no es "de un año" sino **al momento** (se sincroniza cada pocas horas). |
+| `'poblacion': c.get('population')` | `get` es "traé si existe; si no, pone None" — algún país podría no tener el campo, y mejor un valor faltante que un crash. |
+| `'fuente': 'REST Countries'` | Marca esta fila con el origen del dato. |
+| `df_rc = pd.DataFrame(filas_rc)` | Convierte la lista de dicts en una tabla (DataFrame). |
+| `.dropna(subset=['poblacion'])` | Las filas sin población generarían fallas al insertar; mejor excluirlas acá. |
+| `print(f"...{len(df_rc)}")` | Chequeo: si hay menos de ~240 países, revisá el paso anterior de la paginación. |
 
 ---
 
