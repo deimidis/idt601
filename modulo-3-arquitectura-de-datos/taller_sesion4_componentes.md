@@ -27,9 +27,9 @@ Identificar y **nombrar los componentes** de una arquitectura sobre un esquema d
 
 ## Pasos
 
-1. **Etiquetar cada elemento.** Cada equipo asigna a cada caja y cada flecha uno de los cuatro componentes (almacenamiento, procesamiento, catálogo, gobernanza) y, si aplica, identifica fuentes y uso.
+1. **Etiquetar cada caja.** Cada equipo asigna a cada caja uno de los cuatro componentes (almacenamiento, procesamiento, catálogo, gobernanza) y, si aplica, identifica fuentes y uso. Las flechas describen el flujo, no un componente.
 2. **Justificar cada elección.** Para cada etiqueta, escribir la razón en una frase (*"es almacenamiento porque aquí se guarda el dato"*).
-3. **Describir el flujo.** Ordenar el recorrido de los datos de la fuente al uso: `Fuente → Almacenamiento → Procesamiento → Uso`.
+3. **Describir el flujo.** Ordenar el recorrido de los datos de la fuente al uso: `Fuente → Almacenamiento → Procesamiento → Almacenamiento de análisis → Uso`.
 4. **Detectar las capas transversales.** Indicar qué representan "Capa 1" y "Capa 2" y por qué no son una etapa del flujo.
 
 ## Hoja de trabajo

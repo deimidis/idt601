@@ -9,7 +9,7 @@
 
 Ya sabemos de dónde salen los datos, qué forma tienen y cómo llegan a la institución.
 Ahora llega la pregunta de fondo: **¿cómo los organizamos para que toda la institución
-pueda usarlos con confianza?**. La respuesta es una **arquitectura de datos**.
+pueda usarlos con confianza?** La respuesta es una **arquitectura de datos**.
 
 Una arquitectura de datos es el **plano** que define qué datos existen, dónde se guardan,
 cómo se mueven y quién los usa con qué reglas. Sin ese plano, cada área guarda "su" dato
@@ -99,7 +99,7 @@ error frecuente dibujarlos como un paso adicional.
 
 Para leer cualquier diagrama basta un procedimiento de cinco preguntas: ¿dónde **nacen** los
 datos?, ¿dónde se **guardan**?, ¿qué los **transforma**?, ¿dónde está su **definición**?,
-¿quién controla el **acceso**?.
+¿quién controla el **acceso**?
 
 ### 5. Los patrones: warehouse, lake, lakehouse y lambda
 
@@ -174,7 +174,7 @@ tecnológica viene después.
 | Procesamiento | Cómo se mueven y transforman los datos. |
 | Catálogo de datos | Inventario que documenta qué datos existen y qué significan. |
 | Metadatos | Datos que describen a los datos (definición, formato, dueño, origen). |
-| Gobernanza de datos | Reglas y responsables sobre calidad, acceso y uso. |
+| Gobernanza de datos | Reglas y responsables sobre calidad, acceso, seguridad y uso. |
 | Silo de datos | Datos encerrados en un área o sistema que los demás no ven. |
 | Data warehouse | Almacén de datos procesados y estructurados, listos para reportar. |
 | Data lake | Repositorio de datos crudos y diversos, en cualquier formato. |

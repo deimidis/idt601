@@ -1,7 +1,7 @@
 # Taller — Sesión 5: diseñar la arquitectura de un caso institucional
 
 **Módulo:** Ingeniería de Datos (IDT 601) · Bloque 3 — Arquitectura de Datos
-**Duración:** 85 min de taller (10 de apertura + 60 de trabajo + 15 de puesta en común), dentro de la sesión de 3 horas
+**Duración:** 75 min de taller (10 de consigna + 50 de trabajo + 15 de puesta en común), dentro de la sesión de 3 horas
 **Modalidad:** presencial o en línea (salas)
 **Materiales:** esta guía, plantilla de diseño impresa o compartida, papelógrafos o pizarra digital
 
@@ -25,7 +25,7 @@ Producir el **diseño de arquitectura completo y documentado** para el caso asig
 | Momento | Tiempo | Quién |
 |---|---|---|
 | Apertura: consigna y conformación de equipos | 10 min | Docente |
-| Trabajo en equipos con la plantilla | 60 min | Equipos |
+| Trabajo en equipos con la plantilla | 50 min | Equipos |
 | Puesta en común | 15 min | Todos |
 
 ## Pasos del trabajo en equipos
