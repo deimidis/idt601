@@ -1,0 +1,304 @@
+{
+ "name": "Actividad - Pipeline datos: dos fuentes a NocoDB",
+ "nodes": [
+  {
+   "parameters": {},
+   "id": "a1a1a1a1-0001-4001-8001-aaaaaaaaaaa1",
+   "name": "Disparo manual",
+   "type": "n8n-nodes-base.manualTrigger",
+   "typeVersion": 1,
+   "position": [
+    -380,
+    300
+   ]
+  },
+  {
+   "parameters": {
+    "url": "https://api.worldbank.org/v2/es/country/all/indicator/SP.POP.TOTL?format=json&per_page=300&mrv=1",
+    "options": {}
+   },
+   "id": "a1a1a1a1-0002-4002-8002-aaaaaaaaaaa2",
+   "name": "Extract - Banco Mundial",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -140,
+    140
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "// Respuesta del Banco Mundial: un array [metadatos, registros]\n// En n8n llega como UN item cuyo json es ese array (o el body dentro de un wrapper).\nconst raw = $input.first().json;\nconst datos = Array.isArray(raw) ? raw : (raw.body ? raw.body : raw.data ? raw.data : null);\nif (!datos || !Array.isArray(datos)) {\n  throw new Error('Respuesta inesperada del Banco Mundial. Mirá la SALIDA del nodo HTTP Request y ajustá esta primera línea (debug parte del ejercicio).');\n}\nconst registros = datos[1];\n// Agregados del Banco Mundial (región 'NA', verificado 2026-10-02 sobre /v2/country)\nconst AGG = new Set(['AFE','AFR','AFW','ARB','BEA','BEC','BHI','BLA','BMN','BSS','CAA','CEA','CEB','CEU','CLA','CME','CSA','CSS','DEA','DEC','DLA','DMN','DNS','DSA','DSF','DSS','EAP','EAR','EAS','ECA','ECS','EMU','EUU','FXS','HIC','HPC','IBB','IBD','IBT','IDA','IDB','IDX','INX','LAC','LCN','LDC','LIC','LMC','LMY','LTE','MDE','MEA','MIC','MNA','NAC','NAF','NRS','NXS','OED','OSS','PRE','PSS','PST','RRS','SAS','SSA','SSF','SST','SXZ','TEA','TEC','TLA','TMN','TSA','TSS','UMC','WLD','XZN']);\nconst filas = registros.map(r => ({\n  json: {\n    codigo_iso3: r.countryiso3code || '',\n    nombre_pais: (r.country && r.country.value) || '',\n    anio: parseInt(r.date, 10),\n    poblacion: r.value,\n    fuente: 'Banco Mundial'\n  }\n}));\nreturn filas.filter(f => f.json.codigo_iso3 && !AGG.has(f.json.codigo_iso3) && f.json.poblacion !== null);"
+   },
+   "id": "a1a1a1a1-0003-4003-8003-aaaaaaaaaaa3",
+   "name": "Transformar - Banco Mundial",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    100,
+    140
+   ]
+  },
+  {
+   "parameters": {
+    "url": "https://api.restcountries.com/countries/v5?limit=100&offset=0",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Authorization",
+       "value": "Bearer TU_API_KEY_RESTCOUNTRIES"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "a1a1a1a1-0004-4004-8004-aaaaaaaaaaa4",
+   "name": "Extract RC - pagina 1",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -140,
+    380
+   ]
+  },
+  {
+   "parameters": {
+    "url": "https://api.restcountries.com/countries/v5?limit=100&offset=100",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Authorization",
+       "value": "Bearer TU_API_KEY_RESTCOUNTRIES"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "a1a1a1a1-0005-4005-8005-aaaaaaaaaaa5",
+   "name": "Extract RC - pagina 2",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -140,
+    560
+   ]
+  },
+  {
+   "parameters": {
+    "url": "https://api.restcountries.com/countries/v5?limit=100&offset=200",
+    "sendHeaders": true,
+    "headerParameters": {
+     "parameters": [
+      {
+       "name": "Authorization",
+       "value": "Bearer TU_API_KEY_RESTCOUNTRIES"
+      }
+     ]
+    },
+    "options": {}
+   },
+   "id": "a1a1a1a1-0006-4006-8006-aaaaaaaaaaa6",
+   "name": "Extract RC - pagina 3",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    -140,
+    740
+   ]
+  },
+  {
+   "parameters": {
+    "jsCode": "// Las 3 paginas de REST Countries llegan como 3 items;\n// cada uno trae data.objects (JSON:API). Campos verificados el 2026-10-02:\n// names.common, codes.alpha_3, capitals[0].name, region, population\nconst salidas = $input.all().map(i => i.json);\nconst filas = [];\nfor (const s of salidas) {\n  const objs = (s && s.data && s.data.objects) ? s.data.objects : (Array.isArray(s) ? s : []);\n  for (const c of objs) {\n    filas.push({ json: {\n      codigo_iso3: c.codes && c.codes.alpha_3 ? c.codes.alpha_3 : '',\n      nombre_pais: c.names && c.names.common ? c.names.common : '',\n      anio: 2026, // population de v5 es \"al momento\"\n      poblacion: typeof c.population === 'number' ? c.population : null,\n      fuente: 'REST Countries'\n    }});\n  }\n}\nreturn filas.filter(f => f.json.codigo_iso3 && f.json.nombre_pais && f.json.poblacion !== null);"
+   },
+   "id": "a1a1a1a1-0007-4007-8007-aaaaaaaaaaa7",
+   "name": "Transformar - REST Countries",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    100,
+    380
+   ]
+  },
+  {
+   "parameters": {
+    "mode": "append",
+    "numberInputs": 2
+   },
+   "id": "a1a1a1a1-0008-4008-8008-aaaaaaaaaaa8",
+   "name": "Unir fuentes",
+   "type": "n8n-nodes-base.merge",
+   "typeVersion": 2.1,
+   "position": [
+    360,
+    380
+   ]
+  },
+  {
+   "parameters": {
+    "resource": "row",
+    "operation": "create",
+    "projectId": "",
+    "tableId": "",
+    "columns": {
+     "mappingMode": "autoMapInputData",
+     "matchingColumns": [],
+     "schema": []
+    },
+    "options": {}
+   },
+   "id": "a1a1a1a1-0009-4009-8009-aaaaaaaaaaa9",
+   "name": "Load - NocoDB",
+   "type": "n8n-nodes-base.nocoDb",
+   "typeVersion": 4,
+   "position": [
+    620,
+    380
+   ]
+  },
+  {
+   "parameters": {
+    "method": "POST",
+    "url": "https://app.nocodb.com/api/v2/tables/TU_TABLA_ID/records",
+    "authentication": "predefinedCredentialType",
+    "nodeCredentialType": "nocoDbApiToken",
+    "sendBody": true,
+    "specifyBody": "json",
+    "jsonBody": "={{ JSON.stringify($input.all().map(i => i.json)) }}",
+    "options": {}
+   },
+   "id": "a1a1a1a1-000a-400a-800a-aaaaaaaaaaaa",
+   "name": "Load HTTP - plan B (1 llamada)",
+   "type": "n8n-nodes-base.httpRequest",
+   "typeVersion": 4.2,
+   "position": [
+    620,
+    620
+   ]
+  },
+  {
+   "parameters": {
+    "content": "## CONFIGURACIÓN tras importar\n\n1. Extract RC: reemplazá TU_API_KEY_RESTCOUNTRIES por tu clave en el header (Authorization: Bearer ...).\n2. Load - NocoDB: conectá la credential (Host: https://app.nocodb.com + API token) y elegí tu base y tabla en el panel derecho.\n3. Load HTTP - plan B: nodo suelto para instancias n8n SIN nodo NocoDB v4 (anteriores a 2.26.0). Conectalo a 'Unir fuentes', poné TU_TABLA_ID y borrá el otro nodo.\n4. IMPORTANTE verificado en ensayo: NocoDB cloud acepta hasta 100 filas por llamada (ERR_MAX_PAYLOAD_LIMIT_EXCEEDED). El nodo NocoDBInserta 1 fila por llamada (demora más pero funciona); el plan B en 1 sola llamada solo sirve para tandas de <=100 filas.\n5. Instancias anteriores a 2.26.0: usá el plan B.",
+    "height": 420,
+    "width": 420,
+    "color": 4
+   },
+   "id": "b1a1a1a1-000b-400b-800b-aaaaaaaaaaa1",
+   "name": "Sticky Note",
+   "type": "n8n-nodes-base.stickyNote",
+   "typeVersion": 1,
+   "position": [
+    880,
+    140
+   ]
+  }
+ ],
+ "connections": {
+  "Disparo manual": {
+   "main": [
+    [
+     {
+      "node": "Extract - Banco Mundial",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Extract RC - pagina 1",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Extract RC - pagina 2",
+      "type": "main",
+      "index": 0
+     },
+     {
+      "node": "Extract RC - pagina 3",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Extract - Banco Mundial": {
+   "main": [
+    [
+     {
+      "node": "Transformar - Banco Mundial",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Extract RC - pagina 1": {
+   "main": [
+    [
+     {
+      "node": "Transformar - REST Countries",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Extract RC - pagina 2": {
+   "main": [
+    [
+     {
+      "node": "Transformar - REST Countries",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Extract RC - pagina 3": {
+   "main": [
+    [
+     {
+      "node": "Transformar - REST Countries",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Transformar - Banco Mundial": {
+   "main": [
+    [
+     {
+      "node": "Unir fuentes",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Transformar - REST Countries": {
+   "main": [
+    [
+     {
+      "node": "Unir fuentes",
+      "type": "main",
+      "index": 1
+     }
+    ]
+   ]
+  },
+  "Unir fuentes": {
+   "main": [
+    [
+     {
+      "node": "Load - NocoDB",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "pinData": {},
+ "settings": {}
+}
