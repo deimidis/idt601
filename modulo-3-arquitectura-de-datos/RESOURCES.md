@@ -13,6 +13,9 @@ lecciones se extrae de aquí, no de la memoria del agente.
   Texto abierto y gratuito en español. Usar para: arquitecturas y componentes.
 - **Libro:** _The Data Warehouse Toolkit_, Ralph Kimball y Margy Ross (Wiley).
   Usar para: fundamentos de modelado y del data warehouse.
+- [Material de proveedor: IBM Think, _¿Qué es la arquitectura de datos?_](https://www.ibm.com/es-es/think/topics/data-architecture)
+  Usar para: panorama introductorio y vocabulario moderno (tejido y malla de datos).
+  **Es fuente de proveedor:** no citar sus cifras sin estudio de origen, año y muestra.
 
 ## Wisdom (Communities)
 

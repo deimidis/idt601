@@ -35,33 +35,12 @@ Note:
 
 ---
 
-<div class="topline"><span class="kicker">00 / Resumen</span><span class="mark">IBM · Arquitectura de datos moderna</span></div>
-<div class="content single"><h2 class="slide-title">Arquitectura de datos, hoy</h2>
-  <p class="body-copy">Una arquitectura moderna prioriza la <strong>interoperabilidad</strong>, el acceso en <strong>tiempo real</strong> y tratar los datos como un <strong>producto</strong>. Su implementación sigue un enfoque por fases, de la planificación a la ejecución.</p>
-  <div class="cards">
-    <article class="card"><h3>Características</h3><p>Nativa de la nube, pipelines inteligentes, integración por API, servicios desacoplados y organización por dominios.</p></article>
-    <article class="card"><h3>Patrones modernos</h3><p><strong>Tejido de datos</strong> (automatiza la integración) y <strong>malla de datos</strong> (descentraliza por dominios).</p></article>
-    <article class="card"><h3>Implementación en 5 pasos</h3><p>Alinear con el negocio → modelar y gobernar → diseñar → crear e integrar → monitorear y escalar.</p></article>
-  </div>
-</div>
-<div class="footer"><span>Resumen del tema</span><span>02</span></div>
-
-Note:
-- Abrir con el panorama moderno antes de los patrones concretos.
-- Remarcar las características: nube, tiempo real, APIs y organización por dominios; los datos como producto.
-- Nombrar los patrones modernos (tejido y malla de datos) y aclarar que no son excluyentes.
-- Recorrer los cinco pasos de implementación como hoja de ruta.
-- **No olvidar:** este resumen conecta con los cuatro patrones de hoy y con el diseño paso a paso.
-- Fuente: IBM Think, "¿Qué es la arquitectura de datos?" (ibm.com/es-es/think/topics/data-architecture).
-
----
-
 <div class="topline"><span class="kicker">01 / Encuadre</span><span class="mark">Pregunta de arranque</span></div>
 <div class="content single"><h2 class="slide-title">¿Para qué necesitan los datos?</h2>
   <p class="lead">¿Para reportes del mes pasado, para análisis en el momento, o para ambos?</p>
   <p class="body-copy">Anotemos las respuestas en la pizarra. Anticipan el criterio para elegir el patrón. Elegir y documentar: las dos tareas del arquitecto de datos.</p>
 </div>
-<div class="footer"><span>Encuadre</span><span>03</span></div>
+<div class="footer"><span>Encuadre</span><span>02</span></div>
 
 Note:
 - Lanzar el enganche: "¿necesitan sus datos para reportes del mes pasado, para análisis en el momento, o para ambos?" y anotar las respuestas.
@@ -70,16 +49,39 @@ Note:
 
 ---
 
-<div class="topline"><span class="kicker">02 / Hoja de ruta</span><span class="mark">180 minutos</span></div>
-<div class="content single"><h2 class="slide-title">Una sesión, cinco tramos</h2>
+<div class="topline"><span class="kicker">02 / Resumen</span><span class="mark">IBM · Arquitectura de datos moderna</span></div>
+<div class="content single"><h2 class="slide-title">Arquitectura de datos, hoy</h2>
+  <p class="body-copy">Una arquitectura moderna prioriza la <strong>interoperabilidad</strong>, el acceso en <strong>tiempo real</strong> y tratar los datos como un <strong>producto</strong>. Su implementación sigue un enfoque por fases, de la planificación a la ejecución.</p>
+  <div class="cards">
+    <article class="card"><h3>Características</h3><p>Nativa de la nube, pipelines inteligentes, integración por API, servicios desacoplados y organización por dominios.</p></article>
+    <article class="card"><h3>Otros enfoques</h3><p>El <strong>tejido de datos</strong> (integración asistida por metadatos) y la <strong>malla de datos</strong> (propiedad por dominio) <strong>no son patrones hermanos</strong> de los cuatro de hoy: son enfoques organizativos. La malla exige madurez de plataforma y gobernanza federada.</p></article>
+    <article class="card"><h3>Implementación por fases</h3><p>Alinear con el negocio → modelar y gobernar → diseñar → crear e integrar → monitorear y escalar.</p></article>
+  </div>
+</div>
+<div class="footer"><span>Resumen del tema</span><span>03</span></div>
+
+Note:
+- Retomar las respuestas del enganche y mostrar que cada necesidad apunta a un patrón distinto.
+- Remarcar las características: nube, tiempo real, APIs y organización por dominios; los datos como producto.
+- Nombrar el tejido y la malla de datos, y **aclarar que no son patrones hermanos** de warehouse, lake, lakehouse y lambda: son enfoques organizativos. La malla tiene dificultades de implementación documentadas (gobernanza federada y traslado de responsabilidad).
+- **No confundir:** esta implementación por fases de un proveedor no es el proceso de diseño de cinco pasos que veremos hoy; el del bloque es el de las láminas siguientes.
+- **No olvidar:** este resumen conecta con los cuatro patrones de hoy y con el diseño paso a paso.
+- Fuente: IBM Think, "¿Qué es la arquitectura de datos?" (ibm.com/es-es/think/topics/data-architecture).
+
+---
+
+<div class="topline"><span class="kicker">03 / Hoja de ruta</span><span class="mark">180 minutos</span></div>
+<div class="content single"><h2 class="slide-title">Una sesión, ocho tramos</h2>
   <table class="type-table">
     <thead><tr><th>Momento</th><th>Tiempo</th><th>Qué haremos</th></tr></thead>
     <tbody>
+      <tr><td>Apertura y encuadre</td><td>10 min</td><td>Ubicación de la sesión, pregunta de arranque y mapa de la sesión.</td></tr>
       <tr><td>Patrones</td><td>35 min</td><td>Warehouse, lake, lakehouse y lambda.</td></tr>
       <tr><td>Comparativa</td><td>10 min</td><td>Criterios para elegir un patrón.</td></tr>
       <tr><td>Pausa</td><td>10 min</td><td>Receso.</td></tr>
       <tr><td>Diseño paso a paso</td><td>30 min</td><td>El proceso y la plantilla de diseño.</td></tr>
-      <tr><td>Taller</td><td>75 min</td><td>Diseñar la arquitectura de un caso institucional.</td></tr>
+      <tr><td>Taller</td><td>60 min</td><td>Diseñar la arquitectura de un caso institucional, en equipos.</td></tr>
+      <tr><td>Puesta en común</td><td>15 min</td><td>Cada equipo expone su diseño; se contrastan los patrones elegidos.</td></tr>
       <tr><td>Cierre</td><td>10 min</td><td>Síntesis, dudas y puente a la Sesión 6.</td></tr>
     </tbody>
   </table>
@@ -88,13 +90,13 @@ Note:
 
 Note:
 - Leer la tabla en voz alta y fijar el contrato de tiempo.
-- Explicar que el tramo de taller incluye el trabajo en equipos y la puesta en común.
+- Explicar que el taller y la puesta en común son dos tramos: 60 minutos de trabajo en equipos y 15 de exposición.
 - Señalar que la pausa cae después de la comparativa y antes del diseño paso a paso.
 - **No olvidar:** anticipar el puente hacia la Sesión 6 (integración de datos).
 
 ---
 
-<div class="topline"><span class="kicker">03 / Concepto</span><span class="mark">Qué es un patrón</span></div>
+<div class="topline"><span class="kicker">04 / Concepto</span><span class="mark">Qué es un patrón</span></div>
 <div class="content">
   <div><h2 class="slide-title">¿Qué es un patrón de arquitectura?</h2><p class="body-copy">Una <strong>forma típica y probada</strong> de organizar los datos para un propósito. No se inventa cada vez: <strong>se elige</strong>. Hoy veremos cuatro.</p></div>
   <div><div class="card"><h3>Los cuatro</h3><p><strong>Data warehouse</strong> · <strong>Data lake</strong> · <strong>Data lakehouse</strong> · <strong>Lambda</strong></p><p class="muted">No son tecnologías: son formas de organizar el dato.</p></div></div>
@@ -109,7 +111,7 @@ Note:
 
 ---
 
-<div class="topline"><span class="kicker">04 / Patrones</span><span class="mark">1 de 4</span></div>
+<div class="topline"><span class="kicker">05 / Patrones</span><span class="mark">1 de 4</span></div>
 <div class="content">
   <div><h2 class="slide-title">Data warehouse</h2><p class="body-copy">Datos <strong>ya procesados, limpios y estructurados</strong>, listos para reportes. <strong>Esquema fijo</strong>, alta confiabilidad. Responde: <em>"¿cuánto recaudamos el trimestre pasado por departamento?"</em>.</p></div>
   <div><div class="card"><h3>Ejemplo</h3><p>Almacén institucional con recaudación tributaria mensual, depurada y validada para reportes de gestión.</p></div></div>
@@ -124,7 +126,7 @@ Note:
 
 ---
 
-<div class="topline"><span class="kicker">04 / Patrones</span><span class="mark">2 de 4</span></div>
+<div class="topline"><span class="kicker">05 / Patrones</span><span class="mark">2 de 4</span></div>
 <div class="content">
   <div><h2 class="slide-title">Data lake</h2><p class="body-copy">Datos en <strong>forma cruda y original</strong>, de cualquier tipo y a gran escala. <strong>Esquema al leer</strong>, flexible, bajo costo por volumen. Responde: <em>"guardar todo lo que se genera, aunque no sepamos para qué"</em>.</p></div>
   <div><div class="card"><h3>Ejemplo</h3><p>Repositorio con lecturas de medidores de agua, logs de sistemas y documentos escaneados sin procesar.</p></div></div>
@@ -139,7 +141,7 @@ Note:
 
 ---
 
-<div class="topline"><span class="kicker">04 / Patrones</span><span class="mark">3 de 4</span></div>
+<div class="topline"><span class="kicker">05 / Patrones</span><span class="mark">3 de 4</span></div>
 <div class="content">
   <div><h2 class="slide-title">Data lakehouse</h2><p class="body-copy"><strong>Combina</strong> la flexibilidad del lake con la estructura y el gobierno del warehouse. Permite guardar datos crudos <strong>y</strong> consultarlos con esquema en un mismo repositorio.</p></div>
   <div><div class="card"><h3>Ejemplo</h3><p>Datos crudos de trámites con esquema y gobierno, sobre los que se generan reportes confiables.</p></div></div>
@@ -154,7 +156,7 @@ Note:
 
 ---
 
-<div class="topline"><span class="kicker">04 / Patrones</span><span class="mark">4 de 4</span></div>
+<div class="topline"><span class="kicker">05 / Patrones</span><span class="mark">4 de 4</span></div>
 <div class="content">
   <div><h2 class="slide-title">Arquitectura lambda</h2><p class="body-copy"><strong>Dos caminos en paralelo:</strong> una <strong>capa batch</strong> (la historia completa, precisa, cada cierto tiempo) y una <strong>capa de velocidad</strong> (lo que acaba de llegar, inmediato).</p></div>
   <div><div class="card"><h3>Ejemplo</h3><p>Tránsito: reportes históricos cada noche + alerta en tiempo real ante un congestionamiento.</p></div></div>
@@ -169,7 +171,7 @@ Note:
 
 ---
 
-<div class="topline"><span class="kicker">04 / Patrones</span><span class="mark">Lambda de cerca</span></div>
+<div class="topline"><span class="kicker">05 / Patrones</span><span class="mark">Lambda de cerca</span></div>
 <div class="content single"><h2 class="slide-title">Los dos caminos de lambda</h2>
   <img class="diagram" src="assets/esquema-lambda.svg" alt="Arquitectura lambda: las fuentes alimentan una capa batch y una capa de velocidad, que sirven reportes confiables y alertas inmediatas." />
 </div>
@@ -183,7 +185,7 @@ Note:
 
 ---
 
-<div class="topline"><span class="kicker">05 / Comparativa</span><span class="mark">Lado a lado</span></div>
+<div class="topline"><span class="kicker">06 / Comparativa</span><span class="mark">Lado a lado</span></div>
 <div class="content single"><h2 class="slide-title">Los cuatro, lado a lado</h2>
   <table class="type-table">
     <thead><tr><th>Patrón</th><th>Qué guarda</th><th>Foco</th><th>Tiempo real</th><th>Riesgo o costo</th></tr></thead>
@@ -204,7 +206,7 @@ Note:
 
 ---
 
-<div class="topline"><span class="kicker">05 / Comparativa</span><span class="mark">Los cuatro patrones</span></div>
+<div class="topline"><span class="kicker">06 / Comparativa</span><span class="mark">Los cuatro patrones</span></div>
 <div class="content single"><h2 class="slide-title">Un mismo problema, cuatro formas</h2>
   <img class="diagram" src="assets/esquema-patrones.svg" alt="Comparación visual de data warehouse, data lake, data lakehouse y lambda: qué guarda cada uno, su foco, el tiempo real y su riesgo." />
 </div>
@@ -218,7 +220,7 @@ Note:
 
 ---
 
-<div class="topline"><span class="kicker">06 / Diseño</span><span class="mark">El proceso</span></div>
+<div class="topline"><span class="kicker">07 / Diseño</span><span class="mark">El proceso</span></div>
 <div class="content single"><h2 class="slide-title">Diseñar es un proceso ordenado</h2>
   <img class="diagram" src="assets/esquema-diseno.svg" alt="Los cinco pasos del diseño: entender el caso, mapear las fuentes, definir los componentes, elegir el patrón y documentar." />
   <p class="quote">El plano <em>no es</em> la casa: primero el diseño, después la tecnología.</p>
@@ -233,7 +235,7 @@ Note:
 
 ---
 
-<div class="topline"><span class="kicker">06 / Diseño</span><span class="mark">Pasos 1 y 2</span></div>
+<div class="topline"><span class="kicker">07 / Diseño</span><span class="mark">Pasos 1 y 2</span></div>
 <div class="content single"><h2 class="slide-title">El caso y las fuentes</h2>
   <div class="split">
     <div class="split-panel"><h3>Paso 1 · Entender el caso</h3><p>¿Qué necesita la institución? ¿Qué <strong>preguntas</strong> debe responder con datos? Ejemplo: reportar mensualmente el avance de los trámites de licencias.</p></div>
@@ -249,7 +251,7 @@ Note:
 
 ---
 
-<div class="topline"><span class="kicker">06 / Diseño</span><span class="mark">Paso 3</span></div>
+<div class="topline"><span class="kicker">07 / Diseño</span><span class="mark">Paso 3</span></div>
 <div class="content">
   <div><h2 class="slide-title">Paso 3 · Definir los componentes</h2><p class="body-copy">Las <strong>cuatro piezas</strong> del plano: <strong>almacenamiento</strong> (dónde), <strong>procesamiento</strong> (cómo), <strong>catálogo</strong> (qué es) y <strong>gobernanza</strong> (quién y con qué reglas).</p></div>
   <div><div class="card"><h3>Ejemplo</h3><p>Base operacional + data warehouse + proceso nocturno + diccionario de datos + política de acceso.</p></div></div>
@@ -263,7 +265,7 @@ Note:
 
 ---
 
-<div class="topline"><span class="kicker">06 / Diseño</span><span class="mark">Paso 4</span></div>
+<div class="topline"><span class="kicker">07 / Diseño</span><span class="mark">Paso 4</span></div>
 <div class="content">
   <div><h2 class="slide-title">Paso 4 · Elegir el patrón</h2><p class="body-copy">Según el caso: <strong>warehouse</strong> → reportes confiables; <strong>lake</strong> → datos crudos y diversos; <strong>lakehouse</strong> → ambos; <strong>lambda</strong> → lotes + tiempo real.</p></div>
   <div><div class="card"><h3>Ejemplo</h3><p>Data warehouse para reportes mensuales confiables.</p></div></div>
@@ -277,7 +279,7 @@ Note:
 
 ---
 
-<div class="topline"><span class="kicker">06 / Diseño</span><span class="mark">Paso 5</span></div>
+<div class="topline"><span class="kicker">07 / Diseño</span><span class="mark">Paso 5</span></div>
 <div class="content single"><h2 class="slide-title">Paso 5 · Documentar</h2>
   <p class="body-copy">Dibujar el <strong>flujo</strong> desde la fuente hasta el uso, nombrar cada <strong>componente</strong> y registrar las <strong>reglas</strong> de gobernanza.</p>
   <table class="type-table">
@@ -286,7 +288,7 @@ Note:
       <tr><td>Caso y objetivo</td><td>Qué necesita y qué pregunta responde</td></tr>
       <tr><td>Fuentes de datos</td><td>De dónde salen y su tipo</td></tr>
       <tr><td>Componentes</td><td>Almacenamiento, procesamiento, catálogo, gobernanza</td></tr>
-      <tr><td>Patrón elegido</td><td>Cuál y por qué</td></tr>
+      <tr><td>Patrón elegido</td><td>Cuál y por qué (y qué alternativa se descartó)</td></tr>
       <tr><td>Diagrama de flujo</td><td>Desde la fuente hasta el uso</td></tr>
       <tr><td>Reglas de gobernanza</td><td>Quién accede, calidad y seguridad</td></tr>
     </tbody>
@@ -301,7 +303,7 @@ Note:
 
 ---
 
-<div class="topline"><span class="kicker">07 / Taller</span><span class="mark">El caso</span></div>
+<div class="topline"><span class="kicker">08 / Taller</span><span class="mark">El caso</span></div>
 <div class="content single"><h2 class="slide-title">Taller: la gobernación y la atención al ciudadano</h2>
   <p class="body-copy">Reclamos en <strong>tres sistemas</strong> (ventanilla, teléfono y web), inspecciones anotadas en papel e indicadores armados a mano en Excel. Se necesita un reporte mensual confiable <strong>y</strong> una alerta inmediata ante un reclamo crítico repetido en la misma zona.</p>
   <div class="cards">
@@ -309,18 +311,18 @@ Note:
     <article class="card"><h3>2. Componentes y patrón</h3><p>Definan las cuatro piezas y elijan el patrón.</p></article>
     <article class="card"><h3>3. Diagrama y plantilla</h3><p>Dibujen el flujo y completen la plantilla.</p></article>
   </div>
-  <p class="body-copy"><strong>Entregable:</strong> diagrama + plantilla + justificación del patrón. Equipos de 4–5 · 60 min de trabajo + 15 de puesta en común.</p>
+  <p class="body-copy"><strong>Entregable:</strong> diagrama + plantilla + justificación del patrón. Equipos de 4 · 60 min de trabajo + 15 de puesta en común.</p>
 </div>
 <div class="footer"><span>Taller</span><span>18</span></div>
 
 Note:
 - Leer el caso y explicitar la meta doble: reporte mensual confiable y alerta inmediata.
-- Dar la consigna y los tiempos: equipos de 4 a 5, 60 minutos de trabajo y 15 de puesta en común.
-- **No olvidar:** circular entre equipos recordando las tres preguntas y asignar un énfasis distinto a cada uno.
+- Dar la consigna y los tiempos: equipos de 4, 60 minutos de trabajo y 15 de puesta en común.
+- **No olvidar:** circular entre equipos recordando las cuatro preguntas (dónde, cómo, qué es, quién) y asignar un énfasis distinto a cada uno.
 
 ---
 
-<div class="topline"><span class="kicker">07 / Taller</span><span class="mark">Puesta en común</span></div>
+<div class="topline"><span class="kicker">08 / Taller</span><span class="mark">Puesta en común</span></div>
 <div class="content single"><h2 class="slide-title">Compartan y contrasten los diseños</h2>
   <div class="cards">
     <article class="card"><h3>1. Expongan</h3><p>Cada equipo presenta su diagrama y su patrón en 3–4 minutos.</p></article>
@@ -338,7 +340,7 @@ Note:
 
 ---
 
-<div class="topline"><span class="kicker">08 / En resumen</span><span class="mark">Cierre</span></div>
+<div class="topline"><span class="kicker">09 / En resumen</span><span class="mark">Cierre</span></div>
 <div class="content single"><h2 class="slide-title">Elegir y documentar</h2>
   <div class="cards">
     <article class="card"><h3>Patrón</h3><p>No hay uno mejor; hay uno adecuado para cada caso.</p></article>

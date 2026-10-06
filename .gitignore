@@ -8,3 +8,7 @@ desktop.ini
 .idea/
 *.swp
 *~
+
+# Herramientas internas de trabajo — no forman parte del sitio publicado
+.research/
+.mimocode/

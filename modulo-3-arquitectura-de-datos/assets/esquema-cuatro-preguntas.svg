@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" role="img" aria-label="Tres preguntas que responde la arquitectura de datos">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1590 500" role="img" aria-label="Cuatro preguntas que responde la arquitectura de datos: dónde vive el dato, cómo se mueve y transforma, qué datos existen y qué significan, y quién puede usarlo y con qué reglas">
   <defs>
     <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#507A6E" />
@@ -23,11 +23,18 @@
 
     <rect x="810" y="50" width="360" height="400" rx="10" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
     <rect x="810" y="50" width="360" height="12" rx="6" fill="#DABC6E" />
-    <text x="990" y="132" text-anchor="middle" font-size="30" font-weight="bold" fill="#2A4D40">¿Quién puede usarlo</text>
-    <text x="990" y="170" text-anchor="middle" font-size="30" font-weight="bold" fill="#2A4D40">y con qué reglas?</text>
+    <text x="990" y="132" text-anchor="middle" font-size="30" font-weight="bold" fill="#2A4D40">¿Qué datos existen</text>
+    <text x="990" y="170" text-anchor="middle" font-size="30" font-weight="bold" fill="#2A4D40">y qué significan?</text>
     <path d="M990,205 L990,285" stroke="#507A6E" stroke-width="4" marker-end="url(#a)" />
     <rect x="850" y="305" width="280" height="86" rx="8" fill="#EAF0ED" stroke="#507A6E" stroke-width="2" />
-    <text x="990" y="345" text-anchor="middle" font-size="26" fill="#2A4D40">Acceso y</text>
-    <text x="990" y="376" text-anchor="middle" font-size="26" fill="#2A4D40">gobernanza</text>
+    <text x="990" y="356" text-anchor="middle" font-size="28" fill="#2A4D40">Catálogo</text>
+
+    <rect x="1200" y="50" width="360" height="400" rx="10" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+    <rect x="1200" y="50" width="360" height="12" rx="6" fill="#DABC6E" />
+    <text x="1380" y="132" text-anchor="middle" font-size="30" font-weight="bold" fill="#2A4D40">¿Quién puede usarlo</text>
+    <text x="1380" y="170" text-anchor="middle" font-size="30" font-weight="bold" fill="#2A4D40">y con qué reglas?</text>
+    <path d="M1380,205 L1380,285" stroke="#507A6E" stroke-width="4" marker-end="url(#a)" />
+    <rect x="1240" y="305" width="280" height="86" rx="8" fill="#EAF0ED" stroke="#507A6E" stroke-width="2" />
+    <text x="1380" y="356" text-anchor="middle" font-size="28" fill="#2A4D40">Gobernanza</text>
   </g>
 </svg>
