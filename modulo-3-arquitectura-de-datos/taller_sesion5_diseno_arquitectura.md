@@ -24,7 +24,7 @@ Producir el **diseño de arquitectura completo y documentado** para el caso asig
 
 | Momento | Tiempo | Quién |
 |---|---|---|
-| Apertura: consigna y conformación de equipos | 10 min | Docente |
+| Apertura: consigna y conformación de equipos (4 personas) | 10 min | Docente |
 | Trabajo en equipos con la plantilla | 50 min | Equipos |
 | Puesta en común | 15 min | Todos |
 

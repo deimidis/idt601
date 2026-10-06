@@ -13,15 +13,15 @@ Identificar y **nombrar los componentes** de una arquitectura sobre un esquema d
 
 ## Preparación previa
 
-1. Imprimir o compartir `assets/esquema-arquitectura-sin-etiquetas.svg` (uno por equipo). El esquema tiene cajas rotuladas de forma genérica ("Caja A", "Flecha 1", …) y dos bandas rotuladas "Capa 1" y "Capa 2".
+1. Imprimir o compartir `assets/esquema-arquitectura-sin-etiquetas.svg` (uno por equipo). El esquema tiene cajas rotuladas de forma genérica ("Caja A"…"Caja G") y dos bandas rotuladas "Capa 1" y "Capa 2". Las flechas **no** llevan rótulo: indican el flujo y no se etiquetan.
 2. Preparar la hoja de trabajo (abajo) o pedir que la copien.
-3. Tener a mano el esquema resuelto (`assets/esquema-arquitectura-resuelto.svg`) para la puesta en común.
+3. Tener a mano el esquema resuelto (`assets/esquema-arquitectura-resuelto.svg`) para la puesta en común. Los dos esquemas comparten la **misma geometría** (cajas, bandas y flechas en las mismas posiciones), así que se pueden superponer al comparar.
 
 ## Reparto del tiempo (50 min)
 
 | Momento | Tiempo | Quién |
 |---|---|---|
-| Consigna y conformación de equipos (3–4 personas) | 10 min | Docente |
+| Consigna y conformación de equipos (4 personas) | 10 min | Docente |
 | Trabajo en equipos sobre el esquema | 30 min | Equipos |
 | Puesta en común | 10 min | Todos |
 

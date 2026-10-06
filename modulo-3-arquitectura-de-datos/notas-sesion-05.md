@@ -16,7 +16,7 @@
 
 ## Slide 2 — Hoja de ruta
 - Leer la tabla en voz alta y fijar el contrato de tiempo: 35 minutos de patrones, 10 de comparativa, 30 de diseño paso a paso, 75 de taller y 10 de cierre.
-- Explicar que el tramo de taller incluye el trabajo en equipos y la puesta en común; por eso es el bloque más largo de la jornada.
+- Explicar que el taller y la puesta en común son dos tramos: 60 minutos de trabajo en equipos y 15 de exposición; por eso el taller es el bloque más largo de la jornada.
 - Señalar dónde cae la pausa: después de la comparativa y antes de empezar el diseño paso a paso.
 - Anticipar que el cierre deja un puente hacia la Sesión 6, con la integración de datos, ETL y orquestación.
 - **No olvidar:** pedir al grupo que vaya anotando sus dudas, porque el cierre reserva 10 minutos para preguntas.
@@ -101,9 +101,9 @@
 ## Slide 14 — Taller
 - Leer el caso en voz alta: reclamos en tres sistemas (ventanilla, teléfono y web), inspecciones en papel e indicadores armados a mano en Excel.
 - Explicitar la meta doble: un reporte mensual confiable y una alerta inmediata cuando un reclamo crítico se repite en la misma zona.
-- Dar la consigna y los tiempos: equipos de 4 a 5 personas, 60 minutos de trabajo con la plantilla y 15 minutos de puesta en común.
+- Dar la consigna y los tiempos: equipos de 4 personas, 60 minutos de trabajo con la plantilla y 15 minutos de puesta en común.
 - Recordar los cinco pasos y el entregable del taller: diagrama de flujo, plantilla completa y justificación del patrón elegido.
-- **No olvidar:** circular por los equipos recordando las tres preguntas (dónde, cómo, quién) y confirmar el énfasis de cada equipo (reportes, alerta o histórico).
+- **No olvidar:** circular por los equipos recordando las cuatro preguntas (dónde, cómo, qué es, quién) y confirmar el énfasis de cada equipo (reportes, alerta o histórico).
 
 ## Slide 15 — Cierre
 - Sintetizar las tres ideas de la jornada: no hay un patrón mejor, el diseño sigue un proceso ordenado y el diseño se documenta.

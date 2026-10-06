@@ -162,7 +162,7 @@ Presentar el diseño como una secuencia de pasos, con un ejemplo breve.
 
 > Variante sugerida: asignar a cada equipo un énfasis (reportes mensuales, alerta inmediata o análisis histórico) para comparar elecciones de patrón.
 
-**Pasos del trabajo en equipos:**
+**Pasos del trabajo en equipos** (4 personas por equipo):
 1. Leer el caso y definir el objetivo (Paso 1).
 2. Listar las fuentes de datos y su tipo (Paso 2).
 3. Definir los cuatro componentes (Paso 3).

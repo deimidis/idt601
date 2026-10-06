@@ -99,8 +99,8 @@
 - **No olvidar:** este slide es el **puente** hacia la práctica; no pasar de largo sin haber leído un diagrama en conjunto.
 
 ## Slide 14 — Práctica
-- Dar la consigna: en equipos de **3 a 4 personas**, con un esquema sin etiquetas y una hoja de trabajo con las cuatro categorías.
-- Explicar los tres pasos: etiquetar cada caja y flecha con su componente, justificar la elección y describir el flujo de la fuente al uso.
+- Dar la consigna: en equipos de **4 personas**, con un esquema sin etiquetas y una hoja de trabajo con las cuatro categorías.
+- Explicar los tres pasos: etiquetar cada caja con su componente, justificar la elección y describir el flujo de la fuente al uso (las flechas se describen, no se etiquetan).
 - Recordar el tiempo: 50 minutos en total, incluida la puesta en común.
 - Circular entre los equipos para destrabar dudas y orientar la lectura del esquema.
 - **No olvidar:** en la puesta en común cada equipo expone **un componente y su justificación**; valorar que distingan almacenamiento de procesamiento y que reconozcan catálogo y gobernanza como capas transversales.

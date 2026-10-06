@@ -160,11 +160,11 @@ Luego, leer en conjunto un diagrama sencillo de arquitectura. Mostrar o dibujar 
 
 **Objetivo:** identificar y nombrar los componentes de una arquitectura en un esquema dado.
 
-**Materiales:** un esquema impreso por equipo, con cajas y flechas **sin etiquetas** (o con etiquetas genéricas: "Caja A", "Flecha 1", etc.).
+**Materiales:** un esquema impreso por equipo, con cajas **sin etiquetas** (rotuladas de forma genérica: "Caja A"…"Caja G") y las flechas del flujo sin rótulo.
 
 **Pasos:**
 
-1. Conformar equipos de 3–4 personas.
+1. Conformar equipos de 4 personas.
 2. Entregar a cada equipo el esquema y una hoja de trabajo con las cuatro categorías: almacenamiento, procesamiento, catálogo, gobernanza.
 3. Cada equipo debe **etiquetar cada elemento** del esquema con su componente y justificarlo.
 4. Además, responder: *¿cuál es el flujo de datos, de la fuente al uso?*
