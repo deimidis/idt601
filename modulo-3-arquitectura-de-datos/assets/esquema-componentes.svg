@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1230 620" role="img" aria-label="Los cuatro componentes de una arquitectura de datos">
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="30" y="40" width="570" height="260" rx="10" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+    <rect x="30" y="40" width="14" height="260" rx="7" fill="#2A4D40" />
+    <text x="70" y="100" font-size="36" font-weight="bold" fill="#2A4D40">Almacenamiento</text>
+    <text x="70" y="150" font-size="25" fill="#3D6558">¿Dónde vive el dato y en qué forma?</text>
+    <line x1="70" y1="180" x2="560" y2="180" stroke="#EAF0ED" stroke-width="2" />
+    <text x="70" y="225" font-size="23" fill="#7E9A8E">Ejemplo</text>
+    <text x="70" y="262" font-size="24" fill="#3D6558">Base de trámites + repositorio de escaneos</text>
+
+    <rect x="630" y="40" width="570" height="260" rx="10" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+    <rect x="630" y="40" width="14" height="260" rx="7" fill="#507A6E" />
+    <text x="670" y="100" font-size="36" font-weight="bold" fill="#2A4D40">Procesamiento</text>
+    <text x="670" y="150" font-size="25" fill="#3D6558">¿Cómo se mueve y transforma?</text>
+    <line x1="670" y1="180" x2="1160" y2="180" stroke="#EAF0ED" stroke-width="2" />
+    <text x="670" y="225" font-size="23" fill="#7E9A8E">Ejemplo</text>
+    <text x="670" y="262" font-size="24" fill="#3D6558">Consolidación nocturna de pagos</text>
+
+    <rect x="30" y="330" width="570" height="260" rx="10" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+    <rect x="30" y="330" width="14" height="260" rx="7" fill="#7E9A8E" />
+    <text x="70" y="390" font-size="36" font-weight="bold" fill="#2A4D40">Catálogo</text>
+    <text x="70" y="440" font-size="25" fill="#3D6558">¿Qué datos existen y qué significan?</text>
+    <line x1="70" y1="470" x2="560" y2="470" stroke="#EAF0ED" stroke-width="2" />
+    <text x="70" y="515" font-size="23" fill="#7E9A8E">Ejemplo</text>
+    <text x="70" y="552" font-size="24" fill="#3D6558">Diccionario que define «DNI»</text>
+
+    <rect x="630" y="330" width="570" height="260" rx="10" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+    <rect x="630" y="330" width="14" height="260" rx="7" fill="#DABC6E" />
+    <text x="670" y="390" font-size="36" font-weight="bold" fill="#2A4D40">Gobernanza</text>
+    <text x="670" y="440" font-size="25" fill="#3D6558">¿Quién puede usarlo y con qué reglas?</text>
+    <line x1="670" y1="470" x2="1160" y2="470" stroke="#EAF0ED" stroke-width="2" />
+    <text x="670" y="515" font-size="23" fill="#7E9A8E">Ejemplo</text>
+    <text x="670" y="552" font-size="24" fill="#3D6558">Solo Personal modifica el sueldo</text>
+  </g>
+</svg>

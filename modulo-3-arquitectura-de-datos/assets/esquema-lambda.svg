@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" role="img" aria-label="Arquitectura lambda con capa batch y capa de velocidad">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#507A6E" />
+    </marker>
+  </defs>
+  <g font-family="Helvetica, Arial, sans-serif">
+    <!-- Fuentes -->
+    <rect x="30" y="150" width="210" height="260" rx="10" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+    <text x="135" y="200" text-anchor="middle" font-size="28" font-weight="bold" fill="#2A4D40">Fuentes</text>
+    <text x="135" y="245" text-anchor="middle" font-size="21" fill="#3D6558">sistemas</text>
+    <text x="135" y="278" text-anchor="middle" font-size="21" fill="#3D6558">formularios</text>
+    <text x="135" y="311" text-anchor="middle" font-size="21" fill="#3D6558">sensores</text>
+    <text x="135" y="365" text-anchor="middle" font-size="20" fill="#7E9A8E">datos en</text>
+    <text x="135" y="390" text-anchor="middle" font-size="20" fill="#7E9A8E">continuo</text>
+
+    <!-- Capa batch -->
+    <rect x="330" y="70" width="270" height="150" rx="10" fill="#EAF0ED" stroke="#507A6E" stroke-width="2" />
+    <text x="465" y="130" text-anchor="middle" font-size="28" font-weight="bold" fill="#2A4D40">Capa batch</text>
+    <text x="465" y="170" text-anchor="middle" font-size="21" fill="#3D6558">historia completa</text>
+    <text x="465" y="198" text-anchor="middle" font-size="21" fill="#3D6558">precisa · periódica</text>
+
+    <!-- Capa de velocidad -->
+    <rect x="330" y="340" width="270" height="150" rx="10" fill="#FBF4E1" stroke="#DABC6E" stroke-width="2" />
+    <text x="465" y="400" text-anchor="middle" font-size="28" font-weight="bold" fill="#2A4D40">Capa de velocidad</text>
+    <text x="465" y="440" text-anchor="middle" font-size="21" fill="#3D6558">lo recién llegado</text>
+    <text x="465" y="468" text-anchor="middle" font-size="21" fill="#3D6558">inmediato · aproximado</text>
+
+    <!-- Servir -->
+    <rect x="760" y="150" width="400" height="260" rx="10" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+    <text x="960" y="215" text-anchor="middle" font-size="30" font-weight="bold" fill="#2A4D40">Servir</text>
+    <line x1="800" y1="245" x2="1120" y2="245" stroke="#EAF0ED" stroke-width="2" />
+    <text x="960" y="295" text-anchor="middle" font-size="25" fill="#3D6558">Reportes confiables</text>
+    <text x="960" y="340" text-anchor="middle" font-size="25" fill="#3D6558">+ Alertas inmediatas</text>
+    <text x="960" y="385" text-anchor="middle" font-size="20" fill="#7E9A8E">reportes y alertas a la vez</text>
+
+    <!-- Flechas -->
+    <g stroke="#507A6E" stroke-width="4" fill="none">
+      <path d="M240,220 C290,200 300,150 327,145" marker-end="url(#a)" />
+      <path d="M240,340 C290,360 300,405 327,415" marker-end="url(#a)" />
+      <path d="M600,145 C680,160 700,240 757,255" marker-end="url(#a)" />
+      <path d="M600,415 C680,400 700,320 757,305" marker-end="url(#a)" />
+    </g>
+  </g>
+</svg>

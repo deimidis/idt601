@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 520" role="img" aria-label="Flujo entre componentes con catálogo y gobernanza como capas transversales">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#507A6E" />
+    </marker>
+  </defs>
+  <g font-family="Helvetica, Arial, sans-serif">
+    <!-- Capas transversales -->
+    <rect x="0" y="60" width="1240" height="62" fill="#DABC6E" opacity="0.22" />
+    <text x="24" y="100" font-size="26" font-weight="bold" fill="#2A4D40">Catálogo de datos</text>
+    <text x="1216" y="100" text-anchor="end" font-size="20" fill="#3D6558">capa transversal · atraviesa todo el flujo</text>
+    <rect x="0" y="398" width="1240" height="62" fill="#DABC6E" opacity="0.22" />
+    <text x="24" y="438" font-size="26" font-weight="bold" fill="#2A4D40">Gobernanza</text>
+    <text x="1216" y="438" text-anchor="end" font-size="20" fill="#3D6558">capa transversal · atraviesa todo el flujo</text>
+
+    <!-- Cajas del flujo -->
+    <g text-anchor="middle">
+      <rect x="30" y="205" width="190" height="96" rx="8" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+      <text x="125" y="262" font-size="26" fill="#2A4D40">Fuente</text>
+
+      <rect x="265" y="205" width="190" height="96" rx="8" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+      <text x="360" y="250" font-size="23" fill="#2A4D40">Almacena-</text>
+      <text x="360" y="280" font-size="23" fill="#2A4D40">miento</text>
+
+      <rect x="500" y="205" width="190" height="96" rx="8" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+      <text x="595" y="250" font-size="23" fill="#2A4D40">Procesa-</text>
+      <text x="595" y="280" font-size="23" fill="#2A4D40">miento</text>
+
+      <rect x="735" y="205" width="190" height="96" rx="8" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+      <text x="830" y="242" font-size="21" fill="#2A4D40">Almacena-</text>
+      <text x="830" y="268" font-size="21" fill="#2A4D40">miento de</text>
+      <text x="830" y="294" font-size="21" fill="#2A4D40">análisis</text>
+
+      <rect x="970" y="205" width="190" height="96" rx="8" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+      <text x="1065" y="262" font-size="26" fill="#2A4D40">Uso</text>
+    </g>
+
+    <!-- Flechas -->
+    <g stroke="#507A6E" stroke-width="4" fill="none">
+      <path d="M220,253 L262,253" marker-end="url(#a)" />
+      <path d="M455,253 L497,253" marker-end="url(#a)" />
+      <path d="M690,253 L732,253" marker-end="url(#a)" />
+      <path d="M925,253 L967,253" marker-end="url(#a)" />
+    </g>
+  </g>
+</svg>

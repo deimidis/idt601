@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1260 300" role="img" aria-label="Los cinco pasos del diseño de una arquitectura">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#DABC6E" />
+    </marker>
+  </defs>
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="20" y="60" width="210" height="180" rx="10" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+    <text x="125" y="130" text-anchor="middle" font-size="46" font-weight="bold" fill="#DABC6E">1</text>
+    <text x="125" y="180" text-anchor="middle" font-size="23" fill="#2A4D40">Entender</text>
+    <text x="125" y="208" text-anchor="middle" font-size="23" fill="#2A4D40">el caso</text>
+
+    <rect x="270" y="60" width="210" height="180" rx="10" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+    <text x="375" y="130" text-anchor="middle" font-size="46" font-weight="bold" fill="#DABC6E">2</text>
+    <text x="375" y="180" text-anchor="middle" font-size="23" fill="#2A4D40">Mapear las</text>
+    <text x="375" y="208" text-anchor="middle" font-size="23" fill="#2A4D40">fuentes</text>
+
+    <rect x="520" y="60" width="210" height="180" rx="10" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+    <text x="625" y="130" text-anchor="middle" font-size="46" font-weight="bold" fill="#DABC6E">3</text>
+    <text x="625" y="180" text-anchor="middle" font-size="23" fill="#2A4D40">Definir</text>
+    <text x="625" y="208" text-anchor="middle" font-size="23" fill="#2A4D40">componentes</text>
+
+    <rect x="770" y="60" width="210" height="180" rx="10" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+    <text x="875" y="130" text-anchor="middle" font-size="46" font-weight="bold" fill="#DABC6E">4</text>
+    <text x="875" y="180" text-anchor="middle" font-size="23" fill="#2A4D40">Elegir</text>
+    <text x="875" y="208" text-anchor="middle" font-size="23" fill="#2A4D40">el patrón</text>
+
+    <rect x="1020" y="60" width="210" height="180" rx="10" fill="#2A4D40" stroke="#2A4D40" stroke-width="2" />
+    <text x="1125" y="130" text-anchor="middle" font-size="46" font-weight="bold" fill="#DABC6E">5</text>
+    <text x="1125" y="180" text-anchor="middle" font-size="23" fill="#FFFFFF">Documentar</text>
+
+    <g stroke="#DABC6E" stroke-width="4" fill="none">
+      <path d="M232,150 L266,150" marker-end="url(#a)" />
+      <path d="M482,150 L516,150" marker-end="url(#a)" />
+      <path d="M732,150 L766,150" marker-end="url(#a)" />
+      <path d="M982,150 L1016,150" marker-end="url(#a)" />
+    </g>
+  </g>
+</svg>
