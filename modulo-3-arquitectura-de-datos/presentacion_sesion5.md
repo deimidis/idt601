@@ -136,6 +136,7 @@ Note:
 Note:
 - Recorrer el esquema: las fuentes alimentan los dos caminos a la vez.
 - La capa batch prioriza precisión; la capa de velocidad, inmediatez.
+- **Esquema en pantalla (lambda):** a la izquierda, las fuentes; de ellas salen dos caminos paralelos: arriba la capa batch (historia completa, precisa, periódica) y abajo la capa de velocidad (lo recién llegado, inmediato). Ambos confluyen en «Servir: reportes confiables + alertas inmediatas». Enfatizar que son dos lógicas simultáneas sobre los mismos datos.
 - **No olvidar:** ambas alimentan la misma capa de servicio (reportes y alertas).
 
 ---
@@ -170,6 +171,7 @@ Note:
 Note:
 - Recorrer los cuatro paneles del esquema y conectar cada uno con su ejemplo ya visto.
 - Repetir los criterios de elección: caso, volumen, estructura del dato y tiempo real.
+- **Esquema en pantalla (los cuatro patrones):** cuatro columnas: warehouse (tablas limpias → reportes), lake (depósito crudo y diverso), lakehouse (crudo + esquema y gobierno) y lambda (capa batch + capa de velocidad). Cada columna indica qué guarda, su foco, el tiempo real y su riesgo. Recorrerlas y conectar con los ejemplos ya vistos.
 - **No olvidar:** cerrar anunciando la pausa y anticipar que al volver empieza el diseño paso a paso.
 
 ---
@@ -184,6 +186,7 @@ Note:
 Note:
 - Presentar el diseño como un proceso ordenado de cinco pasos, no como una inspiración.
 - Nombrar la secuencia: entender, mapear, definir componentes, elegir el patrón y documentar.
+- **Esquema en pantalla (los cinco pasos):** cinco bloques numerados en fila —1 entender el caso, 2 mapear fuentes, 3 definir componentes, 4 elegir patrón, 5 documentar— unidos por flechas. Señalar que el orden importa: cada paso habilita el siguiente y el 5 (documentar) es el entregable.
 - **No olvidar:** el diseño va antes de pensar en herramientas.
 
 ---
