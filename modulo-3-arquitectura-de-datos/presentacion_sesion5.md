@@ -14,12 +14,33 @@ Note:
 
 ---
 
+<div class="topline"><span class="kicker">00 / Resumen</span><span class="mark">IBM · Arquitectura de datos moderna</span></div>
+<div class="content single"><h2 class="slide-title">Arquitectura de datos, hoy</h2>
+  <p class="body-copy">Una arquitectura moderna prioriza la <strong>interoperabilidad</strong>, el acceso en <strong>tiempo real</strong> y tratar los datos como un <strong>producto</strong>. Su implementación sigue un enfoque por fases, de la planificación a la ejecución.</p>
+  <div class="cards">
+    <article class="card"><h3>Características</h3><p>Nativa de la nube, pipelines inteligentes, integración por API, servicios desacoplados y organización por dominios.</p></article>
+    <article class="card"><h3>Patrones modernos</h3><p><strong>Tejido de datos</strong> (automatiza la integración) y <strong>malla de datos</strong> (descentraliza por dominios).</p></article>
+    <article class="card"><h3>Implementación en 5 pasos</h3><p>Alinear con el negocio → modelar y gobernar → diseñar → crear e integrar → monitorear y escalar.</p></article>
+  </div>
+</div>
+<div class="footer"><span>Resumen del tema</span><span>02</span></div>
+
+Note:
+- Abrir con el panorama moderno antes de los patrones concretos.
+- Remarcar las características: nube, tiempo real, APIs y organización por dominios; los datos como producto.
+- Nombrar los patrones modernos (tejido y malla de datos) y aclarar que no son excluyentes.
+- Recorrer los cinco pasos de implementación como hoja de ruta.
+- **No olvidar:** este resumen conecta con los cuatro patrones de hoy y con el diseño paso a paso.
+- Fuente: IBM Think, "¿Qué es la arquitectura de datos?" (ibm.com/es-es/think/topics/data-architecture).
+
+---
+
 <div class="topline"><span class="kicker">01 / Encuadre</span><span class="mark">Pregunta de arranque</span></div>
 <div class="content single"><h2 class="slide-title">¿Para qué necesitan los datos?</h2>
   <p class="lead">¿Para reportes del mes pasado, para análisis en el momento, o para ambos?</p>
   <p class="body-copy">Anotemos las respuestas en la pizarra. Anticipan el criterio para elegir el patrón. Elegir y documentar: las dos tareas del arquitecto de datos.</p>
 </div>
-<div class="footer"><span>Encuadre</span><span>02</span></div>
+<div class="footer"><span>Encuadre</span><span>03</span></div>
 
 Note:
 - Lanzar el enganche: "¿necesitan sus datos para reportes del mes pasado, para análisis en el momento, o para ambos?" y anotar las respuestas.
@@ -42,7 +63,7 @@ Note:
     </tbody>
   </table>
 </div>
-<div class="footer"><span>Hoja de ruta</span><span>03</span></div>
+<div class="footer"><span>Hoja de ruta</span><span>04</span></div>
 
 Note:
 - Leer la tabla en voz alta y fijar el contrato de tiempo.
@@ -57,7 +78,7 @@ Note:
   <div><h2 class="slide-title">¿Qué es un patrón de arquitectura?</h2><p class="body-copy">Una <strong>forma típica y probada</strong> de organizar los datos para un propósito. No se inventa cada vez: <strong>se elige</strong>. Hoy veremos cuatro.</p></div>
   <div><div class="card"><h3>Los cuatro</h3><p><strong>Data warehouse</strong> · <strong>Data lake</strong> · <strong>Data lakehouse</strong> · <strong>Lambda</strong></p><p class="muted">No son tecnologías: son formas de organizar el dato.</p></div></div>
 </div>
-<div class="footer"><span>Concepto</span><span>04</span></div>
+<div class="footer"><span>Concepto</span><span>05</span></div>
 
 Note:
 - Definir un patrón de arquitectura como una forma típica y probada; no se inventa cada vez, se elige.
@@ -72,7 +93,7 @@ Note:
   <div><h2 class="slide-title">Data warehouse</h2><p class="body-copy">Datos <strong>ya procesados, limpios y estructurados</strong>, listos para reportes. <strong>Esquema fijo</strong>, alta confiabilidad. Responde: <em>"¿cuánto recaudamos el trimestre pasado por departamento?"</em>.</p></div>
   <div><div class="card"><h3>Ejemplo</h3><p>Almacén institucional con recaudación tributaria mensual, depurada y validada para reportes de gestión.</p></div></div>
 </div>
-<div class="footer"><span>Data warehouse</span><span>05</span></div>
+<div class="footer"><span>Data warehouse</span><span>06</span></div>
 
 Note:
 - Definir el warehouse: datos ya procesados, limpios y estructurados para reportes.
@@ -87,7 +108,7 @@ Note:
   <div><h2 class="slide-title">Data lake</h2><p class="body-copy">Datos en <strong>forma cruda y original</strong>, de cualquier tipo y a gran escala. <strong>Esquema al leer</strong>, flexible, bajo costo por volumen. Responde: <em>"guardar todo lo que se genera, aunque no sepamos para qué"</em>.</p></div>
   <div><div class="card"><h3>Ejemplo</h3><p>Repositorio con lecturas de medidores de agua, logs de sistemas y documentos escaneados sin procesar.</p></div></div>
 </div>
-<div class="footer"><span>Data lake</span><span>06</span></div>
+<div class="footer"><span>Data lake</span><span>07</span></div>
 
 Note:
 - Definir el lake: datos en su forma cruda y original, de cualquier tipo y a gran escala.
@@ -102,7 +123,7 @@ Note:
   <div><h2 class="slide-title">Data lakehouse</h2><p class="body-copy"><strong>Combina</strong> la flexibilidad del lake con la estructura y el gobierno del warehouse. Permite guardar datos crudos <strong>y</strong> consultarlos con esquema en un mismo repositorio.</p></div>
   <div><div class="card"><h3>Ejemplo</h3><p>Datos crudos de trámites con esquema y gobierno, sobre los que se generan reportes confiables.</p></div></div>
 </div>
-<div class="footer"><span>Data lakehouse</span><span>07</span></div>
+<div class="footer"><span>Data lakehouse</span><span>08</span></div>
 
 Note:
 - Presentar el lakehouse como la combinación de la flexibilidad del lake con la estructura y el gobierno del warehouse.
@@ -117,7 +138,7 @@ Note:
   <div><h2 class="slide-title">Arquitectura lambda</h2><p class="body-copy"><strong>Dos caminos en paralelo:</strong> una <strong>capa batch</strong> (la historia completa, precisa, cada cierto tiempo) y una <strong>capa de velocidad</strong> (lo que acaba de llegar, inmediato).</p></div>
   <div><div class="card"><h3>Ejemplo</h3><p>Tránsito: reportes históricos cada noche + alerta en tiempo real ante un congestionamiento.</p></div></div>
 </div>
-<div class="footer"><span>Lambda</span><span>08</span></div>
+<div class="footer"><span>Lambda</span><span>09</span></div>
 
 Note:
 - Explicar los dos caminos: capa batch (historia completa, precisa) y capa de velocidad (lo recién llegado, inmediato).
@@ -131,7 +152,7 @@ Note:
 <div class="content single"><h2 class="slide-title">Los dos caminos de lambda</h2>
   <img class="diagram" src="assets/esquema-lambda.svg" alt="Arquitectura lambda: las fuentes alimentan una capa batch y una capa de velocidad, que sirven reportes confiables y alertas inmediatas." />
 </div>
-<div class="footer"><span>Lambda de cerca</span><span>09</span></div>
+<div class="footer"><span>Lambda de cerca</span><span>10</span></div>
 
 Note:
 - Recorrer el esquema: las fuentes alimentan los dos caminos a la vez.
@@ -153,7 +174,7 @@ Note:
     </tbody>
   </table>
 </div>
-<div class="footer"><span>Comparativa</span><span>10</span></div>
+<div class="footer"><span>Comparativa</span><span>11</span></div>
 
 Note:
 - Leer la tabla columna por columna: qué guarda cada patrón, su foco, el tiempo real y el riesgo.
@@ -166,7 +187,7 @@ Note:
 <div class="content single"><h2 class="slide-title">Un mismo problema, cuatro formas</h2>
   <img class="diagram" src="assets/esquema-patrones.svg" alt="Comparación visual de data warehouse, data lake, data lakehouse y lambda: qué guarda cada uno, su foco, el tiempo real y su riesgo." />
 </div>
-<div class="footer"><span>Los cuatro patrones</span><span>11</span></div>
+<div class="footer"><span>Los cuatro patrones</span><span>12</span></div>
 
 Note:
 - Recorrer los cuatro paneles del esquema y conectar cada uno con su ejemplo ya visto.
@@ -181,7 +202,7 @@ Note:
   <img class="diagram" src="assets/esquema-diseno.svg" alt="Los cinco pasos del diseño: entender el caso, mapear las fuentes, definir los componentes, elegir el patrón y documentar." />
   <p class="quote">El plano <em>no es</em> la casa: primero el diseño, después la tecnología.</p>
 </div>
-<div class="footer"><span>Diseño paso a paso</span><span>12</span></div>
+<div class="footer"><span>Diseño paso a paso</span><span>13</span></div>
 
 Note:
 - Presentar el diseño como un proceso ordenado de cinco pasos, no como una inspiración.
@@ -198,7 +219,7 @@ Note:
     <div class="split-panel"><h3>Paso 2 · Mapear las fuentes</h3><p>¿De dónde salen los datos y <strong>qué tipo</strong> son? Ejemplo: sistema de trámites (tablas), formularios web (JSON), documentos escaneados.</p></div>
   </div>
 </div>
-<div class="footer"><span>Pasos 1 y 2</span><span>13</span></div>
+<div class="footer"><span>Pasos 1 y 2</span><span>14</span></div>
 
 Note:
 - Desarrollar el paso 1: qué necesita la institución y qué preguntas debe responder con datos.
@@ -212,7 +233,7 @@ Note:
   <div><h2 class="slide-title">Paso 3 · Definir los componentes</h2><p class="body-copy">Las <strong>cuatro piezas</strong> del plano: <strong>almacenamiento</strong> (dónde), <strong>procesamiento</strong> (cómo), <strong>catálogo</strong> (qué es) y <strong>gobernanza</strong> (quién y con qué reglas).</p></div>
   <div><div class="card"><h3>Ejemplo</h3><p>Base operacional + data warehouse + proceso nocturno + diccionario de datos + política de acceso.</p></div></div>
 </div>
-<div class="footer"><span>Paso 3</span><span>14</span></div>
+<div class="footer"><span>Paso 3</span><span>15</span></div>
 
 Note:
 - Definir los cuatro componentes con una pregunta cada uno.
@@ -226,7 +247,7 @@ Note:
   <div><h2 class="slide-title">Paso 4 · Elegir el patrón</h2><p class="body-copy">Según el caso: <strong>warehouse</strong> → reportes confiables; <strong>lake</strong> → datos crudos y diversos; <strong>lakehouse</strong> → ambos; <strong>lambda</strong> → lotes + tiempo real.</p></div>
   <div><div class="card"><h3>Ejemplo</h3><p>Data warehouse para reportes mensuales confiables.</p></div></div>
 </div>
-<div class="footer"><span>Paso 4</span><span>15</span></div>
+<div class="footer"><span>Paso 4</span><span>16</span></div>
 
 Note:
 - Recordar las correspondencias y aterrizar el ejemplo: warehouse para reportes mensuales confiables.
@@ -250,7 +271,7 @@ Note:
     </tbody>
   </table>
 </div>
-<div class="footer"><span>Paso 5</span><span>16</span></div>
+<div class="footer"><span>Paso 5</span><span>17</span></div>
 
 Note:
 - Presentar el paso 5 y recorrer la plantilla sección por sección.
@@ -269,7 +290,7 @@ Note:
   </div>
   <p class="body-copy"><strong>Entregable:</strong> diagrama + plantilla + justificación del patrón. Equipos de 4–5 · 60 min de trabajo + 15 de puesta en común.</p>
 </div>
-<div class="footer"><span>Taller</span><span>17</span></div>
+<div class="footer"><span>Taller</span><span>18</span></div>
 
 Note:
 - Leer el caso y explicitar la meta doble: reporte mensual confiable y alerta inmediata.
@@ -287,7 +308,7 @@ Note:
   </div>
   <p class="quote">Se evalúa la <em>coherencia</em> entre caso, fuentes, componentes y patrón.</p>
 </div>
-<div class="footer"><span>Puesta en común</span><span>18</span></div>
+<div class="footer"><span>Puesta en común</span><span>19</span></div>
 
 Note:
 - Cada equipo expone en 3–4 minutos: diagrama, componentes y patrón.
@@ -305,7 +326,7 @@ Note:
   </div>
   <p class="quote">Próxima sesión: la <em>integración de datos</em> — ETL/ELT, automatización y orquestación.</p>
 </div>
-<div class="footer"><span>Fin de la sesión</span><span>19</span></div>
+<div class="footer"><span>Fin de la sesión</span><span>20</span></div>
 
 Note:
 - Repetir el mensaje central: no hay un patrón mejor, hay uno adecuado para cada caso.
@@ -322,7 +343,7 @@ Note:
   <p class="lead">Bloque 3 · Sesión 5 · Patrones y diseño</p>
   <p class="quote">El diseño entregado es la evidencia del bloque.</p>
 </div>
-<div class="footer"><span>EGPP · Escuela de Gestión Pública Plurinacional</span><span>20</span></div>
+<div class="footer"><span>EGPP · Escuela de Gestión Pública Plurinacional</span><span>21</span></div>
 
 Note:
 - Recoger las entregas del taller y cerrar el Bloque 3 con las tres ideas fuerza de la jornada.
