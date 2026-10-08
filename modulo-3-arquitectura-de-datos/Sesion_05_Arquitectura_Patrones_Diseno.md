@@ -33,10 +33,16 @@
 | Patrones de arquitectura | 35 min | Data warehouse, data lake, data lakehouse y lambda. |
 | Comparativa de patrones | 10 min | Lado a lado y criterios de elección. |
 | Pausa | 10 min | Receso. |
-| Diseño paso a paso | 30 min | El proceso de diseño y la plantilla. |
-| Taller: diseñar la arquitectura | 60 min | Trabajo en equipos con la plantilla de diseño. |
-| Puesta en común | 15 min | Presentación breve de cada diseño. |
+| Diseño paso a paso | 20 min | El proceso de diseño y la plantilla. |
+| Taller: diseñar la arquitectura | 60 min | Trabajo en equipos de 4 con la plantilla de diseño. |
+| Puesta en común | 25 min | Cada énfasis expone su diseño; contraste de patrones. |
 | Cierre y preguntas | 10 min | Síntesis, dudas y puente a la Sesión 6. |
+
+> **Ajuste de tiempos:** "Diseño paso a paso" baja de 30 a 20 min —los cinco pasos ya están en la plantilla del taller, que los vuelve a guiar— y esos 10 min pasan a la puesta en común, que es el tramo con más riesgo de desborde (ver abajo).
+
+> **Trabajo asincrónico asociado** (cuenta para las 20 h del contrato): asignar la lección interactiva `modulo-3-arquitectura-de-datos/lessons/0002-patrones-de-arquitectura.html` **antes** de esta sesión y `lessons/0003-diseno-de-arquitectura.html` **al cierre**. Son 10 ítems de quiz con corrección automática y explicación del "por qué", y dan evidencia de los objetivos que hoy solo se evalúan por participación.
+
+> **Preparación previa (el día antes):** subir a Moodle la guía del taller, la plantilla y la rúbrica; crear la hoja colaborativa con una pestaña por equipo; dejar listos los enlaces para pegar en el chat.
 
 ---
 
@@ -115,7 +121,7 @@ Un **patrón de arquitectura** es una forma típica y probada de organizar los d
 
 ---
 
-## Diseño paso a paso (30 min)
+## Diseño paso a paso (20 min)
 
 Presentar el diseño como una secuencia de pasos, con un ejemplo breve.
 
@@ -153,7 +159,7 @@ Presentar el diseño como una secuencia de pasos, con un ejemplo breve.
 
 ---
 
-## Taller: diseñar la arquitectura (60 min)
+## Taller: diseñar la arquitectura (60 min + 25 de puesta en común)
 
 **Objetivo:** producir el diseño de arquitectura completo y documentado para el caso asignado.
 
@@ -162,7 +168,17 @@ Presentar el diseño como una secuencia de pasos, con un ejemplo breve.
 
 > Variante sugerida: asignar a cada equipo un énfasis (reportes mensuales, alerta inmediata o análisis histórico) para comparar elecciones de patrón.
 
-**Pasos del trabajo en equipos** (4 personas por equipo):
+**Fuentes del caso (insumo para el Paso 2):** entregar junto con el caso esta tabla, para que el mapeo de fuentes se haga sobre datos y no de memoria.
+
+| Fuente | Qué registra | Tipo de dato | Formato |
+|---|---|---|---|
+| Sistema de ventanilla | Reclamos presenciales, con número de expediente | Estructurado | Tablas de base de datos |
+| Sistema telefónico | Reclamos y consultas por llamada | Estructurado | Tablas de base de datos |
+| Formulario web | Reclamos con texto libre del ciudadano | Semiestructurado | JSON |
+| Inspecciones en papel | Actas de inspección con observaciones manuscritas | No estructurado | Documentos escaneados |
+| Planilla de indicadores | Indicadores armados a mano por el área | Estructurado | Excel |
+
+**Pasos del trabajo en equipos:**
 1. Leer el caso y definir el objetivo (Paso 1).
 2. Listar las fuentes de datos y su tipo (Paso 2).
 3. Definir los cuatro componentes (Paso 3).
@@ -176,15 +192,20 @@ Presentar el diseño como una secuencia de pasos, con un ejemplo breve.
 
 **Entregable por equipo:** el diagrama + la plantilla completa + la justificación del patrón.
 
+**Organización de los equipos:** equipos de **4 personas**, con un coordinador y un relator.
+
+**Evaluación del taller:** se aplica la **rúbrica de 5 criterios con 3 anclajes** (caso y fuentes · componentes · patrón elegido · diagrama y gobernanza · coherencia interna) que está en la guía del taller y en `modulo-3-arquitectura-de-datos/REPASO_DOCENTE_BLOQUE3.md` §8.2. Compartirla con los equipos al dar la consigna, no al final.
+
 ---
 
-## Puesta en común (15 min)
+## Puesta en común (25 min)
 
+- **Reparto del tiempo:** con 25 min, expone **un equipo por énfasis** (A reportes · B alerta · C histórico), 3–4 min cada uno ≈ 12 min; quedan ~13 min para preguntas y contraste. Si hay más equipos, usar *lightning talks* de 2 min o *gallery walk* (todos publican el diagrama en el tablero compartido y se comenta en plenario).
 - Cada equipo expone su diseño en 3–4 minutos: diagrama, componentes y patrón elegido.
 - El docente y los demás equipos plantean preguntas: *¿por qué ese patrón? ¿cómo garantizan la calidad? ¿quién accede?*
 - Registrar las distintas elecciones de patrón en la pizarra para contrastar.
 
-**Guía de corrección:** valorar la coherencia entre el caso, las fuentes, los componentes y el patrón, y la presencia de catálogo y gobernanza en el diseño.
+**Guía de corrección:** valorar la coherencia entre el caso, las fuentes, los componentes y el patrón, y la presencia de catálogo y gobernanza en el diseño. Aplicar la **rúbrica de 3 anclajes** incluida en la guía del taller.
 
 **Criterios de evaluación:** entrega del diseño completo, coherencia interna y justificación fundamentada.
 
@@ -202,10 +223,10 @@ Presentar el diseño como una secuencia de pasos, con un ejemplo breve.
 ## Recursos
 
 - Presentación (láminas de cada patrón, tabla comparativa y proceso de diseño).
-- Casos de estudio impresos y guía de taller (caso institucional + plantilla de diseño).
-- Plantillas de diseño impresas por equipo.
-- Papelógrafos, marcadores o pizarra digital para los diagramas.
+- Guía del taller (caso institucional + insumo de fuentes + plantilla de diseño + **rúbrica**).
+- **Hoja colaborativa en línea con una pestaña por equipo** (Google Sheets o Docs) para la plantilla, y Google Drawings o Miro para el diagrama. En modalidad virtual esta es la vía por defecto; las plantillas impresas quedan como respaldo.
 - Pizarra o pizarra digital para comparar patrones lado a lado.
+- Lecciones interactivas `lessons/0002` (trabajo previo) y `lessons/0003` (cierre) para el trabajo asincrónico.
 
 ## Evaluación de la sesión
 
@@ -219,5 +240,8 @@ Presentar el diseño como una secuencia de pasos, con un ejemplo breve.
 | Identifica fuentes, componentes y patrón | Plantilla de diseño completada |
 | Incluye catálogo y gobernanza | Diagrama y ficha de componentes |
 | Entrega un diseño completo y coherente | Entrega final del diseño de arquitectura |
+| Reconoce los patrones y el proceso de diseño | Resultado de las lecciones `0002` (previo) y `0003` (cierre) |
+
+**Calificación del entregable:** se aplica la rúbrica de 5 criterios con 3 anclajes (guía del taller y `REPASO_DOCENTE_BLOQUE3.md` §8.2).
 
 **Entrega:** diseño de arquitectura del caso trabajado (diagrama de flujo + plantilla completa + justificación del patrón elegido).

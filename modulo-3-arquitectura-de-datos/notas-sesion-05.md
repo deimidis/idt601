@@ -12,11 +12,11 @@
 - Recuperar en dos frases la Sesión 4: ya sabemos qué es una arquitectura y que tiene cuatro piezas (almacenamiento, procesamiento, catálogo y gobernanza); hoy vemos cómo se combinan y cómo se diseña una.
 - Anunciar el recorrido del día: primero los cuatro patrones, después la comparativa, luego el proceso de diseño paso a paso y al final el taller con entrega.
 - Aclarar que el público no necesita programar: hoy se trata de elegir bien y justificar, no de configurar herramientas.
-- **No olvidar:** avisar desde el arranque que hay una pausa de 10 minutos a mitad de sesión y que la jornada termina con un taller cuyo entregable se recoge.
+- **No olvidar:** avisar desde el arranque que hay una pausa de 10 minutos a mitad de sesión y que la jornada termina con un taller cuyo entregable se recoge. Recordar que la lección `0002` (patrones) era el trabajo previo y que `0003` (diseño) queda como cierre asincrónico.
 
 ## Slide 2 — Hoja de ruta
-- Leer la tabla en voz alta y fijar el contrato de tiempo: 35 minutos de patrones, 10 de comparativa, 30 de diseño paso a paso, 75 de taller y 10 de cierre.
-- Explicar que el taller y la puesta en común son dos tramos: 60 minutos de trabajo en equipos y 15 de exposición; por eso el taller es el bloque más largo de la jornada.
+- Leer la tabla en voz alta y fijar el contrato de tiempo: 35 minutos de patrones, 10 de comparativa, 20 de diseño paso a paso, 85 de taller (60 de trabajo + 25 de puesta en común) y 10 de cierre.
+- Explicar que el tramo de taller incluye el trabajo en equipos y la puesta en común; por eso es el bloque más largo de la jornada.
 - Señalar dónde cae la pausa: después de la comparativa y antes de empezar el diseño paso a paso.
 - Anticipar que el cierre deja un puente hacia la Sesión 6, con la integración de datos, ETL y orquestación.
 - **No olvidar:** pedir al grupo que vaya anotando sus dudas, porque el cierre reserva 10 minutos para preguntas.
@@ -94,16 +94,17 @@
 ## Slide 13 — Documentar
 - Presentar el paso 5 como la prueba de que el diseño existe: dibujar el flujo desde la fuente hasta el uso, nombrar cada componente y registrar las reglas.
 - Recorrer la plantilla sección por sección: caso y objetivo, fuentes de datos, componentes, patrón elegido, diagrama de flujo y reglas de gobernanza.
-- Explicar que la plantilla completa es el entregable del taller y que se evalúa, sobre todo, su coherencia interna.
+- Explicar que la plantilla completa es el entregable del taller y que se evalúa con la **rúbrica de 5 criterios con 3 anclajes** (compartirla ahora, no al final); lo que más pesa es la coherencia interna y la justificación del patrón.
 - Repasar los errores típicos que la plantilla ayuda a evitar: confundir almacenamiento con procesamiento y olvidar catálogo o gobernanza.
 - **No olvidar:** documentar es tan importante como dibujar; un diseño no documentado no se puede sostener ni auditar.
 
 ## Slide 14 — Taller
 - Leer el caso en voz alta: reclamos en tres sistemas (ventanilla, teléfono y web), inspecciones en papel e indicadores armados a mano en Excel.
 - Explicitar la meta doble: un reporte mensual confiable y una alerta inmediata cuando un reclamo crítico se repite en la misma zona.
-- Dar la consigna y los tiempos: equipos de 4 personas, 60 minutos de trabajo con la plantilla y 15 minutos de puesta en común.
+- Repartir, junto con la plantilla, la **tabla de fuentes del caso** (insumo del Paso 2) y la **rúbrica** de 5 criterios.
+- Dar la consigna y los tiempos: equipos de **4 personas**, **60 minutos** de trabajo con la plantilla y **25 minutos** de puesta en común.
 - Recordar los cinco pasos y el entregable del taller: diagrama de flujo, plantilla completa y justificación del patrón elegido.
-- **No olvidar:** circular por los equipos recordando las cuatro preguntas (dónde, cómo, qué es, quién) y confirmar el énfasis de cada equipo (reportes, alerta o histórico).
+- **No olvidar:** circular por los equipos recordando las cuatro preguntas (dónde, cómo, qué es, quién) y confirmar el énfasis de cada equipo (reportes, alerta o histórico). En la puesta en común expone **un equipo por énfasis**, para poder contrastar los tres patrones.
 
 ## Slide 15 — Cierre
 - Sintetizar las tres ideas de la jornada: no hay un patrón mejor, el diseño sigue un proceso ordenado y el diseño se documenta.
