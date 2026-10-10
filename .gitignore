@@ -12,3 +12,7 @@ desktop.ini
 # Herramientas internas de trabajo — no forman parte del sitio publicado
 .research/
 .mimocode/
+
+# Documentos Word generados desde Markdown — no versionados (binarios)
+*.docx
+~$*.docx
