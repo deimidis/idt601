@@ -112,6 +112,23 @@ Note:
 - Dar el ejemplo de las ventas de sucursales: tomarlas todas, unificar fechas y montos, y guardarlas en el almacén para los reportes.
 - **No olvidar:** el resumen memorable **"tomar → arreglar → guardar"**: el producto final son **datos listos para usar**.
 
+
+---
+
+<div class="topline"><span class="kicker">04 / ETL</span><span class="mark">ELT</span></div>
+<div class="content">
+  <div><h2 class="slide-title">ELT: cargar primero, transformar después</h2><p class="body-copy"><strong>E</strong>xtraer → <strong>L</strong>oad (cargar) → <strong>T</strong>ransformar. Los datos llegan <strong>crudos al destino</strong> y se transforman <strong>allí dentro</strong>. La carga es más rápida y flexible.</p></div>
+  <div><div class="card"><h3>Ejemplo</h3><div class="code">volcar → calcular dentro</div><p>Volcar los registros crudos de todas las cajas de recaudación a un lago de datos y calcular los totales después.</p></div></div>
+</div>
+<div class="footer"><span>ELT</span><span>06</span></div>
+
+Note:
+- Explicar **ELT**: Extraer → Cargar → Transformar. Se guarda primero en crudo y se transforma después, dentro del propio destino.
+- Señalar el requisito: el destino debe ser **potente** (nube o data lake) para procesar grandes volúmenes.
+- Dar el ejemplo boliviano: volcar los registros crudos de las cajas de recaudación a un lago y calcular los totales por municipio después.
+- Contrastar con ETL en una frase: ETL arregla antes de guardar; ELT guarda y arregla dentro.
+- **No olvidar:** no hay uno mejor; ELT conviene con **gran volumen y destino flexible**.
+
 ---
 
 <div class="topline"><span class="kicker">05 / Comparación</span><span class="mark">ETL vs. ELT</span></div>
@@ -127,7 +144,7 @@ Note:
     </tbody>
   </table>
 </div>
-<div class="footer"><span>ETL vs. ELT</span><span>06</span></div>
+<div class="footer"><span>ETL vs. ELT</span><span>07</span></div>
 
 Note:
 - Aclarar que el orden de las letras no es un detalle: cambia **cuándo** y **dónde** se transforman los datos.
@@ -148,7 +165,7 @@ Note:
     </tbody>
   </table>
 </div>
-<div class="footer"><span>Herramientas de integración</span><span>07</span></div>
+<div class="footer"><span>Herramientas de integración</span><span>08</span></div>
 
 Note:
 - Presentar las dos familias: **comerciales** (licencia pagada, interfaz visual, soporte) y **de código abierto** (gratuitas, más trabajo técnico).
@@ -166,7 +183,7 @@ Note:
     <div class="split-panel"><h3>Código abierto</h3><p>Libres y gratuitas, con más control y adaptación a cambio de más trabajo técnico. Convienen con presupuesto limitado.</p></div>
   </div>
 </div>
-<div class="footer"><span>Herramientas</span><span>08</span></div>
+<div class="footer"><span>Herramientas</span><span>09</span></div>
 
 Note:
 - Describir las **comerciales**: productos pagados con interfaz de arrastrar y conectar, soporte y capacitación; convienen con presupuesto y equipos poco técnicos.
@@ -186,7 +203,7 @@ Note:
   </div>
   <p class="body-copy">Es donde más tiempo se gasta en un proyecto real: <strong>datos sucios producen reportes sucios</strong>.</p>
 </div>
-<div class="footer"><span>Limpieza de datos</span><span>09</span></div>
+<div class="footer"><span>Limpieza de datos</span><span>10</span></div>
 
 Note:
 - Enmarcar la limpieza como el corazón de la transformación: es donde **más tiempo se gasta** en un proyecto real.
@@ -202,7 +219,7 @@ Note:
   <div><h2 class="slide-title">Automatización</h2><p class="body-copy">Hacer que <strong>una tarea se ejecute sola</strong>, sin intervención manual. Se apoya en <strong>programar</strong> cuándo corre y <strong>avisar</strong> si algo sale mal.</p></div>
   <div><div class="card"><h3>Ejemplo</h3><div class="code">lunes 06:00 → reporte</div><p>El reporte de recaudación se genera solo y llega por correo a quien lo necesita.</p></div></div>
 </div>
-<div class="footer"><span>Automatización</span><span>10</span></div>
+<div class="footer"><span>Automatización</span><span>11</span></div>
 
 Note:
 - Definir automatizar como hacer que **una tarea se ejecute sola**, sin que una persona la dispare cada vez.
@@ -218,7 +235,7 @@ Note:
   <div><h2 class="slide-title">Orquestación</h2><p class="body-copy"><strong>Coordinar varias tareas</strong> que dependen unas de otras, en el <strong>orden correcto</strong>. Incluye dependencias, reintentos y avisos ante fallas.</p></div>
   <div><div class="card"><h3>Ejemplo</h3><div class="code">descargar → transformar → cargar → avisar</div><p>Si un paso falla, se avisa y se reintenta. Como un director de orquesta.</p></div></div>
 </div>
-<div class="footer"><span>Orquestación</span><span>11</span></div>
+<div class="footer"><span>Orquestación</span><span>12</span></div>
 
 Note:
 - Definir orquestar como **coordinar varias tareas** que dependen unas de otras, asegurando el **orden correcto**.
@@ -237,7 +254,7 @@ Note:
     <article class="card"><h3>Trazabilidad</h3><p>Se sabe qué corrió, cuándo y con qué resultado: sirve para auditar.</p></article>
   </div>
 </div>
-<div class="footer"><span>Beneficios</span><span>12</span></div>
+<div class="footer"><span>Beneficios</span><span>13</span></div>
 
 Note:
 - Recorrer los tres beneficios: **menos errores** (lo repetitivo hecho a mano falla), **ahorro de tiempo** y **trazabilidad**.
@@ -253,7 +270,7 @@ Note:
   <div><h2 class="slide-title">Cron: el más simple</h2><p class="body-copy">El <strong>programador de tareas</strong> del sistema operativo. Se define una <strong>frecuencia</strong> y un <strong>comando</strong>.</p></div>
   <div><div class="card"><h3>Cuándo usarlo</h3><div class="code">0 6 * * 1 → lunes 6:00</div><p>Tareas simples y aisladas, sin dependencias complejas.</p></div></div>
 </div>
-<div class="footer"><span>Cron</span><span>13</span></div>
+<div class="footer"><span>Cron</span><span>14</span></div>
 
 Note:
 - Presentar **cron** como el programador de tareas del sistema operativo: lo más simple que existe.
@@ -269,7 +286,7 @@ Note:
   <div><h2 class="slide-title">Apache Airflow</h2><p class="body-copy">Plataforma de <strong>orquestación de flujos de trabajo</strong>. Los flujos se definen como <strong>DAGs</strong>: cada nodo es una tarea y las flechas marcan el orden.</p></div>
   <div><div class="card"><h3>Cuándo usarlo</h3><div class="code">DAG = tareas + orden</div><p>Flujos con varias etapas que dependen unas de otras y requieren monitoreo, reintentos y alertas.</p></div></div>
 </div>
-<div class="footer"><span>Apache Airflow</span><span>14</span></div>
+<div class="footer"><span>Apache Airflow</span><span>15</span></div>
 
 Note:
 - Presentar **Apache Airflow** como plataforma de **orquestación de flujos de trabajo**, estándar en ingeniería de datos.
@@ -291,7 +308,7 @@ Note:
     </tbody>
   </table>
 </div>
-<div class="footer"><span>Herramientas de orquestación</span><span>15</span></div>
+<div class="footer"><span>Herramientas de orquestación</span><span>16</span></div>
 
 Note:
 - Recorrer la tabla criterio por criterio: complejidad, dependencias entre tareas y cuándo usarla.
@@ -311,7 +328,7 @@ Note:
   </div>
   <p class="body-copy">Variantes: <strong>A</strong> reporte mensual · <strong>B</strong> alerta temprana · <strong>C</strong> trazabilidad.</p>
 </div>
-<div class="footer"><span>Taller</span><span>16</span></div>
+<div class="footer"><span>Taller</span><span>17</span></div>
 
 Note:
 - Dar la consigna en dos partes: **limpiar y preparar** el CSV de reclamos (unificar canal, tipo y zona; quitar duplicados; marcar `SIN ZONA`; unificar fechas) y **diseñar el flujo que corre solo**.
@@ -331,7 +348,7 @@ Note:
   </div>
   <p class="quote">Próxima sesión: <em>licencias de datos y datos abiertos</em> — qué se puede usar y cómo se comparte.</p>
 </div>
-<div class="footer"><span>Fin de la sesión</span><span>17</span></div>
+<div class="footer"><span>Fin de la sesión</span><span>18</span></div>
 
 Note:
 - Sintetizar los tres pilares: **integrar** (ETL/ELT reúne los datos para que cuenten una sola historia), **limpiar** (corregir, unificar y combinar) y **orquestar** (que corra solo, en orden y con aviso).
@@ -349,7 +366,7 @@ Note:
   <p class="lead">Bloque 4 · Sesión 6 · Integración de datos</p>
   <p class="quote">Integrar, limpiar y hacer que corra solo, en orden y con aviso si falla.</p>
 </div>
-<div class="footer"><span>EGPP · Escuela de Gestión Pública Plurinacional</span><span>18</span></div>
+<div class="footer"><span>EGPP · Escuela de Gestión Pública Plurinacional</span><span>19</span></div>
 
 Note:
 - Agradecer la asistencia y la participación, en especial durante el taller.
