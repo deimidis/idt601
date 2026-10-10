@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lección 03 · Automatizar y orquestar</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Lección 03 · Bloque 4 — Integración de Datos</p>
+    <h1>Automatizar y orquestar: que corra solo y en orden</h1>
+    <p class="lead">Al terminar, podrás distinguir automatización de orquestación, comparar cron con Airflow y diseñar un flujo programado con frecuencia, dependencias, manejo de fallas y trazabilidad.</p>
+
+    <p class="sidenote">
+      Apoyado en la documentación oficial de Apache Airflow.
+      <cite><a href="../reference/orquestacion-cron-airflow.html">Ver referencia →</a></cite>
+    </p>
+
+    <h2>La idea central</h2>
+    <p><strong>Automatizar</strong> es hacer que <em>una tarea</em> se ejecute sola, sin que una persona la dispare cada vez. <strong>Orquestar</strong> es coordinar <em>varias tareas</em> que dependen unas de otras, en el orden correcto, con reintentos y avisos si algo falla.</p>
+    <p>La diferencia importa: automatizar un reporte es que se genere solo los lunes a las 6:00. Orquestar es asegurar que primero se descarguen los datos, <em>después</em> se transformen, <em>después</em> se carguen y, solo si todo salió bien, se envíe el resumen.</p>
+
+    <div class="box">
+      <p><strong>Idea para la pizarra:</strong> automatizar = que corra solo; orquestar = que corra en orden y avise si falla.</p>
+    </div>
+
+    <h2>De lo simple a lo complejo</h2>
+    <p><strong>Cron</strong> es el programador de tareas del sistema operativo: se define una <strong>frecuencia</strong> y un <strong>comando</strong> (por ejemplo, <code>0 6 * * 1</code> = todos los lunes a las 6:00). Alcanza para tareas simples y aisladas. <strong>Apache Airflow</strong> es una plataforma de orquestación: los flujos se dibujan como <strong>DAGs</strong> y trae interfaz web, reintentos y alertas; conviene para flujos con varias etapas dependientes.</p>
+
+    <h2>Practica: ¿automatizar u orquestar?</h2>
+    <p>Elige una opción. Recibirás la corrección al instante.</p>
+
+    <div class="quiz">
+      <p class="q">1. Programar que un reporte se genere solo todos los lunes a las 6:00 es…</p>
+      <div class="opts">
+        <button data-correct="true">Automatización</button>
+        <button>Orquestación</button>
+        <button>Integración</button>
+        <button>Limpieza</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> es <em>una</em> tarea que se ejecuta sola por una frecuencia. Eso es automatizar.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">2. Coordinar descargar → transformar → cargar → avisar, asegurando el orden y avisando si un paso falla, es…</p>
+      <div class="opts">
+        <button>Automatización</button>
+        <button data-correct="true">Orquestación</button>
+        <button>ETL</button>
+        <button>Unificar formatos</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> hay varias tareas dependientes que deben correr en orden, con manejo de fallas. Eso es orquestar.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">3. Tienes una única tarea simple, sin dependencias. ¿Qué alcanza?</p>
+      <div class="opts">
+        <button data-correct="true">Cron</button>
+        <button>Apache Airflow</button>
+        <button>Un data lake</button>
+        <button>Un data warehouse</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> para una tarea suelta, cron alcanza. Airflow es para flujos con varias etapas y monitoreo.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">4. ¿Qué documenta la "trazabilidad" de un flujo?</p>
+      <div class="opts">
+        <button>El color de los reportes</button>
+        <button data-correct="true">Qué corrió, cuándo y con qué resultado</button>
+        <button>Quién es el dueño del dato</button>
+        <button>El precio de las herramientas</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> la trazabilidad es el registro de ejecución: permite auditar y rendir cuentas.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">5. Al diseñar el flujo, la tarea "Limpiar" falla. ¿Cuál es la mejor decisión?</p>
+      <div class="opts">
+        <button>Continuar igual y cargar lo que haya</button>
+        <button data-correct="true">Detener y avisar: mejor no cargar datos sucios</button>
+        <button>Borrar todas las filas</button>
+        <button>Cambiar la frecuencia</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> no todas las fallas se tratan igual: si la limpieza falla, cargar datos sucios es peor que no cargar. El flujo debe saber detenerse y avisar.</div>
+    </div>
+
+    <hr />
+
+    <h2>Las cuatro preguntas del flujo</h2>
+    <p>Antes de dar por listo un flujo programado, responde por escrito: <strong>¿cada cuánto corre?</strong> (frecuencia), <strong>¿qué tarea espera a cuál?</strong> (dependencias), <strong>¿qué pasa si falla?</strong> (reintentos y avisos) y <strong>¿dónde queda el registro?</strong> (trazabilidad).</p>
+
+    <h2>Fuente principal</h2>
+    <p class="refs">
+      Para profundizar: documentación oficial de Apache Airflow (<a href="https://airflow.apache.org/docs/">airflow.apache.org/docs</a>) para DAGs, reintentos y alertas.
+      Complementa con Martin Kleppmann, <em>Diseño de aplicaciones con uso intensivo en datos</em>.
+    </p>
+
+    <div class="askai">
+      ¿Algo te hace dudar? Pregúntame y lo desarmamos — por ejemplo: "¿cuándo conviene pasar de cron a Airflow?" o "¿cómo decido qué tarea debe detener el flujo?".
+    </div>
+
+    <div class="nav">
+      <a href="0002-limpieza-de-datos.html">← Lección 02: limpieza de datos</a>
+      <a href="../reference/orquestacion-cron-airflow.html">Referencia: orquestación →</a>
+    </div>
+  </div>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>

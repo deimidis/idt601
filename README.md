@@ -1,12 +1,13 @@
 # idt601 — Ingeniería de Datos (IDT 601)
 
-Sitio estático con las **presentaciones** y **lecciones** de los Módulos 1 (Datos), 2 (Ingesta de Datos)
-y 3 (Arquitectura de Datos) del Diplomado en Data Driven AI (EGPP 2026).
+Sitio estático con las **presentaciones** y **lecciones** de los Módulos 1 (Datos), 2 (Ingesta de Datos),
+3 (Arquitectura de Datos) y 4 (Integración de Datos) del Diplomado en Data Driven AI (EGPP 2026).
 
 - Portada: `index.html`
 - Módulo 1: `modulo-1-datos/`
 - Módulo 2: `modulo-2-ingesta-de-datos/`
 - Módulo 3: `modulo-3-arquitectura-de-datos/`
+- Módulo 4: `modulo-4-integracion-de-datos/`
 
 ## Publicar en GitHub Pages
 

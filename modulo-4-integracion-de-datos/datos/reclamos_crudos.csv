@@ -1,0 +1,25 @@
+id_reclamo,fecha,canal,tipo_reclamo,zona,descripcion,estado
+REC-0001,2026-09-01,Ventanilla,Bacheo,Macrodistrito Centro,Bache en Av. 6 de Agosto,Cerrado
+REC-0002,2026/09/01,ventanilla,BACHEO,centro,,Abierto
+REC-0003,2026-09-02,Teléfono,Alumbrado,Macrodistrito Cotahuma,Luminaria apagada,Cerrado
+REC-0004,2026-09-02,telefono,alumbrado,COTAHUMA,Luminaria sin luz,Abierto
+REC-0005,2026-09-03,Formulario web,Residuos,Macrodistrito Max Paredes,Basura acumulada,Cerrado
+REC-0006,2026-09-03,formulario web,residuos,Max Paredes,Contenedor desbordado,Abierto
+REC-0007,2026-09-04,Ventanilla,Residuos,Macrodistrito Periférica,,Cerrado
+REC-0008,2026-09-05,Teléfono,Bacheo,Macrodistrito Sur,Bache profundo,Abierto
+REC-0008,2026-09-05,Teléfono,Bacheo,Macrodistrito Sur,Bache profundo,Abierto
+REC-0010,2026-09-06,Formulario web,Alumbrado,Macrodistrito Centro,Poste caído,Abierto
+REC-0010,2026-09-06,Formulario web,Alumbrado,Macrodistrito Centro,Poste caído,Abierto
+REC-0012,2026/09/07,Ventanilla,Residuos,Macrodistrito Sur,Basura en la plaza,Cerrado
+REC-0013,2026-09-08,Teléfono,Alumbrado,periférica,Luminaria intermitente,Abierto
+REC-0014,2026-09-09,Formulario web,Bacheo,,,Abierto
+REC-0015,2026-09-10,Ventanilla,Bacheo,Macrodistrito Cotahuma,Bache frente al mercado,Cerrado
+REC-0016,2026-09-11,Teléfono,Residuos,M. Paredes,Botadero clandestino,Abierto
+REC-0017,2026-09-12,Formulario web,Alumbrado,Macrodistrito Centro,,Abierto
+REC-0018,2026-13-05,Ventanilla,Bacheo,Macrodistrito Sur,Fecha inválida en el sistema,Abierto
+REC-0019,2026-09-13,Telefono,Residuos,Macrodistrito Periférica,Basura acumulada,Anulado
+REC-0020,2026-09-14,Ventanilla,Alumbrado ,Cotahuma,Luminaria apagada,Cerrado
+REC-0021,2026-09-15,Formulario web,Bacheo,Macrodistrito Max Paredes,Bache en la avenida,Abierto
+REC-0022,2026-09-16,ventanilla,Bacheo,Macrodistrito Cotahuma,Bache junto al parque,Cerrado
+REC-0023,2026-09-17,Teléfono,Alumbrado,Macrodistrito Periférica,Luminaria apagada,Abierto
+REC-0024,2026-09-18,Formulario web,Residuos,Macrodistrito Sur,Basura acumulada,Cerrado

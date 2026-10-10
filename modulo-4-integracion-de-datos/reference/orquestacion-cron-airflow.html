@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Referencia · Orquestación: cron y Airflow</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Referencia · Bloque 4 — Integración de Datos</p>
+    <h1>Orquestación: cron y Airflow</h1>
+    <p class="lead">Hoja de referencia rápida: de lo simple a lo complejo, y las cuatro preguntas para diseñar un flujo programado.</p>
+
+    <h2>Automatizar vs. orquestar</h2>
+    <p><strong>Automatizar</strong> = que <em>una tarea</em> corra sola. <strong>Orquestar</strong> = que <em>varias tareas</em> corran en orden, con dependencias, reintentos y avisos.</p>
+
+    <table class="ref">
+      <thead><tr><th>Herramienta</th><th>Complejidad</th><th>Dependencias</th><th>Interfaz visual</th><th>Cuándo usarla</th></tr></thead>
+      <tbody>
+        <tr><td>Cron</td><td>Baja</td><td>No</td><td>No</td><td>Tareas simples por horario</td></tr>
+        <tr><td>Programador de nube</td><td>Baja</td><td>Limitadas</td><td>Parcial</td><td>Tareas simples en la nube</td></tr>
+        <tr><td>Apache Airflow</td><td>Media-alta</td><td>Sí (DAGs)</td><td>Sí</td><td>Flujos complejos con monitoreo y alertas</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box">
+      <p><strong>Idea para la pizarra:</strong> para una <strong>tarea suelta, cron alcanza</strong>; para <strong>flujos complejos con aviso de fallas, Airflow</strong>.</p>
+    </div>
+
+    <h2>Las cuatro preguntas del flujo</h2>
+    <p class="refs">
+      1. <strong>Frecuencia</strong>: ¿cada cuánto corre? &nbsp;·&nbsp;
+      2. <strong>Dependencias</strong>: ¿qué tarea espera a cuál? &nbsp;·&nbsp;
+      3. <strong>Si falla</strong>: ¿se reintenta? ¿se avisa? ¿se detiene todo? &nbsp;·&nbsp;
+      4. <strong>Trazabilidad</strong>: ¿dónde queda registrado qué corrió, cuándo y con qué resultado?
+    </p>
+
+    <p class="refs">
+      Ejemplo de cron: <code>0 6 * * 1</code> → todos los lunes a las 6:00.
+      Fuente: documentación oficial de Apache Airflow (<a href="https://airflow.apache.org/docs/">airflow.apache.org/docs</a>).
+    </p>
+
+    <div class="nav">
+      <a href="herramientas-de-integracion.html">← Referencia: herramientas de integración</a>
+      <a href="../lessons/0003-automatizar-y-orquestar.html">Lección 03: automatizar y orquestar →</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lección 01 · ETL vs. ELT</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Lección 01 · Bloque 4 — Integración de Datos</p>
+    <h1>ETL vs. ELT: transformar antes o después de guardar</h1>
+    <p class="lead">Al terminar, podrás distinguir ETL de ELT y justificar cuál conviene según el volumen y el destino de los datos.</p>
+
+    <p class="sidenote">
+      Apoyado en Kimball &amp; Ross, <em>The Data Warehouse Toolkit</em> y en la documentación de dbt.
+      <cite><a href="../reference/etl-vs-elt.html">Ver referencia →</a></cite>
+    </p>
+
+    <h2>La idea central</h2>
+    <p>Integrar datos es reunirlos de fuentes distintas en un destino común. La herramienta clásica es el <strong>ETL</strong>: <strong>E</strong>xtraer, <strong>T</strong>ransformar, <strong>L</strong>impiar… perdón, <strong>C</strong>argar. La variante <strong>ELT</strong> solo cambia el orden: extrae, carga y <em>después</em> transforma.</p>
+    <p>El orden no es un detalle de escritura: define <strong>cuándo</strong> y <strong>dónde</strong> se transforman los datos. En ETL, los datos se limpian en un espacio intermedio y llegan al destino ya listos. En ELT, llegan <em>crudos</em> al destino y se transforman allí dentro.</p>
+
+    <div class="box">
+      <p><strong>Regla de oro:</strong> no hay uno mejor que otro. <strong>ETL</strong> conviene con destino rígido, datos sensibles o poco volumen; <strong>ELT</strong>, con gran volumen y destino flexible (nube o data lake).</p>
+    </div>
+
+    <h2>Practica: ¿ETL o ELT?</h2>
+    <p>Elige una opción. Recibirás la corrección al instante.</p>
+
+    <div class="quiz">
+      <p class="q">1. ¿Cuál es el orden de las etapas en ETL?</p>
+      <div class="opts">
+        <button>Extraer → Cargar → Transformar</button>
+        <button data-correct="true">Extraer → Transformar → Cargar</button>
+        <button>Transformar → Extraer → Cargar</button>
+        <button>Cargar → Transformar → Extraer</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> en ETL la transformación ocurre <em>antes</em> de cargar: los datos llegan limpios al destino.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">2. En ELT, ¿dónde se transforman los datos?</p>
+      <div class="opts">
+        <button>En un espacio intermedio, antes de guardar</button>
+        <button data-correct="true">Dentro del destino, después de guardar</button>
+        <button>En la fuente, antes de extraer</button>
+        <button>No se transforman</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> ELT carga primero en crudo y transforma después, dentro del propio destino (nube o data lake).</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">3. Una entidad vuelca registros crudos de todas sus cajas de recaudación a un lago de datos y calcula los totales después. ¿Qué enfoque usa?</p>
+      <div class="opts">
+        <button>ETL</button>
+        <button data-correct="true">ELT</button>
+        <button>Ninguno</button>
+        <button>Los dos a la vez</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> primero carga el dato crudo y transforma (calcula) dentro del lago. Ese es el patrón ELT.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">4. Una entidad unifica las planillas de varios hospitales a un formato común <em>antes</em> de subirlas al sistema central. ¿Qué enfoque usa?</p>
+      <div class="opts">
+        <button data-correct="true">ETL</button>
+        <button>ELT</button>
+        <button>Ninguno</button>
+        <button>Los dos a la vez</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> transforma antes de cargar, en un espacio intermedio. Es ETL; conviene con datos sensibles y destino rígido.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">5. "ELT es mejor que ETL porque carga más rápido." ¿Qué es incorrecto en esta afirmación?</p>
+      <div class="opts">
+        <button>Nada: es correcta</button>
+        <button data-correct="true">Que asume que uno es mejor: la elección depende del volumen y del destino</button>
+        <button>Que ELT no existe</button>
+        <button>Que ETL no carga datos</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> ELT carga más rápido, sí, pero exige un destino potente. No es "mejor" en abstracto: se elige según el caso.</div>
+    </div>
+
+    <hr />
+
+    <h2>La regla que evita elegir mal</h2>
+    <p>Antes de decidir, responde dos preguntas: <strong>¿cuánto volumen hay?</strong> y <strong>¿qué tan flexible y potente es el destino?</strong> Si el destino es rígido, el dato es sensible o el volumen es bajo, ETL. Si el volumen es grande y el destino es flexible (nube, lake), ELT.</p>
+
+    <h2>Fuente principal</h2>
+    <p class="refs">
+      Para profundizar: Ralph Kimball y Margy Ross, <em>The Data Warehouse Toolkit</em> (fundamentos de ETL).
+      Complementa con la documentación oficial de dbt para el enfoque ELT.
+    </p>
+
+    <div class="askai">
+      ¿Algo te hace dudar? Pregúntame y lo desarmamos — por ejemplo: "¿puedo empezar con ETL y pasar a ELT después?" o "¿ELT sirve si mis datos son sensibles?".
+    </div>
+
+    <div class="nav">
+      <a href="../reference/etl-vs-elt.html">Referencia: ETL vs. ELT →</a>
+      <a href="0002-limpieza-de-datos.html">Lección 02: limpieza de datos →</a>
+    </div>
+  </div>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lección 02 · Limpieza de datos</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Lección 02 · Bloque 4 — Integración de Datos</p>
+    <h1>Limpieza y preparación: donde se gasta el tiempo</h1>
+    <p class="lead">Al terminar, podrás reconocer y aplicar las tareas de limpieza de la transformación: corregir, unificar, deduplicar y marcar faltantes sin perder registros.</p>
+
+    <p class="sidenote">
+      Apoyado en Kimball &amp; Ross, <em>The Data Warehouse Toolkit</em>.
+      <cite><a href="../reference/etl-vs-elt.html">Ver referencia →</a></cite>
+    </p>
+
+    <h2>La idea central</h2>
+    <p>La transformación del ETL no es magia: es un conjunto de tareas concretas de <strong>limpieza y preparación</strong>. Es la parte que <strong>más tiempo consume</strong> en un proyecto real, y por eso conviene hacerla <em>una vez</em> y programarla, en lugar de repetirla a mano cada mes.</p>
+
+    <div class="box">
+      <p><strong>Idea para la pizarra:</strong> datos sucios producen reportes sucios.</p>
+    </div>
+
+    <h2>Las cinco tareas típicas</h2>
+    <ul>
+      <li><strong>Corregir errores</strong> — valores imposibles o mal cargados (una fecha <code>2026-13-05</code>, un monto negativo).</li>
+      <li><strong>Unificar formatos</strong> — fechas, mayúsculas y tildes ("La Paz" vs. "LA PAZ").</li>
+      <li><strong>Eliminar duplicados</strong> — un mismo registro anotado dos veces.</li>
+      <li><strong>Completar o marcar faltantes</strong> — un dato ausente se marca (por ejemplo, <code>SIN ZONA</code>) en lugar de borrar la fila.</li>
+      <li><strong>Combinar tablas</strong> — cruzar el padrón de contribuyentes con la recaudación.</li>
+    </ul>
+
+    <h2>Practica: limpia sin perder datos</h2>
+    <p>Elige una opción. Recibirás la corrección al instante.</p>
+
+    <div class="quiz">
+      <p class="q">1. Un reclamo llega sin zona registrada. ¿Qué se hace?</p>
+      <div class="opts">
+        <button>Se borra la fila: está incompleta</button>
+        <button data-correct="true">Se marca como <code>SIN ZONA</code> y se conserva</button>
+        <button>Se le asigna una zona al azar</button>
+        <button>Se ignora en todos los conteos</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el reclamo existió. Se marca para no <em>inflar</em> ni <em>perder</em> los totales; borrarlo distorsiona el reporte.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">2. En la misma columna de zona aparecen "Macrodistrito Centro", "centro" y "CENTRO". ¿Qué tarea corresponde?</p>
+      <div class="opts">
+        <button>Eliminar duplicados</button>
+        <button data-correct="true">Unificar formatos</button>
+        <button>Combinar tablas</button>
+        <button>Corregir la fuente</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> son el mismo valor escrito distinto; se normaliza a un único valor canónico.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">3. El registro <code>REC-0008</code> aparece exactamente dos veces. ¿Qué se hace?</p>
+      <div class="opts">
+        <button data-correct="true">Eliminar el duplicado</button>
+        <button>Marcarlo como <code>SIN ZONA</code></button>
+        <button>Sumar los dos para tener más datos</button>
+        <button>Cambiarle la fecha</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> es un error de carga. Si no se elimina, el mismo hecho se cuenta dos veces e infla el total.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">4. Aparece la fecha <code>2026-13-05</code> (mes 13). ¿Qué haces?</p>
+      <div class="opts">
+        <button>La cambio por <code>2026-12-05</code> para que funcione</button>
+        <button data-correct="true">La marco como error y no la uso en los cálculos</button>
+        <button>La borro junto con toda la fila</button>
+        <button>No hago nada</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> no se inventa un dato. Se marca el error y se decide con el área dueña: corregirlo en origen o excluirlo del reporte.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">5. ¿Por qué se dice que la limpieza es "donde más tiempo se gasta"?</p>
+      <div class="opts">
+        <button>Porque es la única etapa del ETL</button>
+        <button data-correct="true">Porque corregir, unificar y combinar es trabajo real que ocurre en cada carga</button>
+        <button>Porque no se puede automatizar</button>
+        <button>Porque la hacen los proveedores</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> es trabajo concreto; por eso conviene hacerlo <em>una vez</em> dentro de la transformación y programarlo.</div>
+    </div>
+
+    <hr />
+
+    <h2>La regla que evita dañar los totales</h2>
+    <p>Registra siempre la decisión: un faltante se <strong>marca</strong>, un error se <strong>corrige</strong> o <strong>se excluye con registro</strong>. Nunca se inventa un valor ni se borra una fila para "limpiar".</p>
+
+    <h2>Fuente principal</h2>
+    <p class="refs">
+      Para profundizar: Ralph Kimball y Margy Ross, <em>The Data Warehouse Toolkit</em> (transformación y calidad del dato).
+      Complementa con Martin Kleppmann, <em>Diseño de aplicaciones con uso intensivo en datos</em>.
+    </p>
+
+    <div class="askai">
+      ¿Algo te hace dudar? Pregúntame y lo desarmamos — por ejemplo: "¿un faltante se completa o se excluye?" o "¿cómo evito borrar filas por accidente al reemplazar valores?".
+    </div>
+
+    <div class="nav">
+      <a href="0001-etl-vs-elt.html">← Lección 01: ETL vs. ELT</a>
+      <a href="0003-automatizar-y-orquestar.html">Lección 03: automatizar y orquestar →</a>
+    </div>
+  </div>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>

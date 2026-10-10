@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+		<title>Sesión 6 — Integración: ETL, automatización y orquestación</title>
+
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/reset.css" />
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/reveal.css" />
+		<link rel="stylesheet" href="assets/theme-egpp.css" />
+
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown
+					data-separator="\r?\n---\r?\n"
+					data-separator-vertical="\r?\n--\r?\n"
+					data-separator-notes="^Note:">
+				<script type="text/template">
+<!-- .slide: class="cover" -->
+<div class="kicker">Ingeniería de Datos · IDT 601</div>
+<h1>Integración: ETL, automatización y orquestación</h1>
+<p class="lead">Mover y transformar datos de forma confiable.</p>
+<div class="mark">Bloque 4 · Sesión 6 · EGPP</div>
+<div class="cover-side" aria-hidden="true"><div class="code-stack"><span>ETL:</span><span>extraer → transformar</span><span>→ cargar → orquestar</span></div></div>
+
+Note:
+- Dar la bienvenida y ubicar la sesión en el **Bloque 4 — Integración de Datos**, continuación del Bloque 3 (arquitectura): ya sabemos dónde viven los datos, hoy aprendemos a moverlos y transformarlos.
+- Anunciar la promesa: al terminar sabrán qué es **ETL/ELT**, cómo se limpian y preparan los datos, y cómo se hace que un proceso **corra solo, en orden y a tiempo**.
+- Aclarar que el público no es especialista: no hace falta saber programar; el taller final es guiado paso a paso.
+- Adelantar el recorrido: integrar y ETL, ETL vs. ELT, herramientas, limpieza, automatización y orquestación, y un taller de limpieza y diseño del flujo.
+- **No olvidar:** avisar desde el arranque que hay una **pausa de 10 minutos** a mitad de sesión y que el último tramo es un **taller de 65 minutos** (limpiar los datos y diseñar el flujo que corre solo).
+
+---
+
+<div class="topline"><span class="kicker">01 / Hoja de ruta</span><span class="mark">180 minutos</span></div>
+<div class="content single"><h2 class="slide-title">Una sola sesión, siete tramos</h2>
+  <table class="type-table">
+    <thead><tr><th>Tramo</th><th>Tiempo</th><th>Qué haremos</th></tr></thead>
+    <tbody>
+      <tr><td>Integrar y ETL</td><td>20 min</td><td>Qué es integrar y qué hace cada etapa.</td></tr>
+      <tr><td>ETL vs. ELT</td><td>15 min</td><td>Cuándo transformar antes y cuándo después.</td></tr>
+      <tr><td>Herramientas</td><td>10 min</td><td>Comerciales y de código abierto.</td></tr>
+      <tr><td>Limpieza y automatización</td><td>25 min</td><td>Preparar datos y hacer que corran solos.</td></tr>
+      <tr><td>Herramientas de orquestación</td><td>15 min</td><td>De cron a Airflow.</td></tr>
+      <tr><td>Taller</td><td>65 min</td><td>Limpiar datos y diseñar el flujo programado.</td></tr>
+      <tr><td>Cierre</td><td>10 min</td><td>Síntesis y puente a la próxima sesión.</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Hoja de ruta</span><span>02</span></div>
+
+Note:
+- Recorrer los siete tramos leyendo el hilo y los tiempos: integrar y ETL (20), ETL vs. ELT (15), herramientas (10), limpieza y automatización (25), orquestación (15), taller (65) y cierre (10).
+- Señalar que el **taller (65 min)** es el corazón de la sesión: la mayor parte del tiempo se pasa haciendo, no escuchando.
+- Ubicar la pausa de 10 minutos después del bloque de herramientas de integración.
+- Aclarar que el taller final es **por equipos de 4 personas** y que se entrega un **diagrama de flujo + tabla de tareas**, sin programar.
+- **No olvidar:** confirmar que el cierre reserva 10 minutos para preguntas y para el puente a la próxima sesión.
+
+---
+
+<div class="topline"><span class="kicker">02 / Encuadre</span><span class="mark">Tres preguntas</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Tres preguntas guían la sesión</h2><p class="body-copy">Los datos están repartidos en muchos sistemas. Saber responderlas es el primer paso para <strong>integrarlos y automatizarlos</strong>.</p></div>
+  <div><p class="body-copy">1. ¿<strong>Qué es</strong> ETL/ELT y con qué herramientas integramos?<br>2. ¿<strong>Cómo</strong> limpiamos y preparamos los datos?<br>3. ¿<strong>Cómo</strong> hacemos que el proceso corra <strong>solo, en orden y a tiempo</strong>?</p></div>
+</div>
+<div class="footer"><span>Encuadre</span><span>03</span></div>
+
+Note:
+- Escribir las tres preguntas en la pizarra y dejarlas visibles toda la sesión: **qué es ETL/ELT**, **cómo se limpian los datos** y **cómo corre solo**.
+- Lanzar el primer enganche: *"¿cuántos sistemas de su institución habría que juntar para armar un solo informe?"*.
+- Lanzar el segundo: *"¿qué tarea repetitiva harían que se ejecute sola?"* y dejar que el grupo proponga ejemplos.
+- Anotar 4 o 5 ejemplos en la pizarra y avisar que se retoman en el taller final.
+- **No olvidar:** dejar claro que estas **tres preguntas ordenan la sesión** y se responden en el cierre.
+
+---
+
+<div class="topline"><span class="kicker">03 / Integración</span><span class="mark">Una sola historia</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Integrar datos: ¿qué significa?</h2><p class="body-copy">Reunir datos de <strong>fuentes distintas</strong> en un <strong>destino común y coherente</strong>. Sin integración, cada sistema cuenta su parte y nadie tiene la foto completa.</p></div>
+  <div><div class="card"><h3>Ejemplo</h3><div class="code">trámites · recaudación · reclamos</div><p>Tres sistemas del municipio que, integrados, se cruzan en un solo tablero.</p></div></div>
+</div>
+<div class="footer"><span>Integración</span><span>04</span></div>
+
+Note:
+- Definir con palabras simples: integrar es **reunir datos de fuentes distintas** en un **destino común y coherente**.
+- Contar el ejemplo del municipio: trámites en un sistema, recaudación en otro y reclamos en una planilla; integrados se cruzan en un solo tablero.
+- Subrayar la consecuencia de no integrar: cada sistema cuenta su parte y **nadie tiene la foto completa**.
+- Preguntar al grupo qué sistemas de su institución necesitarían cruzarse para armar un informe de gestión.
+- **No olvidar:** instalar la idea de que los datos deben contar **una sola historia**, y anunciar que la herramienta clásica es el **ETL**.
+
+---
+
+<div class="topline"><span class="kicker">04 / ETL</span><span class="mark">Tres etapas</span></div>
+<div class="content single"><h2 class="slide-title">El proceso ETL, paso a paso</h2>
+  <div class="flow">
+    <div class="flow-step"><strong>E — Extraer</strong><p>Tomar los datos desde la fuente: bases de datos, planillas, archivos, APIs.</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>T — Transformar</strong><p>Limpiar, ordenar y convertir a un formato común.</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>L — Cargar</strong><p>Guardar los datos listos en el almacén o archivo consolidado.</p></div>
+  </div>
+</div>
+<div class="footer"><span>Proceso ETL</span><span>05</span></div>
+
+Note:
+- Escribir en la pizarra el proceso en tres etapas y en orden: **E — Extraer → T — Transformar → L — Cargar**.
+- Explicar cada etapa: extraer es **tomar el dato de la fuente** (bases, planillas, archivos, APIs); transformar es **limpiar y convertir**; cargar es **guardar listo** en el almacén.
+- Usar el símil de la **planta de envasado**: recibe la materia prima, la lava y selecciona, y la despacha al depósito.
+- Dar el ejemplo de las ventas de sucursales: tomarlas todas, unificar fechas y montos, y guardarlas en el almacén para los reportes.
+- **No olvidar:** el resumen memorable **"tomar → arreglar → guardar"**: el producto final son **datos listos para usar**.
+
+---
+
+<div class="topline"><span class="kicker">05 / Comparación</span><span class="mark">ETL vs. ELT</span></div>
+<div class="content single"><h2 class="slide-title">Transformar antes o después de guardar</h2>
+  <table class="type-table">
+    <thead><tr><th>Aspecto</th><th>ETL</th><th>ELT</th></tr></thead>
+    <tbody>
+      <tr><td>Orden</td><td>Extraer → Transformar → Cargar</td><td>Extraer → Cargar → Transformar</td></tr>
+      <tr><td>Dónde transforma</td><td>Antes de guardar</td><td>Después de guardar</td></tr>
+      <tr><td>Velocidad de carga</td><td>Menor</td><td>Mayor</td></tr>
+      <tr><td>Flexibilidad</td><td>Menor</td><td>Mayor</td></tr>
+      <tr><td>Conviene cuando</td><td>Destino rígido, poco volumen</td><td>Gran volumen, nube o data lake</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>ETL vs. ELT</span><span>06</span></div>
+
+Note:
+- Aclarar que el orden de las letras no es un detalle: cambia **cuándo** y **dónde** se transforman los datos.
+- Explicar **ETL**: transforma antes de cargar; el destino queda ordenado desde el inicio, pero requiere un espacio intermedio y puede demorar con grandes volúmenes.
+- Explicar **ELT**: carga primero en crudo y transforma después dentro del destino; carga rápida y flexible, pero exige un destino potente (nube o data lake).
+- Contrastar con los ejemplos bolivianos: planillas de hospitales a formato común (**ETL**) y cajas de recaudación a un lago de datos (**ELT**).
+- **No olvidar:** no hay uno mejor que otro: **depende del volumen y del destino**; los dos buscan dejar datos listos para usar.
+
+---
+
+<div class="topline"><span class="kicker">06 / Herramientas</span><span class="mark">Dos familias</span></div>
+<div class="content single"><h2 class="slide-title">Herramientas de integración</h2>
+  <table class="type-table">
+    <thead><tr><th>Familia</th><th>Costo</th><th>Perfil</th><th>Ejemplos</th></tr></thead>
+    <tbody>
+      <tr><td>Comerciales</td><td>Licencia pagada</td><td>Interfaz visual y soporte</td><td>Informatica, DataStage, Azure Data Factory, AWS Glue</td></tr>
+      <tr><td>Código abierto</td><td>Gratuitas</td><td>Más trabajo técnico</td><td>Airflow, NiFi, Pentaho, dbt, Talend</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Herramientas de integración</span><span>07</span></div>
+
+Note:
+- Presentar las dos familias: **comerciales** (licencia pagada, interfaz visual, soporte) y **de código abierto** (gratuitas, más trabajo técnico).
+- Nombrar ejemplos comerciales: Informatica, IBM DataStage, Azure Data Factory, AWS Glue.
+- Nombrar ejemplos de código abierto: Airflow, NiFi, Pentaho (Kettle), dbt, Talend Open Studio.
+- Traducir la tabla a la regla de elección: se decide por el **caso**, el **presupuesto** y el **equipo** disponible.
+- **No olvidar:** lo importante es **entender qué hace cada herramienta**, no memorizar nombres.
+
+---
+
+<div class="topline"><span class="kicker">06 / Herramientas</span><span class="mark">Lado a lado</span></div>
+<div class="content single"><h2 class="slide-title">¿Cuál elegir? Depende del caso</h2>
+  <div class="split">
+    <div class="split-panel"><h3>Comerciales</h3><p>Pagadas, con interfaz visual y soporte formal. Convienen a instituciones con presupuesto y equipos poco técnicos.</p></div>
+    <div class="split-panel"><h3>Código abierto</h3><p>Libres y gratuitas, con más control y adaptación a cambio de más trabajo técnico. Convienen con presupuesto limitado.</p></div>
+  </div>
+</div>
+<div class="footer"><span>Herramientas</span><span>08</span></div>
+
+Note:
+- Describir las **comerciales**: productos pagados con interfaz de arrastrar y conectar, soporte y capacitación; convienen con presupuesto y equipos poco técnicos.
+- Describir las de **código abierto**: libres y gratuitas, mantenidas por la comunidad, con más control y adaptación a cambio de más trabajo técnico.
+- Señalar el criterio de decisión: **presupuesto** frente a **capacidad técnica del equipo**.
+- Preguntar quién conoce o usa alguna de estas herramientas en su institución.
+- **No olvidar:** ninguna familia es "la correcta"; la elección es una **decisión institucional según el caso**.
+
+---
+
+<div class="topline"><span class="kicker">07 / Transformación</span><span class="mark">Limpieza</span></div>
+<div class="content single"><h2 class="slide-title">Limpieza y preparación de datos</h2>
+  <div class="cards">
+    <article class="card"><h3>Corregir y unificar</h3><p>Fechas inválidas, montos negativos, tildes y mayúsculas: "La Paz" y "LA PAZ".</p></article>
+    <article class="card"><h3>Deduplicar y filtrar</h3><p>Un trámite registrado dos veces; quedarse con las columnas relevantes.</p></article>
+    <article class="card"><h3>Combinar y marcar</h3><p>Cruzar padrón y recaudación; marcar zonas sin registrar sin inflar totales.</p></article>
+  </div>
+  <p class="body-copy">Es donde más tiempo se gasta en un proyecto real: <strong>datos sucios producen reportes sucios</strong>.</p>
+</div>
+<div class="footer"><span>Limpieza de datos</span><span>09</span></div>
+
+Note:
+- Enmarcar la limpieza como el corazón de la transformación: es donde **más tiempo se gasta** en un proyecto real.
+- Recorrer las tareas concretas: **corregir** errores, **unificar** formatos, **eliminar duplicados**, **marcar faltantes** y **combinar tablas**.
+- Dar el ejemplo del reporte mensual de reclamos: unificar "Macrodistrito Centro" y "centro", descartar duplicados y marcar "sin zona".
+- Repetir la idea de la pizarra: **datos sucios producen reportes sucios**.
+- **No olvidar:** limpiar no es opcional; decidir si los faltantes se completan o se excluyen, **sin inflar totales**.
+
+---
+
+<div class="topline"><span class="kicker">08 / Automatización</span><span class="mark">Que corra solo</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Automatización</h2><p class="body-copy">Hacer que <strong>una tarea se ejecute sola</strong>, sin intervención manual. Se apoya en <strong>programar</strong> cuándo corre y <strong>avisar</strong> si algo sale mal.</p></div>
+  <div><div class="card"><h3>Ejemplo</h3><div class="code">lunes 06:00 → reporte</div><p>El reporte de recaudación se genera solo y llega por correo a quien lo necesita.</p></div></div>
+</div>
+<div class="footer"><span>Automatización</span><span>10</span></div>
+
+Note:
+- Definir automatizar como hacer que **una tarea se ejecute sola**, sin que una persona la dispare cada vez.
+- Explicar sus dos apoyos: **programar** cuándo debe correr y **avisar** si algo sale mal.
+- Dar el ejemplo del reporte de recaudación que se genera solo **los lunes a las 6:00** y llega por correo a quien lo necesita.
+- Lanzar la pregunta al grupo: *"¿qué tarea repetitiva de su trabajo harían que se ejecute sola?"* (reportes, respaldos, resúmenes).
+- **No olvidar:** automatizar es **que corra solo**; la diferencia con orquestar aparece en el slide siguiente.
+
+---
+
+<div class="topline"><span class="kicker">09 / Orquestación</span><span class="mark">En orden</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Orquestación</h2><p class="body-copy"><strong>Coordinar varias tareas</strong> que dependen unas de otras, en el <strong>orden correcto</strong>. Incluye dependencias, reintentos y avisos ante fallas.</p></div>
+  <div><div class="card"><h3>Ejemplo</h3><div class="code">descargar → transformar → cargar → avisar</div><p>Si un paso falla, se avisa y se reintenta. Como un director de orquesta.</p></div></div>
+</div>
+<div class="footer"><span>Orquestación</span><span>11</span></div>
+
+Note:
+- Definir orquestar como **coordinar varias tareas** que dependen unas de otras, asegurando el **orden correcto**.
+- Explicar qué maneja: **dependencias** (la tarea B espera a la A), **reintentos** y **avisos** ante fallas.
+- Recorrer el ejemplo del flujo: descargar → transformar → cargar al almacén → enviar resumen.
+- Usar el símil del **director de orquesta**: no toca instrumentos, pero asegura que cada músico entre a tiempo y en orden.
+- **No olvidar:** si un paso falla, hay que **avisar y reintentar**: orquestar es que corra en orden y coordinado.
+
+---
+
+<div class="topline"><span class="kicker">10 / Beneficios</span><span class="mark">Por qué importa</span></div>
+<div class="content single"><h2 class="slide-title">¿Por qué importa?</h2>
+  <div class="cards">
+    <article class="card"><h3>Menos errores</h3><p>Lo repetitivo hecho a mano falla; el flujo programado, no.</p></article>
+    <article class="card"><h3>Ahorro de tiempo</h3><p>La gente deja de hacer lo repetitivo y gana tiempo para analizar.</p></article>
+    <article class="card"><h3>Trazabilidad</h3><p>Se sabe qué corrió, cuándo y con qué resultado: sirve para auditar.</p></article>
+  </div>
+</div>
+<div class="footer"><span>Beneficios</span><span>12</span></div>
+
+Note:
+- Recorrer los tres beneficios: **menos errores** (lo repetitivo hecho a mano falla), **ahorro de tiempo** y **trazabilidad**.
+- Explicar la trazabilidad: se sabe **qué corrió, cuándo y con qué resultado**, algo clave para auditar y rendir cuentas.
+- Traducirlo a la gestión pública: menos horas copiando y pegando, más tiempo para analizar y decidir.
+- Reforzar el par conceptual escrito en la pizarra.
+- **No olvidar:** automatizar es **que corra solo**; orquestar es **que corra en orden y coordinado**.
+
+---
+
+<div class="topline"><span class="kicker">11 / Orquestación</span><span class="mark">Cron</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Cron: el más simple</h2><p class="body-copy">El <strong>programador de tareas</strong> del sistema operativo. Se define una <strong>frecuencia</strong> y un <strong>comando</strong>.</p></div>
+  <div><div class="card"><h3>Cuándo usarlo</h3><div class="code">0 6 * * 1 → lunes 6:00</div><p>Tareas simples y aisladas, sin dependencias complejas.</p></div></div>
+</div>
+<div class="footer"><span>Cron</span><span>13</span></div>
+
+Note:
+- Presentar **cron** como el programador de tareas del sistema operativo: lo más simple que existe.
+- Explicar que se define una **frecuencia** y un **comando**, y leer el ejemplo `0 6 * * 1` = "todos los lunes a las 6:00".
+- Aclarar cuándo conviene: tareas **simples y aisladas**, sin dependencias complejas.
+- Anticipar que con esto alcanza para el taller: no hace falta una plataforma grande.
+- **No olvidar:** empezar simple: para una **tarea suelta, cron alcanza**.
+
+---
+
+<div class="topline"><span class="kicker">11 / Orquestación</span><span class="mark">Airflow</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Apache Airflow</h2><p class="body-copy">Plataforma de <strong>orquestación de flujos de trabajo</strong>. Los flujos se definen como <strong>DAGs</strong>: cada nodo es una tarea y las flechas marcan el orden.</p></div>
+  <div><div class="card"><h3>Cuándo usarlo</h3><div class="code">DAG = tareas + orden</div><p>Flujos con varias etapas que dependen unas de otras y requieren monitoreo, reintentos y alertas.</p></div></div>
+</div>
+<div class="footer"><span>Apache Airflow</span><span>14</span></div>
+
+Note:
+- Presentar **Apache Airflow** como plataforma de **orquestación de flujos de trabajo**, estándar en ingeniería de datos.
+- Explicar los **DAGs**: cada nodo es una tarea y las flechas marcan el orden.
+- Destacar lo que aporta: **interfaz web**, programación, **reintentos** y **alertas**.
+- Aclarar cuándo conviene: flujos con varias etapas dependientes que requieren monitoreo.
+- **No olvidar:** mencionar las alternativas (Dagster, Prefect, Luigi) y los programadores de nube (Azure Scheduler, Cloud Scheduler, EventBridge).
+
+---
+
+<div class="topline"><span class="kicker">11 / Orquestación</span><span class="mark">Cron y Airflow</span></div>
+<div class="content single"><h2 class="slide-title">De lo simple a lo complejo</h2>
+  <table class="type-table">
+    <thead><tr><th>Herramienta</th><th>Complejidad</th><th>Dependencias</th><th>Cuándo usarla</th></tr></thead>
+    <tbody>
+      <tr><td>Cron</td><td>Baja</td><td>No</td><td>Tareas simples por horario (0 6 * * 1 = lunes 6:00).</td></tr>
+      <tr><td>Programador de nube</td><td>Baja</td><td>Limitadas</td><td>Tareas simples en la nube.</td></tr>
+      <tr><td>Apache Airflow</td><td>Media-alta</td><td>Sí (DAGs)</td><td>Flujos complejos con monitoreo y alertas.</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Herramientas de orquestación</span><span>15</span></div>
+
+Note:
+- Recorrer la tabla criterio por criterio: complejidad, dependencias entre tareas y cuándo usarla.
+- Contrastar: **cron** de complejidad baja y sin dependencias, frente a **Airflow** de complejidad media-alta con DAGs y monitoreo.
+- Incluir al programador de nube como punto medio: simple, en la nube, con dependencias limitadas.
+- Traducir a la regla práctica y anunciar que ahora toca diseñar el flujo que corre solo.
+- **No olvidar:** para una **tarea suelta, cron alcanza**; para **flujos complejos con aviso de fallas, Airflow**.
+
+---
+
+<div class="topline"><span class="kicker">12 / En la práctica</span><span class="mark">65 minutos</span></div>
+<div class="content single"><h2 class="slide-title">Automatizar el pipeline de reclamos</h2>
+  <div class="cards">
+    <article class="card"><h3>1. Limpiar</h3><p>Unificar canal, tipo y zona; quitar duplicados; marcar SIN ZONA; unificar fechas.</p></article>
+    <article class="card"><h3>2. Diseñar el flujo</h3><p>Frecuencia, dependencias, qué pasa si falla y trazabilidad. Cada tarea es una caja; cada flecha, una dependencia.</p></article>
+    <article class="card"><h3>3. Entregar</h3><p>Diagrama + tabla de tareas + regla de trazabilidad. Sin programar: solo hoja de cálculo.</p></article>
+  </div>
+  <p class="body-copy">Variantes: <strong>A</strong> reporte mensual · <strong>B</strong> alerta temprana · <strong>C</strong> trazabilidad.</p>
+</div>
+<div class="footer"><span>Taller</span><span>16</span></div>
+
+Note:
+- Dar la consigna en dos partes: **limpiar y preparar** el CSV de reclamos (unificar canal, tipo y zona; quitar duplicados; marcar `SIN ZONA`; unificar fechas) y **diseñar el flujo que corre solo**.
+- Recordar las cuatro preguntas del flujo: **frecuencia**, **orden y dependencias**, **qué pasa si falla** y **dónde queda la trazabilidad**.
+- Presentar las variantes por equipo (A/B/C) y explicar el entregable: **diagrama + tabla de tareas + regla de trazabilidad**, cerrado en la sesión.
+- Aclarar que **no se programa**: se usa una hoja de cálculo en línea. El insumo y la guía están en `modulo-4-integracion-de-datos/`.
+- **No olvidar:** con grupos de poca base, usar el **Modo B** (demostración guionada) de la guía del taller.
+
+---
+
+<div class="topline"><span class="kicker">13 / En resumen</span><span class="mark">Cierre</span></div>
+<div class="content single"><h2 class="slide-title">Integrar, limpiar y hacer que corra solo</h2>
+  <div class="cards">
+    <article class="card"><h3>Integrar</h3><p>ETL/ELT reúne los datos para que cuenten una sola historia.</p></article>
+    <article class="card"><h3>Limpiar</h3><p>Corregir, unificar y combinar: datos listos para usarse.</p></article>
+    <article class="card"><h3>Orquestar</h3><p>Automatizar para que corra solo, en orden y con aviso si falla.</p></article>
+  </div>
+  <p class="quote">Próxima sesión: <em>licencias de datos y datos abiertos</em> — qué se puede usar y cómo se comparte.</p>
+</div>
+<div class="footer"><span>Fin de la sesión</span><span>17</span></div>
+
+Note:
+- Sintetizar los tres pilares: **integrar** (ETL/ELT reúne los datos para que cuenten una sola historia), **limpiar** (corregir, unificar y combinar) y **orquestar** (que corra solo, en orden y con aviso).
+- Reforzar por qué importa: **menos errores**, **ahorro de tiempo** y **trazabilidad** (se sabe qué corrió, cuándo y con qué resultado).
+- Releer con el grupo la regla final: de lo simple (**cron**) a lo complejo (**Airflow**).
+- Anticipar la próxima sesión: **licencias de datos y datos abiertos** — qué se puede usar, cómo se comparte y bajo qué condiciones.
+- **No olvidar:** dejar un espacio real para preguntas antes de cerrar y recordar la entrega del taller (diagrama + tabla de tareas).
+
+---
+
+<!-- .slide: class="dark" -->
+<div class="topline"><span class="kicker">Fin</span><span class="mark">Ingeniería de Datos · IDT 601</span></div>
+<div class="content single">
+  <h2 class="slide-title">Gracias</h2>
+  <p class="lead">Bloque 4 · Sesión 6 · Integración de datos</p>
+  <p class="quote">Integrar, limpiar y hacer que corra solo, en orden y con aviso si falla.</p>
+</div>
+<div class="footer"><span>EGPP · Escuela de Gestión Pública Plurinacional</span><span>18</span></div>
+
+Note:
+- Agradecer la asistencia y la participación, en especial durante el taller.
+- Recordar la idea final: **integrar, limpiar y hacer que corra solo, en orden y con aviso si falla**.
+- Repetir el puente a la próxima sesión: **licencias de datos y datos abiertos**.
+- Invitar a llevar sus dudas y a consultar la guía del taller y la plantilla de entrega.
+- **No olvidar:** despedirse confirmando día y hora de la próxima sesión y dejando el canal de contacto del docente.
+</script></section>
+			</div>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/reveal.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/plugin/notes.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/plugin/markdown.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/plugin/highlight.js"></script>
+		<script>
+			Reveal.initialize({
+				width: 1920,
+				height: 1080,
+				margin: 0,
+				center: false,
+				hash: true,
+				plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+			});
+		</script>
+	</body>
+</html>

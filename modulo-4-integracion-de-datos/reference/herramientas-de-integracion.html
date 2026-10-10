@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Referencia · Herramientas de integración</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Referencia · Bloque 4 — Integración de Datos</p>
+    <h1>Herramientas de integración</h1>
+    <p class="lead">Hoja de referencia rápida: las dos familias de herramientas y cómo elegir según el caso.</p>
+
+    <h2>La pregunta que decide</h2>
+    <p>No existe la herramienta perfecta. Se elige según el <strong>caso</strong>, el <strong>presupuesto</strong> y el <strong>equipo</strong> disponible. Lo importante es entender <em>qué hace</em> cada una, no memorizar nombres.</p>
+
+    <table class="ref">
+      <thead><tr><th>Familia</th><th>Costo</th><th>Perfil</th><th>Ejemplos</th><th>Cuándo conviene</th></tr></thead>
+      <tbody>
+        <tr><td>Comerciales</td><td>Licencia pagada</td><td>Interfaz visual (arrastrar y conectar) y soporte</td><td>Informatica, IBM DataStage, Azure Data Factory, AWS Glue</td><td>Presupuesto y equipos poco técnicos</td></tr>
+        <tr><td>Código abierto</td><td>Gratuitas</td><td>Más trabajo técnico y más control</td><td>Apache Airflow, Apache NiFi, Pentaho (Kettle), dbt, Talend Open Studio</td><td>Presupuesto limitado y perfil técnico</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box">
+      <p><strong>Por qué importa:</strong> la elección es una <em>decisión institucional</em>, no una preferencia. Ninguna familia es "la correcta".</p>
+    </div>
+
+    <h2>Criterio de decisión</h2>
+    <p class="refs">
+      <strong>Presupuesto</strong> frente a <strong>capacidad técnica del equipo</strong>. Comercial si se necesita soporte formal y no se quiere programar; código abierto si hay perfil técnico y se busca control sin costo de licencia.
+    </p>
+
+    <p class="refs">Fuente: panorama de herramientas de integración y orquestación; ver <a href="../../RESOURCES.md">RESOURCES</a>.</p>
+
+    <div class="nav">
+      <a href="etl-vs-elt.html">← Referencia: ETL vs. ELT</a>
+      <a href="orquestacion-cron-airflow.html">Orquestación: cron y Airflow →</a>
+    </div>
+  </div>
+</body>
+</html>

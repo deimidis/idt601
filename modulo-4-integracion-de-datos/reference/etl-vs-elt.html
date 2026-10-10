@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Referencia · ETL vs. ELT</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Referencia · Bloque 4 — Integración de Datos</p>
+    <h1>ETL vs. ELT</h1>
+    <p class="lead">Hoja de referencia rápida: qué cambia entre ETL y ELT, y cuándo conviene cada uno.</p>
+
+    <h2>La pregunta que decide</h2>
+    <p>El orden de las letras no es un detalle: define <strong>cuándo</strong> y <strong>dónde</strong> se transforman los datos. Decide según <strong>cuánto volumen</strong> hay y <strong>qué tan flexible y potente es el destino</strong>.</p>
+
+    <table class="ref">
+      <thead><tr><th>Aspecto</th><th>ETL</th><th>ELT</th></tr></thead>
+      <tbody>
+        <tr><td>Orden</td><td>Extraer → Transformar → Cargar</td><td>Extraer → Cargar → Transformar</td></tr>
+        <tr><td>Dónde transforma</td><td>Antes de guardar (espacio intermedio)</td><td>Después de guardar (dentro del destino)</td></tr>
+        <tr><td>Velocidad de carga</td><td>Menor</td><td>Mayor</td></tr>
+        <tr><td>Flexibilidad</td><td>Menor (se transforma una vez)</td><td>Mayor (se puede transformar varias veces)</td></tr>
+        <tr><td>Conviene cuando</td><td>Destino rígido, datos sensibles o poco volumen</td><td>Gran volumen y destino flexible (nube, data lake)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box">
+      <p><strong>Por qué importa:</strong> no hay uno mejor. ETL deja el destino limpio desde el inicio; ELT carga rápido y transforma después, pero exige un destino potente.</p>
+    </div>
+
+    <h2>Para llevar</h2>
+    <p class="refs">
+      <strong>ETL</strong> → limpiar antes de guardar. &nbsp;·&nbsp;
+      <strong>ELT</strong> → guardar crudo y transformar dentro. &nbsp;·&nbsp;
+      <strong>Decide</strong> → volumen + potencia del destino.
+    </p>
+
+    <p class="refs">Fuentes: Kimball &amp; Ross, <em>The Data Warehouse Toolkit</em>; documentación oficial de dbt.</p>
+
+    <div class="nav">
+      <a href="../lessons/0001-etl-vs-elt.html">← Lección 01: ETL vs. ELT</a>
+      <a href="herramientas-de-integracion.html">Herramientas de integración →</a>
+    </div>
+  </div>
+</body>
+</html>
