@@ -89,6 +89,14 @@ construyen servicios), innovación (aplicaciones y emprendimientos) y control so
 organizaciones vigilan la gestión). En Bolivia, los portales de referencia son **`datos.gob.bo`** y
 **`gob.bo`** (sección "Datos abiertos del Estado").
 
+**Un dato abierto real:** la *Encuesta Final-Profesores de Inclusión Digital* de AGETIC
+(datos.gob.bo, 2019) es un conjunto publicado bajo **CC-BY** que se usa como insumo del taller de la
+sesión 7. Su caso combina todas las ideas del bloque: licencia, atribución, reutilización y datos
+personales de los encuestados en un solo objeto.
+
+> Fuente: AGETIC, *Encuesta Final-Profesores de Inclusión Digital*, Datos Abiertos Bolivia
+> (datos.gob.bo, 2019). Licencia CC-BY.
+
 ### 6. Límites: datos abiertos y datos personales
 
 **Datos personales** son los que identifican o hacen identificable a una persona (nombre, DNI,

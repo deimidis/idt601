@@ -84,7 +84,7 @@ Completar `plantilla-ficha-decision.md` (o su copia en el documento compartido).
 - Roles del equipo: **coordinador** (cuida el tiempo) y **relator** (comparte pantalla).
 - Rol del docente: **rotar por las salas cada 4–5 min**, destrabar sobre todo la **diferencia entre "gratis" y "abierto"** y la **identificación de datos personales**.
 
-## Modo B — Demostración del docente (guion para compartir pantalla, 20–25 min)
+## Modo B — Demostración del docente (guion para compartir pantalla, 20 min)
 
 Versión totalmente guiada. Los participantes siguen con la vista y anotan.
 

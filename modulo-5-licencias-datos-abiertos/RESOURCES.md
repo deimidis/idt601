@@ -15,7 +15,8 @@ lecciones se extrae de aquí, no de la memoria del agente.
   Usar para: principios de datos abiertos.
 - [AGETIC — Datos Abiertos (gob.bo)](https://www.gob.bo/)
   Fuente del Estado boliviano. Usar para: lineamientos de publicación y el componente "Datos abiertos
-  del Estado" creado por el D.S. 5340 (2025).
+  del Estado" creado por el D.S. 5340 (2025) y actualizado por el D.S. 5468 (2025), que también
+  actualiza el Plan de Gobierno Electrónico (hasta 2028) y el de Software Libre y Estándares Abiertos.
 - Constitución Política del Estado (art. 21.2 y art. 130–131).
   Usar para: base constitucional de la protección de datos personales (acción de protección de la privacidad).
 

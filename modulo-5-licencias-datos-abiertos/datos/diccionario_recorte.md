@@ -1,7 +1,8 @@
-# Diccionario del recorte — `encuesta_profesores_recorte.csv`
+# Diccionario de columnas de interés — `encuesta_profesores_completo.csv`
 
-17 columnas tomadas de la encuesta de AGETIC. Los **encabezados del CSV siguen siendo los códigos
-originales** (`a0`, `a1`, …): parte de la práctica es **renombrarlos** con su pregunta real.
+17 columnas tomadas de la encuesta de AGETIC (el CSV completo del paquete tiene 189 columnas).
+Los **encabezados del CSV siguen siendo los códigos originales** (`a0`, `a1`, …): parte de la
+práctica es **renombrarlos** con su pregunta real.
 
 | Código | Pregunta / significado | Valores observados | Notas |
 |---|---|---|---|
