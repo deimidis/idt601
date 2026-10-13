@@ -1,0 +1,42 @@
+id_registro,fecha,macrodistrito,tipo_servicio,canal,estado,cuadrilla,duracion_min,costo_bs,observacion
+s-0001,2026-09-02,Macrodistrito Sur,Barrido,Ventanilla,Atendido,Cuadrilla 2,167,168.27,requiere seguimiento
+S-0002,2026-09-03,Macrodistrito Sur,Barrido,Ventanilla,En proceso,Cuadrilla 4,68,631.94,requiere seguimiento
+S-0003,2026-09-04,centro,Lavado de contenedores,WhatsApp,Atendido,Cuadrilla 1,154,944.0,contenedor dañado
+S-0004,2026-09-05,Macrodistrito Periférica,Poda de árboles,Formulario web,Atendido,Cuadrilla 2,56,732.22,requiere seguimiento
+S-0005,2026-09-06, Macrodistrito Centro ,Recojo de residuos,Ventanilla,En proceso,Cuadrilla 3,67,680.36,
+S-0006,2026-09-07,Macrodistrito Sur,Lavado de contenedores,Ventanilla,Cerrado,Cuadrilla 3,72,389.46,sin novedad
+S-0007,2026-09-08,Macrodistrito Sur,barrido,Teléfono,En proceso,Cuadrilla 2,239,428.6,sin novedad
+S-0008,2026-09-09,Macrodistrito Cotahuma,Poda de árboles,Formulario web,Atendido,Cuadrilla 1,232,323.09,requiere seguimiento
+S-0009,2026-09-10,Macrodistrito Cotahuma,BARRIDO ,WhatsApp,Cerrado,Cuadrilla 3,50,271.8,sin novedad
+S-0010,2026-09-11,Macrodistrito Periférica,Recojo de residuos,Formulario web,En proceso,Cuadrilla 4,189,937.17,
+S-0011,2026-09-12,Macrodistrito Periférica,Lavado de contenedores,telefono,Atendido,Cuadrilla 4,230,699.0,sin novedad
+S-0012,2026-09-13,Macrodistrito Periférica,Recojo de residuos,WhatsApp,Cerrado,Cuadrilla 1,235,903.16,contenedor dañado
+S-0013,2026-09-14,Macrodistrito Periférica,Poda de árboles,Formulario Web,En proceso,Cuadrilla 2,62,103.97,contenedor dañado
+S-0014,2026-09-15,Macrodistrito Cotahuma,Poda de árboles,Formulario web,En proceso,Cuadrilla 2,35,92.39,
+S-0015,2026-09-16,Macrodistrito Sur,Recojo de residuos,WhatsApp,atendido,Cuadrilla 2,37,299.1,requiere seguimiento
+S-0016,2026-09-17,Macrodistrito Sur,Recojo de residuos,Formulario web,Cerrado,Cuadrilla 4,63,132.99,requiere seguimiento
+S-0017,05/09/2026,Macrodistrito Periférica,Poda de árboles,Teléfono,En proceso,Cuadrilla 1,142,755.56,
+S-0018,2026-09-19,Macrodistrito Cotahuma,Recojo de residuos,Teléfono,Derivado,Cuadrilla 1,172,133.73,contenedor dañado
+S-0019,2026-09-20,Macrodistrito Centro,Barrido,Teléfono,En proceso,Cuadrilla 3,-45,751.87,contenedor dañado
+S-0020,2026-10-21,Macrodistrito Sur,Barrido,Ventanilla,Derivado,Cuadrilla 3,186,926.82,sin novedad
+S-0021,2026-10-22,Macrodistrito Max Paredes,Poda de árboles,WhatsApp,En proceso,Cuadrilla 3,,856.7,sin novedad
+S-0022,2026-10-23,Macrodistrito Periférica,Recojo de residuos,WhatsApp,Atendido,Cuadrilla 4,143,354.9,sin novedad
+S-0023,2026-10-24,Macrodistrito Periférica,Barrido,Teléfono,Cerrado,Cuadrilla 1,228,Bs 340,requiere seguimiento
+S-0024,2026-10-25,Macrodistrito Cotahuma,Lavado de contenedores,Teléfono,Derivado,Cuadrilla 2,221,908.68,contenedor dañado
+S-0025,2026-10-26,Macrodistrito Periférica,Recojo de residuos,Teléfono,En proceso,Cuadrilla 4,161,,contenedor dañado
+S-0026,2026-10-27,Macrodistrito Cotahuma,Lavado de contenedores,Formulario web,Atendido,Cuadrilla 3,34,374.04,contenedor dañado
+S-0027,2026-10-28,Macrodistrito Periférica,Barrido,WhatsApp,Cerrado,Cuadrilla 3,161,340,
+S-0028,2026-09-01,Macrodistrito Cotahuma,Barrido,Ventanilla,Cerrado,Cuadrilla 3,40,868.13,sin novedad
+S-0028,2026-09-01,Macrodistrito Cotahuma,Barrido,Ventanilla,Cerrado,Cuadrilla 3,40,868.13,sin novedad
+S-0029,2026-09-02,Macrodistrito Max Paredes,Recojo de residuos,WhatsApp,Cerrado,Cuadrilla 4,68,546.84,contenedor dañado
+S-0030,2026-09-03,Macrodistrito Max Paredes,Barrido,Formulario web,Atendido,Cuadrilla 2,138,858.9,requiere seguimiento
+S-0032,2026-09-04,Macrodistrito Centro,Barrido,Formulario web,Atendido,Cuadrilla 2,47,310.07,
+S-0032,2026-09-05,Macrodistrito Periférica,Barrido,Formulario web,Derivado,Cuadrilla 3,189,192.43,sin novedad
+S-0033,2026-09-06,Macrodistrito Centro,Recojo de residuos,Formulario web,Atendido,Cuadrilla 2,81,891.05,requiere seguimiento
+S-0034,2026-09-07,Macrodistrito Sur,Recojo de residuos,Formulario web,Derivado,Cuadrilla  2,99,381.89,
+S-0035,2026-09-08,Macrodistrito Max Paredes,Barrido,Ventanilla,Atendido,Cuadrilla 2,161,493.04,contenedor dañado
+S-0036,2026-09-09,Macrodistrito Centro,Poda de árboles,WhatsApp,Derivado,Cuadrilla 3,206,267.21,sin novedad
+S-0037,2026-09-10,Macrodistrito Max Paredes,Recojo de residuos,Teléfono,Derivado,Cuadrilla 3,43,808.18,Requiere Seguimiento
+S-0038,2026-09-11,Macrodistrito Centro,Lavado de contenedores,WhatsApp,En proceso,Cuadrilla 1,51,658.75,contenedor dañado
+S-0039,2026-09-12,Macrodistrito Sur,Lavado de contenedores,Teléfono,Cerrado,Cuadrilla 1,147,241.26,requiere seguimiento
+S-0040,2026-09-13,Macrodistrito Periférica,Barrido,Formulario web,Cerrado,Cuadrilla 3,170,361.47,
