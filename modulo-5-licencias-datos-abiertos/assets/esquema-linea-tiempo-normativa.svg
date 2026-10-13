@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 470" role="img" aria-labelledby="t d">
+  <title id="t">Línea de tiempo normativa de Bolivia</title>
+  <desc id="d">De 2011 a 2025: Ley 164, D.S. 1793, D.S. 2514, D.S. 3251 y D.S. 5340, más el D.S. 5468 de actualización.</desc>
+  <rect x="0" y="0" width="1400" height="470" fill="#F5F3EB"/>
+  <text x="100" y="64" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#2A4D40">Bolivia: de los estándares abiertos a los datos abiertos</text>
+
+  <line x1="120" y1="235" x2="1280" y2="235" stroke="#507A6E" stroke-width="5"/>
+  <polygon points="1280,235 1258,223 1258,247" fill="#507A6E"/>
+
+  <g font-family="Helvetica, Arial, sans-serif" text-anchor="middle">
+    <circle cx="180" cy="235" r="12" fill="#2A4D40"/>
+    <text x="180" y="200" font-size="24" font-weight="700" fill="#2A4D40">2011</text>
+    <text x="180" y="290" font-size="19" font-weight="700" fill="#2A4D40">Ley N.º 164</text>
+    <text x="180" y="315" font-size="16" fill="#3D6558">Marco de TIC y</text>
+    <text x="180" y="336" font-size="16" fill="#3D6558">gobierno electrónico</text>
+
+    <circle cx="430" cy="235" r="12" fill="#2A4D40"/>
+    <text x="430" y="200" font-size="24" font-weight="700" fill="#2A4D40">2013</text>
+    <text x="430" y="290" font-size="19" font-weight="700" fill="#2A4D40">D.S. 1793</text>
+    <text x="430" y="315" font-size="16" fill="#3D6558">Software libre y</text>
+    <text x="430" y="336" font-size="16" fill="#3D6558">estándares abiertos</text>
+
+    <circle cx="680" cy="235" r="12" fill="#2A4D40"/>
+    <text x="680" y="200" font-size="24" font-weight="700" fill="#2A4D40">2015</text>
+    <text x="680" y="290" font-size="19" font-weight="700" fill="#2A4D40">D.S. 2514</text>
+    <text x="680" y="315" font-size="16" fill="#3D6558">Crea la</text>
+    <text x="680" y="336" font-size="16" fill="#3D6558">AGETIC</text>
+
+    <circle cx="930" cy="235" r="12" fill="#2A4D40"/>
+    <text x="930" y="200" font-size="24" font-weight="700" fill="#2A4D40">2017</text>
+    <text x="930" y="290" font-size="19" font-weight="700" fill="#2A4D40">D.S. 3251</text>
+    <text x="930" y="315" font-size="16" fill="#3D6558">Planes de gobierno</text>
+    <text x="930" y="336" font-size="16" fill="#3D6558">electrónico</text>
+
+    <circle cx="1180" cy="235" r="14" fill="#DABC6E" stroke="#2A4D40" stroke-width="3"/>
+    <text x="1180" y="200" font-size="24" font-weight="700" fill="#2A4D40">2025</text>
+    <text x="1180" y="290" font-size="19" font-weight="700" fill="#2A4D40">D.S. 5340</text>
+    <text x="1180" y="315" font-size="16" fill="#3D6558">Plataforma gob.bo y</text>
+    <text x="1180" y="336" font-size="16" fill="#3D6558">"Datos abiertos"</text>
+  </g>
+
+  <rect x="100" y="392" width="1200" height="48" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
+  <text x="120" y="423" font-family="Helvetica, Arial, sans-serif" font-size="18" fill="#3D6558">Actualización 2025: el <tspan font-weight="700" fill="#2A4D40">D.S. 5468</tspan> actualiza el Plan de Gobierno Electrónico (hasta 2028) y el de Software Libre y Estándares Abiertos.</text>
+</svg>

@@ -1,0 +1,345 @@
+<!-- .slide: class="cover" -->
+<div class="kicker">Ingeniería de Datos · IDT 601</div>
+<h1>Licencias de datos y datos abiertos</h1>
+<p class="lead">Usar y reutilizar datos con reglas claras.</p>
+<div class="mark">Bloque 5 · Sesión 7 · EGPP</div>
+<div class="cover-side" aria-hidden="true"><div class="code-stack"><span>publicar =</span><span>licencia clara</span><span>+ abierto + privacidad</span></div></div>
+
+Note:
+- Dar la bienvenida y ubicar el Bloque 5 como la dimensión **legal y de gobernanza** de los datos.
+- Encuadrar: "Ya sabemos de dónde salen los datos y cómo medir su calidad; ahora, ¿quién puede usarlos y bajo qué condiciones?".
+- Lanzar el enganche: "¿pueden reutilizar una base de datos que encontraron en internet o en el portal de otra institución?" — casi nadie lo sabe.
+- **No olvidar:** avisar que hay una **pausa de 10 minutos** y que la jornada cierra con un taller de 35 min.
+
+---
+
+<div class="topline"><span class="kicker">01 / Hoja de ruta</span><span class="mark">180 minutos</span></div>
+<div class="content single"><h2 class="slide-title">Una sola sesión, nueve tramos</h2>
+  <table class="type-table">
+    <thead><tr><th>Bloque</th><th>Tiempo</th><th>Qué haremos</th></tr></thead>
+    <tbody>
+      <tr><td>Apertura y encuadre</td><td>10 min</td><td>Bienvenida, Bloque 5 y las tres preguntas.</td></tr>
+      <tr><td>Licencias de datos</td><td>25 min</td><td>Concepto, espectro y rol en la reutilización.</td></tr>
+      <tr><td>Licencias abiertas</td><td>30 min</td><td>Creative Commons, Open Data Commons y "abierto".</td></tr>
+      <tr><td>Pausa</td><td>10 min</td><td>Receso.</td></tr>
+      <tr><td>Datos abiertos: principios y beneficios</td><td>20 min</td><td>El movimiento, sus principios, beneficios y portales.</td></tr>
+      <tr><td>Límites y protección de datos personales</td><td>25 min</td><td>Datos personales, anonimización/agregación y protección en Bolivia.</td></tr>
+      <tr><td>Regulación en Bolivia</td><td>15 min</td><td>Línea de tiempo e instrumentos.</td></tr>
+      <tr><td>Taller: leer y aplicar una licencia</td><td>35 min</td><td>Actividad integrada con insumos y entregable.</td></tr>
+      <tr><td>Cierre y preguntas</td><td>10 min</td><td>Síntesis y puente a la sesión 8.</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Hoja de ruta</span><span>02</span></div>
+
+Note:
+- Recorrer los nueve tramos leyendo el hilo y los tiempos.
+- Señalar que el **taller (35 min)** es el corazón de la sesión: se pasa de escuchar a hacer.
+- Ubicar la pausa después del bloque de licencias abiertas.
+- **No olvidar:** confirmar el cierre con 10 minutos para preguntas y puente a la sesión 8.
+
+---
+
+<div class="topline"><span class="kicker">02 / Encuadre</span><span class="mark">Tres preguntas</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Tres preguntas guían la sesión</h2><p class="body-copy">Saber responderlas es la base para <strong>compartir y reutilizar</strong> datos con seguridad, no un tema solo para abogados.</p></div>
+  <div><p class="body-copy">1. ¿<strong>Qué es</strong> una licencia de datos?<br>2. ¿<strong>Qué es</strong> un dato abierto?<br>3. ¿<strong>Qué dice Bolivia</strong> al respecto?</p></div>
+</div>
+<div class="footer"><span>Encuadre</span><span>03</span></div>
+
+Note:
+- Escribir las tres preguntas en la pizarra y dejarlas visibles como columna vertebral.
+- Explicar que cada tramo responde una parte y que al cierre se retoman.
+- **No olvidar:** pedir que anoten sus respuestas ahora para compararlas al final.
+
+---
+
+<div class="topline"><span class="kicker">03 / Licencias</span><span class="mark">Certeza jurídica</span></div>
+<div class="content">
+  <div><h2 class="slide-title">¿Qué es una licencia de datos?</h2><p class="body-copy">Un <strong>permiso formal</strong> que dice qué se puede y qué no se puede hacer con un conjunto de datos. Da <strong>certeza</strong> al autor y al usuario; sin licencia, el dato es jurídicamente ambiguo.</p></div>
+  <div><div class="card"><h3>Ejemplo</h3><div class="code">presupuesto.pdf · sin nota de licencia</div><p>Otra entidad o un periodista no sabe si puede redistribuirlo o armar un reporte con esos datos.</p></div></div>
+</div>
+<div class="footer"><span>Licencias de datos</span><span>04</span></div>
+
+Note:
+- Definir la licencia como permiso formal que fija derechos y obligaciones.
+- Explicar que da certeza; sin licencia, el dato es ambiguo.
+- **No olvidar:** la licencia es el puente entre "tener datos" y "usarlos con seguridad".
+
+---
+
+<div class="topline"><span class="kicker">03 / Licencias</span><span class="mark">De cerrado a abierto</span></div>
+<div class="content single"><h2 class="slide-title">El espectro de las licencias</h2>
+  <table class="type-table">
+    <thead><tr><th>Nivel</th><th>Qué permite</th><th>Ejemplo</th></tr></thead>
+    <tbody>
+      <tr><td>Todos los derechos reservados</td><td>Nada, salvo permiso expreso.</td><td>Informe con © reservado.</td></tr>
+      <tr><td>Licencias con condiciones</td><td>Usar bajo reglas: citar, no comercial.</td><td>CC BY-NC.</td></tr>
+      <tr><td>Licencias abiertas</td><td>Usar, reutilizar y redistribuir.</td><td>CC BY.</td></tr>
+      <tr><td>Dominio público</td><td>Todo, sin condiciones.</td><td>CC0 / ODC PDDL.</td></tr>
+    </tbody>
+  </table>
+  <img class="diagram diagram--sm" src="assets/esquema-espectro-licencias.svg" alt="Cuatro niveles de licencia, de más cerrado a más abierto: todos los derechos reservados, con condiciones, abiertas y dominio público." />
+</div>
+<div class="footer"><span>Licencias de datos</span><span>05</span></div>
+
+Note:
+- Dibujar la flecha de más cerrado a más abierto y ubicar los cuatro niveles.
+- Recorrer cada nivel con su ejemplo.
+- **Esquema en pantalla (espectro):** cuatro estaciones sobre una flecha —reservado, con condiciones, abiertas y dominio público—; mostrar que es un gradiente y no dos opciones.
+- **No olvidar:** si no se elige licencia, por defecto se cae en "todos los derechos reservados".
+
+---
+
+<div class="topline"><span class="kicker">04 / Licencias abiertas</span><span class="mark">Creative Commons</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Creative Commons: las dos clave</h2><p class="body-copy"><strong>CC0</strong> renuncia a todos los derechos: dominio público, sin permiso ni cita. <strong>CC BY</strong> permite cualquier uso con una sola condición: <strong>atribuir</strong>.</p></div>
+  <div><div class="card"><h3>Cuidado con las variantes</h3><div class="code">CC BY-SA · CC BY-NC</div><p>"Compartir igual" o "no comercial" dejan a la licencia fuera de la definición estricta de abierto.</p></div></div>
+</div>
+<div class="footer"><span>Licencias abiertas</span><span>06</span></div>
+
+Note:
+- Presentar Creative Commons como familia nacida para obras creativas, hoy usada en datos y documentos.
+- Destacar CC0 y CC BY.
+- Advertir que CC BY-SA y CC BY-NC agregan condiciones.
+- **No olvidar:** que diga "BY" no la vuelve abierta; hay que mirar si suma "no comercial".
+
+---
+
+<div class="topline"><span class="kicker">04 / Licencias abiertas</span><span class="mark">Open Data Commons</span></div>
+<div class="content single"><h2 class="slide-title">Licencias pensadas para bases de datos</h2>
+  <table class="type-table">
+    <thead><tr><th>Licencia</th><th>Condición</th><th>Equivalente CC</th></tr></thead>
+    <tbody>
+      <tr><td>ODC PDDL</td><td>Dominio público, sin condiciones.</td><td>CC0.</td></tr>
+      <tr><td>ODC-By</td><td>Atribución obligatoria.</td><td>CC BY.</td></tr>
+      <tr><td>ODC ODbL</td><td>Atribución + compartir igual.</td><td>CC BY-SA.</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Licencias abiertas</span><span>07</span></div>
+
+Note:
+- Presentar Open Data Commons como el equivalente de CC pensado para bases de datos.
+- Recorrer las equivalencias: PDDL = CC0; ODC-By = CC BY; ODbL = CC BY-SA.
+- **No olvidar:** para conjuntos de datos, ODC es la elección técnicamente más adecuada.
+
+---
+
+<div class="topline"><span class="kicker">05 / Definición</span><span class="mark">Qué es "abierto"</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Abierto: usar, reutilizar y redistribuir</h2><p class="body-copy">Un dato es <strong>abierto</strong> si cualquiera puede usarlo, reutilizarlo y redistribuirlo. A lo sumo se aceptan dos condiciones: <strong>atribución</strong> y <strong>compartir igual</strong>.</p></div>
+  <div><div class="card"><h3>Atención</h3><div class="code">gratis ≠ abierto</div><p>Un dato puede verse sin costo pero estar prohibido de redistribuir. "No comercial" o "solo educativo" no son abiertos.</p></div></div>
+</div>
+<div class="footer"><span>Definición de abierto</span><span>08</span></div>
+
+Note:
+- Enunciar la definición sin rodeos.
+- Aclarar las condiciones aceptadas: atribución y compartir igual.
+- Desarmar "gratis ≠ abierto".
+- **No olvidar:** "abierto" es una condición jurídica precisa, no una sensación de disponibilidad.
+
+---
+
+<div class="topline"><span class="kicker">06 / Datos abiertos</span><span class="mark">Principios</span></div>
+<div class="content single"><h2 class="slide-title">Cinco principios del movimiento</h2>
+  <table class="type-table">
+    <thead><tr><th>Principio</th><th>Qué significa</th></tr></thead>
+    <tbody>
+      <tr><td>Abiertos por defecto</td><td>Publicar salvo que exista una razón fundada para no hacerlo.</td></tr>
+      <tr><td>Oportunos y completos</td><td>Datos actualizados y sin recortes arbitrarios.</td></tr>
+      <tr><td>Accesibles y usables</td><td>Formatos legibles por máquina, no solo PDF o imágenes.</td></tr>
+      <tr><td>Interoperables y comparables</td><td>Estándares comunes para cruzar datos entre instituciones.</td></tr>
+      <tr><td>Para la mejora y la innovación</td><td>Orientados a que otros los reutilicen.</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Datos abiertos</span><span>09</span></div>
+
+Note:
+- Conectar con el origen: los datos con fondos públicos vuelven a la ciudadanía en formatos reutilizables.
+- Recorrer los cinco principios con una traducción práctica cada uno.
+- Detenerse en "accesibles y usables": un PDF o una imagen no son datos abiertos.
+- **No olvidar:** "abiertos por defecto" invierte la lógica: se publica salvo razón fundada.
+
+---
+
+<div class="topline"><span class="kicker">06 / Datos abiertos</span><span class="mark">Beneficios</span></div>
+<div class="content single"><h2 class="slide-title">Por qué abrir los datos públicos</h2>
+  <div class="cards">
+    <article class="card"><h3>Transparencia</h3><p>La ciudadanía puede verificar el uso de los recursos públicos.</p></article>
+    <article class="card"><h3>Reutilización</h3><p>Universidades, empresas y periodistas construyen servicios y análisis.</p></article>
+    <article class="card"><h3>Innovación y control social</h3><p>Surgen aplicaciones y emprendimientos; la prensa vigila la gestión.</p></article>
+  </div>
+  <p class="body-copy">Portales bolivianos: <strong>datos.gob.bo</strong> y <strong>gob.bo</strong> (sección "Datos abiertos del Estado").</p>
+</div>
+<div class="footer"><span>Datos abiertos</span><span>10</span></div>
+
+Note:
+- Recorrer los beneficios con ejemplos bolivianos: presupuesto, contrataciones, transporte.
+- Nombrar los portales datos.gob.bo y gob.bo.
+- **No olvidar:** abrir datos no genera gasto nuevo; el dato ya existe y ya se pagó con recursos públicos.
+
+---
+
+<div class="topline"><span class="kicker">07 / Límites</span><span class="mark">Privacidad</span></div>
+<div class="content single"><h2 class="slide-title">Abrir el dato agregado, proteger el individual</h2>
+  <div class="split">
+    <div class="split-panel"><h3>Sí se publica</h3><p>Cantidad de beneficiarios de un programa por municipio. Es un dato <strong>agregado</strong> que no identifica a personas.</p></div>
+    <div class="split-panel"><h3>No se publica</h3><p>El listado con <strong>DNI y domicilio</strong> de esos beneficiarios. La apertura nunca implica exponer datos personales.</p></div>
+  </div>
+</div>
+<div class="footer"><span>Límites de la apertura</span><span>11</span></div>
+
+Note:
+- Definir datos personales: los que identifican o hacen identificable a una persona.
+- Presentar la regla práctica: abrir el dato agregado, proteger el individual.
+- Contrastar los dos paneles.
+- **No olvidar:** se aplican anonimización (quitar identificadores) y agregación (resumir).
+
+---
+
+<div class="topline"><span class="kicker">07 / Límites</span><span class="mark">Marco boliviano</span></div>
+<div class="content single"><h2 class="slide-title">Protección de datos personales en Bolivia</h2>
+  <div class="cards">
+    <article class="card"><h3>Base constitucional</h3><p>La <strong>CPE art. 21.2</strong> protege la intimidad, privacidad, honor e imagen; el <strong>art. 130–131</strong> establece la acción de protección de la privacidad (ex hábeas data).</p></article>
+    <article class="card"><h3>Sin ley integral</h3><p>Bolivia <strong>no cuenta todavía con una ley integral</strong> de datos personales: la protección vigente es constitucional.</p></article>
+    <article class="card"><h3>Proyectos en trámite</h3><p>Hay un proyecto de ley de acceso a la información (remitido a Diputados en 2026) y un anteproyecto de AGETIC.</p></article>
+  </div>
+</div>
+<div class="footer"><span>Límites de la apertura</span><span>12</span></div>
+
+Note:
+- Explicar la base constitucional: CPE art. 21.2 y art. 130–131 (acción de protección de la privacidad, ex hábeas data).
+- Aclarar que Bolivia no tiene todavía una ley integral de datos personales.
+- Mencionar los proyectos en trámite, sin presentarlos como vigentes.
+- **No olvidar:** no inventar números de ley; decir "en trámite" donde corresponda.
+
+---
+
+<div class="topline"><span class="kicker">08 / Regulación</span><span class="mark">Bolivia · 2011–2025</span></div>
+<div class="content single"><h2 class="slide-title">Línea de tiempo normativa</h2>
+  <table class="type-table">
+    <thead><tr><th>Año</th><th>Norma</th><th>Aporte</th></tr></thead>
+    <tbody>
+      <tr><td>2011</td><td>Ley N.º 164</td><td>Ley marco de TIC y gobierno electrónico.</td></tr>
+      <tr><td>2013</td><td>D.S. 1793</td><td>Gobierno electrónico, software libre y estándares abiertos.</td></tr>
+      <tr><td>2015</td><td>D.S. 2514</td><td>Crea la AGETIC.</td></tr>
+      <tr><td>2017</td><td>D.S. 3251</td><td>Planes de implementación de gobierno electrónico.</td></tr>
+      <tr><td>2025</td><td>D.S. 5340</td><td>Plataforma gob.bo y "Datos abiertos del Estado".</td></tr>
+    </tbody>
+  </table>
+  <img class="diagram diagram--sm" src="assets/esquema-linea-tiempo-normativa.svg" alt="Línea de tiempo 2011 a 2025 con la Ley 164, el D.S. 1793, el D.S. 2514, el D.S. 3251 y el D.S. 5340, más el D.S. 5468 de actualización." />
+</div>
+<div class="footer"><span>Regulación boliviana</span><span>13</span></div>
+
+Note:
+- Recorrer la línea de tiempo citando número y objeto, sin inventar artículos.
+- Detenerse en el D.S. 1793 (2013): nace el impulso al software libre y los estándares abiertos.
+- Cerrar con el D.S. 5340 (2025).
+- **Esquema en pantalla (línea de tiempo):** cinco hitos sobre la línea 2011→2025, más la nota del D.S. 5468 (2025) que actualiza el plan.
+- **No olvidar:** la política va de los estándares abiertos (2013) a los datos abiertos consolidados (2025).
+
+---
+
+<div class="topline"><span class="kicker">08 / Regulación</span><span class="mark">AGETIC y LPG-Bolivia</span></div>
+<div class="content single"><h2 class="slide-title">Instrumentos que habilitan la apertura</h2>
+  <div class="cards">
+    <article class="card"><h3>Lineamientos de AGETIC</h3><p>Guías técnicas del órgano rector para publicar datos con estándares, metadatos y licencias adecuadas.</p></article>
+    <article class="card"><h3>LPG-Bolivia</h3><p>Licencia Pública General de Bolivia, de <strong>software libre</strong>: asegura liberar y reutilizar el software del Estado.</p></article>
+    <article class="card"><h3>Actualización 2025</h3><p>El <strong>D.S. 5468</strong> actualiza el Plan de Gobierno Electrónico (hasta 2028) y el de Software Libre y Estándares Abiertos.</p></article>
+  </div>
+</div>
+<div class="footer"><span>Regulación boliviana</span><span>14</span></div>
+
+Note:
+- Presentar los Lineamientos de Datos Abiertos de AGETIC.
+- Explicar LPG-Bolivia como licencia de software libre del Estado (software, no datos).
+- Añadir la actualización del D.S. 5468 (2025).
+- **No olvidar:** las instituciones ya cuentan con marco y guías; no hay que inventar nada desde cero.
+
+---
+
+<div class="topline"><span class="kicker">09 / Taller</span><span class="mark">35 minutos</span></div>
+<div class="content single"><h2 class="slide-title">Leer y aplicar una licencia</h2>
+  <div class="cards">
+    <article class="card"><h3>1. Lee</h3><p>En equipos de 3–4, revisen el texto de una licencia: <strong>CC0</strong>, <strong>CC BY</strong> u <strong>ODC-By</strong>.</p></article>
+    <article class="card"><h3>2. Identifica</h3><p>¿Qué se puede hacer? ¿Qué condición hay que cumplir? ¿Qué licencia le pondrían a un dato público?</p></article>
+    <article class="card"><h3>3. Protege</h3><p>¿Qué datos NO publicarían para proteger datos personales? Justifiquen con anonimización.</p></article>
+  </div>
+  <p class="body-copy">Insumos: dataset <strong>AGETIC (CC-BY)</strong> + los tres textos de licencia. Entregable: la <strong>ficha de decisión</strong>.</p>
+</div>
+<div class="footer"><span>Taller</span><span>15</span></div>
+
+Note:
+- Dar la consigna: equipos de 3–4 con el texto de una licencia y el dataset AGETIC (CC-BY).
+- Reparto: 5 de consigna + 20 de trabajo + 10 de puesta en común.
+- **No olvidar:** el entregable es la ficha de decisión, cerrada en la sesión.
+
+---
+
+<div class="topline"><span class="kicker">09 / Taller</span><span class="mark">La ficha de decisión</span></div>
+<div class="content single"><h2 class="slide-title">Qué completar</h2>
+  <img class="diagram diagram--sm" src="assets/esquema-abierto-vs-personal.svg" alt="Tres paneles: sí se publica el dato agregado, en el medio anonimizar y agregar, no se publica el dato personal." />
+  <p class="body-copy">1) qué permite la licencia · 2) qué condición exige · 3) qué licencia pondrían a <strong>su</strong> dataset y por qué · 4) qué datos <strong>no</strong> publicarían · 5) atribución lista para pegar.</p>
+</div>
+<div class="footer"><span>Taller</span><span>16</span></div>
+
+Note:
+- Presentar la plantilla de entrega (ficha de decisión) y sus cinco puntos.
+- **Esquema en pantalla (ficha):** publicar el agregado, anonimizar/agregar en el medio y no publicar el dato personal.
+- **No olvidar:** pedir la atribución redactada (con la fuente AGETIC, CC-BY).
+
+---
+
+<div class="topline"><span class="kicker">09 / Taller</span><span class="mark">Puesta en común</span></div>
+<div class="content single"><h2 class="slide-title">Compartan y contrasten</h2>
+  <div class="cards">
+    <article class="card"><h3>1. Expongan</h3><p>Cada equipo comparte su licencia elegida y un dato que decidió no publicar.</p></article>
+    <article class="card"><h3>2. Pregunten</h3><p>¿Por qué esa licencia? ¿Cómo cumplen la atribución? ¿Qué dato protegieron?</p></article>
+    <article class="card"><h3>3. Contrasten</h3><p>Comparen las licencias elegidas y los criterios de privacidad.</p></article>
+  </div>
+  <p class="quote">Publicar no alcanza: hay que publicar con <em>licencia clara, abierta y privacidad protegida</em>.</p>
+</div>
+<div class="footer"><span>Taller</span><span>17</span></div>
+
+Note:
+- Pedir a cada equipo exponer en 2 minutos: una licencia y un dato que no publicaría.
+- Contrastar las elecciones y las condiciones identificadas.
+- **No olvidar:** valorar la identificación correcta de la condición de cada licencia.
+
+---
+
+<div class="topline"><span class="kicker">10 / En resumen</span><span class="mark">Cierre</span></div>
+<div class="content single"><h2 class="slide-title">Licencia clara, datos abiertos y privacidad protegida</h2>
+  <div class="cards">
+    <article class="card"><h3>Licencia</h3><p>Sin permiso formal no hay reutilización segura; la licencia da certeza al autor y al usuario.</p></article>
+    <article class="card"><h3>Abierto</h3><p>Usar, reutilizar y redistribuir con, a lo sumo, atribución y compartir igual.</p></article>
+    <article class="card"><h3>Privacidad</h3><p>Abrir el dato agregado y proteger el dato personal: la apertura no se opone a la privacidad.</p></article>
+  </div>
+  <p class="quote">Próxima sesión: la <em>inteligencia artificial</em>, su historia y las redes neuronales.</p>
+</div>
+<div class="footer"><span>Fin de la sesión</span><span>18</span></div>
+
+Note:
+- Releer los tres mensajes: licencia, abierto y privacidad.
+- Volver a las tres preguntas del inicio y comprobar que ya se responden.
+- Anticipar la sesión 8: inteligencia artificial, historia y redes neuronales.
+- **No olvidar:** reservar espacio real para preguntas.
+
+---
+
+<!-- .slide: class="dark" -->
+<div class="topline"><span class="kicker">Fin</span><span class="mark">Ingeniería de Datos · IDT 601</span></div>
+<div class="content single">
+  <h2 class="slide-title">Gracias</h2>
+  <p class="lead">Bloque 5 · Sesión 7 · Licencias y datos abiertos</p>
+  <p class="quote">Licencia clara + abierto + privacidad protegida.</p>
+</div>
+<div class="footer"><span>EGPP · Escuela de Gestión Pública Plurinacional</span><span>19</span></div>
+
+Note:
+- Agradecer la participación, en especial a los equipos del taller.
+- Recordar la tríada: licencia clara + abierto + privacidad protegida.
+- Invitar a consultar datos.gob.bo y gob.bo y a dejar las dudas pendientes.
+- **No olvidar:** dejar el canal de contacto del docente.

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 430" role="img" aria-labelledby="t d">
+  <title id="t">El espectro de las licencias</title>
+  <desc id="d">De más cerrado a más abierto: todos los derechos reservados, licencias con condiciones, licencias abiertas y dominio público.</desc>
+  <rect x="0" y="0" width="1400" height="430" fill="#F5F3EB"/>
+  <text x="100" y="64" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#2A4D40">De más cerrado a más abierto</text>
+
+  <text x="100" y="140" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#3D6558">más cerrado</text>
+  <text x="1180" y="140" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="700" fill="#3D6558">más abierto</text>
+
+  <line x1="120" y1="168" x2="1272" y2="168" stroke="#507A6E" stroke-width="5"/>
+  <polygon points="1272,168 1250,156 1250,180" fill="#507A6E"/>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="120" y="215" width="250" height="150" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
+    <rect x="120" y="215" width="250" height="8" fill="#DABC6E"/>
+    <text x="145" y="265" font-size="22" font-weight="700" fill="#2A4D40">Todos los derechos</text>
+    <text x="145" y="292" font-size="22" font-weight="700" fill="#2A4D40">reservados</text>
+    <text x="145" y="330" font-size="18" fill="#3D6558">Nada, salvo permiso</text>
+    <text x="145" y="352" font-size="18" fill="#3D6558">expreso.</text>
+
+    <rect x="400" y="215" width="250" height="150" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
+    <rect x="400" y="215" width="250" height="8" fill="#DABC6E"/>
+    <text x="425" y="265" font-size="22" font-weight="700" fill="#2A4D40">Con condiciones</text>
+    <text x="425" y="300" font-size="18" fill="#3D6558">Citar o no comercial.</text>
+    <text x="425" y="330" font-size="18" fill="#3D6558">Ej.: CC BY-NC</text>
+
+    <rect x="680" y="215" width="250" height="150" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
+    <rect x="680" y="215" width="250" height="8" fill="#507A6E"/>
+    <text x="705" y="265" font-size="22" font-weight="700" fill="#2A4D40">Abiertas</text>
+    <text x="705" y="300" font-size="18" fill="#3D6558">Usar, reutilizar y</text>
+    <text x="705" y="322" font-size="18" fill="#3D6558">redistribuir.</text>
+    <text x="705" y="350" font-size="18" fill="#3D6558">Ej.: CC BY</text>
+
+    <rect x="960" y="215" width="250" height="150" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
+    <rect x="960" y="215" width="250" height="8" fill="#2A4D40"/>
+    <text x="985" y="265" font-size="22" font-weight="700" fill="#2A4D40">Dominio público</text>
+    <text x="985" y="300" font-size="18" fill="#3D6558">Todo, sin condiciones.</text>
+    <text x="985" y="330" font-size="18" fill="#3D6558">Ej.: CC0 / ODC PDDL</text>
+  </g>
+</svg>

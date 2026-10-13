@@ -1,0 +1,81 @@
+/* Assets compartidos — Bloque 1 (IDT 601). Estilo editorial tipo Tufte, paleta EGPP. */
+:root {
+  --bg: #fdfcf8;
+  --fg: #2a4d40;
+  --muted: #3d6558;
+  --soft: #7e9a8e;
+  --accent: #2a4d40;
+  --accent-2: #dabc6e;
+  --line: #a4bfbe;
+  --surface: #f3f1e8;
+  --ok: #2f7d4f;
+  --bad: #b23b3b;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  padding: 56px 24px 96px;
+  background: var(--bg);
+  color: var(--fg);
+  font: 19px/1.62 Georgia, "Iowan Old Style", "Times New Roman", serif;
+}
+.wrap { max-width: 720px; margin: 0 auto; }
+.kicker {
+  font: 600 13px/1.4 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--soft);
+  margin: 0 0 8px;
+}
+h1, h2, h3 { font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--accent); font-weight: 700; letter-spacing: -.01em; }
+h1 { font-size: 40px; line-height: 1.12; margin: 0 0 18px; }
+h2 { font-size: 25px; margin: 44px 0 12px; }
+h3 { font-size: 19px; margin: 28px 0 8px; }
+p { margin: 0 0 16px; }
+.lead { font-size: 22px; line-height: 1.5; color: var(--muted); margin: 0 0 28px; }
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-2); }
+a:hover { background: #f6efd6; }
+strong { color: var(--accent); }
+em { color: var(--muted); }
+code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .86em; background: var(--surface); padding: 2px 6px; border-radius: 4px; color: var(--accent); }
+hr { border: 0; border-top: 1px solid var(--line); margin: 40px 0; }
+.sidenote {
+  float: right; clear: right; width: 220px; margin: 4px -260px 16px 24px;
+  font: 15px/1.5 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--soft);
+}
+.sidenote cite { display: block; margin-top: 6px; font-style: normal; }
+@media (max-width: 1100px) { .sidenote { float: none; width: auto; margin: 8px 0 20px; padding-left: 14px; border-left: 3px solid var(--accent-2); } }
+.box { background: var(--surface); border-left: 5px solid var(--accent-2); padding: 18px 22px; margin: 24px 0; }
+.box p:last-child { margin-bottom: 0; }
+table.ref { width: 100%; border-collapse: collapse; font: 17px/1.45 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; margin: 20px 0; }
+table.ref th, table.ref td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.ref th { color: var(--soft); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; }
+table.ref td:first-child { color: var(--accent); font-weight: 600; }
+.refs { font: 16px/1.55 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--muted); }
+.refs li { margin-bottom: 8px; }
+.nav { display: flex; justify-content: space-between; gap: 16px; margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line); font: 15px/1.4 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; }
+.askai { margin-top: 36px; padding: 16px 20px; border: 1px dashed var(--line); border-radius: 8px; font: 16px/1.5 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--muted); }
+
+/* Quiz */
+.quiz { margin: 26px 0; }
+.quiz .q { font: 600 18px/1.5 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--accent); margin-bottom: 12px; }
+.quiz .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.quiz button {
+  width: 100%; min-height: 52px; padding: 10px 14px; cursor: pointer; text-align: left;
+  background: #fff; border: 1.5px solid var(--line); border-radius: 8px; color: var(--fg);
+  font: 16px/1.3 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+.quiz button:hover:not(:disabled) { border-color: var(--accent); }
+.quiz button:disabled { cursor: default; }
+.quiz button.correct { border-color: var(--ok); background: #edf6f0; color: var(--ok); font-weight: 600; }
+.quiz button.wrong { border-color: var(--bad); background: #fbeeee; color: var(--bad); }
+.quiz .explain { display: none; margin-top: 14px; padding: 14px 18px; background: var(--surface); border-left: 4px solid var(--accent-2); font: 16px/1.55 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; color: var(--muted); }
+.quiz .explain.show { display: block; }
+.quiz .explain strong { color: var(--accent); }
+@media (max-width: 560px) { .quiz .opts { grid-template-columns: 1fr; } }
+
+@media print {
+  body { padding: 0; font-size: 12pt; }
+  .nav, .askai, .quiz button:hover { display: none; }
+  a { border: 0; color: var(--accent); }
+  .sidenote { float: right; width: 180px; margin: 4px -200px 12px 20px; }
+}
