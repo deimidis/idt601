@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Referencia · Cómo aprende una red neuronal</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Referencia · Bloque 6 — Inteligencia Artificial</p>
+    <h1>Cómo aprende una red neuronal</h1>
+    <p class="lead">Hoja de referencia rápida: el ciclo de entrenamiento, el sobreajuste y las métricas, en una sola mirada.</p>
+
+    <h2>El ciclo de entrenamiento</h2>
+    <table class="ref">
+      <thead><tr><th>Paso</th><th>Qué ocurre</th></tr></thead>
+      <tbody>
+        <tr><td>1. Ejemplos</td><td>Se presentan los datos a la red.</td></tr>
+        <tr><td>2. Salida</td><td>La red produce un resultado.</td></tr>
+        <tr><td>3. Error</td><td>Se compara con lo esperado: función de pérdida.</td></tr>
+        <tr><td>4. Ajuste</td><td>Se corrigen los pesos para reducir el error.</td></tr>
+        <tr><td>5. Época</td><td>Se repite; cada pasada completa es una época.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Los tres grupos de datos</h2>
+    <table class="ref">
+      <thead><tr><th>Grupo</th><th>Para qué sirve</th></tr></thead>
+      <tbody>
+        <tr><td>Entrenamiento</td><td>Con él el modelo aprende y ajusta sus pesos.</td></tr>
+        <tr><td>Validación</td><td>Para tomar decisiones durante el desarrollo, sin aprender de él.</td></tr>
+        <tr><td>Prueba</td><td>Nunca lo vio; estima el desempeño con casos nuevos.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box">
+      <p><strong>Por qué importa:</strong> medir con los mismos datos del entrenamiento engaña. Memorizar esos ejemplos es el <strong>sobreajuste</strong>: acierta en lo conocido y falla en lo nuevo. Por eso el conjunto de prueba no se usa para aprender.</p>
+    </div>
+
+    <h2>Para llevar</h2>
+    <p class="refs">
+      <strong>Aprender</strong> = corregir los pesos para reducir el error. &nbsp;·&nbsp;
+      <strong>Época</strong> = una pasada por todos los ejemplos. &nbsp;·&nbsp;
+      <strong>Exactitud</strong> = aciertos sobre el total. &nbsp;·&nbsp;
+      <strong>Precisión</strong> = de los marcados como positivos, cuántos lo eran.
+    </p>
+
+    <p class="refs">Fuentes: Joel Grus, <em>Ciencia de datos desde cero</em>; Russell y Norvig, <em>Inteligencia artificial: un enfoque moderno</em>.</p>
+
+    <div class="nav">
+      <a href="../lessons/0003-como-aprende-una-red.html">← Lección 03: cómo aprende una red</a>
+      <a href="../lessons/0004-tipos-de-aprendizaje.html">Lección 04: tipos de aprendizaje →</a>
+    </div>
+  </div>
+</body>
+</html>

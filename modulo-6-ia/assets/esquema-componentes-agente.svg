@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 430" role="img" aria-labelledby="t d">
+  <title id="t">Los cuatro componentes de un agente de IA</title>
+  <desc id="d">Modelo, herramientas, memoria y planificación. El agente sugiere y el humano decide.</desc>
+  <rect x="0" y="0" width="1400" height="430" fill="#F5F3EB"/>
+  <text x="100" y="66" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#2A4D40">Un agente = LLM + herramientas para actuar</text>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="110" y="120" width="270" height="220" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
+    <rect x="110" y="120" width="270" height="8" fill="#507A6E"/>
+    <text x="140" y="180" font-size="26" font-weight="700" fill="#2A4D40">Modelo</text>
+    <text x="140" y="214" font-size="17" fill="#507A6E">el cerebro</text>
+    <text x="140" y="252" font-size="18" fill="#3D6558">El LLM que razona y</text>
+    <text x="140" y="275" font-size="18" fill="#3D6558">decide los pasos.</text>
+
+    <rect x="415" y="120" width="270" height="220" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
+    <rect x="415" y="120" width="270" height="8" fill="#DABC6E"/>
+    <text x="445" y="180" font-size="26" font-weight="700" fill="#2A4D40">Herramientas</text>
+    <text x="445" y="214" font-size="17" fill="#507A6E">las manos</text>
+    <text x="445" y="252" font-size="18" fill="#3D6558">Buscar, leer, calcular,</text>
+    <text x="445" y="275" font-size="18" fill="#3D6558">consultar o enviar.</text>
+
+    <rect x="720" y="120" width="270" height="220" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
+    <rect x="720" y="120" width="270" height="8" fill="#DABC6E"/>
+    <text x="750" y="180" font-size="26" font-weight="700" fill="#2A4D40">Memoria</text>
+    <text x="750" y="214" font-size="17" fill="#507A6E">la agenda</text>
+    <text x="750" y="252" font-size="18" fill="#3D6558">Lo que recuerda de la</text>
+    <text x="750" y="275" font-size="18" fill="#3D6558">conversación o tarea.</text>
+
+    <rect x="1025" y="120" width="270" height="220" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
+    <rect x="1025" y="120" width="270" height="8" fill="#2A4D40"/>
+    <text x="1055" y="180" font-size="26" font-weight="700" fill="#2A4D40">Planificación</text>
+    <text x="1055" y="214" font-size="17" fill="#507A6E">el método</text>
+    <text x="1055" y="252" font-size="18" fill="#3D6558">Descomponer la tarea</text>
+    <text x="1055" y="275" font-size="18" fill="#3D6558">en pasos y ordenarlos.</text>
+  </g>
+
+  <text x="700" y="400" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="700" fill="#2A4D40">Regla de oro: el agente sugiere, el humano decide.</text>
+</svg>

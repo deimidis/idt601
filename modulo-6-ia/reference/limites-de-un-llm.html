@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Referencia · Límites de un LLM</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Referencia · Bloque 6 — Historia y Desarrollo de la Inteligencia Artificial</p>
+    <h1>Límites de un LLM</h1>
+    <p class="lead">Hoja de referencia rápida: los tres límites que hay que conocer y cómo se manejan en la gestión pública.</p>
+
+    <h2>Los tres límites</h2>
+    <p>Un <strong>LLM</strong> genera la palabra más <strong>probable</strong>, no necesariamente la <strong>verdadera</strong>. De esa diferencia nacen sus tres límites.</p>
+
+    <table class="ref">
+      <thead><tr><th>Límite</th><th>Qué es</th><th>Riesgo en la gestión pública</th></tr></thead>
+      <tbody>
+        <tr><td>Alucinación</td><td>Inventa información verosímil pero falsa (datos, normas, citas).</td><td>Cifras, normas o referencias incorrectas.</td></tr>
+        <tr><td>Sesgo</td><td>Repite prejuicios del texto con que se entrenó.</td><td>Trato desigual, lenguaje estereotipado.</td></tr>
+        <tr><td>Fecha de corte</td><td>No conoce lo posterior a su entrenamiento.</td><td>Normativa o datos desactualizados.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box">
+      <p><strong>Por qué importa:</strong> el modelo <strong>sugiere</strong>, no certifica. Cualquier dato, cifra o norma que salga de un chat debe <strong>verificarse</strong> contra la fuente oficial antes de usarlo.</p>
+    </div>
+
+    <h2>Conceptos que explican el comportamiento</h2>
+    <table class="ref">
+      <thead><tr><th>Concepto</th><th>Qué es</th><th>Efecto que explica</th></tr></thead>
+      <tbody>
+        <tr><td>Token</td><td>Fragmento de texto que el modelo usa como unidad.</td><td>Se equivoca al contar letras o con palabras raras.</td></tr>
+        <tr><td>Ventana de contexto</td><td>Máximo de texto que puede tener en cuenta.</td><td>"Olvida" los mensajes viejos de una conversación larga.</td></tr>
+        <tr><td>Temperatura</td><td>Cuánto se arriesga a elegir opciones menos probables.</td><td>Baja = repetible; alta = variada.</td></tr>
+        <tr><td>Embedding (vector)</td><td>Representación numérica del significado de un texto.</td><td>Permite buscar y comparar por parecido.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Confidencialidad: qué NO se pega</h2>
+    <p class="refs">
+      <strong>Datos de ciudadanos</strong>, <strong>documentos reservados</strong> e <strong>información no pública</strong> no se suben a un chat externo.
+      Se trabaja con <strong>ejemplos ficticios</strong>, <strong>datos públicos</strong> o casos <strong>anonimizados</strong>. La responsabilidad es del funcionario.
+    </p>
+
+    <h2>Para llevar</h2>
+    <p class="refs">
+      <strong>Alucinación</strong> → verificar. &nbsp;·&nbsp;
+      <strong>Sesgo</strong> → revisar con criterio. &nbsp;·&nbsp;
+      <strong>Fecha de corte</strong> → usar la fuente actual. &nbsp;·&nbsp;
+      <strong>Confidencialidad</strong> → no subir datos sensibles.
+    </p>
+
+    <p class="refs">Fuente: Microsoft Learn, <em>IA generativa para principiantes</em>; lectura del bloque 6.</p>
+
+    <div class="nav">
+      <a href="../lessons/0005-llms-y-prompting.html">← Lección 05: LLM y prompting</a>
+      <a href="tecnicas-de-prompting.html">Referencia: técnicas de prompting →</a>
+    </div>
+  </div>
+</body>
+</html>

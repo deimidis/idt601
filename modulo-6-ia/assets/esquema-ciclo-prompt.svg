@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 430" role="img" aria-labelledby="t d">
+  <title id="t">El ciclo de trabajo con un modelo de lenguaje</title>
+  <desc id="d">Cuatro pasos: pedir, revisar, verificar y re-pedir. Verificar es el paso obligatorio contra fuentes confiables.</desc>
+  <rect x="0" y="0" width="1400" height="430" fill="#F5F3EB"/>
+  <text x="100" y="66" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#2A4D40">Trabajar con un LLM es un ciclo</text>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <rect x="100" y="150" width="270" height="150" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
+    <rect x="100" y="150" width="270" height="8" fill="#507A6E"/>
+    <text x="130" y="205" font-size="26" font-weight="700" fill="#2A4D40">1. Pedir</text>
+    <text x="130" y="245" font-size="18" fill="#3D6558">Escribir el prompt con</text>
+    <text x="130" y="268" font-size="18" fill="#3D6558">claridad y contexto.</text>
+
+    <rect x="415" y="150" width="270" height="150" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
+    <rect x="415" y="150" width="270" height="8" fill="#507A6E"/>
+    <text x="445" y="205" font-size="26" font-weight="700" fill="#2A4D40">2. Revisar</text>
+    <text x="445" y="245" font-size="18" fill="#3D6558">¿Responde a lo pedido?</text>
+    <text x="445" y="268" font-size="18" fill="#3D6558">¿Tono y formato correctos?</text>
+
+    <rect x="730" y="150" width="270" height="150" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
+    <rect x="730" y="150" width="270" height="8" fill="#DABC6E"/>
+    <text x="760" y="205" font-size="26" font-weight="700" fill="#2A4D40">3. Verificar</text>
+    <text x="760" y="245" font-size="18" fill="#3D6558">Comprobar datos, normas</text>
+    <text x="760" y="268" font-size="18" fill="#3D6558">y cifras en la fuente oficial.</text>
+
+    <rect x="1045" y="150" width="270" height="150" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
+    <rect x="1045" y="150" width="270" height="8" fill="#2A4D40"/>
+    <text x="1075" y="205" font-size="26" font-weight="700" fill="#2A4D40">4. Re-pedir</text>
+    <text x="1075" y="245" font-size="18" fill="#3D6558">Ajustar el prompt y</text>
+    <text x="1075" y="268" font-size="18" fill="#3D6558">comparar con la anterior.</text>
+
+    <path d="M370 175 L415 175" stroke="#507A6E" stroke-width="4" fill="none"/>
+    <polygon points="415,175 401,168 401,182" fill="#507A6E"/>
+    <path d="M685 175 L730 175" stroke="#507A6E" stroke-width="4" fill="none"/>
+    <polygon points="730,175 716,168 716,182" fill="#507A6E"/>
+    <path d="M1000 175 L1045 175" stroke="#507A6E" stroke-width="4" fill="none"/>
+    <polygon points="1045,175 1031,168 1031,182" fill="#507A6E"/>
+
+    <path d="M1180 300 L1180 360 L235 360 L235 300" stroke="#DABC6E" stroke-width="4" fill="none" stroke-dasharray="8 6"/>
+    <polygon points="235,300 228,314 242,314" fill="#DABC6E"/>
+    <text x="707" y="392" text-anchor="middle" font-size="18" font-style="italic" fill="#3D6558">el ciclo se repite hasta obtener una versión presentable</text>
+  </g>
+</svg>

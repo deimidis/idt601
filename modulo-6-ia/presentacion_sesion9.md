@@ -1,0 +1,378 @@
+<!-- .slide: class="cover" -->
+<div class="kicker">Ingeniería de Datos · IDT 601</div>
+<h1>Modelos de lenguaje (LLM) y prompting</h1>
+<p class="lead">¿Qué es un LLM, cómo genera contenido y cómo le pedimos mejor?</p>
+<div class="mark">Bloque 6 · Sesión 9 · EGPP</div>
+<div class="cover-side" aria-hidden="true"><div class="code-stack"><span>respuesta =</span><span>prompt</span><span>+ probabilidad + verificación</span></div></div>
+
+Note:
+- Dar la bienvenida y ubicar la sesión en el **Bloque 6 — Historia y Desarrollo de la Inteligencia Artificial**.
+- Encuadrar el puente con la Sesión 8: "Vimos la red neuronal y cómo aprende; hoy la vemos a escala gigante, en los chats que usamos a diario".
+- Aclarar que el público no es especialista: **no hace falta programar** ni para entender ni para usar un LLM.
+- Anunciar las dos preguntas del día: ¿qué es un LLM y cómo genera contenido? y ¿cómo le pedimos para obtener una buena respuesta?
+- **No olvidar:** pedir que tengan a mano un chat de IA (o el documento compartido del Plan B) y avisar la **pausa de 10 minutos** y la **práctica de 30 min**.
+
+---
+
+<div class="topline"><span class="kicker">01 / Hoja de ruta</span><span class="mark">180 minutos</span></div>
+<div class="content single"><h2 class="slide-title">Una sola sesión, once tramos</h2>
+  <table class="type-table">
+    <thead><tr><th>Bloque</th><th>Tiempo</th><th>Qué haremos</th></tr></thead>
+    <tbody>
+      <tr><td>Apertura y encuadre</td><td>10 min</td><td>Bienvenida, puente con la Sesión 8 y las dos preguntas.</td></tr>
+      <tr><td>Qué es un LLM y cómo se entrena</td><td>20 min</td><td>De la red neuronal al modelo a gran escala.</td></tr>
+      <tr><td>Generación por probabilidad y conceptos operativos</td><td>15 min</td><td>Siguiente palabra; token, contexto, temperatura y embedding.</td></tr>
+      <tr><td>Modelos generativos</td><td>10 min</td><td>Texto y código; el panorama multimodal.</td></tr>
+      <tr><td>Pausa</td><td>10 min</td><td>Receso.</td></tr>
+      <tr><td>Alcances, límites y confidencialidad</td><td>20 min</td><td>Alucinación, sesgo, fecha de corte y cuidado de la información.</td></tr>
+      <tr><td>Chat y qué es un prompt</td><td>10 min</td><td>Interfaz, acceso y buenas prácticas.</td></tr>
+      <tr><td>Técnicas de prompting</td><td>20 min</td><td>Claridad, contexto, ejemplos y rol.</td></tr>
+      <tr><td>Iteración y verificación</td><td>15 min</td><td>El ciclo pedir → revisar → verificar → re-pedir.</td></tr>
+      <tr><td>Práctica: prompts para gestión pública</td><td>30 min</td><td>Redactar, evaluar e iterar un prompt real.</td></tr>
+      <tr><td>Puesta en común y cierre</td><td>20 min</td><td>Compartir el prompt mejorado, síntesis y puente a la Sesión 10.</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Hoja de ruta</span><span>02</span></div>
+
+Note:
+- Recorrer los once tramos leyendo el hilo y los tiempos, sin entrar todavía en contenido.
+- Marcar el ritmo: teoría hasta la mitad, **pausa de 10 minutos** y luego foco en prompting, práctica y cierre.
+- Señalar que la **práctica (30 min)** es el corazón del día y que la **puesta en común** se hace al cierre.
+- **No olvidar:** avisar la hora exacta de la pausa y dónde retoman, para que nadie se disperse.
+
+---
+
+<div class="topline"><span class="kicker">02 / Encuadre</span><span class="mark">Dos preguntas</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Dos preguntas guían la sesión</h2><p class="body-copy">Entender un <strong>modelo de lenguaje</strong> y saber <strong>pedirle bien</strong> son dos habilidades distintas, y las dos se aprenden.</p></div>
+  <div><p class="body-copy">1. ¿<strong>Qué es</strong> un LLM y cómo genera contenido?<br>2. ¿<strong>Cómo le pedimos</strong> para obtener una buena respuesta?</p></div>
+</div>
+<div class="footer"><span>Encuadre</span><span>03</span></div>
+
+Note:
+- Escribir las dos preguntas en la pizarra y dejarlas visibles toda la sesión como columna vertebral.
+- Explicar que la primera mitad responde la pregunta 1 y la segunda, la pregunta 2.
+- **No olvidar:** pedir que anoten sus respuestas ahora, para compararlas al final.
+
+---
+
+<div class="topline"><span class="kicker">03 / Enganche</span><span class="mark">El poder del prompt</span></div>
+<div class="content">
+  <div><h2 class="slide-title">El mismo modelo, dos pedidos</h2><p class="body-copy">Cambiar la forma de pedir cambia por completo la calidad de la respuesta. Este es el corazón de la sesión.</p></div>
+  <div><div class="card"><h3>Vago</h3><div class="code">"háblame de impuestos"</div><h3>Preciso</h3><div class="code">"explicá en 5 líneas y para un funcionario municipal qué es el impuesto predial"</div></div></div>
+</div>
+<div class="footer"><span>Enganche</span><span>04</span></div>
+
+Note:
+- Abrir un chat real y mostrar en vivo las dos respuestas: el pedido vago y el pedido preciso.
+- Preguntar al grupo "¿qué diferencia notan?, ¿qué cambió?" y dejarlos responder antes de explicar.
+- Subrayar que el **modelo es el mismo**: lo único que cambió fue la forma de pedir.
+- **No olvidar:** destacar que este enganche es el corazón de la sesión; todo lo demás explica por qué el prompt manda.
+
+---
+
+<div class="topline"><span class="kicker">04 / LLM</span><span class="mark">Qué es</span></div>
+<div class="content">
+  <div><h2 class="slide-title">¿Qué es un LLM?</h2><p class="body-copy">Un <strong>modelo de lenguaje de gran escala</strong>: una <strong>red neuronal a gran escala</strong> entrenada sobre enormes volúmenes de texto. Su tarea central es <strong>predecir la siguiente palabra</strong>.</p></div>
+  <div><div class="card"><h3>Analogía</h3><p>Un <strong>lector incansable</strong> que leyó una biblioteca entera y, con eso, aprendió qué palabras suelen ir juntas y en qué orden.</p></div></div>
+</div>
+<div class="footer"><span>Qué es un LLM</span><span>05</span></div>
+
+Note:
+- Definir LLM como **red neuronal a gran escala** entrenada sobre enormes volúmenes de texto.
+- Explicar "gran escala" en lenguaje llano: miles de millones de parámetros (pesos) y textos de libros, sitios, documentos públicos y código.
+- Usar la analogía del **lector incansable** que leyó una biblioteca entera.
+- Subrayar la tarea central: **predecir la siguiente palabra**; no piensa ni busca, completa patrones.
+- **No olvidar:** dejar claro que nadie escribió las reglas del idioma dentro del modelo: las descubrió solo.
+
+---
+
+<div class="topline"><span class="kicker">05 / Entrenamiento</span><span class="mark">Cómo aprende</span></div>
+<div class="content">
+  <div><h2 class="slide-title">¿Cómo se entrena?</h2><p class="body-copy">El mismo ciclo de la red neuronal, a escala gigante. <strong>Entrenar = comparar la predicción con la palabra real y corregir los pesos</strong> para reducir el error.</p></div>
+  <div><div class="card"><h3>Precisión</h3><p>Cuando falla, <strong>no se "refuerza"</strong>: se calcula el error y se <strong>ajustan los pesos</strong>. Eso es <strong>descenso de gradiente</strong>, y <strong>no es</strong> aprendizaje por refuerzo.</p></div></div>
+</div>
+<div class="footer"><span>Cómo se entrena</span><span>06</span></div>
+
+Note:
+- Dibujar la red neuronal de la sesión anterior en la pizarra y "agrandarla" millones de veces.
+- Recorrer los pasos: mostrar frases, predecir la siguiente palabra, **comparar con la palabra que realmente seguía** y corregir los pesos.
+- **Corrección técnica (no equivocarse):** en el preentrenamiento **no hay refuerzo por acertar**. Se **compara** con la palabra real y se **corrigen los pesos** (descenso de gradiente). El refuerzo con recompensas es el **aprendizaje por refuerzo** de la Sesión 8, que es otra cosa.
+- Hacer la demostración y pedir al chat que complete "La recaudación tributaria del municipio aumentó porque…".
+- **No olvidar:** el modelo no guarda respuestas: aprende **cómo suele continuar** una frase.
+
+---
+
+<div class="topline"><span class="kicker">06 / Probabilidad</span><span class="mark">Siguiente palabra</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Generación por probabilidad</h2><p class="body-copy">El modelo calcula <strong>qué palabra es más probable que siga</strong> y genera palabra por palabra. No busca en una base de datos: elige entre las opciones más probables.</p></div>
+  <div><div class="card"><h3>Ejemplo</h3><div class="code">"El informe de gestión del año 2025…"</div><p>señala <strong>42%</strong> · muestra <strong>31%</strong> · indica <strong>18%</strong>. Por eso la respuesta puede variar cada vez.</p></div></div>
+</div>
+<div class="footer"><span>Generación por probabilidad</span><span>07</span></div>
+
+Note:
+- Explicar que ante un pedido el modelo calcula **qué palabra es más probable que siga**, según todo lo que leyó.
+- Aclarar que **no busca en una base de datos**: genera palabra por palabra, y cada una pasa a ser contexto de la siguiente.
+- Mostrar el ejemplo con los porcentajes.
+- **No olvidar:** remarcar que elige la palabra **probable**, no necesariamente la **verdadera**; ahí nacen su utilidad y su riesgo.
+
+---
+
+<div class="topline"><span class="kicker">06 / Probabilidad</span><span class="mark">Conceptos operativos</span></div>
+<div class="content single"><h2 class="slide-title">Cuatro conceptos que explican su comportamiento</h2>
+  <table class="type-table">
+    <thead><tr><th>Concepto</th><th>Qué es</th><th>Por qué importa</th></tr></thead>
+    <tbody>
+      <tr><td>Token</td><td>Fragmento de texto (palabra, parte de palabra o signo) que el modelo usa como unidad.</td><td>El modelo predice tokens, no letras: por eso falla al contar letras o con palabras raras.</td></tr>
+      <tr><td>Ventana de contexto</td><td>Cantidad máxima de texto que puede tener en cuenta en una conversación.</td><td>Más allá del límite, los mensajes viejos se pierden: "olvida" lo del principio.</td></tr>
+      <tr><td>Temperatura</td><td>Parámetro que regula qué tan variadas o predecibles son las respuestas.</td><td>Baja = predecible; alta = variada. No es "inteligencia": es cuánto se arriesga.</td></tr>
+      <tr><td>Embedding (vector)</td><td>Representación numérica del significado de un texto, que permite comparar y buscar por parecido.</td><td>Es la base de la búsqueda por similitud y de la recuperación de información.</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Conceptos operativos</span><span>08</span></div>
+
+Note:
+- Presentar los cuatro conceptos como la explicación de por qué el modelo **a veces olvida, repite o inventa**.
+- **Token:** aclarar que el modelo no "lee" letras ni palabras completas; por eso se equivoca al contar letras o al escribir palabras raras.
+- **Ventana de contexto:** dar el ejemplo de una conversación larga donde el modelo "olvida" lo dicho al principio.
+- **Temperatura:** explicar que no es creatividad mágica, sino cuánto se arriesga a elegir opciones menos probables.
+- **Embedding:** definirlo como "significado en números" y anunciar que es la base de la recuperación de información que se verá en la Sesión 10.
+- **No olvidar:** decir que estos conceptos **explican el comportamiento real**, no son teoría de laboratorio.
+
+---
+
+<div class="topline"><span class="kicker">07 / Generativos</span><span class="mark">Qué producen</span></div>
+<div class="content single"><h2 class="slide-title">Modelos generativos: texto y código</h2>
+  <table class="type-table">
+    <thead><tr><th>Tipo</th><th>Qué genera</th><th>Ejemplo en gestión pública</th></tr></thead>
+    <tbody>
+      <tr><td>Texto</td><td>Redacta, resume, traduce, explica y responde.</td><td>Primera versión de una nota o de una respuesta a un reclamo.</td></tr>
+      <tr><td>Código</td><td>Escribe y explica código; ayuda a automatizar.</td><td>Fórmula de planilla o script para ordenar un archivo de datos.</td></tr>
+    </tbody>
+  </table>
+  <p class="body-copy">También hay modelos de <strong>imagen, audio y video</strong>, y <strong>multimodales</strong>, que combinan tipos de contenido.</p>
+</div>
+<div class="footer"><span>Modelos generativos</span><span>09</span></div>
+
+Note:
+- Presentar los dos tipos con un ejemplo local de cada uno: texto (respuesta a un reclamo) y código (fórmula o script para ordenar un archivo).
+- Mencionar que también existen modelos de imagen, audio y video, y que algunos son **multimodales** (combinan tipos de contenido).
+- Explicar **multimodal** en una frase: trabaja con más de un tipo de contenido en la misma conversación.
+- **No olvidar:** cerrar con la idea puente "palabra a palabra o línea a línea" y pasar a los límites.
+
+---
+
+<div class="topline"><span class="kicker">08 / Límites</span><span class="mark">Alcances y riesgos</span></div>
+<div class="content single"><h2 class="slide-title">Los tres límites que hay que conocer</h2>
+  <table class="type-table">
+    <thead><tr><th>Límite</th><th>Qué es</th><th>Riesgo en gestión pública</th></tr></thead>
+    <tbody>
+      <tr><td>Alucinación</td><td>Inventa información verosímil pero falsa.</td><td>Cifras, normas o referencias incorrectas.</td></tr>
+      <tr><td>Sesgo</td><td>Repite prejuicios del entrenamiento.</td><td>Trato desigual, lenguaje estereotipado.</td></tr>
+      <tr><td>Fecha de corte</td><td>No conoce lo posterior a su entrenamiento.</td><td>Normativa o datos desactualizados.</td></tr>
+    </tbody>
+  </table>
+  <p class="body-copy">Regla práctica: <strong>todo lo que salga de un LLM debe verificarse</strong> contra la fuente oficial.</p>
+</div>
+<div class="footer"><span>Alcances y límites</span><span>10</span></div>
+
+Note:
+- Explicar la **alucinación**: inventa con seguridad citas, datos y leyes que no existen.
+- Dar el ejemplo del "artículo 45 de la Ley N° 1234": texto coherente pero falso.
+- Explicar el **sesgo** (reproduce prejuicios del entrenamiento) y la **fecha de corte** (solo sabe hasta que terminó su entrenamiento).
+- Traducir cada límite a un **riesgo concreto**: cifras incorrectas, trato desigual y normativa desactualizada.
+- **No olvidar:** dejar grabada la regla: todo lo que salga de un LLM se **verifica** contra la fuente oficial.
+
+---
+
+<div class="topline"><span class="kicker">08 / Límites</span><span class="mark">Confidencialidad</span></div>
+<div class="content single"><h2 class="slide-title">¿Qué NO se sube a un chat público?</h2>
+  <div class="cards">
+    <article class="card"><h3>Datos de ciudadanos</h3><p>Nombres, documentos, domicilios, salud: datos personales identificables. <strong>No se pegan.</strong></p></article>
+    <article class="card"><h3>Documentos reservados</h3><p>Información no pública o en trámite. <strong>No se pega</strong> en un servicio externo.</p></article>
+    <article class="card"><h3>Qué sí se puede</h3><p>Ejemplos <strong>ficticios</strong>, datos ya <strong>públicos</strong> o <strong>anonimizados</strong>. La responsabilidad es del funcionario.</p></article>
+  </div>
+</div>
+<div class="footer"><span>Confidencialidad</span><span>11</span></div>
+
+Note:
+- Instalar la **regla de confidencialidad** con la pregunta guía: "¿son datos de ciudadanos, documentos reservados o información no pública?".
+- Enlazar con el **Bloque 5**: una cosa es publicar un dato abierto con su licencia y otra es subir datos personales a un servicio externo.
+- Dar las alternativas: trabajar con **ejemplos ficticios**, datos ya **públicos** o casos **anonimizados**.
+- **No olvidar:** repetir que la **responsabilidad es del funcionario**, no de la herramienta.
+
+---
+
+<div class="topline"><span class="kicker">09 / Chat</span><span class="mark">La interfaz</span></div>
+<div class="content">
+  <div><h2 class="slide-title">El chat: la interfaz del LLM</h2><p class="body-copy">Un <strong>cuadro de texto</strong> donde escribimos y recibimos una respuesta. Cada mensaje forma parte de una <strong>conversación</strong>, hasta el límite de la <strong>ventana de contexto</strong>.</p></div>
+  <div><div class="card"><h3>Cómo acceder</h3><div class="code">ChatGPT · Gemini · Copilot</div><p>Cualquiera sirve: el método funciona con todas. <strong>Plan B sin cuenta:</strong> documento compartido + demostración guiada del docente.</p></div></div>
+</div>
+<div class="footer"><span>El chat</span><span>12</span></div>
+
+Note:
+- Mostrar la interfaz real: el cuadro de texto, el historial y la respuesta que se apoya en lo anterior.
+- Explicar que es una **plataforma genérica**: cualquiera de las conocidas sirve; no hay una obligatoria.
+- **Resolver el acceso:** mencionar el **Plan B sin cuenta** (documento compartido + demostración guiada) para quien no pueda crear cuenta.
+- Dar buenas prácticas: **una pregunta por vez** y pedir aclaración o reformulación si la respuesta no sirve.
+- **No olvidar:** reforzar que la salida es una **propuesta a revisar**, nunca la verdad.
+
+---
+
+<div class="topline"><span class="kicker">10 / Prompt</span><span class="mark">La instrucción</span></div>
+<div class="content">
+  <div><h2 class="slide-title">¿Qué es un prompt?</h2><p class="body-copy">El <strong>prompt</strong> es el texto que le damos al modelo: la <strong>instrucción</strong> o pedido. La calidad de la respuesta depende, en gran parte, de <strong>cómo está redactado</strong>.</p></div>
+  <div><div class="card"><h3>Cuatro técnicas</h3><p><strong>Claridad</strong> · <strong>Contexto</strong> · <strong>Ejemplos</strong> · <strong>Rol</strong>. Se pueden combinar; no es obligatorio usar todas.</p></div></div>
+</div>
+<div class="footer"><span>Qué es un prompt</span><span>13</span></div>
+
+Note:
+- Definir el prompt como el texto que le damos al modelo: la instrucción o pedido.
+- Enfatizar que la calidad de la respuesta depende, en gran parte, de cómo está redactado.
+- Presentar las cuatro técnicas: **claridad, contexto, ejemplos y rol**.
+- **No olvidar:** enmarcar que estas cuatro técnicas son la herramienta central que se llevan de la sesión.
+
+---
+
+<div class="topline"><span class="kicker">10 / Prompt</span><span class="mark">Técnicas 1 y 2</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Claridad y contexto</h2><p class="body-copy"><strong>Claridad:</strong> qué, formato, extensión y tono. <strong>Contexto:</strong> para quién y para qué respondemos.</p></div>
+  <div><div class="card"><h3>Claridad</h3><p><strong>Débil:</strong> "Háblame del trámite de licencia."</p><p><strong>Fuerte:</strong> "Explicá en 5 líneas, en tono formal, los requisitos para tramitar una licencia de funcionamiento."</p></div></div>
+</div>
+<div class="footer"><span>Técnicas de prompting</span><span>14</span></div>
+
+Note:
+- Explicar la **claridad** como "qué, formato, extensión y tono" y el **contexto** como "para quién y para qué".
+- Leer en voz alta el ejemplo débil y el fuerte para que se escuche la diferencia.
+- Dar el ejemplo de contexto: "Soy funcionario de un gobierno municipal y debo responder una consulta ciudadana…".
+- **No olvidar:** anticipar que estas dos técnicas son las mínimas que se piden en la práctica.
+
+---
+
+<div class="topline"><span class="kicker">10 / Prompt</span><span class="mark">Técnicas 3 y 4</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Ejemplos y rol</h2><p class="body-copy"><strong>Ejemplos (few-shot):</strong> mostrar el resultado esperado. <strong>Rol:</strong> pedir que asuma un papel para ajustar voz y enfoque.</p></div>
+  <div><div class="card"><h3>Ejemplos</h3><p>"Redactá el aviso siguiendo este modelo: 'Se informa a la población que…'"</p><h3>Rol</h3><p>"Actuá como un asesor de transparencia y explicá…"</p></div></div>
+</div>
+<div class="footer"><span>Técnicas de prompting</span><span>15</span></div>
+
+Note:
+- Explicar los **ejemplos (few-shot)** como mostrar el resultado esperado para guiar formato y tono.
+- Explicar el **rol** como pedirle que asuma un papel para ajustar la voz y el enfoque.
+- Mostrar un ejemplo combinado de las cuatro técnicas en un mismo prompt institucional.
+- **No olvidar:** repetir que las cuatro técnicas se pueden combinar y que no hay una única forma correcta de pedir.
+
+---
+
+<div class="topline"><span class="kicker">10 / Prompt</span><span class="mark">Resumen</span></div>
+<div class="content single"><h2 class="slide-title">Resumen de técnicas</h2>
+  <table class="type-table">
+    <thead><tr><th>Técnica</th><th>Qué es</th><th>Ejemplo breve</th></tr></thead>
+    <tbody>
+      <tr><td>Claridad</td><td>Pedido específico y con formato.</td><td>"En 5 líneas, tono formal…"</td></tr>
+      <tr><td>Contexto</td><td>Antecedentes de quién y para qué.</td><td>"Soy funcionario municipal…"</td></tr>
+      <tr><td>Ejemplos</td><td>Mostrar el resultado esperado.</td><td>"Seguí este modelo: 'Se informa…'"</td></tr>
+      <tr><td>Rol</td><td>Asumir un papel.</td><td>"Actuá como asesor de transparencia…"</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Técnicas de prompting</span><span>16</span></div>
+
+Note:
+- Repasar la tabla técnica por técnica con un ejemplo breve dicho en voz alta.
+- Insistir en que esta tabla es la **síntesis práctica** de toda la parte teórica.
+- Pedir que la copien o la fotografíen, porque se usa en la práctica y en el cierre.
+- **No olvidar:** anunciar que la práctica de 30 minutos aplicará al menos claridad y contexto.
+
+---
+
+<div class="topline"><span class="kicker">11 / Iteración</span><span class="mark">Pedir → verificar</span></div>
+<div class="content single"><h2 class="slide-title">Iterar y verificar</h2>
+  <img class="diagram diagram--sm" src="assets/esquema-ciclo-prompt.svg" alt="Cuatro pasos del ciclo: pedir, revisar, verificar y re-pedir; verificar es el paso obligatorio contra fuentes confiables." />
+  <p class="body-copy">La primera respuesta es un <strong>borrador</strong>: pedir → revisar → <strong>verificar</strong> → re-pedir. Verificar es el paso que <strong>no se salta</strong>.</p>
+</div>
+<div class="footer"><span>Iteración y verificación</span><span>17</span></div>
+
+Note:
+- Explicar que la primera respuesta es un **borrador** y que trabajar con un LLM es **diálogo**.
+- Recorrer el ciclo: **pedir, revisar, verificar y re-pedir**; destacar "verificar" como el paso obligatorio.
+- **Esquema en pantalla (ciclo):** los cuatro pasos del ciclo y la nota de que se repite hasta obtener una versión presentable.
+- Dar ejemplos de re-pedido: "resumí eso en tres viñetas" o "escribilo en lenguaje más sencillo, para un ciudadano".
+- **No olvidar:** usar el **criterio experto**: el funcionario conoce su área y detecta lo incorrecto.
+
+---
+
+<div class="topline"><span class="kicker">12 / Práctica</span><span class="mark">30 minutos</span></div>
+<div class="content single"><h2 class="slide-title">Prompts para gestión pública</h2>
+  <div class="cards">
+    <article class="card"><h3>1. Redactá</h3><p>Elegí una tarea real y armá un prompt con, al menos, <strong>claridad + contexto</strong>.</p></article>
+    <article class="card"><h3>2. Evaluá</h3><p>¿Responde a lo pedido? ¿Tono y formato correctos? ¿Hay algo dudoso que <strong>verificar</strong>?</p></article>
+    <article class="card"><h3>3. Iterá</h3><p>Mejorá el prompt al menos una vez y compará. Anotá el <strong>prompt mejorado + una observación de verificación</strong>.</p></article>
+  </div>
+  <p class="body-copy">Cinco tareas sugeridas en <strong>insumos/tareas-practica-s9.md</strong>. Plataforma genérica de chat; <strong>Plan B sin cuenta</strong>: documento compartido + demo guiada.</p>
+</div>
+<div class="footer"><span>Práctica</span><span>18</span></div>
+
+Note:
+- Dar la consigna: elegir una tarea institucional real y armar un prompt con al menos **claridad y contexto**.
+- Leer las cinco tareas sugeridas y aclarar que puede ser una tarea propia.
+- Explicar los tres pasos: redactar, evaluar e iterar; recordar las tres preguntas de evaluación.
+- **Resolver el acceso:** plataforma genérica (cualquiera sirve) y **Plan B sin cuenta** con documento compartido.
+- **No olvidar:** cronometrar los **30 minutos completos**; la puesta en común va al cierre.
+
+---
+
+<div class="topline"><span class="kicker">13 / Puesta en común</span><span class="mark">Compartir</span></div>
+<div class="content single"><h2 class="slide-title">Compartan el prompt mejorado</h2>
+  <div class="cards">
+    <article class="card"><h3>1. El prompt</h3><p>Cada persona comparte su prompt mejorado y <strong>qué cambió</strong> respecto del primero.</p></article>
+    <article class="card"><h3>2. La verificación</h3><p>Nombra <strong>un dato que verificaría</strong> antes de usar la respuesta.</p></article>
+    <article class="card"><h3>3. El contraste</h3><p>Comparar prompts y criterios: ¿qué hizo la diferencia?</p></article>
+  </div>
+  <p class="quote">Un buen prompt más verificación: la diferencia entre un resultado <em>útil</em> y uno <em>engañoso</em>.</p>
+</div>
+<div class="footer"><span>Puesta en común</span><span>19</span></div>
+
+Note:
+- Pedir a cada persona exponer en 1–2 minutos: **el prompt mejorado y qué cambió**.
+- Pedir que cada uno nombre **un dato que verificaría** antes de usar la respuesta.
+- Contrastar los prompts y reforzar las ideas fuerza.
+- **No olvidar:** valorar que el prompt incluya claridad y contexto y que se identifique un punto a verificar.
+
+---
+
+<div class="topline"><span class="kicker">14 / En resumen</span><span class="mark">Cierre</span></div>
+<div class="content single"><h2 class="slide-title">Probabilidad, buen prompt y verificación</h2>
+  <div class="cards">
+    <article class="card"><h3>Modelo</h3><p>Un LLM genera palabra por palabra usando probabilidades; es útil, pero <strong>no es una fuente de verdad</strong>.</p></article>
+    <article class="card"><h3>Prompt</h3><p>Claridad, contexto, ejemplos y rol mejoran la respuesta; trabajar con un LLM es <strong>iterativo</strong>.</p></article>
+    <article class="card"><h3>Verificar</h3><p>Datos, cifras y normas se comprueban contra la fuente oficial. Y <strong>no se suben datos sensibles</strong>.</p></article>
+  </div>
+  <p class="quote">Próxima sesión: el LLM deja de solo responder y empieza a <em>actuar</em>: los agentes de IA.</p>
+</div>
+<div class="footer"><span>Fin de la sesión</span><span>20</span></div>
+
+Note:
+- Releer los tres mensajes: qué es el modelo, cómo se pide y por qué hay que verificar.
+- Volver a las dos preguntas del inicio y comprobar que ya se responden.
+- Repetir la **regla de confidencialidad** y anticipar la Sesión 10: los **agentes de IA** y el taller integrador.
+- **No olvidar:** cerrar con la entrega: el prompt mejorado de una tarea real con una observación de verificación.
+
+---
+
+<!-- .slide: class="dark" -->
+<div class="topline"><span class="kicker">Fin</span><span class="mark">Ingeniería de Datos · IDT 601</span></div>
+<div class="content single">
+  <h2 class="slide-title">Gracias</h2>
+  <p class="lead">Bloque 6 · Sesión 9 · LLM y prompting</p>
+  <p class="quote">Pedir bien + verificar siempre.</p>
+</div>
+<div class="footer"><span>EGPP · Escuela de Gestión Pública Plurinacional</span><span>21</span></div>
+
+Note:
+- Agradecer la participación y el trabajo de la práctica.
+- Recordar la entrega pendiente: **prompt mejorado más la observación de verificación**.
+- Aclarar que no hace falta memorizar la teoría, sino quedarse con el hábito de **pedir bien y verificar**.
+- **No olvidar:** dejar a mano el material y confirmar la fecha y el tema de la Sesión 10.

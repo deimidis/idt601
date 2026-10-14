@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lección 02 · Determinista vs. indeterminista</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Lección 02 · Bloque 6 — Inteligencia Artificial</p>
+    <h1>Determinista vs. indeterminista: reglas o datos</h1>
+    <p class="lead">Al terminar, podrás distinguir los dos enfoques de la IA, compararlos y decidir cuál conviene según el problema, los datos y el costo de equivocarse.</p>
+
+    <p class="sidenote">
+      Apoyado en <em>Ciencia de datos desde cero</em> (Grus) y en el material del bloque.
+      <cite><a href="../reference/determinista-vs-indeterminista.html">Ver referencia →</a></cite>
+    </p>
+
+    <h2>La idea central</h2>
+    <p>Un sistema <strong>determinista</strong> sigue reglas fijas escritas por un humano: ante la misma entrada, siempre da la misma salida. Es predecible y explicable. Un sistema <strong>indeterminista</strong> aprende patrones a partir de ejemplos: su salida es <strong>probabilística</strong> y a veces poco explicable. No hay uno mejor que el otro: depende del problema.</p>
+
+    <h2>La comparación</h2>
+    <table class="ref">
+      <thead><tr><th>Aspecto</th><th>Determinista</th><th>Indeterminista</th></tr></thead>
+      <tbody>
+        <tr><td>Reglas</td><td>Escritas a mano.</td><td>Aprendidas de los datos.</td></tr>
+        <tr><td>Comportamiento</td><td>Predecible.</td><td>Probabilístico.</td></tr>
+        <tr><td>Explicabilidad</td><td>Alta.</td><td>Puede ser baja.</td></tr>
+        <tr><td>Datos necesarios</td><td>Pocos.</td><td>Muchos.</td></tr>
+        <tr><td>Ideal para</td><td>Reglas claras y estables.</td><td>Patrones complejos y cambiantes.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Cómo decidir</h2>
+    <p>Dos preguntas ayudan:</p>
+    <ul>
+      <li>¿Puedo escribir la regla en una frase? → probablemente <strong>determinista</strong>.</li>
+      <li>¿Necesito ver muchos ejemplos porque la regla es difícil de escribir? → probablemente <strong>indeterminista</strong>.</li>
+    </ul>
+    <p>Y una tercera: muchas soluciones reales son <strong>combinadas</strong>. Un filtro de correo no deseado mezcla reglas del remitente con aprendizaje del contenido.</p>
+
+    <div class="box">
+      <p><strong>Regla de oro:</strong> elige el enfoque por el <strong>problema</strong> y por los <strong>datos disponibles</strong>, no por moda. Si las reglas son claras y estables, escríbelas; si hay patrones que cuesta codificar, aprende de ejemplos.</p>
+    </div>
+
+    <h2>Practica: reglas, datos y decisiones</h2>
+    <p>Elige una opción. Recibirás la corrección al instante.</p>
+
+    <div class="quiz">
+      <p class="q">1. Un enfoque determinista se caracteriza por:</p>
+      <div class="opts">
+        <button>Aprender de ejemplos sin reglas</button>
+        <button data-correct="true">Seguir reglas fijas: misma entrada, misma salida</button>
+        <button>Dar siempre una respuesta probabilística</button>
+        <button>No poder explicarse nunca</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el determinista cumple reglas escritas por un humano; su comportamiento es predecible.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">2. ¿Cuál es una ventaja del enfoque determinista?</p>
+      <div class="opts">
+        <button>Captura patrones que nadie sabría escribir</button>
+        <button data-correct="true">Es predecible y fácil de auditar y explicar</button>
+        <button>No necesita ninguna regla</button>
+        <button>Mejora sola con más datos</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> como sigue reglas explícitas, se puede seguir el razonamiento paso a paso.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">3. La salida de un sistema indeterminista es:</p>
+      <div class="opts">
+        <button>Siempre exacta</button>
+        <button data-correct="true">Probabilística, con un nivel de confianza</button>
+        <button>Independiente de los datos</button>
+        <button>Igual a la de un semáforo programado</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el sistema aprende patrones y devuelve una respuesta con cierta probabilidad, no con certeza total.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">4. Un trámite con requisitos claros y fijos conviene resolverlo con un enfoque:</p>
+      <div class="opts">
+        <button data-correct="true">Determinista</button>
+        <button>Indeterminista</button>
+        <button>Por refuerzo</button>
+        <button>Ninguno: hay que dejarlo al azar</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> si la regla se escribe en una frase y es estable, no hace falta aprender de datos.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">5. Un filtro de correo no deseado que usa reglas del remitente y aprendizaje del contenido es un caso:</p>
+      <div class="opts">
+        <button>Puramente determinista</button>
+        <button>Puramente indeterminista</button>
+        <button data-correct="true">Combinado</button>
+        <button>Sin datos</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> mezcla reglas (determinista) con aprendizaje (indeterminista); es un caso combinado.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">6. "Caja negra" describe a un sistema:</p>
+      <div class="opts">
+        <button>Que falla siempre</button>
+        <button data-correct="true">Cuya explicación nos cuesta seguir</button>
+        <button>Que no usa datos</button>
+        <button>Que es puramente determinista</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> "caja negra" no significa magia: significa que el razonamiento interno del modelo es difícil de rastrear.</div>
+    </div>
+
+    <hr />
+
+    <h2>La frase que lo resume</h2>
+    <p>No hay un enfoque mejor: hay el que <strong>se ajusta al problema</strong>. Reglas claras y estables → determinista; patrones complejos que cuesta codificar → indeterminista; y a menudo, una mezcla de ambos.</p>
+
+    <h2>Fuente principal</h2>
+    <p class="refs">
+      Para profundizar: Joel Grus, <em>Ciencia de datos desde cero</em> (aprendizaje automático) y Russell y Norvig, <em>Inteligencia artificial: un enfoque moderno</em>.
+      La tabla comparativa completa está en la hoja de referencia del bloque.
+    </p>
+
+    <div class="askai">
+      ¿Algo te hace dudar? Pregúntame y lo desarmamos — por ejemplo: "¿mi trámite es determinista o combinado?" o "¿cuándo un sistema indeterminista exige control humano?".
+    </div>
+
+    <div class="nav">
+      <a href="../reference/determinista-vs-indeterminista.html">Referencia: determinista vs. indeterminista →</a>
+      <a href="0003-como-aprende-una-red.html">Lección 03: cómo aprende una red →</a>
+    </div>
+  </div>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>

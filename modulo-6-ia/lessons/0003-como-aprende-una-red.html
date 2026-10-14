@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lección 03 · Cómo aprende una red neuronal</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Lección 03 · Bloque 6 — Inteligencia Artificial</p>
+    <h1>Cómo aprende una red neuronal (y por qué a veces falla)</h1>
+    <p class="lead">Al terminar, podrás explicar neuronas, capas, pesos, el ciclo de entrenamiento, el sobreajuste y por qué se separan los datos de entrenamiento, validación y prueba.</p>
+
+    <p class="sidenote">
+      Apoyado en <em>Ciencia de datos desde cero</em> (Grus) y en <em>Inteligencia artificial: un enfoque moderno</em> (Russell y Norvig).
+      <cite><a href="../reference/como-aprende-una-red.html">Ver referencia →</a></cite>
+    </p>
+
+    <h2>La idea central</h2>
+    <p>Una <strong>red neuronal</strong> es un modelo de neuronas organizadas en <strong>capas</strong> y conectadas por <strong>pesos</strong>. <strong>Aprender es ajustar esos pesos</strong> a partir de ejemplos, para reducir el error. Esa es toda la magia: no hay reglas escritas, hay números que se corrigen una y otra vez.</p>
+
+    <img class="diagram" src="../assets/esquema-red-neuronal.svg" alt="Tres neuronas de entrada conectadas por pesos a una capa oculta y esta a una neurona de salida; si la salida no coincide con lo esperado se calcula el error y se corrigen los pesos." />
+
+    <h2>Neuronas, capas y pesos</h2>
+    <ul>
+      <li><strong>Neurona artificial:</strong> recibe entradas, las pondera y produce una salida.</li>
+      <li><strong>Capas:</strong> entrada (recibe los datos), ocultas (combinan y procesan), salida (entrega el resultado).</li>
+      <li><strong>Peso:</strong> número que indica cuánto importa cada conexión. <strong>Aprender es ajustarlos.</strong></li>
+    </ul>
+
+    <h2>El ciclo de entrenamiento</h2>
+    <ol>
+      <li>Se presentan <strong>ejemplos</strong>.</li>
+      <li>La red produce una <strong>salida</strong>.</li>
+      <li>Se compara con lo esperado y se calcula el <strong>error</strong> con una <strong>función de pérdida</strong>.</li>
+      <li>Se <strong>corrigen los pesos</strong> para reducir ese error.</li>
+      <li>Se repite: cada pasada completa sobre todos los ejemplos es una <strong>época</strong>.</li>
+    </ol>
+
+    <div class="box">
+      <p><strong>Regla de oro:</strong> en el preentrenamiento <strong>no se "refuerza"</strong> nada: se comparan los pesos con la respuesta correcta y se <strong>corrigen</strong> para reducir el error. El <strong>refuerzo</strong> es otra cosa: la señal de recompensa del aprendizaje por refuerzo.</p>
+    </div>
+
+    <h2>Por qué "funciona en la demo y falla en producción"</h2>
+    <p>Si medimos el desempeño con los <strong>mismos datos</strong> con que el modelo aprendió, siempre parecerá bueno. Por eso los datos se separan en tres grupos:</p>
+    <table class="ref">
+      <thead><tr><th>Grupo</th><th>Para qué sirve</th></tr></thead>
+      <tbody>
+        <tr><td>Entrenamiento</td><td>Los ejemplos con los que el modelo aprende y ajusta sus pesos.</td></tr>
+        <tr><td>Validación</td><td>Un grupo aparte para tomar decisiones durante el desarrollo, sin usarlo para aprender.</td></tr>
+        <tr><td>Prueba</td><td>Un grupo que el modelo nunca vio, para estimar cómo funcionará con casos nuevos.</td></tr>
+      </tbody>
+    </table>
+    <p>Cuando el modelo <strong>memoriza</strong> los ejemplos de entrenamiento en vez de captar el patrón, tenemos <strong>sobreajuste</strong>: acierta en lo conocido y falla en lo nuevo. Es la causa típica del "en la demo andaba y en producción no".</p>
+
+    <h2>Métricas: exactitud y precisión</h2>
+    <ul>
+      <li><strong>Exactitud:</strong> proporción de aciertos sobre el total de casos evaluados.</li>
+      <li><strong>Precisión:</strong> de los casos que el modelo marcó como positivos, cuántos lo eran de verdad.</li>
+    </ul>
+    <p>No son lo mismo. Una exactitud alta con precisión baja (o al revés) obliga a preguntar <strong>para qué</strong> se usará el modelo: no es lo mismo filtrar unos pocos casos dudosos que decidir sobre un trámite.</p>
+
+    <h2>Practica: del error al sobreajuste</h2>
+    <p>Elige una opción. Recibirás la corrección al instante.</p>
+
+    <div class="quiz">
+      <p class="q">1. En una red neuronal, aprender consiste en:</p>
+      <div class="opts">
+        <button>Escribir más reglas a mano</button>
+        <button data-correct="true">Ajustar los pesos para reducir el error</button>
+        <button>Guardar todos los ejemplos tal cual</button>
+        <button>Aumentar la cantidad de capas sin datos</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> los pesos son los números ajustables; el aprendizaje los corrige comparando la salida con lo esperado.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">2. La <strong>función de pérdida</strong> mide:</p>
+      <div class="opts">
+        <button>La velocidad de la computadora</button>
+        <button data-correct="true">El error entre la salida del modelo y la respuesta esperada</button>
+        <button>La cantidad de datos disponibles</button>
+        <button>El número de capas de la red</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> la pérdida cuantifica el error y guía el ajuste de los pesos.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">3. Una <strong>época</strong> es:</p>
+      <div class="opts">
+        <button>Un error del modelo</button>
+        <button data-correct="true">Una pasada completa sobre todos los ejemplos de entrenamiento</button>
+        <button>Una neurona de la capa oculta</button>
+        <button>El resultado final del modelo</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> cada vuelta completa sobre los ejemplos de entrenamiento es una época; se repiten muchas.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">4. ¿Para qué sirve el <strong>conjunto de prueba</strong>?</p>
+      <div class="opts">
+        <button>Para que el modelo aprenda más rápido</button>
+        <button data-correct="true">Para estimar el desempeño con casos que el modelo nunca vio</button>
+        <button>Para borrar el sobreajuste automáticamente</button>
+        <button>Para escribir las reglas del sistema</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> es el espejo de la realidad: no se usa para aprender, sino para medir cómo funcionará con casos nuevos.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">5. El <strong>sobreajuste</strong> ocurre cuando el modelo:</p>
+      <div class="opts">
+        <button>Usa pocas capas</button>
+        <button data-correct="true">Memoriza el entrenamiento y falla con casos nuevos</button>
+        <button>Aprende muy despacio</button>
+        <button>No tiene función de pérdida</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el sobreajuste acierta en lo conocido y falla en lo nuevo; se detecta con el conjunto de prueba.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">6. ¿Cuál es la diferencia entre <strong>exactitud</strong> y <strong>precisión</strong>?</p>
+      <div class="opts">
+        <button>Son sinónimos: miden lo mismo</button>
+        <button data-correct="true">La exactitud es aciertos sobre el total; la precisión es cuántos de los marcados como positivos lo eran de verdad</button>
+        <button>La exactitud se mide solo con datos de prueba y la precisión solo con los de entrenamiento</button>
+        <button>La precisión mide el tiempo de cómputo</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> son métricas distintas; una exactitud alta con precisión baja obliga a preguntar para qué se usará el modelo.</div>
+    </div>
+
+    <hr />
+
+    <h2>La frase que lo resume</h2>
+    <p>Una red aprende <strong>corrigiendo sus pesos</strong> para reducir el error. Y por eso mismo hay que medirla con datos que <strong>nunca vio</strong>: si se la evalúa con lo que ya memorizó, el resultado engaña.</p>
+
+    <h2>Fuente principal</h2>
+    <p class="refs">
+      Para profundizar: Joel Grus, <em>Ciencia de datos desde cero</em> (sobreajuste y métricas) y Russell y Norvig, <em>Inteligencia artificial: un enfoque moderno</em>.
+      El ciclo de entrenamiento está resumido en la hoja de referencia del bloque.
+    </p>
+
+    <div class="askai">
+      ¿Algo te hace dudar? Pregúntame y lo desarmamos — por ejemplo: "¿por qué no alcanza con medir el acierto en los datos de entrenamiento?" o "¿qué métrica conviene si el error es caro?".
+    </div>
+
+    <div class="nav">
+      <a href="../reference/como-aprende-una-red.html">Referencia: cómo aprende una red →</a>
+      <a href="0004-tipos-de-aprendizaje.html">Lección 04: tipos de aprendizaje →</a>
+    </div>
+  </div>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>

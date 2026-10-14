@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 470" role="img" aria-labelledby="t d">
+  <title id="t">Línea de tiempo de la inteligencia artificial</title>
+  <desc id="d">Cinco momentos: la pregunta de Turing en los 1950, las reglas y sistemas expertos en los 60-70, el giro al aprendizaje en los 80-90, la explosión de datos y cómputo en los 2000 y la IA generativa hoy.</desc>
+  <rect x="0" y="0" width="1400" height="470" fill="#F5F3EB"/>
+  <text x="100" y="66" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#2A4D40">De las reglas fijas al aprendizaje</text>
+
+  <line x1="110" y1="150" x2="1290" y2="150" stroke="#507A6E" stroke-width="5"/>
+  <polygon points="1290,150 1268,138 1268,162" fill="#507A6E"/>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <circle cx="220" cy="150" r="11" fill="#DABC6E" stroke="#2A4D40" stroke-width="3"/>
+    <circle cx="460" cy="150" r="11" fill="#DABC6E" stroke="#2A4D40" stroke-width="3"/>
+    <circle cx="700" cy="150" r="11" fill="#DABC6E" stroke="#2A4D40" stroke-width="3"/>
+    <circle cx="940" cy="150" r="11" fill="#DABC6E" stroke="#2A4D40" stroke-width="3"/>
+    <circle cx="1180" cy="150" r="11" fill="#2A4D40" stroke="#2A4D40" stroke-width="3"/>
+
+    <rect x="110" y="200" width="220" height="210" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
+    <rect x="110" y="200" width="220" height="8" fill="#DABC6E"/>
+    <text x="132" y="248" font-size="24" font-weight="700" fill="#2A4D40">1950s — La pregunta</text>
+    <text x="132" y="292" font-size="18" fill="#3D6558">Turing: ¿puede una máquina</text>
+    <text x="132" y="316" font-size="18" fill="#3D6558">comportarse como un</text>
+    <text x="132" y="340" font-size="18" fill="#3D6558">humano?</text>
+
+    <rect x="350" y="200" width="220" height="210" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
+    <rect x="350" y="200" width="220" height="8" fill="#DABC6E"/>
+    <text x="372" y="248" font-size="24" font-weight="700" fill="#2A4D40">1960–70s — Reglas</text>
+    <text x="372" y="292" font-size="18" fill="#3D6558">Sistemas expertos:</text>
+    <text x="372" y="316" font-size="18" fill="#3D6558">conocimiento en reglas</text>
+    <text x="372" y="340" font-size="18" fill="#3D6558">"si… entonces".</text>
+
+    <rect x="590" y="200" width="220" height="210" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
+    <rect x="590" y="200" width="220" height="8" fill="#507A6E"/>
+    <text x="612" y="248" font-size="24" font-weight="700" fill="#2A4D40">1980–90s — Aprender</text>
+    <text x="612" y="292" font-size="18" fill="#3D6558">Escribir todas las reglas</text>
+    <text x="612" y="316" font-size="18" fill="#3D6558">es imposible: mejor dar</text>
+    <text x="612" y="340" font-size="18" fill="#3D6558">ejemplos.</text>
+
+    <rect x="830" y="200" width="220" height="210" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
+    <rect x="830" y="200" width="220" height="8" fill="#507A6E"/>
+    <text x="852" y="248" font-size="24" font-weight="700" fill="#2A4D40">2000s — Datos</text>
+    <text x="852" y="292" font-size="18" fill="#3D6558">Internet produce datos</text>
+    <text x="852" y="316" font-size="18" fill="#3D6558">masivos y hay potencia</text>
+    <text x="852" y="340" font-size="18" fill="#3D6558">de cálculo.</text>
+
+    <rect x="1070" y="200" width="220" height="210" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
+    <rect x="1070" y="200" width="220" height="8" fill="#2A4D40"/>
+    <text x="1092" y="248" font-size="24" font-weight="700" fill="#2A4D40">Hoy — Generativa</text>
+    <text x="1092" y="292" font-size="18" fill="#3D6558">No solo clasifica:</text>
+    <text x="1092" y="316" font-size="18" fill="#3D6558">genera texto, imágenes</text>
+    <text x="1092" y="340" font-size="18" fill="#3D6558">y código.</text>
+  </g>
+</svg>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Referencia · Componentes de un agente y supervisión humana</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Referencia · Bloque 6 — Inteligencia Artificial</p>
+    <h1>Componentes de un agente y supervisión humana</h1>
+    <p class="lead">Hoja de referencia rápida: qué es un agente, sus cuatro componentes, sus usos, sus riesgos y las salvaguardas que exige.</p>
+
+    <h2>Qué es un agente</h2>
+    <p>Un <strong>agente de IA</strong> combina un <strong>LLM</strong> con <strong>herramientas</strong> para <strong>realizar tareas</strong>. No solo responde: decide <strong>pasos</strong> y ejecuta <strong>acciones</strong> con cierta autonomía. Es como <em>encargarle una tarea</em> en lugar de <em>preguntarle algo</em>.</p>
+
+    <img class="diagram" src="../assets/esquema-componentes-agente.svg" alt="Un agente es un LLM más herramientas para actuar; sus componentes son modelo, herramientas, memoria y planificación; regla de oro: el agente sugiere, el humano decide." />
+
+    <h2>Los cuatro componentes</h2>
+    <table class="ref">
+      <thead><tr><th>Componente</th><th>Qué es</th><th>Analogía</th></tr></thead>
+      <tbody>
+        <tr><td>Modelo</td><td>El LLM que razona y decide los pasos.</td><td>El cerebro</td></tr>
+        <tr><td>Herramientas</td><td>Lo que puede usar para actuar: buscar, leer, calcular, consultar, enviar. Cada una trae su descripción.</td><td>Las manos</td></tr>
+        <tr><td>Memoria</td><td>Lo que recuerda de la conversación o de los pasos ya hechos.</td><td>La agenda</td></tr>
+        <tr><td>Planificación</td><td>Descomponer la tarea en pasos y ordenarlos; puede seguir un flujo definido o decidir por su cuenta.</td><td>El método</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Usos habituales</h2>
+    <table class="ref">
+      <thead><tr><th>Uso</th><th>Qué hace</th><th>Ejemplo</th></tr></thead>
+      <tbody>
+        <tr><td>Asistente</td><td>Conversa y resuelve dentro de un dominio, con los documentos de la institución.</td><td>Consultas sobre requisitos de trámites.</td></tr>
+        <tr><td>RAG</td><td>Busca en las fuentes propias y responde <strong>citando</strong> lo encontrado.</td><td>Agente que cita el reglamento interno de la alcaldía.</td></tr>
+        <tr><td>Automatización</td><td>Ejecuta pasos repetitivos.</td><td>Clasificar correos o llenar planillas.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Riesgos y supervisión humana</h2>
+    <table class="ref">
+      <thead><tr><th>Riesgo</th><th>Qué puede pasar</th><th>Salvaguarda</th></tr></thead>
+      <tbody>
+        <tr><td>Error de datos</td><td>Busca mal, cita una fuente incorrecta o extrae un dato erróneo.</td><td>Verificar contra la fuente; RAG con documentos confiables.</td></tr>
+        <tr><td>Acción indebida</td><td>Envía, publica o modifica algo que no debía.</td><td>Menor privilegio: leer, pero no enviar; sugerir, pero no publicar.</td></tr>
+        <tr><td>Falta de transparencia</td><td>No queda claro por qué tomó una decisión.</td><td>Auditoría y trazabilidad: registrar qué hizo y con qué fuentes.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box">
+      <p><strong>Por qué importa:</strong> un agente <strong>actúa</strong>, así que un error no es solo una frase: puede ser una <strong>acción</strong>. En el sector público la responsabilidad es del <strong>funcionario</strong>, no de la herramienta: <strong>el agente sugiere, el humano decide</strong>.</p>
+    </div>
+
+    <h2>Para llevar</h2>
+    <p class="refs">
+      <strong>Agente</strong> → LLM + herramientas que actúan. &nbsp;·&nbsp;
+      <strong>Componentes</strong> → modelo, herramientas, memoria, planificación. &nbsp;·&nbsp;
+      <strong>RAG</strong> → buscar y citar fuentes. &nbsp;·&nbsp;
+      <strong>Supervisión</strong> → humano en el circuito, menor privilegio y trazabilidad. &nbsp;·&nbsp;
+      <strong>Confidencialidad</strong> → no subir datos de ciudadanos ni documentos reservados.
+    </p>
+
+    <p class="refs">Fuentes: Microsoft Learn (<em>Fundamentos de IA generativa y agentes</em>); Russell y Norvig, <em>Inteligencia artificial: un enfoque moderno</em>.</p>
+
+    <div class="nav">
+      <a href="../lessons/0006-agentes-de-ia.html">← Lección 06: agentes de IA</a>
+      <a href="../presentacion_sesion10.html">Presentación de la sesión 10 →</a>
+    </div>
+  </div>
+</body>
+</html>

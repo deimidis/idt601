@@ -1,0 +1,374 @@
+<!-- .slide: class="cover" -->
+<div class="kicker">Ingeniería de Datos · IDT 601</div>
+<h1>Agentes de IA y taller integrador</h1>
+<p class="lead">Del chat que responde al agente que actúa.</p>
+<div class="mark">Bloque 6 · Sesión 10 · EGPP</div>
+<div class="cover-side" aria-hidden="true"><div class="code-stack"><span>agente =</span><span>modelo + herramientas</span><span>+ memoria + planificación</span></div></div>
+
+Note:
+- Dar la bienvenida y ubicar esta sesión como la **última del módulo** y del Bloque 6.
+- Hacer el puente: "Aprendimos a conversar con un LLM y a armar prompts; hoy lo vemos **actuar con herramientas** y cerramos integrando todo en una mini-solución".
+- Anunciar el tono de la jornada: más práctica que teórica, con un taller que ocupa la mayor parte del tiempo.
+- **No olvidar:** avisar que hay una **pausa de 10 minutos** a mitad de sesión y que hoy se entrega y defiende una mini-solución.
+
+---
+
+<div class="topline"><span class="kicker">01 / Hoja de ruta</span><span class="mark">180 minutos</span></div>
+<div class="content single"><h2 class="slide-title">Una sola sesión que cierra el módulo</h2>
+  <table class="type-table">
+    <thead><tr><th>Bloque</th><th>Tiempo</th><th>Qué haremos</th></tr></thead>
+    <tbody>
+      <tr><td>Apertura y encuadre</td><td>10 min</td><td>Bienvenida, cierre del módulo y preguntas.</td></tr>
+      <tr><td>Del chat al agente</td><td>15 min</td><td>De responder a actuar.</td></tr>
+      <tr><td>Componentes</td><td>20 min</td><td>Modelo, herramientas, memoria y planificación.</td></tr>
+      <tr><td>Ejemplos: asistentes, RAG, automatización</td><td>15 min</td><td>Casos aplicados a la gestión pública.</td></tr>
+      <tr><td>Pausa</td><td>10 min</td><td>Receso.</td></tr>
+      <tr><td>Riesgos y supervisión humana</td><td>10 min</td><td>Errores, control, responsabilidad y confidencialidad.</td></tr>
+      <tr><td>Método y consigna</td><td>15 min</td><td>Definir, armar, evaluar y mejorar.</td></tr>
+      <tr><td>Taller: definir y armar</td><td>35 min</td><td>Tarea y prompts/flujo de la mini-solución.</td></tr>
+      <tr><td>Taller: evaluar, mejorar y preparar la defensa</td><td>25 min</td><td>Prueba, mejora y preparación de la defensa.</td></tr>
+      <tr><td>Presentación y defensa (2 min por equipo)</td><td>15 min</td><td>Cada equipo presenta su mini-solución.</td></tr>
+      <tr><td>Cierre del módulo y preguntas</td><td>10 min</td><td>Síntesis integradora y trabajo final.</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Hoja de ruta</span><span>02</span></div>
+
+Note:
+- Recorrer los tramos del cuadro de un vistazo, sin detenerse en cada uno.
+- Subrayar que **75 minutos** son taller (35 + 25 + 15 de defensa): la sesión se juega en el trabajo en equipos.
+- Señalar la pausa tras el bloque de ejemplos y RAG.
+- **No olvidar:** el bloque "evaluar, mejorar y preparar la defensa" dura **25 min** y la defensa es de **2 min por equipo**; el cronograma suma 180 min.
+
+---
+
+<div class="topline"><span class="kicker">02 / Encuadre</span><span class="mark">Tres preguntas</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Tres preguntas guían la sesión</h2><p class="body-copy">Un agente <strong>no solo responde: actúa</strong> con herramientas; por eso requiere <strong>supervisión humana</strong>.</p></div>
+  <div><p class="body-copy">1. ¿<strong>Qué es</strong> un agente y en qué se diferencia del chat?<br>2. ¿<strong>Cómo se diseña</strong> el flujo de trabajo de un agente?<br>3. ¿<strong>Cómo integro</strong> lo aprendido en una solución útil para mi institución?</p></div>
+</div>
+<div class="footer"><span>Encuadre</span><span>03</span></div>
+
+Note:
+- Enganche: comparar "¿qué trámites se pueden hacer en línea?" con "buscá y armá una tabla comparando requisitos".
+- Preguntar al grupo: "¿qué cambió entre las dos respuestas?".
+- Escribir en la pizarra los dos flujos: Chat = entrada → respuesta; Agente = tarea → plan → pasos → resultado → revisión.
+- **No olvidar:** dejar claro que el agente no "sabe más": actúa más y por eso requiere supervisión humana.
+
+---
+
+<div class="topline"><span class="kicker">03 / Del chat al agente</span><span class="mark">Qué cambia</span></div>
+<div class="content single"><h2 class="slide-title">Del chat que responde al agente que actúa</h2>
+  <div class="split">
+    <div class="split-panel"><h3>El chat responde</h3><p>Genera texto a partir del prompt. No actúa sobre el mundo; se apoya en su entrenamiento y en la conversación.</p></div>
+    <div class="split-panel"><h3>El agente actúa</h3><p>Decide pasos y ejecuta acciones con herramientas: buscar, leer, consultar, calcular o llamar a otro sistema.</p></div>
+  </div>
+  <p class="body-copy">Chat: <strong>entrada → respuesta</strong>. Agente: <strong>tarea → plan → pasos → resultado → revisión</strong>. Es como preguntarle a un colega frente a <strong>encargarle una tarea</strong>.</p>
+</div>
+<div class="footer"><span>Del chat al agente</span><span>04</span></div>
+
+Note:
+- Contrastar las dos columnas: el chat responde con texto; el agente decide pasos y ejecuta acciones.
+- Usar la analogía del colega: preguntarle algo es el chat; encargarle una tarea completa es el agente.
+- Insistir en el eslabón final: el agente siempre termina en **revisión**.
+- **No olvidar:** un error del chat es una frase; un error del agente puede ser una acción con consecuencias.
+
+---
+
+<div class="topline"><span class="kicker">04 / Herramientas</span><span class="mark">Qué puede hacer</span></div>
+<div class="content single"><h2 class="slide-title">Un agente no responde: usa herramientas</h2>
+  <div class="flow">
+    <div class="flow-step"><strong>Buscar</strong><p>En la web o en los documentos y la normativa de la institución.</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>Leer y consultar</strong><p>Un PDF, una planilla o una base de datos interna.</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>Ejecutar</strong><p>Código, cálculos o el envío de un correo.</p></div>
+  </div>
+  <p class="body-copy">Cada herramienta trae su <strong>descripción</strong> para que el modelo sepa cuándo usarla. El agente solo puede hacer lo que se le habilita.</p>
+</div>
+<div class="footer"><span>Herramientas</span><span>05</span></div>
+
+Note:
+- Explicar que un agente usa **herramientas** y que cada una trae una descripción para que el modelo sepa cuándo usarla.
+- Dar ejemplos concretos: buscar en la web o en los documentos de la institución, leer un PDF o una planilla, ejecutar código o enviar un correo.
+- Insistir en que no se limita a responder: **descompone** la tarea en pasos hasta cumplirla.
+- **No olvidar:** el agente solo puede actuar con las herramientas que se le habilitan; nada más.
+
+---
+
+<div class="topline"><span class="kicker">05 / Componentes</span><span class="mark">La anatomía</span></div>
+<div class="content single"><h2 class="slide-title">Cuatro componentes de un agente</h2>
+  <table class="type-table">
+    <thead><tr><th>Componente</th><th>Qué es</th><th>Analogía</th></tr></thead>
+    <tbody>
+      <tr><td>Modelo</td><td>El LLM que razona y decide.</td><td>El cerebro</td></tr>
+      <tr><td>Herramientas</td><td>Lo que usa para actuar.</td><td>Las manos</td></tr>
+      <tr><td>Memoria</td><td>Lo que recuerda de la tarea.</td><td>La agenda</td></tr>
+      <tr><td>Planificación</td><td>Cómo ordena los pasos.</td><td>El método</td></tr>
+    </tbody>
+  </table>
+  <img class="diagram diagram--sm" src="assets/esquema-componentes-agente.svg" alt="Cuatro componentes de un agente: modelo, herramientas, memoria y planificación; regla de oro: el agente sugiere, el humano decide." />
+</div>
+<div class="footer"><span>Componentes</span><span>06</span></div>
+
+Note:
+- Presentar los cuatro componentes con su analogía: cerebro, manos, agenda y método.
+- Explicar que un agente no es solo el modelo: es la combinación de las cuatro piezas.
+- **Esquema en pantalla:** modelo, herramientas, memoria y planificación sobre una fila; abajo, la regla de oro "el agente sugiere, el humano decide".
+- **No olvidar:** la planificación puede seguir un flujo definido por una persona o decidir pasos por su cuenta, y eso cambia el nivel de control.
+
+---
+
+<div class="topline"><span class="kicker">05 / Componentes</span><span class="mark">De cerca</span></div>
+<div class="content single"><h2 class="slide-title">Cada pieza cumple un papel</h2>
+  <div class="cards">
+    <article class="card"><h3>Modelo</h3><div class="code">el cerebro</div><p>El motor de lenguaje que razona y decide. El agente le suma capacidades de acción.</p></article>
+    <article class="card"><h3>Herramientas</h3><div class="code">las manos</div><p>Búsqueda, documentos, código, base de datos o correo. Cada una trae su descripción.</p></article>
+    <article class="card"><h3>Memoria</h3><div class="code">la agenda</div><p>Lo que recuerda dentro de la tarea: la conversación o el registro de pasos hechos.</p></article>
+  </div>
+  <p class="body-copy">La <strong>planificación</strong> es el método: descompone la tarea en pasos y los ordena; puede seguir un flujo definido por una persona o decidir por su cuenta.</p>
+</div>
+<div class="footer"><span>Componentes</span><span>07</span></div>
+
+Note:
+- Recorrer modelo, herramientas y memoria con un ejemplo local: razonar sobre una consulta, leer la normativa o una planilla, recordar los pasos hechos.
+- Insistir en las consecuencias: **sin herramientas** un LLM solo conversa; **sin planificación** no encadena pasos; **sin memoria** pierde el hilo.
+- Mencionar que cada herramienta trae su descripción para que el modelo sepa cuándo usarla.
+- **No olvidar:** las cuatro piezas trabajan juntas; quitar una rompe el resultado.
+
+---
+
+<div class="topline"><span class="kicker">06 / Ejemplos</span><span class="mark">En la gestión pública</span></div>
+<div class="content single"><h2 class="slide-title">Tres usos habituales</h2>
+  <div class="cards">
+    <article class="card"><h3>Asistentes</h3><p>Conversan y resuelven dentro de un dominio, usando los documentos de la institución.</p></article>
+    <article class="card"><h3>RAG</h3><p>Busca en los documentos propios y genera la respuesta <strong>citando</strong> lo encontrado.</p></article>
+    <article class="card"><h3>Automatización</h3><p>Ejecuta pasos repetitivos: clasificar correos, llenar planillas, generar reportes.</p></article>
+  </div>
+  <p class="body-copy">Ejemplos locales: requisitos de trámites, derivación de reclamos y resúmenes de informes para una autoridad.</p>
+</div>
+<div class="footer"><span>Ejemplos</span><span>08</span></div>
+
+Note:
+- Presentar los tres usos: asistentes, RAG y automatización.
+- Dar un ejemplo boliviano de cada uno: requisitos de trámites, derivación de reclamos y resúmenes de informes para una autoridad.
+- Preguntar: "¿cuál de los tres usaría primero su institución y por qué?".
+- **No olvidar:** RAG cita fuentes y la automatización ejecuta pasos repetitivos; no son lo mismo.
+
+---
+
+<div class="topline"><span class="kicker">06 / Ejemplos</span><span class="mark">RAG</span></div>
+<div class="content">
+  <div><h2 class="slide-title">Responder con fuentes, no solo de memoria</h2><p class="body-copy"><strong>Retrieval-Augmented Generation:</strong> primero el agente <strong>busca</strong> en los documentos propios; luego <strong>genera</strong> la respuesta <strong>citando</strong> lo encontrado. Así reduce las alucinaciones.</p></div>
+  <div><div class="card"><h3>Dos pasos</h3><div class="code">buscar → citar</div><p>Un agente que consulta el reglamento interno de la alcaldía y responde con la referencia exacta.</p></div></div>
+</div>
+<div class="footer"><span>RAG</span><span>09</span></div>
+
+Note:
+- Explicar los dos pasos: primero buscar en los documentos propios; luego generar citando lo encontrado.
+- Señalar el beneficio central: responde **con fuentes**, no solo de memoria, y así **reduce las alucinaciones**.
+- Ejemplo: un agente que consulta el reglamento interno de la alcaldía y responde con la referencia exacta.
+- **No olvidar:** sin documentos internos ordenados y confiables, RAG no aporta valor; la calidad de las fuentes es la condición.
+
+---
+
+<div class="topline"><span class="kicker">07 / Riesgos</span><span class="mark">El agente actúa</span></div>
+<div class="content single"><h2 class="slide-title">El agente amplifica los errores del LLM</h2>
+  <div class="cards">
+    <article class="card"><h3>Error de datos</h3><p>Cita mal una fuente, busca mal o extrae un dato erróneo.</p></article>
+    <article class="card"><h3>Acción indebida</h3><p>Envía, publica o modifica algo que no debía.</p></article>
+    <article class="card"><h3>Falta de transparencia</h3><p>No queda claro por qué tomó tal decisión.</p></article>
+  </div>
+  <p class="body-copy">Sus errores no son solo una frase: pueden ser una <strong>acción</strong>. Por eso exige controles.</p>
+</div>
+<div class="footer"><span>Riesgos</span><span>10</span></div>
+
+Note:
+- Explicar que el agente **amplifica los límites del LLM** porque sus errores se traducen en acciones.
+- Recorrer los tres riesgos: **error de datos**, **acción indebida** y **falta de transparencia**.
+- Añadir que también puede usar mal una herramienta, interpretar mal una instrucción o encadenar errores.
+- **No olvidar:** un error de un agente no es solo una frase mal escrita; puede ser un envío, una publicación o un cambio indebido.
+
+---
+
+<div class="topline"><span class="kicker">08 / Supervisión</span><span class="mark">Human-in-the-loop</span></div>
+<div class="content single"><h2 class="slide-title">La responsabilidad sigue siendo humana</h2>
+  <div class="split">
+    <div class="split-panel"><h3>Controles</h3><p>Humano en el circuito para aprobar acciones críticas; principio de menor privilegio (leer, pero no enviar; sugerir, pero no publicar).</p></div>
+    <div class="split-panel"><h3>Trazabilidad</h3><p>Registrar qué hizo y con qué fuentes. En el sector público, la responsabilidad es del funcionario, no del agente.</p></div>
+  </div>
+  <p class="quote">El agente sugiere, <em>el humano decide</em>.</p>
+</div>
+<div class="footer"><span>Supervisión humana</span><span>11</span></div>
+
+Note:
+- Presentar los tres controles: **humano en el circuito**, **menor privilegio** (leer pero no enviar, sugerir pero no publicar) y **trazabilidad**.
+- Dejar instalada la regla de oro: **el agente sugiere, el humano decide**.
+- Enfatizar que en el sector público la responsabilidad es del **funcionario**, no del agente.
+- **No olvidar:** sin registro de qué hizo y con qué fuentes no hay auditoría posible.
+
+---
+
+<div class="topline"><span class="kicker">09 / Aplicación integrada</span><span class="mark">El método</span></div>
+<div class="content single"><h2 class="slide-title">Cuatro pasos para una mini-solución</h2>
+  <div class="flow">
+    <div class="flow-step"><strong>Definir</strong><p>Qué problema, para quién y qué resultado. Acotado y concreto.</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>Armar</strong><p>Prompts (chat) o flujo con sus componentes y control humano.</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>Evaluar</strong><p>Probar con casos reales y criterio experto.</p></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step"><strong>Mejorar</strong><p>Ajustar prompts, flujos o fuentes e iterar.</p></div>
+  </div>
+</div>
+<div class="footer"><span>Aplicación integrada</span><span>12</span></div>
+
+Note:
+- Explicar el ciclo de cuatro pasos: **Definir → Armar → Evaluar → Mejorar**, y que vuelve a empezar.
+- Detallar brevemente: problema y destinatario; prompts o flujo con control humano; prueba con casos reales; ajuste e iteración.
+- Repetir la regla: mejor un paso útil y concreto que un proyecto enorme.
+- **No olvidar:** este es el método que usarán tanto en el taller de hoy como en el trabajo final integrador.
+
+---
+
+<div class="topline"><span class="kicker">10 / Taller</span><span class="mark">En equipos de 3–4</span></div>
+<div class="content single"><h2 class="slide-title">Construir y defender una mini-solución</h2>
+  <div class="cards">
+    <article class="card"><h3>1. Definir</h3><p>Un problema institucional acotado y su destinatario.</p></article>
+    <article class="card"><h3>2. Armar</h3><p>Prompts para el chat o el flujo del agente con sus componentes.</p></article>
+    <article class="card"><h3>3. Evaluar y mejorar</h3><p>Probar con un caso real, corregir y aplicar una mejora.</p></article>
+  </div>
+  <p class="body-copy">Tiempos: definir y armar <strong>35 min</strong> · evaluar, mejorar y preparar la defensa <strong>25 min</strong> · defensa <strong>2 min por equipo</strong>.</p>
+</div>
+<div class="footer"><span>Taller</span><span>13</span></div>
+
+Note:
+- Formar equipos de **3 a 4** personas y repartir las dos plantillas (flujo y entrega).
+- Dar la consigna y los tiempos: primero definir y armar (35 min), luego evaluar, mejorar y preparar la defensa (25 min); la defensa es de **2 min por equipo**.
+- Recordar que hay un chat LLM disponible para apoyar el trabajo, siempre con datos ficticios o públicos.
+- **No olvidar:** antes de empezar, cada equipo debe anotar el problema y su destinatario.
+
+---
+
+<div class="topline"><span class="kicker">10 / Taller</span><span class="mark">Los cinco casos</span></div>
+<div class="content single"><h2 class="slide-title">Un caso acotado por equipo</h2>
+  <table class="type-table">
+    <thead><tr><th>Caso</th><th>Cómo se resuelve</th></tr></thead>
+    <tbody>
+      <tr><td>1. Asistente de trámites</td><td>Chat que responde con la normativa institucional.</td></tr>
+      <tr><td>2. Clasificador de reclamos</td><td>Chat que propone la categoría; la persona revisa y deriva.</td></tr>
+      <tr><td>3. Resumidor de informes</td><td>Chat que resume un informe para una autoridad.</td></tr>
+      <tr><td>4. Verificador de expedientes</td><td>Chat que marca documentos faltantes en un caso ficticio; la persona confirma.</td></tr>
+      <tr><td>5. Avisos a la ciudadanía</td><td>Chat que redacta avisos claros sobre servicios y trámites.</td></tr>
+    </tbody>
+  </table>
+  <p class="body-copy">Los casos <strong>2 y 4</strong> se resuelven con <strong>chat + criterio + supervisión humana</strong>: no hace falta una plataforma de agentes real. El <strong>flujo del agente se diseña y se documenta</strong> con la plantilla, aunque no se ejecute en vivo.</p>
+</div>
+<div class="footer"><span>Taller</span><span>14</span></div>
+
+Note:
+- Leer los cinco casos y pedir que cada equipo elija **uno acotado**.
+- Explicar que los casos 2 y 4 se resuelven con **chat + criterio + supervisión humana**, sin plataforma de agentes real.
+- Aclarar que el **flujo del agente se diseña y se documenta** con la plantilla de diseño, aunque no se ejecute en vivo.
+- **No olvidar:** se trabaja siempre con un caso **ficticio o público**; nunca con reclamos o expedientes reales.
+
+---
+
+<div class="topline"><span class="kicker">10 / Taller</span><span class="mark">Control humano</span></div>
+<div class="content single"><h2 class="slide-title">Dónde revisa una persona</h2>
+  <div class="split">
+    <div class="split-panel"><h3>Punto de control humano</h3><p>Antes de usar el resultado, una persona <strong>revisa</strong> el dato, <strong>confirma</strong> la categoría y <strong>decide</strong> la acción. El agente sugiere; el funcionario firma.</p></div>
+    <div class="split-panel"><h3>Confidencialidad</h3><p><strong>No se suben</strong> datos de ciudadanos ni documentos reservados a un chat público. Se usa un caso ficticio, un dato ya público o un documento abierto.</p></div>
+  </div>
+</div>
+<div class="footer"><span>Taller</span><span>15</span></div>
+
+Note:
+- Explicar dónde se ubica el punto de control humano en cada caso.
+- Dejar instalada la regla de confidencialidad: no subir datos de ciudadanos ni documentos reservados a un chat público.
+- Recordar que la responsabilidad en el sector público es del funcionario, no de la herramienta.
+- **No olvidar:** pedir a cada equipo que escriba **dónde** revisa una persona su resultado.
+
+---
+
+<div class="topline"><span class="kicker">10 / Taller</span><span class="mark">Entrega y defensa</span></div>
+<div class="content single"><h2 class="slide-title">Qué se entrega y qué se defiende</h2>
+  <table class="type-table">
+    <thead><tr><th>Entregable</th><th>Qué muestra</th></tr></thead>
+    <tbody>
+      <tr><td>Tarea</td><td>El problema y para quién.</td></tr>
+      <tr><td>Prompt o flujo</td><td>Los componentes y el control humano.</td></tr>
+      <tr><td>Resultado</td><td>La prueba con un caso ficticio o público.</td></tr>
+      <tr><td>Evaluación crítica</td><td>Qué hubo que verificar o corregir.</td></tr>
+      <tr><td>Mejora aplicada</td><td>Qué cambiaron y por qué.</td></tr>
+    </tbody>
+  </table>
+  <p class="body-copy">Defensa de <strong>2 min</strong> por equipo. No se busca la perfección técnica, sino la <strong>integración consciente</strong> de lo aprendido.</p>
+</div>
+<div class="footer"><span>Taller</span><span>16</span></div>
+
+Note:
+- Mostrar la plantilla de entrega: tarea, prompt o flujo, resultado, evaluación crítica y mejora aplicada.
+- Explicar que la defensa es de **2 minutos** por equipo y se apoya en esa plantilla.
+- Aclarar que no se busca la perfección técnica, sino la integración consciente de lo aprendido.
+- **No olvidar:** cada equipo debe mostrar explícitamente **qué tuvo que verificar o corregir** y qué dato no subiría a un chat público.
+
+---
+
+<div class="topline"><span class="kicker">11 / Cierre</span><span class="mark">Síntesis integradora</span></div>
+<div class="content single"><h2 class="slide-title">El módulo en una cadena</h2>
+  <table class="type-table">
+    <thead><tr><th>Eslabón</th><th>Qué aporta</th></tr></thead>
+    <tbody>
+      <tr><td>Datos y calidad</td><td>El activo de partida, sin el cual nada es confiable.</td></tr>
+      <tr><td>Ingesta</td><td>Traer los datos de las fuentes, por lotes o en tiempo real.</td></tr>
+      <tr><td>Arquitectura</td><td>Organizar el almacenamiento y el procesamiento.</td></tr>
+      <tr><td>Integración</td><td>Transformar y combinar datos para que sean útiles.</td></tr>
+      <tr><td>Licencias y datos abiertos</td><td>Usar y compartir datos de forma legal y transparente.</td></tr>
+      <tr><td>IA, LLMs y agentes</td><td>Convertir los datos en respuestas y acciones.</td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="footer"><span>Síntesis del módulo</span><span>17</span></div>
+
+Note:
+- Recorrer los seis eslabones: datos y calidad, ingesta, arquitectura, integración, licencias y datos abiertos, IA y agentes.
+- Señalar que cada eslabón **habilita al siguiente** y que el módulo culmina en la capa de IA.
+- Pedir que cada equipo conecte su mini-solución con alguno de esos eslabones.
+- **No olvidar:** sin datos de calidad, los eslabones siguientes no sostienen nada; el dato es el activo de partida.
+
+---
+
+<div class="topline"><span class="kicker">11 / Cierre</span><span class="mark">Fin del módulo</span></div>
+<div class="content single"><h2 class="slide-title">La IA potencia al profesional público</h2>
+  <div class="cards">
+    <article class="card"><h3>Potenciar</h3><p>La IA no reemplaza al profesional público: lo potencia cuando hay criterio.</p></article>
+    <article class="card"><h3>Condiciones</h3><p>Datos de calidad, método de trabajo y supervisión humana.</p></article>
+    <article class="card"><h3>Trabajo final</h3><p>Suma la <strong>licencia del dataset</strong> (Bloque 5) y un <strong>prompt/flujo con control humano</strong> (Bloque 6).</p></article>
+  </div>
+  <p class="quote">Datos de calidad + método + <em>supervisión humana</em> = valor público.</p>
+</div>
+<div class="footer"><span>Cierre del módulo</span><span>18</span></div>
+
+Note:
+- Reforzar la idea fuerza: la IA no reemplaza al profesional público, lo potencia cuando hay criterio.
+- Enunciar las condiciones: datos de calidad, método de trabajo y supervisión humana.
+- Presentar el trabajo final integrador e insistir en los **dos componentes obligatorios**: (a) la declaración de licencia del dataset usado (Bloque 5) y (b) un prompt o flujo de agente documentado con su punto de control humano (Bloque 6).
+- **No olvidar:** el trabajo final se entrega fuera de clase y se evalúa con la rúbrica del módulo.
+
+---
+
+<!-- .slide: class="dark" -->
+<div class="topline"><span class="kicker">Fin</span><span class="mark">Ingeniería de Datos · IDT 601</span></div>
+<div class="content single">
+  <h2 class="slide-title">Gracias</h2>
+  <p class="lead">Bloque 6 · Sesión 10 · Agentes y taller</p>
+  <p class="quote">La IA potencia al profesional público cuando los datos son buenos y hay supervisión humana.</p>
+</div>
+<div class="footer"><span>EGPP · Escuela de Gestión Pública Plurinacional</span><span>19</span></div>
+
+Note:
+- Agradecer la participación del grupo a lo largo del módulo.
+- Recordar la entrega del trabajo final integrador, con la declaración de licencia del dataset y el prompt/flujo con punto de control humano.
+- Abrir el espacio para preguntas y cerrar la cursada.
+- **No olvidar:** confirmar el canal y la fecha límite de entrega del trabajo final.

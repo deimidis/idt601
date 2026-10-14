@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="es" data-od-deck-protocol="1">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agentes de IA y taller integrador</title>
+  <style>
+    :root {
+      --bg: #f5f3eb;
+      --fg: #2a4d40;
+      --muted: #3d6558;
+      --accent: #507a6e;
+      --accent-2: #dabc6e;
+      --surface: #a9bebd;
+      --shell: #08090d;
+      --line: #a4bfbe;
+      --logo: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2080%2080%27%3E%3Crect%20x%3D%270%27%20y%3D%270%27%20width%3D%2740%27%20height%3D%2740%27%20fill%3D%27%232A4D40%27%2F%3E%3Crect%20x%3D%2740%27%20y%3D%270%27%20width%3D%2740%27%20height%3D%2740%27%20fill%3D%27%233D6558%27%2F%3E%3Crect%20x%3D%270%27%20y%3D%2740%27%20width%3D%2740%27%20height%3D%2740%27%20fill%3D%27%237E9A8E%27%2F%3E%3Crect%20x%3D%2740%27%20y%3D%2740%27%20width%3D%2740%27%20height%3D%2740%27%20fill%3D%27%23A9BEBD%27%2F%3E%3Ctext%20x%3D%2720%27%20y%3D%2729%27%20fill%3D%27%23FFFFFF%27%20font-family%3D%27Arial%2CHelvetica%2Csans-serif%27%20font-size%3D%2727%27%20font-weight%3D%27bold%27%20text-anchor%3D%27middle%27%3EE%3C%2Ftext%3E%3C%2Fsvg%3E");
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: var(--shell); color: var(--fg); font: 18px/1.5 Calibri, "Segoe UI", Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+    .deck-shell { position: fixed; inset: 0; overflow: hidden; }
+    .deck-stage { width: 1920px; height: 1080px; background: var(--bg); position: relative; transform-origin: top left; box-shadow: 0 30px 80px rgba(0,0,0,.35); }
+    .slide { position: absolute; inset: 0; overflow: hidden; }
+    .slide:not(.active) { display: none !important; }
+    :where(.slide.active) { display: flex; flex-direction: column; }
+    .deck-counter { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); display: none; align-items: center; gap: 4px; background: rgba(10,14,26,.92); padding: 6px; border-radius: 999px; border: 1px solid rgba(255,255,255,.08); color: #fff; font: 12px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .18em; z-index: 1000; }
+    .deck-counter button { width: 36px; height: 36px; background: transparent; color: #fff; border: 0; border-radius: 50%; font-size: 18px; cursor: pointer; }
+    .deck-counter button:hover { background: rgba(255,255,255,.12); }
+    .deck-counter button[disabled] { opacity: .3; cursor: default; }
+    .deck-counter .deck-count { padding: 0 14px; letter-spacing: .22em; }
+    .deck-counter .deck-count .total { color: rgba(255,255,255,.5); }
+    .deck-hint { position: fixed; bottom: 26px; right: 28px; color: rgba(255,255,255,.4); font: 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: .2em; text-transform: uppercase; z-index: 999; pointer-events: none; display: none; }
+    @media print {
+      @page { size: 1920px 1080px; margin: 0; }
+      html, body { width: 1920px !important; height: auto !important; overflow: visible !important; background: #fff !important; }
+      .deck-shell { position: static !important; display: block !important; inset: auto !important; }
+      .deck-stage { width: 1920px !important; height: auto !important; transform: none !important; box-shadow: none !important; position: static !important; }
+      .slide { display: flex !important; position: relative !important; inset: auto !important; width: 1920px !important; height: 1080px !important; page-break-after: always; break-after: page; }
+      .slide:last-child { page-break-after: auto; break-after: auto; }
+      .deck-counter, .deck-hint { display: none !important; }
+    }
+  </style>
+  <style>
+    /* Sistema visual editable: cambia data-theme en <html> para alternar estilo. */
+    :root[data-theme="egpp"] { --bg:#f5f3eb; --fg:#2a4d40; --muted:#3d6558; --accent:#507a6e; --accent-2:#dabc6e; --surface:#a9bebd; --line:#a4bfbe; }
+    :root[data-theme="github"] { --bg:#ffffff; --fg:#1f2328; --muted:#57606a; --accent:#0969da; --accent-2:#1a7f37; --surface:#f6f8fa; --line:#d0d7de; }
+    :root[data-theme="datadog"] { --bg:#111318; --fg:#f4f5f7; --muted:#b2b7c2; --accent:#632ca6; --accent-2:#f04f5f; --surface:#1c1f27; --line:#353a47; }
+    .slide { padding: 72px 112px 64px; background: var(--bg); }
+    .slide::after { content: ''; position: absolute; left: 112px; right: 112px; bottom: 32px; height: 4px; background: var(--accent); opacity: .9; }
+    .slide.dark { background: var(--muted); color: #fff; }
+    .slide.dark::after { background: var(--accent-2); }
+    /* Logo como marca de agua de fondo. */
+    .slide::before {
+      content: '';
+      position: absolute;
+      right: 48px;
+      bottom: 96px;
+      width: 108px;
+      height: 108px;
+      background: var(--logo) no-repeat center / contain;
+      opacity: .3;
+      pointer-events: none;
+    }
+    .slide.dark::before { opacity: .5; }
+    .kicker { color: var(--accent); font-size: 18px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+    .dark .kicker { color: #ffd28a; }
+    h1, h2, h3 { font-family: "Calibri Light", Calibri, "Segoe UI", sans-serif; font-weight: 300; letter-spacing: -.025em; }
+    h1 { font-size: 116px; line-height: 1.08; max-width: 920px; }
+    h2 { font-size: 64px; line-height: 1.12; max-width: 1240px; }
+    h3 { font-size: 30px; line-height: 1.2; }
+    p { max-width: 65ch; }
+    .lead { font-size: 28px; line-height: 1.45; color: var(--muted); max-width: 820px; }
+    .dark .lead, .dark .muted { color: #e5e7eb; }
+    .topline { display: flex; justify-content: space-between; align-items: center; margin-bottom: 96px; }
+    .mark { color: var(--muted); font-size: 16px; letter-spacing: .08em; text-transform: uppercase; }
+    .dark .mark { color: #d5d8df; }
+    .cover { justify-content: center; padding-left: 176px; background: linear-gradient(90deg, var(--bg) 0 67%, var(--accent) 67% 100%); }
+    .cover .kicker { margin-bottom: 30px; }
+    .cover h1 { margin-bottom: 40px; }
+    .cover .lead { margin-bottom: 56px; }
+    .cover-side { position: absolute; right: 94px; top: 50%; transform: translateY(-50%); width: 430px; color: #fff; }
+    .cover-side .code-stack { border-left: 4px solid var(--accent-2); padding-left: 28px; font: 24px/1.8 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .cover-side .code-stack span { display: block; }
+    .cover-side .code-stack span:nth-child(2) { padding-left: 34px; opacity: .82; }
+    .cover-side .code-stack span:nth-child(3) { padding-left: 70px; opacity: .64; }
+    .content { display: grid; grid-template-columns: 1.02fr .98fr; gap: 84px; align-items: center; flex: 1; min-height: 0; }
+    .content.single { display: block; }
+    .slide-title { margin-bottom: 36px; }
+    .body-copy { font-size: 24px; line-height: 1.55; color: var(--muted); }
+    .body-copy strong { color: var(--fg); font-weight: 600; }
+    .dark .body-copy { color: #e5e7eb; }
+    .dark .body-copy strong { color: #fff; }
+    .number { font-size: 210px; line-height: .86; color: var(--accent); font-family: "Calibri Light", Calibri, sans-serif; letter-spacing: -.06em; }
+    .number-label { margin-top: 28px; font-size: 26px; color: var(--muted); max-width: 360px; }
+    .dark .number-label { color: #e5e7eb; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 44px; }
+    .card { min-height: 300px; padding: 30px; border: 1px solid var(--line); background: var(--surface); border-top: 8px solid var(--accent); }
+    .card:nth-child(2) { border-top-color: var(--accent-2); }
+    .card:nth-child(3) { border-top-color: #70ad47; }
+    .card .code { margin: 22px 0; color: var(--accent); font: 25px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .card p { color: var(--muted); font-size: 20px; line-height: 1.45; }
+    .dark .card { background: var(--surface); border-color: var(--line); }
+    .dark .card p { color: #d6d9e0; }
+    .type-table { width: 100%; border-collapse: collapse; font-size: 22px; margin-top: 36px; }
+    .type-table th, .type-table td { text-align: left; padding: 20px 24px; border-bottom: 1px solid var(--line); }
+    .type-table th { color: var(--accent); font-weight: 600; font-size: 18px; letter-spacing: .06em; text-transform: uppercase; }
+    .type-table td:first-child { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--accent-2); }
+    .flow { display: flex; align-items: center; gap: 16px; margin-top: 48px; }
+    .flow-step { flex: 1; min-height: 180px; padding: 26px; background: var(--surface); border: 1px solid var(--line); }
+    .flow-step strong { display: block; margin-bottom: 16px; color: var(--accent); font-size: 25px; }
+    .flow-step p { font-size: 20px; color: var(--muted); }
+    .flow-arrow { color: var(--accent-2); font-size: 38px; }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 42px; }
+    .split-panel { padding: 42px; min-height: 300px; background: var(--surface); border-left: 8px solid var(--accent); }
+    .split-panel:last-child { border-left-color: var(--accent-2); }
+    .split-panel h3 { margin-bottom: 22px; }
+    .split-panel p { font-size: 23px; color: var(--muted); line-height: 1.5; }
+    .quote { max-width: 1100px; margin-top: 86px; font-size: 58px; line-height: 1.22; font-family: "Calibri Light", Calibri, sans-serif; }
+    .quote em { color: var(--accent); font-style: normal; }
+    .diagram { display: block; width: 100%; max-height: 420px; margin: 28px auto 0; object-fit: contain; }
+    .footer { position: absolute; bottom: 48px; left: 112px; right: 112px; display: flex; justify-content: space-between; color: var(--muted); font-size: 15px; }
+    .dark .footer { color: #d5d8df; }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="deck-shell">
+    <div class="deck-stage" id="deck-stage">
+      <section class="slide active cover" data-screen-label="01 Agentes de IA y taller integrador">
+        <div class="kicker">Ingeniería de Datos · IDT 601</div>
+        <h1>Agentes de IA y taller integrador</h1>
+        <p class="lead">Del chat que responde al agente que actúa.</p>
+        <div class="mark">Bloque 6 · Sesión 10 · EGPP</div>
+        <div class="cover-side" aria-hidden="true"><div class="code-stack"><span>agente =</span><span>modelo + herramientas</span><span>+ memoria + planificación</span></div></div>
+      </section>
+
+      <section class="slide" data-screen-label="02 Hoja de ruta">
+        <div class="topline"><span class="kicker">01 / Hoja de ruta</span><span class="mark">180 minutos</span></div>
+        <div class="content single"><h2 class="slide-title">Una sola sesión que cierra el módulo</h2>
+          <table class="type-table">
+            <thead><tr><th>Bloque</th><th>Tiempo</th><th>Qué haremos</th></tr></thead>
+            <tbody>
+              <tr><td>Apertura y encuadre</td><td>10 min</td><td>Bienvenida, cierre del módulo y preguntas.</td></tr>
+              <tr><td>Del chat al agente</td><td>15 min</td><td>De responder a actuar.</td></tr>
+              <tr><td>Componentes</td><td>20 min</td><td>Modelo, herramientas, memoria y planificación.</td></tr>
+              <tr><td>Ejemplos: asistentes, RAG, automatización</td><td>15 min</td><td>Casos aplicados a la gestión pública.</td></tr>
+              <tr><td>Pausa</td><td>10 min</td><td>Receso.</td></tr>
+              <tr><td>Riesgos y supervisión humana</td><td>10 min</td><td>Errores, control, responsabilidad y confidencialidad.</td></tr>
+              <tr><td>Método y consigna</td><td>15 min</td><td>Definir, armar, evaluar y mejorar.</td></tr>
+              <tr><td>Taller: definir y armar</td><td>35 min</td><td>Tarea y prompts/flujo de la mini-solución.</td></tr>
+              <tr><td>Taller: evaluar, mejorar y preparar la defensa</td><td>25 min</td><td>Prueba, mejora y preparación de la defensa.</td></tr>
+              <tr><td>Presentación y defensa (2 min por equipo)</td><td>15 min</td><td>Cada equipo presenta su mini-solución.</td></tr>
+              <tr><td>Cierre del módulo y preguntas</td><td>10 min</td><td>Síntesis integradora y trabajo final.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="footer"><span>Hoja de ruta</span><span>02</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="03 Tres preguntas">
+        <div class="topline"><span class="kicker">02 / Encuadre</span><span class="mark">Tres preguntas</span></div>
+        <div class="content">
+          <div><h2 class="slide-title">Tres preguntas guían la sesión</h2><p class="body-copy">Un agente <strong>no solo responde: actúa</strong> con herramientas; por eso requiere <strong>supervisión humana</strong>.</p></div>
+          <div><p class="body-copy">1. ¿<strong>Qué es</strong> un agente y en qué se diferencia del chat?<br>2. ¿<strong>Cómo se diseña</strong> el flujo de trabajo de un agente?<br>3. ¿<strong>Cómo integro</strong> lo aprendido en una solución útil para mi institución?</p></div>
+        </div>
+        <div class="footer"><span>Encuadre</span><span>03</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="04 Del chat al agente">
+        <div class="topline"><span class="kicker">03 / Del chat al agente</span><span class="mark">Qué cambia</span></div>
+        <div class="content single"><h2 class="slide-title">Del chat que responde al agente que actúa</h2>
+          <div class="split">
+            <div class="split-panel"><h3>El chat responde</h3><p>Genera texto a partir del prompt. No actúa sobre el mundo; se apoya en su entrenamiento y en la conversación.</p></div>
+            <div class="split-panel"><h3>El agente actúa</h3><p>Decide pasos y ejecuta acciones con herramientas: buscar, leer, consultar, calcular o llamar a otro sistema.</p></div>
+          </div>
+          <p class="body-copy">Chat: <strong>entrada → respuesta</strong>. Agente: <strong>tarea → plan → pasos → resultado → revisión</strong>. Es como preguntarle a un colega frente a <strong>encargarle una tarea</strong>.</p>
+        </div>
+        <div class="footer"><span>Del chat al agente</span><span>04</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="05 Herramientas">
+        <div class="topline"><span class="kicker">04 / Herramientas</span><span class="mark">Qué puede hacer</span></div>
+        <div class="content single"><h2 class="slide-title">Un agente no responde: usa herramientas</h2>
+          <div class="flow">
+            <div class="flow-step"><strong>Buscar</strong><p>En la web o en los documentos y la normativa de la institución.</p></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step"><strong>Leer y consultar</strong><p>Un PDF, una planilla o una base de datos interna.</p></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step"><strong>Ejecutar</strong><p>Código, cálculos o el envío de un correo.</p></div>
+          </div>
+          <p class="body-copy">Cada herramienta trae su <strong>descripción</strong> para que el modelo sepa cuándo usarla. El agente solo puede hacer lo que se le habilita.</p>
+        </div>
+        <div class="footer"><span>Herramientas</span><span>05</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="06 Cuatro componentes">
+        <div class="topline"><span class="kicker">05 / Componentes</span><span class="mark">La anatomía</span></div>
+        <div class="content single"><h2 class="slide-title">Cuatro componentes de un agente</h2>
+          <table class="type-table">
+            <thead><tr><th>Componente</th><th>Qué es</th><th>Analogía</th></tr></thead>
+            <tbody>
+              <tr><td>Modelo</td><td>El LLM que razona y decide.</td><td>El cerebro</td></tr>
+              <tr><td>Herramientas</td><td>Lo que usa para actuar.</td><td>Las manos</td></tr>
+              <tr><td>Memoria</td><td>Lo que recuerda de la tarea.</td><td>La agenda</td></tr>
+              <tr><td>Planificación</td><td>Cómo ordena los pasos.</td><td>El método</td></tr>
+            </tbody>
+          </table>
+          <img class="diagram" src="assets/esquema-componentes-agente.svg" alt="Cuatro componentes de un agente: modelo, herramientas, memoria y planificación; regla de oro: el agente sugiere, el humano decide." />
+        </div>
+        <div class="footer"><span>Componentes</span><span>06</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="07 Componentes de cerca">
+        <div class="topline"><span class="kicker">05 / Componentes</span><span class="mark">De cerca</span></div>
+        <div class="content single"><h2 class="slide-title">Cada pieza cumple un papel</h2>
+          <div class="cards">
+            <article class="card"><h3>Modelo</h3><div class="code">el cerebro</div><p>El motor de lenguaje que razona y decide. El agente le suma capacidades de acción.</p></article>
+            <article class="card"><h3>Herramientas</h3><div class="code">las manos</div><p>Búsqueda, documentos, código, base de datos o correo. Cada una trae su descripción.</p></article>
+            <article class="card"><h3>Memoria</h3><div class="code">la agenda</div><p>Lo que recuerda dentro de la tarea: la conversación o el registro de pasos hechos.</p></article>
+          </div>
+          <p class="body-copy">La <strong>planificación</strong> es el método: descompone la tarea en pasos y los ordena; puede seguir un flujo definido por una persona o decidir por su cuenta.</p>
+        </div>
+        <div class="footer"><span>Componentes</span><span>07</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="08 Ejemplos">
+        <div class="topline"><span class="kicker">06 / Ejemplos</span><span class="mark">En la gestión pública</span></div>
+        <div class="content single"><h2 class="slide-title">Tres usos habituales</h2>
+          <div class="cards">
+            <article class="card"><h3>Asistentes</h3><p>Conversan y resuelven dentro de un dominio, usando los documentos de la institución.</p></article>
+            <article class="card"><h3>RAG</h3><p>Busca en los documentos propios y genera la respuesta <strong>citando</strong> lo encontrado.</p></article>
+            <article class="card"><h3>Automatización</h3><p>Ejecuta pasos repetitivos: clasificar correos, llenar planillas, generar reportes.</p></article>
+          </div>
+          <p class="body-copy">Ejemplos locales: requisitos de trámites, derivación de reclamos y resúmenes de informes para una autoridad.</p>
+        </div>
+        <div class="footer"><span>Ejemplos</span><span>08</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="09 RAG">
+        <div class="topline"><span class="kicker">06 / Ejemplos</span><span class="mark">RAG</span></div>
+        <div class="content">
+          <div><h2 class="slide-title">Responder con fuentes, no solo de memoria</h2><p class="body-copy"><strong>Retrieval-Augmented Generation:</strong> primero el agente <strong>busca</strong> en los documentos propios; luego <strong>genera</strong> la respuesta <strong>citando</strong> lo encontrado. Así reduce las alucinaciones.</p></div>
+          <div><div class="card"><h3>Dos pasos</h3><div class="code">buscar → citar</div><p>Un agente que consulta el reglamento interno de la alcaldía y responde con la referencia exacta.</p></div></div>
+        </div>
+        <div class="footer"><span>RAG</span><span>09</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="10 Riesgos">
+        <div class="topline"><span class="kicker">07 / Riesgos</span><span class="mark">El agente actúa</span></div>
+        <div class="content single"><h2 class="slide-title">El agente amplifica los errores del LLM</h2>
+          <div class="cards">
+            <article class="card"><h3>Error de datos</h3><p>Cita mal una fuente, busca mal o extrae un dato erróneo.</p></article>
+            <article class="card"><h3>Acción indebida</h3><p>Envía, publica o modifica algo que no debía.</p></article>
+            <article class="card"><h3>Falta de transparencia</h3><p>No queda claro por qué tomó tal decisión.</p></article>
+          </div>
+          <p class="body-copy">Sus errores no son solo una frase: pueden ser una <strong>acción</strong>. Por eso exige controles.</p>
+        </div>
+        <div class="footer"><span>Riesgos</span><span>10</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="11 Supervisión humana">
+        <div class="topline"><span class="kicker">08 / Supervisión</span><span class="mark">Human-in-the-loop</span></div>
+        <div class="content single"><h2 class="slide-title">La responsabilidad sigue siendo humana</h2>
+          <div class="split">
+            <div class="split-panel"><h3>Controles</h3><p>Humano en el circuito para aprobar acciones críticas; principio de menor privilegio (leer, pero no enviar; sugerir, pero no publicar).</p></div>
+            <div class="split-panel"><h3>Trazabilidad</h3><p>Registrar qué hizo y con qué fuentes. En el sector público, la responsabilidad es del funcionario, no del agente.</p></div>
+          </div>
+          <p class="quote">El agente sugiere, <em>el humano decide</em>.</p>
+        </div>
+        <div class="footer"><span>Supervisión humana</span><span>11</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="12 Método">
+        <div class="topline"><span class="kicker">09 / Aplicación integrada</span><span class="mark">El método</span></div>
+        <div class="content single"><h2 class="slide-title">Cuatro pasos para una mini-solución</h2>
+          <div class="flow">
+            <div class="flow-step"><strong>Definir</strong><p>Qué problema, para quién y qué resultado. Acotado y concreto.</p></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step"><strong>Armar</strong><p>Prompts (chat) o flujo con sus componentes y control humano.</p></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step"><strong>Evaluar</strong><p>Probar con casos reales y criterio experto.</p></div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step"><strong>Mejorar</strong><p>Ajustar prompts, flujos o fuentes e iterar.</p></div>
+          </div>
+        </div>
+        <div class="footer"><span>Aplicación integrada</span><span>12</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="13 Consigna del taller">
+        <div class="topline"><span class="kicker">10 / Taller</span><span class="mark">En equipos de 3–4</span></div>
+        <div class="content single"><h2 class="slide-title">Construir y defender una mini-solución</h2>
+          <div class="cards">
+            <article class="card"><h3>1. Definir</h3><p>Un problema institucional acotado y su destinatario.</p></article>
+            <article class="card"><h3>2. Armar</h3><p>Prompts para el chat o el flujo del agente con sus componentes.</p></article>
+            <article class="card"><h3>3. Evaluar y mejorar</h3><p>Probar con un caso real, corregir y aplicar una mejora.</p></article>
+          </div>
+          <p class="body-copy">Tiempos: definir y armar <strong>35 min</strong> · evaluar, mejorar y preparar la defensa <strong>25 min</strong> · defensa <strong>2 min por equipo</strong>.</p>
+        </div>
+        <div class="footer"><span>Taller</span><span>13</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="14 Los cinco casos">
+        <div class="topline"><span class="kicker">10 / Taller</span><span class="mark">Los cinco casos</span></div>
+        <div class="content single"><h2 class="slide-title">Un caso acotado por equipo</h2>
+          <table class="type-table">
+            <thead><tr><th>Caso</th><th>Cómo se resuelve</th></tr></thead>
+            <tbody>
+              <tr><td>1. Asistente de trámites</td><td>Chat que responde con la normativa institucional.</td></tr>
+              <tr><td>2. Clasificador de reclamos</td><td>Chat que propone la categoría; la persona revisa y deriva.</td></tr>
+              <tr><td>3. Resumidor de informes</td><td>Chat que resume un informe para una autoridad.</td></tr>
+              <tr><td>4. Verificador de expedientes</td><td>Chat que marca documentos faltantes en un caso ficticio; la persona confirma.</td></tr>
+              <tr><td>5. Avisos a la ciudadanía</td><td>Chat que redacta avisos claros sobre servicios y trámites.</td></tr>
+            </tbody>
+          </table>
+          <p class="body-copy">Los casos <strong>2 y 4</strong> se resuelven con <strong>chat + criterio + supervisión humana</strong>: no hace falta una plataforma de agentes real. El <strong>flujo del agente se diseña y se documenta</strong> con la plantilla, aunque no se ejecute en vivo.</p>
+        </div>
+        <div class="footer"><span>Taller</span><span>14</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="15 Control humano">
+        <div class="topline"><span class="kicker">10 / Taller</span><span class="mark">Control humano</span></div>
+        <div class="content single"><h2 class="slide-title">Dónde revisa una persona</h2>
+          <div class="split">
+            <div class="split-panel"><h3>Punto de control humano</h3><p>Antes de usar el resultado, una persona <strong>revisa</strong> el dato, <strong>confirma</strong> la categoría y <strong>decide</strong> la acción. El agente sugiere; el funcionario firma.</p></div>
+            <div class="split-panel"><h3>Confidencialidad</h3><p><strong>No se suben</strong> datos de ciudadanos ni documentos reservados a un chat público. Se usa un caso ficticio, un dato ya público o un documento abierto.</p></div>
+          </div>
+        </div>
+        <div class="footer"><span>Taller</span><span>15</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="16 Entrega y defensa">
+        <div class="topline"><span class="kicker">10 / Taller</span><span class="mark">Entrega y defensa</span></div>
+        <div class="content single"><h2 class="slide-title">Qué se entrega y qué se defiende</h2>
+          <table class="type-table">
+            <thead><tr><th>Entregable</th><th>Qué muestra</th></tr></thead>
+            <tbody>
+              <tr><td>Tarea</td><td>El problema y para quién.</td></tr>
+              <tr><td>Prompt o flujo</td><td>Los componentes y el control humano.</td></tr>
+              <tr><td>Resultado</td><td>La prueba con un caso ficticio o público.</td></tr>
+              <tr><td>Evaluación crítica</td><td>Qué hubo que verificar o corregir.</td></tr>
+              <tr><td>Mejora aplicada</td><td>Qué cambiaron y por qué.</td></tr>
+            </tbody>
+          </table>
+          <p class="body-copy">Defensa de <strong>2 min</strong> por equipo. No se busca la perfección técnica, sino la <strong>integración consciente</strong> de lo aprendido.</p>
+        </div>
+        <div class="footer"><span>Taller</span><span>16</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="17 El módulo en una cadena">
+        <div class="topline"><span class="kicker">11 / Cierre</span><span class="mark">Síntesis integradora</span></div>
+        <div class="content single"><h2 class="slide-title">El módulo en una cadena</h2>
+          <table class="type-table">
+            <thead><tr><th>Eslabón</th><th>Qué aporta</th></tr></thead>
+            <tbody>
+              <tr><td>Datos y calidad</td><td>El activo de partida, sin el cual nada es confiable.</td></tr>
+              <tr><td>Ingesta</td><td>Traer los datos de las fuentes, por lotes o en tiempo real.</td></tr>
+              <tr><td>Arquitectura</td><td>Organizar el almacenamiento y el procesamiento.</td></tr>
+              <tr><td>Integración</td><td>Transformar y combinar datos para que sean útiles.</td></tr>
+              <tr><td>Licencias y datos abiertos</td><td>Usar y compartir datos de forma legal y transparente.</td></tr>
+              <tr><td>IA, LLMs y agentes</td><td>Convertir los datos en respuestas y acciones.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="footer"><span>Síntesis del módulo</span><span>17</span></div>
+      </section>
+
+      <section class="slide" data-screen-label="18 Cierre del módulo">
+        <div class="topline"><span class="kicker">11 / Cierre</span><span class="mark">Fin del módulo</span></div>
+        <div class="content single"><h2 class="slide-title">La IA potencia al profesional público</h2>
+          <div class="cards">
+            <article class="card"><h3>Potenciar</h3><p>La IA no reemplaza al profesional público: lo potencia cuando hay criterio.</p></article>
+            <article class="card"><h3>Condiciones</h3><p>Datos de calidad, método de trabajo y supervisión humana.</p></article>
+            <article class="card"><h3>Trabajo final</h3><p>Suma la <strong>licencia del dataset</strong> (Bloque 5) y un <strong>prompt/flujo con control humano</strong> (Bloque 6).</p></article>
+          </div>
+          <p class="quote">Datos de calidad + método + <em>supervisión humana</em> = valor público.</p>
+        </div>
+        <div class="footer"><span>Cierre del módulo</span><span>18</span></div>
+      </section>
+
+      <section class="slide dark" data-screen-label="19 Gracias">
+        <div class="topline"><span class="kicker">Fin</span><span class="mark">Ingeniería de Datos · IDT 601</span></div>
+        <div class="content single">
+          <h2 class="slide-title">Gracias</h2>
+          <p class="lead">Bloque 6 · Sesión 10 · Agentes y taller</p>
+          <p class="quote">La IA potencia al profesional público cuando los datos son buenos y hay supervisión humana.</p>
+        </div>
+        <div class="footer"><span>EGPP · Escuela de Gestión Pública Plurinacional</span><span>19</span></div>
+      </section>
+    </div>
+  </div>
+  <nav class="deck-counter" role="navigation" aria-label="Navegación de la presentación"><button type="button" id="deck-prev" aria-label="Diapositiva anterior">‹</button><span class="deck-count"><span id="deck-cur">01</span> <span class="total">/ <span id="deck-total">19</span></span></span><button type="button" id="deck-next" aria-label="Siguiente diapositiva">›</button></nav>
+  <div class="deck-hint">← / → · espacio · R reinicia</div>
+  <script>
+    (function () {
+      var stage = document.getElementById('deck-stage');
+      var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+      var prev = document.getElementById('deck-prev');
+      var next = document.getElementById('deck-next');
+      var cur = document.getElementById('deck-cur');
+      var total = document.getElementById('deck-total');
+      var STORE = 'deck:idx:' + (location.pathname || '/');
+      var idx = 0;
+      function fit() { var sw = window.innerWidth, sh = window.innerHeight, pad = 32, s = Math.min((sw - pad) / 1920, (sh - pad) / 1080); if (!isFinite(s) || s <= 0) s = 1; stage.style.transform = 'translate(' + ((sw - 1920 * s) / 2) + 'px,' + ((sh - 1080 * s) / 2) + 'px) scale(' + s + ')'; }
+      function pad2(n) { return (n < 10 ? '0' : '') + n; }
+      function paint() { slides.forEach(function (el, i) { el.classList.toggle('active', i === idx); }); cur.textContent = pad2(idx + 1); total.textContent = pad2(slides.length); prev.toggleAttribute('disabled', idx <= 0); next.toggleAttribute('disabled', idx >= slides.length - 1); try { window.parent.postMessage({type:'od:slide-state', protocolVersion:1, active:idx, count:slides.length}, '*'); } catch (_) {} }
+      function go(i) { idx = Math.max(0, Math.min(slides.length - 1, i)); paint(); try { localStorage.setItem(STORE, String(idx)); } catch (_) {} }
+      function onKey(e) { if (e.__odDeckKeyHandled || e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return; if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.__odDeckKeyHandled = true; e.preventDefault(); go(idx + 1); } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.__odDeckKeyHandled = true; e.preventDefault(); go(idx - 1); } else if (e.key === 'Home' || String(e.key).toLowerCase() === 'r') { e.__odDeckKeyHandled = true; e.preventDefault(); go(0); } else if (e.key === 'End') { e.__odDeckKeyHandled = true; e.preventDefault(); go(slides.length - 1); } }
+      window.addEventListener('message', function (e) { var d = e.data; if (!d || d.type !== 'od:slide') return; if (d.action === 'next') go(idx + 1); else if (d.action === 'prev') go(idx - 1); else if (d.action === 'first') go(0); else if (d.action === 'last') go(slides.length - 1); else if (d.action === 'go' && typeof d.index === 'number') go(Math.floor(d.index)); });
+      window.addEventListener('keydown', onKey, true); document.addEventListener('keydown', onKey, true); prev.addEventListener('click', function () { go(idx - 1); }); next.addEventListener('click', function () { go(idx + 1); });
+      document.addEventListener('click', function (e) { if (e.defaultPrevented || e.button !== undefined && e.button !== 0) return; var t = e.target; while (t && t !== document.body) { if (/^(A|BUTTON|INPUT|TEXTAREA|SELECT)$/.test(t.tagName) || t.isContentEditable) return; t = t.parentElement; } if (e.clientX < window.innerWidth / 2) go(idx - 1); else go(idx + 1); }, true);
+      try { var saved = parseInt(localStorage.getItem(STORE) || '0', 10); if (!isNaN(saved) && saved >= 0 && saved < slides.length) idx = saved; } catch (_) {}
+      window.addEventListener('resize', fit); try { window.parent.postMessage({type:'od:deck-ready', protocolVersion:1, capabilities:['absolute-navigation','state-events']}, '*'); } catch (_) {} fit(); paint();
+    })();
+  </script>
+</body>
+</html>

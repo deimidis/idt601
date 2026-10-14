@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lección 06 · Agentes de IA</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Lección 06 · Bloque 6 — Inteligencia Artificial</p>
+    <h1>Agentes de IA: del chat que responde al sistema que actúa</h1>
+    <p class="lead">Al terminar, podrás explicar qué es un agente, reconocer sus componentes, entender qué es RAG y por qué exige supervisión humana.</p>
+
+    <p class="sidenote">
+      Apoyado en Microsoft Learn (<em>Fundamentos de IA generativa y agentes</em>) y en la obra de referencia de Russell y Norvig.
+      <cite><a href="../reference/componentes-de-un-agente.html">Ver referencia →</a></cite>
+    </p>
+
+    <h2>La idea central</h2>
+    <p>Un <strong>agente de IA</strong> combina un <strong>LLM</strong> con <strong>herramientas</strong> para <strong>realizar tareas</strong>. No solo responde: decide pasos y ejecuta acciones. Es la diferencia entre preguntarle algo a un colega (chat) y <strong>encargarle una tarea</strong> (agente).</p>
+    <p>Como <strong>actúa</strong>, un agente <strong>amplifica los límites</strong> del modelo: un error no es solo una frase, puede ser una acción. Por eso su diseño incluye siempre un <strong>punto de control humano</strong>.</p>
+
+    <div class="box">
+      <p><strong>Regla de oro:</strong> <strong>el agente sugiere, el humano decide.</strong> En el sector público, la responsabilidad es del funcionario, no de la herramienta.</p>
+    </div>
+
+    <h2>El chat responde, el agente actúa</h2>
+    <p>El <strong>chat</strong> genera texto a partir del prompt y no actúa sobre el mundo. El <strong>agente</strong> decide <strong>pasos</strong> y usa <strong>herramientas</strong>: buscar en la web o en los documentos, leer un PDF, consultar una base de datos, calcular o enviar un correo. Piensa en la tarea y la <strong>descompone</strong> hasta cumplirla.</p>
+    <p>Los dos flujos, en la pizarra:</p>
+    <p><strong>Chat:</strong> entrada → respuesta. &nbsp; <strong>Agente:</strong> tarea → plan → pasos → resultado → <strong>revisión</strong>.</p>
+
+    <h2>Los cuatro componentes de un agente</h2>
+    <p>Un agente no es solo el modelo: es la combinación de cuatro piezas que trabajan juntas.</p>
+
+    <img class="diagram" src="../assets/esquema-componentes-agente.svg" alt="Cuatro componentes de un agente: modelo (el cerebro), herramientas (las manos), memoria (la agenda) y planificación (el método); regla de oro: el agente sugiere, el humano decide." />
+
+    <table class="ref">
+      <thead><tr><th>Componente</th><th>Qué es</th><th>Analogía</th></tr></thead>
+      <tbody>
+        <tr><td>Modelo</td><td>El LLM que razona y decide los pasos.</td><td>El cerebro</td></tr>
+        <tr><td>Herramientas</td><td>Lo que puede usar para actuar; cada una trae su descripción.</td><td>Las manos</td></tr>
+        <tr><td>Memoria</td><td>Lo que recuerda de la conversación o de la tarea.</td><td>La agenda</td></tr>
+        <tr><td>Planificación</td><td>Descomponer la tarea en pasos y ordenarlos.</td><td>El método</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Usos: asistentes, RAG y automatización</h2>
+    <p>Los usos más comunes en la gestión pública son tres:</p>
+    <ul>
+      <li><strong>Asistentes</strong> — conversan y resuelven dentro de un dominio, usando los documentos de la institución.</li>
+      <li><strong>RAG</strong> (recuperación aumentada) — el agente <strong>busca</strong> en los documentos propios y luego <strong>genera</strong> la respuesta <strong>citando</strong> lo encontrado. Responde a partir de fuentes, no solo de memoria, y así <strong>reduce las alucinaciones</strong>.</li>
+      <li><strong>Automatización</strong> — ejecuta pasos repetitivos: clasificar correos, llenar planillas, generar reportes.</li>
+    </ul>
+    <p>RAG no es lo mismo que automatización: RAG <em>busca y cita</em>; la automatización <em>ejecuta</em>.</p>
+
+    <h2>Riesgos y supervisión humana</h2>
+    <p>Un agente amplifica los límites del LLM porque sus errores se traducen en acciones: <strong>error de datos</strong> (cita mal o extrae un dato erróneo), <strong>acción indebida</strong> (envía, publica o modifica algo que no debía) y <strong>falta de transparencia</strong> (no queda claro por qué decidió algo).</p>
+    <p>Las salvaguardas son tres:</p>
+    <ul>
+      <li><strong>Supervisión humana</strong> (human-in-the-loop): revisar y aprobar las acciones críticas.</li>
+      <li><strong>Principio de menor privilegio:</strong> dejar que lea, pero no que envíe o publique; que sugiera, no que decida.</li>
+      <li><strong>Auditoría y trazabilidad:</strong> registrar qué hizo y con qué fuentes.</li>
+    </ul>
+
+    <div class="box">
+      <p><strong>Confidencialidad:</strong> antes de pegar cualquier cosa en un chat público, preguntate si son <strong>datos de ciudadanos</strong>, <strong>documentos reservados</strong> o <strong>información no pública</strong>. Si lo son, <strong>no se pegan</strong>: se trabaja con ejemplos ficticios, datos públicos o documentos abiertos.</p>
+    </div>
+
+    <h2>Practica: ¿chat o agente?</h2>
+    <p>Elige una opción. Recibirás la corrección al instante.</p>
+
+    <div class="quiz">
+      <p class="q">1. ¿Qué distingue a un agente de un chat?</p>
+      <div class="opts">
+        <button>Que usa un modelo más grande</button>
+        <button data-correct="true">Que decide pasos y usa herramientas para actuar</button>
+        <button>Que siempre responde más rápido</button>
+        <button>Que no puede equivocarse</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el chat responde con texto; el agente planifica pasos y ejecuta acciones con herramientas.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">2. ¿Cuáles son los cuatro componentes de un agente?</p>
+      <div class="opts">
+        <button>Entrenamiento, prueba, métrica y error</button>
+        <button data-correct="true">Modelo, herramientas, memoria y planificación</button>
+        <button>Prompt, token, temperatura y contexto</button>
+        <button>Datos, red, capa y peso</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> un agente combina el LLM (modelo) con herramientas, memoria de la tarea y planificación de pasos.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">3. En RAG, el agente primero:</p>
+      <div class="opts">
+        <button>Publica la respuesta sin revisar</button>
+        <button data-correct="true">Busca en los documentos propios y luego responde citando lo encontrado</button>
+        <button>Entrena una red neuronal nueva</button>
+        <button>Envía un correo automáticamente</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> RAG = recuperación aumentada: recupera de las fuentes y genera la respuesta citando, lo que reduce las alucinaciones.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">4. ¿Por qué un agente es más riesgoso que un chat?</p>
+      <div class="opts">
+        <button>Porque consume más electricidad</button>
+        <button data-correct="true">Porque sus errores pueden convertirse en acciones, no solo en frases</button>
+        <button>Porque no usa lenguaje natural</button>
+        <button>Porque no tiene fecha de corte</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> al actuar, un agente amplifica los límites del LLM: un error puede ser un envío, una publicación o un cambio indebido.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">5. La regla de oro de la supervisión humana es:</p>
+      <div class="opts">
+        <button>El agente decide y el humano observa</button>
+        <button data-correct="true">El agente sugiere y el humano decide</button>
+        <button>El agente publica y el humano corrige después</button>
+        <button>El agente reemplaza al funcionario</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> en el sector público la responsabilidad es del funcionario; el agente propone y la persona aprueba.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">6. Antes de pegar información en un chat público, ¿qué corresponde hacer?</p>
+      <div class="opts">
+        <button>Pegarla si el chat es de una empresa conocida</button>
+        <button data-correct="true">Verificar que no sean datos de ciudadanos ni documentos reservados</button>
+        <button>Pegarla y borrarla después</button>
+        <button>Pegarla solo los fines de semana</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> la regla de confidencialidad prohíbe subir datos de ciudadanos o información no pública; se trabaja con casos ficticios o públicos.</div>
+    </div>
+
+    <hr />
+
+    <h2>La frase que lo resume</h2>
+    <p>Un <strong>agente</strong> no es un chat más inteligente: es un sistema que <strong>actúa</strong> con herramientas. Justamente por eso, la última pieza es siempre la misma: <strong>una persona que revisa y decide</strong>.</p>
+
+    <h2>Fuente principal</h2>
+    <p class="refs">
+      Para profundizar: Microsoft Learn, <em>Fundamentos de IA generativa y agentes</em>, y Stuart Russell y
+      Peter Norvig, <em>Inteligencia artificial: un enfoque moderno</em> (agentes y representación del
+      conocimiento). La hoja de referencia del bloque resume los componentes.
+    </p>
+
+    <div class="askai">
+      ¿Algo te hace dudar? Pregúntame y lo desarmamos — por ejemplo: "¿un agente puede enviar correos solo?" o "¿cómo sé dónde poner el control humano en mi caso?".
+    </div>
+
+    <div class="nav">
+      <a href="0005-llms-y-prompting.html">← Lección 05: LLM y prompting</a>
+      <a href="../reference/componentes-de-un-agente.html">Referencia: componentes de un agente →</a>
+    </div>
+  </div>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>

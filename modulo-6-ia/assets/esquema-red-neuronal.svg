@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" role="img" aria-labelledby="t d">
+  <title id="t">Cómo aprende una red neuronal</title>
+  <desc id="d">Tres neuronas de entrada conectadas por pesos a una capa oculta y esta a una neurona de salida. Comparar la salida con la respuesta esperada produce un error que ajusta los pesos.</desc>
+  <rect x="0" y="0" width="1200" height="520" fill="#F5F3EB"/>
+  <text x="80" y="66" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="700" fill="#2A4D40">Aprender = ajustar los pesos</text>
+
+  <g stroke="#A9BEBD" stroke-width="2">
+    <line x1="265" y1="180" x2="555" y2="150"/>
+    <line x1="265" y1="180" x2="555" y2="270"/>
+    <line x1="265" y1="180" x2="555" y2="390"/>
+    <line x1="265" y1="280" x2="555" y2="150"/>
+    <line x1="265" y1="280" x2="555" y2="270"/>
+    <line x1="265" y1="280" x2="555" y2="390"/>
+    <line x1="265" y1="380" x2="555" y2="150"/>
+    <line x1="265" y1="380" x2="555" y2="270"/>
+    <line x1="265" y1="380" x2="555" y2="390"/>
+    <line x1="655" y1="150" x2="905" y2="270"/>
+    <line x1="655" y1="270" x2="905" y2="270"/>
+    <line x1="655" y1="390" x2="905" y2="270"/>
+  </g>
+
+  <g font-family="Helvetica, Arial, sans-serif" font-size="17" font-style="italic" fill="#507A6E">
+    <text x="360" y="150">w₁</text>
+    <text x="360" y="238">w₂</text>
+    <text x="360" y="330">w₃</text>
+    <text x="745" y="196">v₁</text>
+    <text x="745" y="266">v₂</text>
+    <text x="745" y="336">v₃</text>
+  </g>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <circle cx="220" cy="180" r="46" fill="#FFFFFF" stroke="#2A4D40" stroke-width="3"/>
+    <circle cx="220" cy="280" r="46" fill="#FFFFFF" stroke="#2A4D40" stroke-width="3"/>
+    <circle cx="220" cy="380" r="46" fill="#FFFFFF" stroke="#2A4D40" stroke-width="3"/>
+    <text x="220" y="460" text-anchor="middle" font-size="20" font-weight="700" fill="#2A4D40">Entrada</text>
+    <text x="220" y="484" text-anchor="middle" font-size="16" fill="#3D6558">los datos</text>
+
+    <circle cx="600" cy="150" r="46" fill="#FFFFFF" stroke="#507A6E" stroke-width="3"/>
+    <circle cx="600" cy="270" r="46" fill="#FFFFFF" stroke="#507A6E" stroke-width="3"/>
+    <circle cx="600" cy="390" r="46" fill="#FFFFFF" stroke="#507A6E" stroke-width="3"/>
+    <text x="600" y="460" text-anchor="middle" font-size="20" font-weight="700" fill="#2A4D40">Capas ocultas</text>
+    <text x="600" y="484" text-anchor="middle" font-size="16" fill="#3D6558">combinan la información</text>
+
+    <circle cx="960" cy="270" r="54" fill="#DABC6E" stroke="#2A4D40" stroke-width="3"/>
+    <text x="960" y="460" text-anchor="middle" font-size="20" font-weight="700" fill="#2A4D40">Salida</text>
+    <text x="960" y="484" text-anchor="middle" font-size="16" fill="#3D6558">la respuesta</text>
+  </g>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <text x="80" y="516" font-size="17" fill="#3D6558">Si la salida no coincide con la respuesta esperada, se calcula el error y se corrigen los pesos (w, v). Se repite muchas veces.</text>
+  </g>
+</svg>

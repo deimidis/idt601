@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lección 04 · Tipos de aprendizaje</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Lección 04 · Bloque 6 — Inteligencia Artificial</p>
+    <h1>Supervisado, no supervisado y por refuerzo</h1>
+    <p class="lead">Al terminar, podrás distinguir los tres tipos de aprendizaje por sus datos y su señal de aprendizaje, y elegir el adecuado para un caso de gestión pública.</p>
+
+    <p class="sidenote">
+      Apoyado en <em>Ciencia de datos desde cero</em> (Grus) y en el material del bloque.
+      <cite><a href="../reference/como-aprende-una-red.html">Ver referencia →</a></cite>
+    </p>
+
+    <h2>La idea central</h2>
+    <p>No todos los problemas tienen los mismos datos. A veces cada ejemplo trae su <strong>respuesta correcta</strong> (etiqueta); a veces solo tenemos datos y queremos descubrir <strong>grupos</strong>; y a veces un sistema <strong>actúa</strong> y recibe <strong>recompensa</strong>. De ahí los tres tipos de aprendizaje.</p>
+
+    <h2>Los tres tipos</h2>
+    <table class="ref">
+      <thead><tr><th>Tipo</th><th>Datos</th><th>Qué aprende</th><th>Señal</th></tr></thead>
+      <tbody>
+        <tr><td>Supervisado</td><td>Etiquetados</td><td>Predecir una etiqueta o un valor.</td><td>Respuesta correcta</td></tr>
+        <tr><td>No supervisado</td><td>Sin etiquetas</td><td>Agrupar y hallar patrones.</td><td>Estructura de los datos</td></tr>
+        <tr><td>Por refuerzo</td><td>Interacción con el entorno</td><td>Decidir acciones.</td><td>Recompensa / penalización</td></tr>
+      </tbody>
+    </table>
+
+    <h2>De cerca</h2>
+    <ul>
+      <li><strong>Supervisado:</strong> con cada ejemplo viene la respuesta correcta. Cubre la <strong>clasificación</strong> (asignar una categoría) y la <strong>regresión</strong> (predecir un número). Ej.: clasificar un trámite como "urgente" o "no urgente".</li>
+      <li><strong>No supervisado:</strong> sin etiquetas. Busca estructura oculta: agrupar casos parecidos o hallar patrones. Técnica típica: <strong>agrupación (clustering)</strong>. Ej.: segmentar ciudadanos según su uso de servicios.</li>
+      <li><strong>Por refuerzo:</strong> ensayo, error y recompensa. Un agente actúa en un entorno, recibe recompensa o penalización y ajusta su comportamiento. Ej.: optimizar la programación de semáforos.</li>
+    </ul>
+
+    <div class="box">
+      <p><strong>Regla de oro:</strong> antes de elegir el tipo, mirá los datos. <strong>¿Hay etiquetas?</strong> → supervisado. <strong>¿Se busca agrupar sin categorías previas?</strong> → no supervisado. <strong>¿Hay una acción y una recompensa?</strong> → por refuerzo.</p>
+    </div>
+
+    <h2>Practica: elegir el tipo de aprendizaje</h2>
+    <p>Elige una opción. Recibirás la corrección al instante.</p>
+
+    <div class="quiz">
+      <p class="q">1. El aprendizaje supervisado se entrena con:</p>
+      <div class="opts">
+        <button>Datos sin etiquetas</button>
+        <button data-correct="true">Datos etiquetados: cada ejemplo trae su respuesta correcta</button>
+        <button>Recompensas y castigos</button>
+        <button>Solo números, nunca categorías</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> la etiqueta es la señal del supervisado; el modelo aprende a predecirla en casos nuevos.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">2. Predecir un número (por ejemplo, la demanda del próximo mes) es una tarea de:</p>
+      <div class="opts">
+        <button>Clasificación</button>
+        <button data-correct="true">Regresión</button>
+        <button>Agrupación</button>
+        <button>Refuerzo</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> la regresión predice un valor numérico; la clasificación asigna una categoría.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">3. Agrupar contribuyentes por comportamiento, sin categorías previas, es:</p>
+      <div class="opts">
+        <button>Supervisado</button>
+        <button data-correct="true">No supervisado</button>
+        <button>Por refuerzo</button>
+        <button>Determinista puro</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> no hay etiquetas; se busca estructura en los datos mediante agrupación.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">4. La señal de aprendizaje del <strong>refuerzo</strong> es:</p>
+      <div class="opts">
+        <button>La respuesta correcta</button>
+        <button>La estructura de los datos</button>
+        <button data-correct="true">La recompensa o penalización</button>
+        <button>El número de capas</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el agente ajusta su comportamiento para maximizar la recompensa al actuar en un entorno.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">5. Optimizar la programación de semáforos probando combinaciones y midiendo el resultado es:</p>
+      <div class="opts">
+        <button>Supervisado</button>
+        <button>No supervisado</button>
+        <button data-correct="true">Por refuerzo</button>
+        <button>Determinista con reglas fijas</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el sistema actúa, recibe recompensa según el tránsito y ajusta su comportamiento: ensayo, error y recompensa.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">6. ¿De qué depende elegir el tipo de aprendizaje?</p>
+      <div class="opts">
+        <button>Solo del presupuesto</button>
+        <button data-correct="true">De los datos disponibles y del problema a resolver</button>
+        <button>De la marca del modelo</button>
+        <button>Del color de la interfaz</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> la pregunta clave es qué datos tenemos (¿etiquetas? ¿interacción?) y qué necesitamos lograr.</div>
+    </div>
+
+    <hr />
+
+    <h2>La frase que lo resume</h2>
+    <p>Mirá los datos antes de elegir: <strong>etiquetas</strong> → supervisado; <strong>sin etiquetas y buscando grupos</strong> → no supervisado; <strong>acción con recompensa</strong> → por refuerzo.</p>
+
+    <h2>Fuente principal</h2>
+    <p class="refs">
+      Para profundizar: Joel Grus, <em>Ciencia de datos desde cero</em> (aprendizaje supervisado y no supervisado) y Russell y Norvig, <em>Inteligencia artificial: un enfoque moderno</em>.
+      La tabla de los tres tipos está resumida en la hoja de referencia del bloque.
+    </p>
+
+    <div class="askai">
+      ¿Algo te hace dudar? Pregúntame y lo desarmamos — por ejemplo: "¿detectar anomalías es supervisado?" o "¿qué tipo conviene para predecir la demanda de un servicio?".
+    </div>
+
+    <div class="nav">
+      <a href="../reference/como-aprende-una-red.html">Referencia: cómo aprende una red →</a>
+      <a href="0003-como-aprende-una-red.html">Lección 03: cómo aprende una red →</a>
+    </div>
+  </div>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>

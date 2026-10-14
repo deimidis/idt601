@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Referencia · Técnicas de prompting</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Referencia · Bloque 6 — Historia y Desarrollo de la Inteligencia Artificial</p>
+    <h1>Técnicas de prompting</h1>
+    <p class="lead">Hoja de referencia rápida: las cuatro técnicas para escribir prompts útiles y el ciclo para mejorarlos.</p>
+
+    <h2>Las cuatro técnicas</h2>
+    <p>Un <strong>prompt</strong> es la instrucción que le damos al modelo. Estas cuatro técnicas mejoran la respuesta y se pueden <strong>combinar</strong>; no es obligatorio usarlas todas.</p>
+
+    <table class="ref">
+      <thead><tr><th>Técnica</th><th>Qué es</th><th>Ejemplo breve</th></tr></thead>
+      <tbody>
+        <tr><td>Claridad</td><td>Pedido específico: qué, formato, extensión y tono.</td><td>"En 5 líneas, tono formal…"</td></tr>
+        <tr><td>Contexto</td><td>Antecedentes de quién pide y para qué.</td><td>"Soy funcionario municipal…"</td></tr>
+        <tr><td>Ejemplos (few-shot)</td><td>Mostrar uno o dos ejemplos del resultado esperado.</td><td>"Seguí este modelo: 'Se informa…'"</td></tr>
+        <tr><td>Rol</td><td>Pedir que asuma un papel para ajustar la voz.</td><td>"Actuá como asesor de transparencia…"</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box">
+      <p><strong>Por qué importa:</strong> el modelo genera según el contexto que recibe. Un pedido vago deja que el modelo adivine; un pedido claro y contextualizado reduce la adivinanza y la respuesta se vuelve <strong>reutilizable</strong>.</p>
+    </div>
+
+    <h2>De vago a preciso</h2>
+    <p class="refs">
+      <strong>Vago:</strong> "háblame de impuestos" &nbsp;→&nbsp;
+      <strong>Preciso:</strong> "explicá en 5 líneas, en tono formal, y para un funcionario municipal, qué es el impuesto predial".
+    </p>
+
+    <h2>El ciclo para mejorar</h2>
+    <p>La primera respuesta es un <strong>borrador</strong>. Se itera: <strong>pedir → revisar → verificar → re-pedir</strong>.</p>
+    <p class="refs">
+      Re-pedidos útiles: "resumilo en tres viñetas" · "reescribilo en lenguaje más sencillo" · "cambiá el tono a más formal" · "dejá solo lo respaldado y marcá lo dudoso como 'a verificar'".
+    </p>
+
+    <h2>Para llevar</h2>
+    <p class="refs">
+      <strong>Claridad</strong> → qué, formato, extensión, tono. &nbsp;·&nbsp;
+      <strong>Contexto</strong> → quién y para qué. &nbsp;·&nbsp;
+      <strong>Ejemplos</strong> → mostrar el resultado. &nbsp;·&nbsp;
+      <strong>Rol</strong> → asumir un papel. &nbsp;·&nbsp;
+      <strong>Iterar</strong> → pedir, revisar, <strong>verificar</strong> y re-pedir.
+    </p>
+
+    <p class="refs">Fuente: OpenAI, <em>Buenas prácticas para la ingeniería de prompts</em>; Microsoft Learn, <em>IA generativa para principiantes</em>.</p>
+
+    <div class="nav">
+      <a href="../lessons/0005-llms-y-prompting.html">← Lección 05: LLM y prompting</a>
+      <a href="limites-de-un-llm.html">Referencia: límites de un LLM →</a>
+    </div>
+  </div>
+</body>
+</html>

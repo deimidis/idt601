@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lección 05 · LLM y prompting</title>
+  <link rel="stylesheet" href="../assets/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="kicker">Lección 05 · Bloque 6 — Historia y Desarrollo de la Inteligencia Artificial</p>
+    <h1>LLM y prompting: pedir bien y verificar siempre</h1>
+    <p class="lead">Al terminar, podrás explicar qué es un modelo de lenguaje, por qué su respuesta puede variar, cómo pedirle mejor y por qué hay que verificar lo que devuelve.</p>
+
+    <p class="sidenote">
+      Apoyado en Microsoft Learn (<em>IA generativa para principiantes</em>), la guía de buenas prácticas
+      de prompting de OpenAI y la lectura del bloque.
+      <cite><a href="../06_Inteligencia_Artificial.md">Ver lectura del bloque →</a></cite>
+    </p>
+
+    <h2>La idea central</h2>
+    <p>Un <strong>LLM</strong> (modelo de lenguaje de gran escala) es una <strong>red neuronal a gran escala</strong> entrenada sobre enormes volúmenes de texto. Su tarea central es <strong>predecir la siguiente palabra</strong>. No piensa ni consulta una base de datos: <strong>genera</strong> texto palabra por palabra, eligiendo entre las continuaciones más probables.</p>
+    <p>Entender eso explica su utilidad y sus fallas: el modelo elige lo <strong>probable</strong>, que casi siempre suena bien, pero no es necesariamente lo <strong>verdadero</strong>.</p>
+
+    <div class="box">
+      <p><strong>Regla de oro:</strong> un LLM no es una fuente de verdad; es un <strong>generador de borradores</strong>. Lo que produce se <strong>verifica</strong> antes de usarse.</p>
+    </div>
+
+    <h2>Cómo se entrena</h2>
+    <p>Se le muestran miles de millones de frases y se le pide, una y otra vez, predecir la siguiente palabra. Su predicción se <strong>compara con la palabra que realmente seguía</strong> y se <strong>corrigen los pesos</strong> para reducir el error: el mismo ciclo de la red neuronal, a escala gigante.</p>
+    <p><strong>Ojo con una confusión frecuente:</strong> durante el preentrenamiento <strong>no hay un "refuerzo" cuando acierta</strong>. No aprende con premios ni castigos, sino comparando y corrigiendo los pesos (descenso de gradiente). El aprendizaje <strong>por refuerzo</strong> es otra cosa y se vio en la Sesión 8.</p>
+
+    <h2>Por qué la respuesta puede variar</h2>
+    <p>El modelo calcula <strong>probabilidades</strong>: por ejemplo, tras "El informe de gestión del año 2025…" puede dar <em>señala</em> 42 %, <em>muestra</em> 31 %, <em>indica</em> 18 %. Elige una opción y sigue; por eso la misma pregunta puede dar respuestas parecidas pero no idénticas.</p>
+    <p>Cuatro conceptos explican el comportamiento real:</p>
+    <ul>
+      <li><strong>Token:</strong> fragmento de texto (palabra, parte de palabra o signo) que el modelo usa como unidad.</li>
+      <li><strong>Ventana de contexto:</strong> máximo de texto que puede tener en cuenta; más allá, los mensajes viejos se pierden.</li>
+      <li><strong>Temperatura:</strong> cuánto se arriesga a elegir opciones menos probables (baja = predecible; alta = variada).</li>
+      <li><strong>Embedding (vector):</strong> representación numérica del significado de un texto, que permite comparar y buscar por parecido.</li>
+    </ul>
+
+    <img class="diagram" src="../assets/esquema-ciclo-prompt.svg" alt="Ciclo de trabajo con un LLM: pedir, revisar, verificar y re-pedir; verificar es el paso obligatorio." style="width:100%;height:auto;margin:28px 0;" />
+
+    <h2>Modelos generativos y límites</h2>
+    <p>Los modelos generativos producen <strong>texto y código</strong> (y también imagen, audio o video; algunos son <strong>multimodales</strong>). Pero arrastran tres límites que conviene tener presentes:</p>
+    <table class="ref">
+      <thead><tr><th>Límite</th><th>Qué es</th><th>Riesgo en la gestión pública</th></tr></thead>
+      <tbody>
+        <tr><td>Alucinación</td><td>Inventa información verosímil pero falsa.</td><td>Cifras, normas o referencias incorrectas.</td></tr>
+        <tr><td>Sesgo</td><td>Repite prejuicios del entrenamiento.</td><td>Trato desigual, lenguaje estereotipado.</td></tr>
+        <tr><td>Fecha de corte</td><td>No conoce lo posterior a su entrenamiento.</td><td>Normativa o datos desactualizados.</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Técnicas de prompting</h2>
+    <p>Un <strong>prompt</strong> es la instrucción que le damos al modelo. Cuatro técnicas mejoran la respuesta y se pueden combinar:</p>
+    <ul>
+      <li><strong>Claridad:</strong> qué, formato, extensión y tono. <em>("Explicá en 5 líneas, en tono formal…")</em></li>
+      <li><strong>Contexto:</strong> para quién y para qué. <em>("Soy funcionario municipal…")</em></li>
+      <li><strong>Ejemplos (few-shot):</strong> mostrar el resultado esperado. <em>("Seguí este modelo: 'Se informa…'")</em></li>
+      <li><strong>Rol:</strong> indicar cómo debe comportarse. <em>("Actuá como asesor de transparencia…")</em></li>
+    </ul>
+    <p>Después, se <strong>itera</strong>: pedir → revisar → <strong>verificar</strong> → re-pedir. La primera respuesta es un borrador; verificar es el paso que no se salta.</p>
+
+    <div class="box">
+      <p><strong>Regla de confidencialidad.</strong> Antes de pegar cualquier cosa en un chat público: ¿son datos de ciudadanos, documentos reservados o información no pública? Si lo son, <strong>no se pega</strong>. Se trabaja con ejemplos ficticios, con datos ya públicos o con documentos abiertos. En el Estado, la responsabilidad es del funcionario, no de la herramienta.</p>
+    </div>
+
+    <h2>Practica: ¿lo entendiste?</h2>
+    <p>Elige una opción. Recibirás la corrección al instante.</p>
+
+    <div class="quiz">
+      <p class="q">1. ¿Qué es un LLM?</p>
+      <div class="opts">
+        <button>Una base de datos de respuestas ya escritas</button>
+        <button data-correct="true">Una red neuronal a gran escala que genera texto prediciendo la siguiente palabra</button>
+        <button>Un buscador de internet</button>
+        <button>Un programa con reglas escritas a mano</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> un LLM es un modelo entrenado que genera palabra por palabra; no busca respuestas guardadas ni sigue reglas escritas por una persona.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">2. Durante el preentrenamiento, cuando el modelo se equivoca:</p>
+      <div class="opts">
+        <button>Se lo "refuerza" con una recompensa</button>
+        <button>Se lo castiga y borra lo aprendido</button>
+        <button data-correct="true">Se compara su predicción con la palabra que realmente seguía y se corrigen los pesos</button>
+        <button>No pasa nada: no se ajusta nada</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el modelo reduce el error corrigiendo los pesos (descenso de gradiente). Eso <strong>no</strong> es aprendizaje por refuerzo, que usa recompensas.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">3. ¿Por qué, ante la misma pregunta, la respuesta puede variar?</p>
+      <div class="opts">
+        <button>Porque el modelo "decide" cambiar de opinión</button>
+        <button data-correct="true">Porque genera eligiendo probabilísticamente entre las continuaciones más probables</button>
+        <button>Porque copia de distintas fuentes de internet</button>
+        <button>Porque tiene emociones</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el modelo asigna probabilidades a la siguiente palabra y elige entre ellas; por eso la salida cambia aunque el pedido sea igual.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">4. Un modelo que "inventa" una ley o un artículo que no existe está mostrando:</p>
+      <div class="opts">
+        <button>Sesgo</button>
+        <button>Fecha de corte</button>
+        <button data-correct="true">Alucinación</button>
+        <button>Una actualización</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> la alucinación es contenido inventado con apariencia de verdad (datos, normas o citas falsas). Por eso todo dato debe verificarse.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">5. ¿Cuál de estas instrucciones aplica mejor la técnica de <em>contexto</em>?</p>
+      <div class="opts">
+        <button>"Escribí algo sobre un trámite."</button>
+        <button data-correct="true">"Soy funcionario municipal y debo responder una consulta ciudadana; redactá la respuesta en lenguaje claro."</button>
+        <button>"Resumilo."</button>
+        <button>"Hacelo más corto."</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> el contexto aporta los antecedentes de <strong>quién</strong> pide y <strong>para qué</strong>, para que el modelo no responda de forma genérica.</div>
+    </div>
+
+    <div class="quiz">
+      <p class="q">6. ¿Qué NO se debe pegar en un chat público?</p>
+      <div class="opts">
+        <button>Un ejemplo ficticio de un caso</button>
+        <button data-correct="true">Datos de ciudadanos o documentos reservados</button>
+        <button>Un dato ya publicado y abierto</button>
+        <button>Una consigna de redacción sin datos reales</button>
+      </div>
+      <div class="explain"><strong>Por qué:</strong> la regla de confidencialidad prohíbe subir datos personales o información no pública; se usan casos ficticios, públicos o anonimizados.</div>
+    </div>
+
+    <hr />
+
+    <h2>La frase que lo resume</h2>
+    <p>Un LLM genera <strong>palabra por palabra usando probabilidades</strong>. Un <strong>buen prompt</strong> y la <strong>verificación</strong> son la diferencia entre un resultado útil y uno engañoso.</p>
+
+    <h2>Fuente principal</h2>
+    <p class="refs">
+      Para profundizar: Microsoft Learn, <em>Inteligencia artificial generativa para principiantes</em>,
+      y OpenAI, <em>Buenas prácticas para la ingeniería de prompts</em>. Las técnicas están ampliadas en
+      la hoja de referencia del bloque.
+    </p>
+
+    <div class="askai">
+      ¿Algo te hace dudar? Pregúntame y lo desarmamos — por ejemplo: "¿por qué el modelo inventa una norma?" o "¿cómo sé si mi prompt tiene suficiente contexto?".
+    </div>
+
+    <div class="nav">
+      <a href="../reference/tecnicas-de-prompting.html">Referencia: técnicas de prompting →</a>
+      <a href="../reference/limites-de-un-llm.html">Referencia: límites de un LLM →</a>
+    </div>
+    <div class="nav">
+      <a href="0004-tipos-de-aprendizaje.html">← Lección 04: tipos de aprendizaje</a>
+      <a href="0006-agentes-de-ia.html">Lección 06: agentes de IA →</a>
+    </div>
+  </div>
+  <script src="../assets/quiz.js"></script>
+</body>
+</html>
