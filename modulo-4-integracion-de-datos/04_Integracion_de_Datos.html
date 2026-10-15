@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde 04_Integracion_de_Datos.md — no editar a mano. -->
+<title>Bloque 4 — Integración de Datos</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 4 — Integración de Datos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="bloque-4--integración-de-datos">Bloque 4 — Integración de
+Datos</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601)
+<strong>Sesión:</strong> 6 · <strong>Carga del bloque:</strong> 3
+teóricas + 6 prácticas (Plan de Clases) · dictado en una sesión de 3
+h</p>
+<hr />
+<h2 id="de-qué-trata-este-bloque">¿De qué trata este bloque?</h2>
+<p>Ya sabemos de dónde salen los datos (Bloque 1), cómo llegan a la
+institución (Bloque 2) y dónde viven (Bloque 3). Ahora llega la pregunta
+operativa: <strong>¿cómo reunimos todos esos datos en un solo lugar
+confiable y, además, hacemos que el trabajo se ejecute
+solo?</strong></p>
+<p>La respuesta es la <strong>integración de datos</strong>. Integrar es
+<strong>reunir datos de fuentes distintas en un destino común y
+coherente</strong>, para que cuenten una sola historia. Sin integración,
+cada sistema cuenta su parte: los trámites están en un sistema, la
+recaudación en otro y los reclamos en una planilla, y nadie tiene la
+foto completa.</p>
+<p>La herramienta clásica para integrar es el <strong>ETL</strong>
+(extraer, transformar, cargar). A su lado, la variante
+<strong>ELT</strong> cambia el orden de las etapas. Y para que el
+trabajo <strong>no haya que rehacerlo a mano cada vez</strong>, aparece
+la <strong>automatización</strong> (que una tarea corra sola) y la
+<strong>orquestación</strong> (que varias tareas corran en orden y
+avisen si algo falla).</p>
+<p><strong>Cómo se reparte en una sesión de 3 horas (180
+min):</strong></p>
+<ul>
+<li><strong>Sesión 6</strong> — qué es integrar y el proceso ETL/ELT;
+herramientas de integración; limpieza y preparación de datos;
+automatización y orquestación; cron y Airflow; y un taller de limpieza y
+diseño de un flujo programado, con entrega.</li>
+</ul>
+<hr />
+<h2 id="lectura">Lectura</h2>
+<h3 id="1-qué-es-integrar-datos">1. ¿Qué es integrar datos?</h3>
+<p>Integrar es <strong>reunir datos de fuentes distintas</strong> (bases
+de datos, planillas, sistemas, archivos, servicios web) en un
+<strong>destino común y coherente</strong>. El resultado no es una
+simple acumulación: es una fuente única y confiable que se puede
+cruzar.</p>
+<p><strong>Ejemplo cercano.</strong> En un municipio, los trámites están
+en un sistema, la recaudación en otro y los reclamos en una planilla.
+Integrarlos permite cruzar "qué se recaudó", "qué se tramitó" y "qué
+reclamó la gente" en un solo tablero. Sin integrar, cada área mira su
+parte y <strong>nadie ve el conjunto</strong>.</p>
+<blockquote>
+<p>Idea para la pizarra: <strong>integrar = juntar los datos para que
+cuenten una sola historia.</strong></p>
+</blockquote>
+<h3 id="2-el-proceso-etl-y-la-diferencia-con-elt">2. El proceso ETL y la
+diferencia con ELT</h3>
+<p>El <strong>ETL</strong> (extraer, transformar, cargar) es la
+herramienta clásica de la integración. Tres etapas, en orden:</p>
+<table>
+<thead>
+<tr>
+<th>Etapa</th>
+<th>Qué hace</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>E — Extraer</strong></td>
+<td>Leer y tomar los datos desde la fuente.</td>
+<td>Tomar las ventas de todas las sucursales.</td>
+</tr>
+<tr>
+<td><strong>T — Transformar</strong></td>
+<td>Limpiar, ordenar y convertir a un formato común.</td>
+<td>Unificar fechas y montos, quitar duplicados.</td>
+</tr>
+<tr>
+<td><strong>L — Cargar</strong></td>
+<td>Guardar los datos listos en el destino.</td>
+<td>Escribir en el almacén para los reportes.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Símil:</strong> el ETL es como una <strong>planta de
+envasado</strong>: se recibe la materia prima (extraer), se la lava y
+selecciona (transformar) y se la despacha al depósito (cargar). El
+producto final son <strong>datos listos para usar</strong>.</p>
+<p><strong>ETL vs. ELT.</strong> El orden de las letras no es un
+detalle: cambia <strong>cuándo</strong> y <strong>dónde</strong> se
+transforman los datos.</p>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>ETL</th>
+<th>ELT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Orden</td>
+<td>Extraer → <strong>Transformar</strong> → Cargar</td>
+<td>Extraer → Cargar → <strong>Transformar</strong></td>
+</tr>
+<tr>
+<td>Dónde se transforma</td>
+<td>Antes de guardar</td>
+<td>Después de guardar, dentro del destino</td>
+</tr>
+<tr>
+<td>Velocidad de carga</td>
+<td>Menor</td>
+<td>Mayor</td>
+</tr>
+<tr>
+<td>Flexibilidad</td>
+<td>Menor (se transforma una vez)</td>
+<td>Mayor (se puede transformar varias veces)</td>
+</tr>
+<tr>
+<td>Conviene cuando</td>
+<td>Destino rígido, datos sensibles o poco volumen</td>
+<td>Gran volumen y destino flexible (nube, data lake)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>No hay uno mejor que otro:</strong> depende del
+<strong>volumen</strong> y del <strong>destino</strong>. Los dos buscan
+dejar datos listos para usar.</p>
+<h3 id="3-herramientas-de-integración">3. Herramientas de
+integración</h3>
+<p>Hay dos grandes familias, y se eligen según el <strong>caso</strong>,
+el <strong>presupuesto</strong> y el <strong>equipo</strong>:</p>
+<ul>
+<li><strong>Comerciales</strong> — productos pagados, con interfaz
+visual (arrastrar y conectar), soporte y capacitación. Ejemplos:
+Informatica, IBM DataStage, Azure Data Factory, AWS Glue. Convienen a
+instituciones con presupuesto y equipos poco técnicos.</li>
+<li><strong>De código abierto</strong> — libres y gratuitas, mantenidas
+por una comunidad; dan más control y adaptación a cambio de más trabajo
+técnico. Ejemplos: Apache Airflow, Apache NiFi, Pentaho (Kettle), dbt,
+Talend Open Studio. Convienen con presupuesto limitado.</li>
+</ul>
+<blockquote>
+<p>Idea para la pizarra: <strong>no existe la herramienta
+perfecta</strong>; lo importante es entender qué hacen, no memorizar
+nombres.</p>
+</blockquote>
+<h3 id="4-limpieza-y-preparación-de-datos">4. Limpieza y preparación de
+datos</h3>
+<p>La transformación no es magia: es un conjunto de tareas concretas de
+<strong>limpieza y preparación</strong>. Es donde <strong>más tiempo se
+gasta</strong> en un proyecto real.</p>
+<ul>
+<li><strong>Corregir errores</strong> — valores imposibles o mal
+cargados (fechas inválidas, montos negativos).</li>
+<li><strong>Unificar formatos</strong> — fechas, mayúsculas y tildes
+("La Paz" vs. "LA PAZ"), monedas.</li>
+<li><strong>Eliminar duplicados</strong> — un mismo trámite registrado
+dos veces.</li>
+<li><strong>Completar o marcar faltantes</strong> — zonas sin registrar;
+se marcan (por ejemplo, <code>SIN ZONA</code>) en lugar de borrar la
+fila, para <strong>no inflar ni perder</strong> los totales.</li>
+<li><strong>Combinar tablas</strong> — cruzar el padrón de
+contribuyentes con la recaudación.</li>
+<li><strong>Filtrar y seleccionar</strong> — quedarse solo con las
+columnas y filas relevantes.</li>
+</ul>
+<blockquote>
+<p>Idea para la pizarra: <strong>datos sucios producen reportes
+sucios.</strong></p>
+</blockquote>
+<h3 id="5-automatización-y-orquestación">5. Automatización y
+orquestación</h3>
+<ul>
+<li><strong>Automatización</strong> — hacer que <strong>una tarea se
+ejecute sola</strong>, sin que una persona la dispare cada vez. Se apoya
+en <strong>programar</strong> cuándo debe correr y
+<strong>avisar</strong> si algo sale mal. Ejemplo: que un reporte de
+recaudación se genere solo, todos los lunes a las 6:00, y llegue por
+correo.</li>
+<li><strong>Orquestación</strong> — <strong>coordinar varias
+tareas</strong> que dependen unas de otras, asegurando el <strong>orden
+correcto</strong>. Maneja <strong>dependencias</strong> (la tarea B
+espera a la A), <strong>reintentos</strong> y <strong>avisos</strong>
+ante fallas. Ejemplo: descargar → transformar → cargar al almacén →
+enviar resumen; si un paso falla, se avisa y se reintenta.</li>
+</ul>
+<p><strong>Símil:</strong> la orquestación es como un <strong>director
+de orquesta</strong>: no toca los instrumentos, pero asegura que cada
+músico entre a tiempo y en el orden correcto.</p>
+<p><strong>Por qué importa:</strong> reduce <strong>errores</strong> (lo
+repetitivo a mano falla), ahorra <strong>tiempo</strong> y da
+<strong>trazabilidad</strong> (se sabe qué corrió, cuándo y con qué
+resultado).</p>
+<h3 id="6-herramientas-de-orquestación-cron-y-airflow">6. Herramientas
+de orquestación: cron y Airflow</h3>
+<p>De lo simple a lo complejo:</p>
+<ul>
+<li><strong>Cron</strong> — programador de tareas del sistema operativo.
+Se define una <strong>frecuencia</strong> y un <strong>comando</strong>;
+por ejemplo, <code>0 6 * * 1</code> significa "todos los lunes a las
+6:00". Conviene para tareas <strong>simples y aisladas</strong>.</li>
+<li><strong>Apache Airflow</strong> — plataforma de <strong>orquestación
+de flujos</strong>. Los flujos se definen como <strong>DAGs</strong>
+(cada nodo es una tarea; las flechas marcan el orden), con
+<strong>interfaz web</strong>, programación, <strong>reintentos</strong>
+y <strong>alertas</strong>. Conviene para flujos con varias etapas
+dependientes y con monitoreo.</li>
+<li>Hay puntos intermedios: <strong>programadores de nube</strong>
+(Azure Scheduler, Cloud Scheduler, EventBridge) y otros orquestadores
+(Dagster, Prefect, Luigi).</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Herramienta</th>
+<th>Complejidad</th>
+<th>Dependencias</th>
+<th>Interfaz visual</th>
+<th>Cuándo usarla</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cron</td>
+<td>Baja</td>
+<td>No</td>
+<td>No</td>
+<td>Tareas simples por horario</td>
+</tr>
+<tr>
+<td>Programador de nube</td>
+<td>Baja</td>
+<td>Limitadas</td>
+<td>Parcial</td>
+<td>Tareas simples en la nube</td>
+</tr>
+<tr>
+<td>Apache Airflow</td>
+<td>Media-alta</td>
+<td>Sí</td>
+<td>Sí</td>
+<td>Flujos complejos con monitoreo</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Idea para la pizarra: <strong>cron = que corra solo; Airflow = que
+corra en orden y avise si falla.</strong></p>
+</blockquote>
+<h3 id="7-diseñar-un-flujo-programado-paso-a-paso">7. Diseñar un flujo
+programado paso a paso</h3>
+<p>Diseñar el flujo es responder, en orden, <strong>cuatro
+preguntas</strong> y documentarlas:</p>
+<ol type="1">
+<li><strong>Frecuencia</strong> — ¿cada cuánto debe correr? (diario,
+mensual, cada hora).</li>
+<li><strong>Orden y dependencias</strong> — ¿qué tareas hay y cuál
+espera a cuál?</li>
+<li><strong>Si algo falla</strong> — ¿se reintenta? ¿se avisa? ¿se
+detiene todo o se continúa?</li>
+<li><strong>Trazabilidad</strong> — ¿dónde queda registrado qué corrió,
+cuándo y con qué resultado?</li>
+</ol>
+<p>El resultado se dibuja como un <strong>diagrama de tareas y
+flechas</strong> y se documenta en una tabla:</p>
+<table>
+<thead>
+<tr>
+<th>Tarea</th>
+<th>Qué hace</th>
+<th>Depende de</th>
+<th>Frecuencia</th>
+<th>Si falla</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Extraer</td>
+<td>Toma los datos de las fuentes</td>
+<td>—</td>
+<td>Diario 6:00</td>
+<td>Reintentar 3 veces; si una fuente falla, avisar</td>
+</tr>
+<tr>
+<td>Limpiar</td>
+<td>Corrige, unifica y deduplica</td>
+<td>Extraer</td>
+<td>Diario 6:00</td>
+<td>Detener y avisar (no cargar datos sucios)</td>
+</tr>
+<tr>
+<td>Cargar</td>
+<td>Guarda en el almacén</td>
+<td>Limpiar</td>
+<td>Diario 6:00</td>
+<td>Reintentar y avisar</td>
+</tr>
+<tr>
+<td>Calcular</td>
+<td>Arma los indicadores</td>
+<td>Cargar</td>
+<td>Mensual</td>
+<td>Reintentar</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mensaje puente:</strong> <em>integrar es juntar los datos
+para que cuenten una sola historia; automatizar y orquestar es hacer que
+ese trabajo corra solo, en orden y con aviso si algo falla.</em></p>
+<hr />
+<h2 id="ideas-clave">Ideas clave</h2>
+<ul>
+<li><strong>Integrar</strong> datos es reunirlos desde varias fuentes y
+dejarlos coherentes, como un todo.</li>
+<li><strong>ETL</strong> transforma <em>antes</em> de cargar;
+<strong>ELT</strong> carga <em>primero</em> y transforma
+<em>después</em>.</li>
+<li>La <strong>limpieza y preparación</strong> ocurre dentro de la
+transformación: corregir, unificar, deduplicar y marcar faltantes.</li>
+<li><strong>Automatizar</strong> es que una tarea corra
+<strong>sola</strong>; <strong>orquestar</strong> es que varias corran
+<strong>en orden</strong> y avisen si fallan.</li>
+<li><strong>Cron</strong> sirve para tareas simples por horario;
+<strong>Airflow</strong> para flujos complejos con dependencias y
+monitoreo.</li>
+<li>Un flujo programado debe poder <strong>fallar con aviso</strong> y
+dejar <strong>trazabilidad</strong>.</li>
+</ul>
+<h2 id="glosario">Glosario</h2>
+<table>
+<thead>
+<tr>
+<th>Término</th>
+<th>Definición</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Integración de datos</td>
+<td>Reunir datos de fuentes distintas en un destino común y
+coherente.</td>
+</tr>
+<tr>
+<td>ETL</td>
+<td>Extraer → Transformar → Cargar; se transforma antes de guardar.</td>
+</tr>
+<tr>
+<td>ELT</td>
+<td>Extraer → Cargar → Transformar; se guarda primero y se transforma
+después.</td>
+</tr>
+<tr>
+<td>Pipeline (flujo)</td>
+<td>Secuencia de etapas por las que pasa el dato.</td>
+</tr>
+<tr>
+<td>Limpieza de datos</td>
+<td>Corregir, unificar, deduplicar y marcar faltantes.</td>
+</tr>
+<tr>
+<td>Automatización</td>
+<td>Hacer que una tarea se ejecute sola.</td>
+</tr>
+<tr>
+<td>Orquestación</td>
+<td>Coordinar varias tareas dependientes en el orden correcto.</td>
+</tr>
+<tr>
+<td>Dependencia</td>
+<td>Una tarea que no empieza hasta que termina otra.</td>
+</tr>
+<tr>
+<td>DAG</td>
+<td>Forma de dibujar un flujo: nodos (tareas) y flechas (orden).</td>
+</tr>
+<tr>
+<td>Trazabilidad</td>
+<td>Registro de qué corrió, cuándo y con qué resultado.</td>
+</tr>
+<tr>
+<td>Cron</td>
+<td>Programador de tareas del sistema operativo (frecuencia +
+comando).</td>
+</tr>
+<tr>
+<td>Apache Airflow</td>
+<td>Plataforma de orquestación de flujos definidos como DAGs.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="para-repasar-autoevaluación">Para repasar (autoevaluación)</h2>
+<ol type="1">
+<li>¿Qué significa integrar datos y por qué importa para una
+institución?</li>
+<li>Explica ETL y ELT, y di cuándo conviene cada uno.</li>
+<li>Menciona tres tareas de limpieza y explica por qué los faltantes se
+marcan en lugar de borrarse.</li>
+<li>¿Cuál es la diferencia entre automatizar y orquestar? Da un ejemplo
+de cada uno.</li>
+<li>¿Cuándo alcanza con cron y cuándo conviene Airflow?</li>
+<li>¿Qué cuatro preguntas respondes al diseñar un flujo programado?</li>
+</ol>
+<h2 id="referencias-recomendadas">Referencias recomendadas</h2>
+<ul>
+<li>Martin Kleppmann, <em>Diseño de aplicaciones con uso intensivo en
+datos</em> (Marcombo, 2022). Procesamiento por lotes y por flujos.</li>
+<li>Ralph Kimball y Margy Ross, <em>The Data Warehouse Toolkit</em>
+(Wiley). Fundamentos de ETL.</li>
+<li>Apache Airflow, documentación oficial (<a
+href="https://airflow.apache.org/docs/">https://airflow.apache.org/docs/</a>).
+DAGs, reintentos y alertas.</li>
+<li>dbt, documentación oficial (<a
+href="https://docs.getdbt.com/">https://docs.getdbt.com/</a>). ELT y
+transformación después de cargar.</li>
+</ul>
+<h2 id="presentaciones-del-bloque">Presentaciones del bloque</h2>
+<ul>
+<li>Sesión 6 — Integración: ETL, automatización y orquestación:
+<code>presentacion_sesion6.html</code></li>
+</ul>
+  <footer class="docfoot">Generado desde <a href="04_Integracion_de_Datos.md"><code>04_Integracion_de_Datos.md</code></a> · Módulo 4 — Integración de Datos · IDT 601</footer>
+</div>
+</body>
+</html>

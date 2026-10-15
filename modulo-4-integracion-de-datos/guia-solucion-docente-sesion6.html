@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde guia-solucion-docente-sesion6.md — no editar a mano. -->
+<title>Guía de solución del docente — Taller Sesión 6</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 4 — Integración de Datos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="guía-de-solución-del-docente--taller-sesión-6">Guía de solución
+del docente — Taller Sesión 6</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601) · Bloque 4 —
+Integración de Datos <strong>Taller:</strong>
+<code>taller_sesion6_automatizar_pipeline.md</code>
+<strong>Uso:</strong> respuestas modelo de la Parte 1 y la Parte 2,
+flujos por variante y rúbrica.</p>
+<hr />
+<h2 id="parte-1--limpieza-resuelta-valores-exactos">Parte 1 — Limpieza
+resuelta (valores exactos)</h2>
+<table>
+<thead>
+<tr>
+<th>Comprobación</th>
+<th>Esperado</th>
+<th>Fórmula de control (Google Sheets)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filas crudas</td>
+<td><strong>24</strong></td>
+<td><code>=CONTARA(crudo!A2:A)</code></td>
+</tr>
+<tr>
+<td>Duplicados eliminados</td>
+<td><strong>2</strong></td>
+<td>diferencia entre crudo y limpio</td>
+</tr>
+<tr>
+<td>Filas limpias</td>
+<td><strong>22</strong></td>
+<td><code>=CONTARA(A2:A)</code></td>
+</tr>
+<tr>
+<td>Reclamos <code>SIN ZONA</code></td>
+<td><strong>1</strong></td>
+<td><code>=CONTAR.SI(E2:E;"SIN ZONA")</code></td>
+</tr>
+<tr>
+<td>Fechas inválidas</td>
+<td><strong>1</strong></td>
+<td><code>=CONTAR.SI(B2:B;"2026-13-05")</code></td>
+</tr>
+<tr>
+<td>Descripciones vacías</td>
+<td><strong>4</strong></td>
+<td><code>=CONTAR.BLANCO(F2:F)</code></td>
+</tr>
+<tr>
+<td>Ventanilla / Teléfono / Formulario web</td>
+<td><strong>8 / 7 / 7</strong></td>
+<td><code>=CONTAR.SI(C2:C;"Ventanilla")</code> …</td>
+</tr>
+<tr>
+<td>Bacheo / Alumbrado / Residuos</td>
+<td><strong>8 / 7 / 7</strong></td>
+<td><code>=CONTAR.SI(D2:D;"Bacheo")</code> …</td>
+</tr>
+<tr>
+<td>Centro / Cotahuma / Max Paredes / Periférica / Sur / SIN ZONA</td>
+<td><strong>4 / 5 / 4 / 4 / 4 / 1</strong></td>
+<td><code>=CONTAR.SI(E2:E;"Macrodistrito Centro")</code> …</td>
+</tr>
+<tr>
+<td>Abierto / Cerrado / Anulado</td>
+<td><strong>12 / 9 / 1</strong></td>
+<td><code>=CONTAR.SI(G2:G;"Abierto")</code> …</td>
+</tr>
+</tbody>
+</table>
+<h3
+id="reemplazos-de-limpieza-con-coincidir-con-toda-la-celda">Reemplazos
+de limpieza (con “coincidir con toda la celda”)</h3>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Reemplazar</th>
+<th>Por</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>canal</code></td>
+<td><code>ventanilla</code></td>
+<td><code>Ventanilla</code></td>
+</tr>
+<tr>
+<td><code>canal</code></td>
+<td><code>telefono</code>, <code>Telefono</code></td>
+<td><code>Teléfono</code></td>
+</tr>
+<tr>
+<td><code>canal</code></td>
+<td><code>formulario web</code></td>
+<td><code>Formulario web</code></td>
+</tr>
+<tr>
+<td><code>tipo_reclamo</code></td>
+<td><code>BACHEO</code></td>
+<td><code>Bacheo</code></td>
+</tr>
+<tr>
+<td><code>tipo_reclamo</code></td>
+<td><code>alumbrado</code>, <code>Alumbrado </code></td>
+<td><code>Alumbrado</code></td>
+</tr>
+<tr>
+<td><code>tipo_reclamo</code></td>
+<td><code>residuos</code></td>
+<td><code>Residuos</code></td>
+</tr>
+<tr>
+<td><code>zona</code></td>
+<td><code>centro</code></td>
+<td><code>Macrodistrito Centro</code></td>
+</tr>
+<tr>
+<td><code>zona</code></td>
+<td><code>COTAHUMA</code>, <code>Cotahuma</code></td>
+<td><code>Macrodistrito Cotahuma</code></td>
+</tr>
+<tr>
+<td><code>zona</code></td>
+<td><code>Max Paredes</code>, <code>M. Paredes</code></td>
+<td><code>Macrodistrito Max Paredes</code></td>
+</tr>
+<tr>
+<td><code>zona</code></td>
+<td><code>periférica</code></td>
+<td><code>Macrodistrito Periférica</code></td>
+</tr>
+<tr>
+<td><code>zona</code></td>
+<td><em>(vacío)</em></td>
+<td><code>SIN ZONA</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Punto de aprendizaje clave:</strong> <code>SIN ZONA</code>
+<strong>no</strong> es lo mismo que borrar la fila. El reclamo existe;
+se conserva marcado para no <strong>inflar</strong> ni
+<strong>perder</strong> totales.</p>
+</blockquote>
+<hr />
+<h2 id="parte-2--flujo-resuelto">Parte 2 — Flujo resuelto</h2>
+<h3 id="flujo-base-las-7-tareas-y-su-orden">Flujo base (las 7 tareas y
+su orden)</h3>
+<pre class="text"><code>T1 Extraer reclamos (3 sistemas)
+        │
+        ▼
+T2 Limpiar y preparar (unificar, deduplicar, fechas)
+        │
+        ▼
+T3 Combinar con el padrón de zonas
+        │
+        ├──────────────▶ T6 Detectar alerta (crítico repetido por zona)
+        ▼
+T4 Cargar al almacén analítico
+        │
+        ▼
+T5 Calcular indicadores del reporte
+        │
+        ▼
+T7 Enviar aviso (resumen del reporte y, si corresponde, alerta)   ◀── T6</code></pre>
+<h3 id="tabla-de-tareas-modelo">Tabla de tareas modelo</h3>
+<table>
+<thead>
+<tr>
+<th>Tarea</th>
+<th>Qué hace</th>
+<th>Depende de</th>
+<th>Frecuencia</th>
+<th>Si falla</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1 Extraer</td>
+<td>Toma datos de ventanilla, teléfono y web</td>
+<td>—</td>
+<td>Diario 6:00</td>
+<td>Reintentar 3 veces; si una fuente no responde, avisar y seguir con
+las otras dos, marcando el faltante</td>
+</tr>
+<tr>
+<td>T2 Limpiar</td>
+<td>Unifica canal/tipo/zona, deduplica, corrige fechas</td>
+<td>T1</td>
+<td>Diario 6:00</td>
+<td><strong>Detener</strong>: no se carga nada (mejor no cargar datos
+sucios) y avisar</td>
+</tr>
+<tr>
+<td>T3 Combinar</td>
+<td>Cruza con el padrón de zonas</td>
+<td>T2</td>
+<td>Diario 6:00</td>
+<td>Igual que T2: detener y avisar</td>
+</tr>
+<tr>
+<td>T4 Cargar</td>
+<td>Guarda en el almacén analítico</td>
+<td>T3</td>
+<td>Diario 6:00</td>
+<td>Reintentar 3 veces; si persiste, avisar</td>
+</tr>
+<tr>
+<td>T5 Calcular</td>
+<td>Totales por zona, canal y tipo</td>
+<td>T4</td>
+<td>Mensual (día 1)</td>
+<td>Reintentar; si falla, avisar al responsable del reporte</td>
+</tr>
+<tr>
+<td>T6 Detectar alerta</td>
+<td>¿Un crítico repetido en la misma zona?</td>
+<td>T3</td>
+<td>Cada 6 horas</td>
+<td>Reintentar; si falla, avisar (la alerta no puede quedar muda)</td>
+</tr>
+<tr>
+<td>T7 Enviar aviso</td>
+<td>Correo con resumen y/o alerta</td>
+<td>T5 y T6</td>
+<td>Diario y mensual</td>
+<td>Reintentar; registrar el envío</td>
+</tr>
+</tbody>
+</table>
+<h3 id="trazabilidad-respuesta-modelo">Trazabilidad (respuesta
+modelo)</h3>
+<ul>
+<li>Se registra <strong>una fila por corrida</strong> en una hoja
+<code>log</code>:
+<code>fecha_hora | tarea | estado (ok/error) | filas_procesadas | duración</code>.</li>
+<li>Se conserva el <code>crudo</code> de cada extracción y el
+<code>limpio</code> de cada día: permite <strong>reproducir</strong> el
+reporte.</li>
+<li>Un responsable revisa el log <strong>cada mañana</strong>; si hay
+errores, recibe aviso automático.</li>
+</ul>
+<h3 id="decisión-sobre-la-fecha-inválida">Decisión sobre la fecha
+inválida</h3>
+<p>No se inventa una fecha. Opciones válidas: <strong>excluirla</strong>
+del reporte marcándola, o <strong>corregirla con el área</strong> dueña
+del dato (mesa de entrada) y dejar registro del cambio. Cualquiera de
+las dos es aceptable <strong>si se justifica</strong>.</p>
+<hr />
+<h2 id="flujos-por-variante-énfasis">Flujos por variante (énfasis)</h2>
+<table>
+<thead>
+<tr>
+<th>Variante</th>
+<th>Qué cambia</th>
+<th>Qué se evalúa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A — Reporte mensual</strong></td>
+<td>T1→T5 corre <strong>una vez al mes</strong>; se prioriza que T2
+quede perfecta</td>
+<td>Justifica que los datos estén <strong>completos y limpios</strong>
+antes de calcular</td>
+</tr>
+<tr>
+<td><strong>B — Alerta temprana</strong></td>
+<td><strong>T1→T3→T6</strong> corre <strong>varias veces al
+día</strong>; T5→T7 una vez al mes</td>
+<td>Distingue la <strong>frecuencia de la alerta</strong> de la del
+reporte</td>
+</tr>
+<tr>
+<td><strong>C — Trazabilidad</strong></td>
+<td>Añade una tarea de <strong>registro</strong> después de cada paso;
+conserva el log y el crudo</td>
+<td>Define <strong>dónde y qué</strong> se guarda, y quién lo
+revisa</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="errores-frecuentes-y-cómo-orientarlos">Errores frecuentes y cómo
+orientarlos</h2>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Cómo se detecta</th>
+<th>Cómo orientar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Borran filas con zona vacía</td>
+<td>El conteo baja de 22</td>
+<td>Recordar <code>SIN ZONA</code>: marcar, no borrar</td>
+</tr>
+<tr>
+<td>Reemplazos que rompen palabras</td>
+<td>“centro” dentro de otras palabras</td>
+<td>Activar “coincidir con toda la celda”</td>
+</tr>
+<tr>
+<td>Flujo como lista sin flechas</td>
+<td>Tareas sueltas</td>
+<td>Preguntar “¿puede empezar sin la anterior?”</td>
+</tr>
+<tr>
+<td>Todos “si falla: reintentar” sin distinguir</td>
+<td>No hay tarea que deba <strong>detenerse</strong></td>
+<td>Discutir por qué cargar datos sucios es peor que no cargar</td>
+</tr>
+<tr>
+<td>No definen trazabilidad</td>
+<td>Falta la sección 3</td>
+<td>Relacionar con auditoría y rendición de cuentas</td>
+</tr>
+<tr>
+<td>Ignoran su énfasis</td>
+<td>A, B y C salen iguales</td>
+<td>Volver a las variantes y ajustar frecuencia y tareas</td>
+</tr>
+</tbody>
+</table>
+<h2 id="rúbrica-con-niveles">Rúbrica con niveles</h2>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Descriptor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Insuficiente (1–59)</strong></td>
+<td>No limpia o pierde registros; el flujo no tiene orden ni
+dependencias ni manejo de fallas.</td>
+</tr>
+<tr>
+<td><strong>Suficiente (70–84)</strong></td>
+<td>Limpia la mayoría de los valores; el flujo está ordenado, pero no
+define qué pasa si falla ni la trazabilidad.</td>
+</tr>
+<tr>
+<td><strong>Alto (85–94)</strong></td>
+<td>Limpieza completa y verificada; flujo con frecuencia, dependencias y
+manejo de fallas; define trazabilidad.</td>
+</tr>
+<tr>
+<td><strong>Excelente (95–100)</strong></td>
+<td>Todo lo anterior + coherencia con su énfasis, frecuencia distinta
+para alerta y reporte, y una decisión justificada con datos (la fecha
+inválida).</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Escala del módulo: 1–59 inicial · 60–69 muy parcial · 70–84
+suficiente · 85–94 alto porcentaje · 95–100 logro total esperado.</p>
+</blockquote>
+  <footer class="docfoot">Generado desde <a href="guia-solucion-docente-sesion6.md"><code>guia-solucion-docente-sesion6.md</code></a> · Módulo 4 — Integración de Datos · IDT 601</footer>
+</div>
+</body>
+</html>

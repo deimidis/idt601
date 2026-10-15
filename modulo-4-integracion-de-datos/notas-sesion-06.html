@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde notas-sesion-06.md — no editar a mano. -->
+<title>Notas del orador — Sesión 6</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 4 — Integración de Datos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="notas-del-orador--sesión-6">Notas del orador — Sesión 6</h1>
+<p><strong>Deck:</strong> <code>deck-sesion-06.html</code> · 15
+diapositivas · 180 min <strong>Tema:</strong> Integración: ETL,
+automatización y orquestación</p>
+<blockquote>
+<p>Guion punteado por diapositiva. Cada viñeta es algo para decir en voz
+alta; <strong>No olvidar</strong> marca lo imprescindible.</p>
+</blockquote>
+<hr />
+<h2 id="slide-1--integración-etl-automatización-y-orquestación">Slide 1
+— Integración: ETL, automatización y orquestación</h2>
+<ul>
+<li>Dar la bienvenida y encuadrar la sesión en el <strong>Bloque 4 —
+Integración de Datos</strong>, como continuación del Bloque 3
+(arquitectura): ya sabemos dónde viven los datos, hoy aprendemos a
+moverlos y transformarlos.</li>
+<li>Anunciar la promesa: al terminar sabrán qué es
+<strong>ETL/ELT</strong>, cómo se limpian y preparan los datos, y cómo
+se hace que un proceso <strong>corra solo, en orden y a
+tiempo</strong>.</li>
+<li>Aclarar que el público no es especialista: no hace falta saber
+programar; el taller final es guiado paso a paso.</li>
+<li>Adelantar el recorrido: integrar y ETL, ETL vs. ELT, herramientas,
+limpieza, automatización y orquestación, y un taller de limpieza y
+diseño del flujo.</li>
+<li><strong>No olvidar:</strong> avisar desde el arranque que hay una
+<strong>pausa de 10 minutos</strong> a mitad de sesión y que el último
+tramo es un <strong>taller de 65 minutos</strong> (limpiar los datos y
+diseñar el flujo que corre solo).</li>
+</ul>
+<h2 id="slide-2--hoja-de-ruta">Slide 2 — Hoja de ruta</h2>
+<ul>
+<li>Recorrer los siete tramos con sus tiempos: integrar y ETL (20), ETL
+vs. ELT (15), herramientas (10), limpieza y automatización (25),
+orquestación (15), taller (65) y cierre (10).</li>
+<li>Señalar que el <strong>taller (65 min)</strong> es el corazón de la
+sesión: la mayor parte del tiempo se pasa haciendo, no escuchando.</li>
+<li>Ubicar la pausa de 10 minutos después del bloque de herramientas de
+integración.</li>
+<li>Aclarar que el taller final es <strong>por equipos de 4
+personas</strong> y que se entrega un <strong>diagrama de flujo + tabla
+de tareas</strong>, sin programar.</li>
+<li><strong>No olvidar:</strong> confirmar que el cierre reserva 10
+minutos para preguntas y para el puente a la próxima sesión.</li>
+</ul>
+<h2 id="slide-3--la-pregunta-del-día">Slide 3 — La pregunta del día</h2>
+<ul>
+<li>Escribir las tres preguntas en la pizarra y dejarlas visibles toda
+la sesión: <strong>qué es ETL/ELT</strong>, <strong>cómo se limpian los
+datos</strong> y <strong>cómo corre solo</strong>.</li>
+<li>Lanzar el primer enganche: <em>"¿cuántos sistemas de su institución
+habría que juntar para armar un solo informe?"</em>.</li>
+<li>Lanzar el segundo: <em>"¿qué tarea repetitiva harían que se ejecute
+sola?"</em> y dejar que el grupo proponga ejemplos.</li>
+<li>Anotar 4 o 5 ejemplos en la pizarra y avisar que se retoman en el
+taller final.</li>
+<li><strong>No olvidar:</strong> dejar claro que estas <strong>tres
+preguntas ordenan la sesión</strong> y se responden en el cierre.</li>
+</ul>
+<h2 id="slide-4--integrar-datos">Slide 4 — Integrar datos</h2>
+<ul>
+<li>Definir con palabras simples: integrar es <strong>reunir datos de
+fuentes distintas</strong> en un <strong>destino común y
+coherente</strong>.</li>
+<li>Contar el ejemplo del municipio: trámites en un sistema, recaudación
+en otro y reclamos en una planilla; integrados se cruzan en un solo
+tablero.</li>
+<li>Subrayar la consecuencia de no integrar: cada sistema cuenta su
+parte y <strong>nadie tiene la foto completa</strong>.</li>
+<li>Preguntar al grupo qué sistemas de su institución necesitarían
+cruzarse para armar un informe de gestión.</li>
+<li><strong>No olvidar:</strong> instalar la idea de que los datos deben
+contar <strong>una sola historia</strong>, y anunciar que la herramienta
+clásica es el <strong>ETL</strong>.</li>
+</ul>
+<h2 id="slide-5--proceso-etl">Slide 5 — Proceso ETL</h2>
+<ul>
+<li>Dibujar en la pizarra el proceso en tres etapas y en orden:
+<strong>E — Extraer → T — Transformar → L — Cargar</strong>.</li>
+<li>Explicar cada etapa: extraer es <strong>tomar el dato de la
+fuente</strong> (bases, planillas, archivos, APIs); transformar es
+<strong>limpiar y convertir</strong>; cargar es <strong>guardar
+listo</strong> en el almacén.</li>
+<li>Usar el símil de la <strong>planta de envasado</strong>: recibe la
+materia prima, la lava y selecciona, y la despacha al depósito.</li>
+<li>Dar el ejemplo de las ventas de sucursales: tomarlas todas, unificar
+fechas y montos, y guardarlas en el almacén para los reportes.</li>
+<li><strong>No olvidar:</strong> el resumen memorable <strong>"tomar →
+arreglar → guardar"</strong>: el producto final son <strong>datos listos
+para usar</strong>.</li>
+</ul>
+<h2 id="slide-6--etl-vs-elt">Slide 6 — ETL vs. ELT</h2>
+<ul>
+<li>Aclarar que el orden de las letras no es un detalle: cambia
+<strong>cuándo</strong> y <strong>dónde</strong> se transforman los
+datos.</li>
+<li>Explicar <strong>ETL</strong>: transforma antes de cargar; el
+destino queda ordenado desde el inicio, pero requiere un espacio
+intermedio y puede demorar con grandes volúmenes.</li>
+<li>Explicar <strong>ELT</strong>: carga primero en crudo y transforma
+después dentro del destino; carga rápida y flexible, pero exige un
+destino potente (nube o data lake).</li>
+<li>Contrastar con los ejemplos bolivianos: planillas de hospitales a
+formato común (<strong>ETL</strong>) y cajas de recaudación a un lago de
+datos (<strong>ELT</strong>).</li>
+<li><strong>No olvidar:</strong> no hay uno mejor que otro:
+<strong>depende del volumen y del destino</strong>; los dos buscan dejar
+datos listos para usar.</li>
+</ul>
+<h2 id="slide-7--herramientas-de-integración">Slide 7 — Herramientas de
+integración</h2>
+<ul>
+<li>Presentar las dos familias: <strong>comerciales</strong> (licencia
+pagada, interfaz visual, soporte) y <strong>de código abierto</strong>
+(gratuitas, más trabajo técnico).</li>
+<li>Nombrar ejemplos comerciales: Informatica, IBM DataStage, Azure Data
+Factory, AWS Glue.</li>
+<li>Nombrar ejemplos de código abierto: Airflow, NiFi, Pentaho (Kettle),
+dbt, Talend Open Studio.</li>
+<li>Traducir la tabla a la regla de elección: se decide por el
+<strong>caso</strong>, el <strong>presupuesto</strong> y el
+<strong>equipo</strong> disponible.</li>
+<li><strong>No olvidar:</strong> lo importante es <strong>entender qué
+hace cada herramienta</strong>, no memorizar nombres.</li>
+</ul>
+<h2 id="slide-8--comerciales-vs-código-abierto">Slide 8 — Comerciales
+vs. código abierto</h2>
+<ul>
+<li>Describir las <strong>comerciales</strong>: productos pagados con
+interfaz de arrastrar y conectar, soporte y capacitación; convienen con
+presupuesto y equipos poco técnicos.</li>
+<li>Describir las de <strong>código abierto</strong>: libres y
+gratuitas, mantenidas por la comunidad, con más control y adaptación a
+cambio de más trabajo técnico.</li>
+<li>Señalar el criterio de decisión: <strong>presupuesto</strong> frente
+a <strong>capacidad técnica del equipo</strong>.</li>
+<li>Preguntar quién conoce o usa alguna de estas herramientas en su
+institución.</li>
+<li><strong>No olvidar:</strong> ninguna familia es "la correcta"; la
+elección es una <strong>decisión institucional según el
+caso</strong>.</li>
+</ul>
+<h2 id="slide-9--limpieza-y-preparación">Slide 9 — Limpieza y
+preparación</h2>
+<ul>
+<li>Enmarcar la limpieza como el corazón de la transformación: es donde
+<strong>más tiempo se gasta</strong> en un proyecto real.</li>
+<li>Recorrer las tareas concretas: <strong>corregir</strong> errores,
+<strong>unificar</strong> formatos, <strong>eliminar
+duplicados</strong>, <strong>marcar faltantes</strong> y
+<strong>combinar tablas</strong>.</li>
+<li>Dar el ejemplo del reporte mensual de reclamos: unificar
+"Macrodistrito Centro" y "centro", descartar duplicados y marcar "sin
+zona".</li>
+<li>Repetir la idea de la pizarra: <strong>datos sucios producen
+reportes sucios</strong>.</li>
+<li><strong>No olvidar:</strong> limpiar no es opcional; decidir si los
+faltantes se completan o se excluyen, <strong>sin inflar
+totales</strong>.</li>
+</ul>
+<h2 id="slide-10--automatización">Slide 10 — Automatización</h2>
+<ul>
+<li>Definir automatizar como hacer que <strong>una tarea se ejecute
+sola</strong>, sin que una persona la dispare cada vez.</li>
+<li>Explicar sus dos apoyos: <strong>programar</strong> cuándo debe
+correr y <strong>avisar</strong> si algo sale mal.</li>
+<li>Dar el ejemplo del reporte de recaudación que se genera solo
+<strong>los lunes a las 6:00</strong> y llega por correo a quien lo
+necesita.</li>
+<li>Lanzar la pregunta al grupo: <em>"¿qué tarea repetitiva de su
+trabajo harían que se ejecute sola?"</em> (reportes, respaldos,
+resúmenes).</li>
+<li><strong>No olvidar:</strong> automatizar es <strong>que corra
+solo</strong>; la diferencia con orquestar aparece en el slide
+siguiente.</li>
+</ul>
+<h2 id="slide-11--orquestación">Slide 11 — Orquestación</h2>
+<ul>
+<li>Definir orquestar como <strong>coordinar varias tareas</strong> que
+dependen unas de otras, asegurando el <strong>orden
+correcto</strong>.</li>
+<li>Explicar qué maneja: <strong>dependencias</strong> (la tarea B
+espera a la A), <strong>reintentos</strong> y <strong>avisos</strong>
+ante fallas.</li>
+<li>Recorrer el ejemplo del flujo: descargar → transformar → cargar al
+almacén → enviar resumen.</li>
+<li>Usar el símil del <strong>director de orquesta</strong>: no toca
+instrumentos, pero asegura que cada músico entre a tiempo y en
+orden.</li>
+<li><strong>No olvidar:</strong> si un paso falla, hay que
+<strong>avisar y reintentar</strong>: orquestar es que corra en orden y
+coordinado.</li>
+</ul>
+<h2 id="slide-12--herramientas-de-orquestación">Slide 12 — Herramientas
+de orquestación</h2>
+<ul>
+<li>Presentar <strong>cron</strong> como el programador del sistema
+operativo: se define una <strong>frecuencia</strong> y un
+<strong>comando</strong>; leer <code>0 6 * * 1</code> = "todos los lunes
+a las 6:00".</li>
+<li>Aclarar que cron conviene para <strong>tareas simples y
+aisladas</strong>, sin dependencias complejas.</li>
+<li>Presentar <strong>Apache Airflow</strong> como plataforma de
+orquestación: flujos definidos como <strong>DAGs</strong>, con interfaz
+web, reintentos y alertas.</li>
+<li>Recorrer la tabla lado a lado (complejidad, dependencias, interfaz)
+e incluir los <strong>programadores de nube</strong> como punto
+medio.</li>
+<li><strong>No olvidar:</strong> empezar simple: para una <strong>tarea
+suelta, cron alcanza</strong>; para <strong>flujos complejos con aviso
+de fallas, Airflow</strong>.</li>
+</ul>
+<h2 id="slide-13--taller-automatizar-el-pipeline">Slide 13 — Taller:
+automatizar el pipeline</h2>
+<ul>
+<li>Dar la consigna en dos partes: <strong>limpiar y preparar</strong>
+el CSV de reclamos (unificar canal, tipo y zona; quitar duplicados;
+marcar <code>SIN ZONA</code>; unificar fechas) y <strong>diseñar el
+flujo que corre solo</strong>.</li>
+<li>Recordar las cuatro preguntas del flujo:
+<strong>frecuencia</strong>, <strong>orden y dependencias</strong>,
+<strong>qué pasa si falla</strong> y <strong>dónde queda la
+trazabilidad</strong>.</li>
+<li>Presentar las variantes por equipo: A reporte mensual · B alerta
+temprana · C trazabilidad y auditoría.</li>
+<li>Explicar el entregable: <strong>diagrama del flujo + tabla de tareas
++ regla de trazabilidad</strong>, cerrado en la sesión. No se programa;
+se usa una hoja de cálculo.</li>
+<li><strong>No olvidar:</strong> el insumo y la guía están en
+<code>modulo-4-integracion-de-datos/</code>; con grupos de poca base,
+usar el <strong>Modo B</strong> (demostración guionada) de la guía.</li>
+</ul>
+<h2 id="slide-14--cierre">Slide 14 — Cierre</h2>
+<ul>
+<li>Sintetizar los tres pilares: <strong>integrar</strong> (ETL/ELT
+reúne los datos para que cuenten una sola historia),
+<strong>limpiar</strong> (corregir, unificar y combinar) y
+<strong>orquestar</strong> (que corra solo, en orden y con aviso).</li>
+<li>Reforzar por qué importa: <strong>menos errores</strong>,
+<strong>ahorro de tiempo</strong> y <strong>trazabilidad</strong> (se
+sabe qué corrió, cuándo y con qué resultado).</li>
+<li>Releer con el grupo la regla final: de lo simple
+(<strong>cron</strong>) a lo complejo (<strong>Airflow</strong>).</li>
+<li>Anticipar la próxima sesión: <strong>licencias de datos y datos
+abiertos</strong> — qué se puede usar, cómo se comparte y bajo qué
+condiciones.</li>
+<li><strong>No olvidar:</strong> dejar un espacio real para preguntas
+antes de cerrar y recordar la entrega del taller (diagrama + tabla de
+tareas).</li>
+</ul>
+<h2 id="slide-15--gracias">Slide 15 — Gracias</h2>
+<ul>
+<li>Agradecer la asistencia y la participación, en especial durante el
+taller.</li>
+<li>Recordar la idea final: <strong>integrar, limpiar y hacer que corra
+solo, en orden y con aviso si falla</strong>.</li>
+<li>Repetir el puente a la próxima sesión: <strong>licencias de datos y
+datos abiertos</strong>.</li>
+<li>Invitar a llevar sus dudas y a consultar la guía del taller y la
+plantilla de entrega.</li>
+<li><strong>No olvidar:</strong> despedirse confirmando día y hora de la
+próxima sesión y dejando el canal de contacto del docente.</li>
+</ul>
+  <footer class="docfoot">Generado desde <a href="notas-sesion-06.md"><code>notas-sesion-06.md</code></a> · Módulo 4 — Integración de Datos · IDT 601</footer>
+</div>
+</body>
+</html>

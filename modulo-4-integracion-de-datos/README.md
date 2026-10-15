@@ -43,5 +43,6 @@ Diplomado en Data Driven AI (EGPP 2026).
 
 ## Cómo se mantiene
 
+- Los **documentos** (planes, notas, talleres, guías, plantillas, insumos) tienen una versión de lectura `.html` con el diseño del sitio, generada con `./render-docs.sh` (`pandoc` + `assets/doc-template.html` + `assets/docs.css`). El `.md` sigue siendo la fuente: tras editarlo, volver a correr el script.
 - Esta carpeta es el origen; se publica en el sitio estático `../idt601/modulo-4-integracion-de-datos/`.
 - Si se cambia un material aquí, hay que volver a copiarlo allí.

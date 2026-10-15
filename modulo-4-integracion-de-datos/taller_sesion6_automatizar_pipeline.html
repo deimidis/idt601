@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde taller_sesion6_automatizar_pipeline.md — no editar a mano. -->
+<title>Taller — Sesión 6: automatizar el pipeline de reclamos</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 4 — Integración de Datos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="taller--sesión-6-automatizar-el-pipeline-de-reclamos">Taller —
+Sesión 6: automatizar el pipeline de reclamos</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601) · Bloque 4 —
+Integración de Datos <strong>Duración:</strong> 65 min de taller (5 de
+consigna + 50 de trabajo + 10 de puesta en común), dentro de la sesión
+de 3 horas <strong>Modalidad:</strong> 100 % en línea (Zoom + salas) ·
+<strong>Modo A</strong> (equipos) o <strong>Modo B</strong>
+(demostración del docente) <strong>Herramienta:</strong> hoja de cálculo
+— <strong>Google Sheets</strong> (recomendado) o <strong>Excel en
+línea</strong>; el diagrama se dibuja en la misma hoja, en un documento
+o en una pizarra digital. <strong>Sin instalar nada.</strong>
+<strong>Insumo:</strong> <code>datos/reclamos_crudos.csv</code> +
+<code>datos/DICCIONARIO_reclamos.md</code> (ver
+<code>datos/FUENTE.md</code>)</p>
+<hr />
+<h2 id="objetivo">Objetivo</h2>
+<p>Convertir el flujo manual de reclamos en un <strong>trabajo
+programado y documentado</strong>, en dos pasos:</p>
+<ol type="1">
+<li><strong>Limpiar y preparar</strong> una vez los datos (la
+<strong>T</strong> de transformar), para que queden confiables.</li>
+<li><strong>Diseñar el flujo que correrá solo</strong>, definiendo
+<strong>frecuencia, orden y dependencias, qué pasa si falla y dónde
+queda la trazabilidad</strong> (automatización y orquestación).</li>
+</ol>
+<p>No se escribe código: se <strong>diseña y documenta</strong> el
+flujo, como el director de orquesta que coordina sin tocar los
+instrumentos.</p>
+<h2 id="caso-institucional-continuidad-con-la-sesión-5">Caso
+institucional (continuidad con la sesión 5)</h2>
+<blockquote>
+<p><em>Una gobernación quiere mejorar la atención al ciudadano. Los
+reclamos entran por <strong>tres sistemas</strong> (ventanilla, teléfono
+y formulario web), se limpian hoy a mano en Excel y los indicadores se
+arman una vez al mes, a demanda. La Dirección necesita un
+<strong>reporte mensual confiable</strong> de reclamos atendidos y una
+<strong>alerta temprana</strong> cuando un reclamo crítico (por ejemplo,
+bacheo) se repite en la misma zona.</em></p>
+</blockquote>
+<p>Este es el mismo caso de la sesión 5: allí se diseñó <strong>dónde
+viven los datos</strong>; hoy se define <strong>cómo se mueven solos y
+en orden</strong>.</p>
+<p><strong>Variantes por equipo</strong> (todas usan el mismo insumo;
+cambia el énfasis del flujo):</p>
+<ul>
+<li><strong>Énfasis A — reporte mensual:</strong> prioriza que los datos
+estén <strong>limpios y completos</strong> antes de calcular.</li>
+<li><strong>Énfasis B — alerta temprana:</strong> prioriza la
+<strong>frescura</strong>; el flujo debe avisar apenas detecta el
+patrón.</li>
+<li><strong>Énfasis C — trazabilidad y auditoría:</strong> prioriza
+<strong>registrar qué corrió, cuándo y con qué resultado</strong>.</li>
+</ul>
+<h2 id="insumo-y-preparación-previa-el-día-anterior">Insumo y
+preparación previa (el día anterior)</h2>
+<ol type="1">
+<li>Subir a Moodle (o pegar en el chat) estos archivos:
+<code>datos/reclamos_crudos.csv</code> y
+<code>datos/DICCIONARIO_reclamos.md</code>.</li>
+<li>Pedir a cada participante que <strong>abra una cuenta de
+Google</strong> o de Excel en línea antes de la clase.</li>
+<li>Tener preparada una <strong>hoja de demostración</strong> con: la
+parte 1 resuelta (<code>crudo</code> y <code>limpio</code>) y el
+<strong>flujo modelado</strong> (para el Modo B).</li>
+<li>Tener listo un <strong>tablero/pizarra colaborativa</strong> (Google
+Sheets compartido, Miro o Jamboard) para pegar los flujos en la puesta
+en común.</li>
+</ol>
+<h2 id="reparto-del-tiempo-65-min-en-línea">Reparto del tiempo (65 min,
+en línea)</h2>
+<table>
+<thead>
+<tr>
+<th>Momento</th>
+<th>Tiempo</th>
+<th>Quién</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Consigna, conformación de equipos (4 personas) y variante</td>
+<td>5 min</td>
+<td>Docente</td>
+</tr>
+<tr>
+<td><strong>Parte 1</strong> — Limpiar y preparar los datos (la “T” del
+ETL)</td>
+<td>20 min</td>
+<td>Equipos</td>
+</tr>
+<tr>
+<td><strong>Parte 2</strong> — Diseñar el flujo programado (automatizar
+y orquestar)</td>
+<td>30 min</td>
+<td>Equipos</td>
+</tr>
+<tr>
+<td>Puesta en común y entrega</td>
+<td>10 min</td>
+<td>Todos</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Ajuste de tiempos sugerido para el docente:</strong> la
+sesión reserva 40 min a la práctica; este taller necesita ~65. Los 25
+min extra se recuperan recortando “Herramientas de integración” de 20 a
+10 min (es el tramo más memorístico y menos accionable) y 5 min del
+bloque de “Limpieza”. El resto del cronograma no cambia.</p>
+</blockquote>
+<hr />
+<h2 id="parte-1--limpiar-y-preparar-los-datos-20-min">Parte 1 — Limpiar
+y preparar los datos (20 min)</h2>
+<p><strong>Consigna:</strong> "Importen <code>reclamos_crudos.csv</code>
+y déjenlo limpio y confiable. No se pierde ningún reclamo válido."</p>
+<h3 id="paso-a-paso--google-sheets">Paso a paso — Google Sheets</h3>
+<ol type="1">
+<li><strong>Extraer.</strong>
+<code>Archivo → Importar → Cargar → reclamos_crudos.csv → Separador: Coma</code>.
+Renombrar la pestaña como <strong><code>crudo</code></strong>.
+Verificar: <strong>24 filas de datos × 7 columnas</strong>.</li>
+<li><strong>Duplicar a <code>limpio</code>.</strong> Clic derecho sobre
+la pestaña <code>crudo → Duplicar</code> y renombrar la copia como
+<strong><code>limpio</code></strong>. Así el <code>crudo</code> queda
+intacto como respaldo.</li>
+<li><strong>Eliminar duplicados.</strong> En <code>limpio</code>,
+seleccionar todo → <code>Datos → Quitar duplicados</code>. Confirmar que
+quedan <strong>22 filas de datos</strong>.</li>
+<li><strong>Unificar <code>canal</code>, <code>tipo_reclamo</code> y
+<code>zona</code>.</strong> Con
+<code>Editar → Buscar y reemplazar</code>, corregir cada variante por su
+valor canónico (ver la tabla de abajo). Usar <strong>“Coincidir con toda
+la celda”</strong> para no romper palabras.</li>
+<li><strong>Marcar los faltantes.</strong> Buscar celdas vacías en
+<code>zona</code> y escribir <strong><code>SIN ZONA</code></strong>.
+<strong>No borrar la fila:</strong> el reclamo existió.</li>
+<li><strong>Unificar las fechas.</strong> Seleccionar la columna
+<code>fecha</code> → <code>Formato → Número → Fecha</code> (o
+<code>Formato → Fecha</code>). La fecha imposible
+(<code>2026-13-05</code>) no se convertirá: <strong>marcarla como
+error</strong> y decidir si se excluye de los totales.</li>
+<li><strong>Verificar</strong> con los conteos de la tabla "Resultado
+esperado".</li>
+</ol>
+<h3 id="paso-a-paso--excel-en-línea">Paso a paso — Excel en línea</h3>
+<ol type="1">
+<li><code>Datos → Obtener datos → Desde archivo → Desde texto/CSV</code>;
+origen <strong>65001: Unicode (UTF-8)</strong>; delimitador
+<strong>Coma</strong> → <code>Cargar</code>. Renombrar la hoja como
+<code>crudo</code>.</li>
+<li>Copiar la hoja
+(<code>clic derecho → Moverse o copiar → Crear una copia</code>) y
+nombrarla <code>limpio</code>.</li>
+<li><code>Datos → Quitar duplicados</code>.</li>
+<li><code>Inicio → Buscar y seleccionar → Reemplazar</code> con
+<strong>“Coincidir con el contenido de toda la celda”</strong>.</li>
+<li>Formato de fecha:
+<code>Inicio → Formato de número → Fecha</code>.</li>
+<li>Verificar con las mismas comprobaciones.</li>
+</ol>
+<h3 id="tabla-de-limpieza">Tabla de limpieza</h3>
+<table>
+<thead>
+<tr>
+<th>Tarea</th>
+<th>En el <code>crudo</code> aparece…</th>
+<th>En el <code>limpio</code> debe quedar…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Duplicados</td>
+<td>La fila <code>REC-0008</code> y la fila <code>REC-0010</code>, cada
+una <strong>dos veces</strong></td>
+<td>Una sola vez cada una</td>
+</tr>
+<tr>
+<td>Canal</td>
+<td><code>ventanilla</code>, <code>telefono</code>,
+<code>Telefono</code>, <code>formulario web</code></td>
+<td><code>Ventanilla</code>, <code>Teléfono</code>,
+<code>Formulario web</code></td>
+</tr>
+<tr>
+<td>Tipo de reclamo</td>
+<td><code>BACHEO</code>, <code>alumbrado</code>, <code>Alumbrado </code>
+(con espacio), <code>residuos</code></td>
+<td><code>Bacheo</code>, <code>Alumbrado</code>,
+<code>Residuos</code></td>
+</tr>
+<tr>
+<td>Zona</td>
+<td><code>centro</code>, <code>COTAHUMA</code>, <code>Cotahuma</code>,
+<code>Max Paredes</code>, <code>M. Paredes</code>,
+<code>periférica</code>, vacío</td>
+<td>Los 5 macrodistritos oficiales, o <code>SIN ZONA</code></td>
+</tr>
+<tr>
+<td>Fecha</td>
+<td><code>2026/09/01</code>, <code>2026-13-05</code></td>
+<td><code>2026-09-01</code> (ISO); la imposible queda marcada</td>
+</tr>
+<tr>
+<td>Descripción vacía</td>
+<td>4 filas sin detalle</td>
+<td>Se dejan vacías y se <strong>registra</strong> la falta (no se
+inventa texto)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="resultado-esperado-verificación-de-la-parte-1">Resultado
+esperado (verificación de la Parte 1)</h3>
+<table>
+<thead>
+<tr>
+<th>Comprobación</th>
+<th>Esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filas crudas</td>
+<td><strong>24</strong></td>
+</tr>
+<tr>
+<td>Duplicados exactos eliminados</td>
+<td><strong>2</strong></td>
+</tr>
+<tr>
+<td>Filas limpias</td>
+<td><strong>22</strong></td>
+</tr>
+<tr>
+<td>Reclamos <code>SIN ZONA</code></td>
+<td><strong>1</strong></td>
+</tr>
+<tr>
+<td>Fechas inválidas marcadas</td>
+<td><strong>1</strong> (<code>2026-13-05</code>)</td>
+</tr>
+<tr>
+<td>Descripciones vacías (registradas)</td>
+<td><strong>4</strong></td>
+</tr>
+<tr>
+<td>Total por canal</td>
+<td>Ventanilla <strong>8</strong> · Teléfono <strong>7</strong> ·
+Formulario web <strong>7</strong></td>
+</tr>
+<tr>
+<td>Total por tipo</td>
+<td>Bacheo <strong>8</strong> · Alumbrado <strong>7</strong> · Residuos
+<strong>7</strong></td>
+</tr>
+<tr>
+<td>Total por zona</td>
+<td>Centro <strong>4</strong> · Cotahuma <strong>5</strong> · Max
+Paredes <strong>4</strong> · Periférica <strong>4</strong> · Sur
+<strong>4</strong> · SIN ZONA <strong>1</strong></td>
+</tr>
+<tr>
+<td>Total por estado</td>
+<td>Abierto <strong>12</strong> · Cerrado <strong>9</strong> · Anulado
+<strong>1</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Lección clave:</strong> limpiar no es opcional. <strong>Datos
+sucios producen reportes sucios.</strong> Y limpiar es la parte que
+<strong>más tiempo consume</strong> en un proyecto real: por eso
+conviene <strong>hacerlo una vez y programarlo</strong>, en lugar de
+repetirlo a mano cada mes.</p>
+</blockquote>
+<hr />
+<h2 id="parte-2--diseñar-el-flujo-programado-30-min">Parte 2 — Diseñar
+el flujo programado (30 min)</h2>
+<p><strong>Consigna:</strong> "Ya tienen los datos limpios. Ahora
+conviertan ese trabajo manual en un <strong>flujo que corre
+solo</strong>. Respondan las cuatro preguntas y dibujen el flujo con sus
+tareas y flechas."</p>
+<h3 id="las-cuatro-preguntas-del-flujo">Las cuatro preguntas del
+flujo</h3>
+<ol type="1">
+<li><strong>Frecuencia:</strong> ¿<strong>cada cuánto</strong> debe
+correr? (todos los días a las 6:00, semanal, al terminar el mes…)</li>
+<li><strong>Orden y dependencias:</strong> ¿qué tareas hay y <strong>en
+qué orden</strong>? ¿qué tarea <strong>espera</strong> a cuál?</li>
+<li><strong>Si algo falla:</strong> ¿se <strong>reintenta</strong>?
+¿hasta cuántas veces? ¿se <strong>avisa</strong> a alguien? ¿se detiene
+todo o se sigue con lo que se pueda?</li>
+<li><strong>Trazabilidad:</strong> ¿<strong>dónde queda
+registrado</strong> qué corrió, cuándo y con qué resultado?</li>
+</ol>
+<h3 id="tareas-base-del-flujo-se-pueden-renombrar-unir-o-separar">Tareas
+base del flujo (se pueden renombrar, unir o separar)</h3>
+<table>
+<thead>
+<tr>
+<th>N.º</th>
+<th>Tarea</th>
+<th>Qué hace</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1</td>
+<td><strong>Extraer</strong> reclamos</td>
+<td>Toma los datos de los tres sistemas (ventanilla, teléfono,
+web).</td>
+</tr>
+<tr>
+<td>T2</td>
+<td><strong>Limpiar y preparar</strong></td>
+<td>Unifica canal, tipo y zona; corrige fechas; quita duplicados (lo de
+la Parte 1).</td>
+</tr>
+<tr>
+<td>T3</td>
+<td><strong>Combinar</strong> con el padrón</td>
+<td>Cruza el reclamo con la lista oficial de zonas.</td>
+</tr>
+<tr>
+<td>T4</td>
+<td><strong>Cargar</strong> al almacén</td>
+<td>Guarda los datos limpios en el almacén analítico.</td>
+</tr>
+<tr>
+<td>T5</td>
+<td><strong>Calcular indicadores</strong></td>
+<td>Totales del mes por zona, canal y tipo (el reporte).</td>
+</tr>
+<tr>
+<td>T6</td>
+<td><strong>Detectar la alerta</strong></td>
+<td>¿Un reclamo crítico (p. ej. bacheo) se repite en la misma zona?</td>
+</tr>
+<tr>
+<td>T7</td>
+<td><strong>Enviar el aviso</strong></td>
+<td>Correo con el resumen y, si corresponde, la alerta.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cómo-dibujar-el-flujo-el-dag">Cómo dibujar el flujo (el
+“DAG”)</h3>
+<p>Dibujen cada tarea como una <strong>caja</strong> y unan con
+<strong>flechas</strong> el orden. Una tarea solo puede empezar cuando
+terminaron <strong>todas</strong> las flechas que le llegan. Pueden usar
+una tabla de tres columnas
+(<code>Tarea → Depende de → Qué pasa si falla</code>) o un diagrama de
+cajas y flechas en la misma hoja.</p>
+<p><strong>Ejemplo mínimo (referencia):</strong></p>
+<pre class="text"><code>T1 Extraer ─▶ T2 Limpiar ─▶ T3 Combinar ─┬▶ T4 Cargar ─▶ T5 Calcular reporte ─▶ T7 Enviar aviso
+                                          └▶ T6 Detectar alerta ────────────────▶ T7 Enviar aviso</code></pre>
+<blockquote>
+<p>Cada variante de énfasis cambia el flujo:</p>
+<ul>
+<li><strong>A (reporte mensual):</strong> todo el flujo una vez al mes;
+la prioridad es que <strong>T2 esté bien hecha</strong>.</li>
+<li><strong>B (alerta temprana):</strong> <strong>T1→T2→T3→T6</strong>
+corre <strong>varias veces al día</strong>; <strong>T5→T7</strong> una
+vez al mes.</li>
+<li><strong>C (auditoría):</strong> añade una tarea de
+<strong>registro</strong> después de cada paso y guarda el log.</li>
+</ul>
+</blockquote>
+<hr />
+<h2 id="plantilla-de-entrega">Plantilla de entrega</h2>
+<p>Completar la plantilla <code>plantilla-flujo-programado.md</code> (o
+copiarla a la hoja). Debe tener:</p>
+<ol type="1">
+<li><strong>Diagrama del flujo</strong> (tareas y flechas).</li>
+<li><strong>Tabla de tareas:</strong>
+<code>Tarea | Qué hace | Depende de | Frecuencia | Si falla (reintento/aviso)</code>.</li>
+<li><strong>Regla de trazabilidad:</strong> dónde se registra cada
+ejecución y qué se guarda.</li>
+<li><strong>Decisión de la fecha inválida:</strong> ¿se excluye del
+reporte o se corrige con el área? Justificar.</li>
+</ol>
+<h2 id="modo-a--trabajo-de-participantes-salas">Modo A — Trabajo de
+participantes (salas)</h2>
+<p><strong>Consigna (pegar en el chat):</strong> "Limpien el archivo
+(Parte 1) y diseñen el flujo programado (Parte 2). Entregan el diagrama
+y la tabla de tareas. Guarden el enlace con permiso de edición."</p>
+<ul>
+<li>Roles del equipo: <strong>coordinador</strong> (cuida el tiempo y el
+reparto) y <strong>relator</strong> (comparte pantalla).</li>
+<li>Rol del docente: <strong>rotar por las salas cada 4–5 min</strong>,
+destrabar sobre todo la <strong>unificación de zonas</strong> y la
+<strong>detección de dependencias</strong>. Avisar por el chat el tiempo
+restante (quedan 10', quedan 5').</li>
+</ul>
+<h2
+id="modo-b--demostración-del-docente-guion-para-compartir-pantalla-2530-min">Modo
+B — Demostración del docente (guion para compartir pantalla, 25–30
+min)</h2>
+<p>Versión totalmente guiada. Los participantes siguen con la vista y
+anotan.</p>
+<ol type="1">
+<li><strong>Encuadre (2 min).</strong> "Vamos a convertir un trabajo
+manual en un flujo que corre solo. Primero limpiamos una vez; después
+diseñamos quién corre, cuándo y en qué orden."</li>
+<li><strong>Extraer y duplicar (2 min).</strong> Importar
+<code>reclamos_crudos.csv</code>, pestaña <code>crudo</code>, y duplicar
+a <code>limpio</code>.</li>
+<li><strong>Limpiar (8 min).</strong> <code>Quitar duplicados</code> (24
+→ 22). <code>Buscar y reemplazar</code> de canal, tipo y zona. Marcar
+<code>SIN ZONA</code>. Formato de fecha. <strong>Pausar</strong> y
+preguntar: <em>"¿qué pasaría si dejo un bacheo sin zona y luego cuento
+por zona?"</em>.</li>
+<li><strong>Verificar (3 min).</strong> Escribir
+<code>=CONTARA(A2:A)</code> y los <code>CONTAR.SI</code> por canal, tipo
+y zona; contrastar con la tabla de resultado esperado.</li>
+<li><strong>Diseñar el flujo (8 min).</strong> Dibujar las 7 tareas en
+pantalla y unirlas con flechas (usar <code>Insertar → Dibujo</code> o
+una tabla de dependencias). Leer el diagrama en voz alta como el
+director de orquesta: "T1 entrega a T2; T2 entrega a T3…".</li>
+<li><strong>Responder las cuatro preguntas (5 min).</strong> Frecuencia
+= diario 6:00 (T1–T4) y mensual (T5); orden y dependencias; si falla =
+reintentar 3 veces y avisar; trazabilidad = una fila de registro por
+corrida.</li>
+<li><strong>Cierre (2 min).</strong> Repetir el par de conceptos:
+<strong>automatizar = que corra solo; orquestar = que corra en orden y
+avise si falla</strong>.</li>
+</ol>
+<blockquote>
+<p><strong>Consejo de pantalla:</strong> hacerlo despacio, pensar en voz
+alta y mantener el diccionario en una ventana al costado. Si algo falla,
+mostrarlo y corregirlo: es parte del aprendizaje.</p>
+</blockquote>
+<h2 id="puesta-en-común-10-min">Puesta en común (10 min)</h2>
+<p>El <strong>relator</strong> de cada equipo comparte pantalla (2 min
+por equipo; con muchos equipos, solo <strong>un equipo por énfasis
+A/B/C</strong>). Cuenta:</p>
+<ul>
+<li><strong>Un problema de limpieza</strong> que encontró y cómo lo
+resolvió.</li>
+<li><strong>Su flujo programado</strong>: la tarea más crítica y qué
+pasa si falla.</li>
+</ul>
+<p>El docente contrasta los flujos <strong>A vs. B vs. C</strong> y
+refuerza las ideas fuerza: <em>automatizar = que corra solo; orquestar =
+que corra en orden y avise; la limpieza va una vez, no cada
+vez.</em></p>
+<hr />
+<h2 id="evaluación-y-entrega">Evaluación y entrega</h2>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Limpia y prepara los datos</td>
+<td>Pestaña <code>limpio</code> sin duplicados, con valores y fechas
+unificados</td>
+</tr>
+<tr>
+<td>No pierde reclamos válidos</td>
+<td>El conteo se mantiene en 22 y hay <code>SIN ZONA</code> en lugar de
+filas borradas</td>
+</tr>
+<tr>
+<td>Reconoce la frecuencia adecuada</td>
+<td>Columna "Frecuencia" justificada en la tabla de tareas</td>
+</tr>
+<tr>
+<td>Ordena las tareas y sus dependencias</td>
+<td>Diagrama con flechas coherentes y columna "Depende de"</td>
+</tr>
+<tr>
+<td>Define qué pasa si un paso falla</td>
+<td>Columna "Si falla" con reintento y/o aviso</td>
+</tr>
+<tr>
+<td>Define la trazabilidad</td>
+<td>Regla de registro de cada ejecución</td>
+</tr>
+<tr>
+<td>Coherencia con su énfasis</td>
+<td>El flujo responde a su variante A/B/C</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Entrega por equipo:</strong> el <strong>enlace</strong> de la
+hoja (con permiso de edición) o una exportación CSV, con la pestaña
+<code>limpio</code>, el <strong>diagrama del flujo</strong> y la
+<strong>tabla de tareas</strong>. Se cierra <strong>dentro de la
+sesión</strong>.</p>
+<h2 id="guía-de-corrección--rúbrica-con-niveles">Guía de corrección /
+rúbrica con niveles</h2>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>A quién corresponde</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Insuficiente</strong></td>
+<td>No limpia o pierde registros; el flujo es una lista de tareas sin
+orden ni dependencias.</td>
+</tr>
+<tr>
+<td><strong>Suficiente</strong></td>
+<td>Limpia la mayoría de los valores; el flujo está ordenado pero no
+dice qué pasa si falla ni dónde queda la trazabilidad.</td>
+</tr>
+<tr>
+<td><strong>Alto</strong></td>
+<td>Limpieza completa y verificada (22 registros, <code>SIN ZONA</code>,
+fecha inválida tratada); flujo con frecuencia, dependencias y manejo de
+fallas; define la trazabilidad.</td>
+</tr>
+<tr>
+<td><strong>Excelente</strong></td>
+<td>Todo lo anterior, más: el flujo es <strong>coherente con su
+énfasis</strong> (A/B/C), distingue la frecuencia del reporte de la de
+la alerta, y justifica con datos una decisión (por ejemplo, excluir o
+corregir la fecha inválida).</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Escala del módulo (Plan de Clases): 1–59 inicial · 60–69 muy parcial
+· 70–84 suficiente · 85–94 alto porcentaje · 95–100 logro total.</p>
+</blockquote>
+<h2 id="problemas-frecuentes-y-qué-hacer">Problemas frecuentes (y qué
+hacer)</h2>
+<table>
+<thead>
+<tr>
+<th>Síntoma</th>
+<th>Causa</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Al reemplazar <code>centro</code> desaparecen letras de otras
+palabras</td>
+<td>Falta “coincidir con toda la celda”</td>
+<td>Activar esa opción y repetir el reemplazo.</td>
+</tr>
+<tr>
+<td>El conteo baja de 22</td>
+<td>Se borraron filas en vez de marcar faltantes</td>
+<td>Recargar del <code>crudo</code> y reemplazar
+<strong>valores</strong>, no filas; usar <code>SIN ZONA</code>.</td>
+</tr>
+<tr>
+<td>Las fechas siguen mezcladas</td>
+<td>La columna es texto</td>
+<td>Cambiar el formato de la columna a <strong>Fecha</strong> o
+reimportar como fecha.</td>
+</tr>
+<tr>
+<td>La fecha imposible “desaparece”</td>
+<td>Se “corrigió” inventando una fecha</td>
+<td>No inventar: marcarla como error y decidir con el área dueña del
+dato.</td>
+</tr>
+<tr>
+<td>El diagrama es una lista suelta</td>
+<td>No pensaron dependencias</td>
+<td>Preguntar “¿esta tarea puede empezar sin que termine la anterior?” y
+dibujar la flecha.</td>
+</tr>
+<tr>
+<td>Todos los equipos dibujan igual</td>
+<td>No aplicaron su variante</td>
+<td>Recordar el énfasis A/B/C y ajustar frecuencia y tareas.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="plan-b-si-falla-la-conexión-o-el-acceso">Plan B (si falla la
+conexión o el acceso)</h2>
+<ul>
+<li><strong>Sin salas:</strong> cada equipo trabaja en un documento o
+pizarra compartida coordinado por el chat.</li>
+<li><strong>Sin hoja en línea:</strong> cada equipo completa un CSV
+local del <code>limpio</code> y dibuja el flujo en papel o en el
+chat.</li>
+<li><strong>Sin poder importar:</strong> el docente comparte pantalla
+con el <code>crudo</code> ya importado y los equipos completan solo la
+Parte 2 sobre la hoja de demostración.</li>
+<li><strong>Sin audio:</strong> la consigna y la puesta en común se
+hacen por chat y pantalla compartida.</li>
+</ul>
+<hr />
+<h2 id="nota-para-el-docente">Nota para el docente</h2>
+<ul>
+<li>Este taller <strong>reemplaza</strong> la “Práctica: programar una
+tarea sencilla (40 min)” del plan de la sesión 6, que pedía escribir un
+script y agendarlo con cron/Airflow: inviable en 40 min, en línea y con
+público no especialista.</li>
+<li>Enseña los mismos conceptos centrales (<strong>automatizar = que
+corra solo; orquestar = que corra en orden y con aviso</strong>)
+<strong>sin exigir programación</strong>, y respeta el patrón no-code de
+los talleres 1-5.</li>
+<li><strong>Continuidad:</strong> usa el mismo caso institucional de la
+sesión 5 y el mismo tipo de fuente (CSV) de los talleres 2-3.</li>
+<li>La <strong>solución modelo</strong> (acciones, diagrama resuelto por
+variante y tabla de tareas de ejemplo) está en
+<code>guia-solucion-docente-sesion6.md</code>.</li>
+</ul>
+  <footer class="docfoot">Generado desde <a href="taller_sesion6_automatizar_pipeline.md"><code>taller_sesion6_automatizar_pipeline.md</code></a> · Módulo 4 — Integración de Datos · IDT 601</footer>
+</div>
+</body>
+</html>
