@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde taller_sesion3_pipeline_online.md — no editar a mano. -->
+<title>Taller — Sesión 3: implementar un pipeline de ingesta (modalidad en línea)</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 2 — Ingesta de Datos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1
+id="taller--sesión-3-implementar-un-pipeline-de-ingesta-modalidad-en-línea">Taller
+— Sesión 3: implementar un pipeline de ingesta (modalidad en línea)</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601) · Bloque 2 —
+Ingesta de Datos <strong>Duración:</strong> 65 min de taller (dentro de
+la sesión de 3 horas) <strong>Herramienta:</strong> hoja de cálculo —
+<strong>Google Sheets</strong> (recomendado) o <strong>Excel en
+línea</strong> <strong>Fuente de datos:</strong>
+<code>datos/encuesta_profesores_recorte.csv</code> (ver
+<code>datos/FUENTE.md</code>)</p>
+<hr />
+<h2 id="objetivo">Objetivo</h2>
+<p>Construir un <strong>pipeline de ingesta completo</strong> sobre una
+fuente real de datos abiertos, recorriendo sus cuatro etapas:
+<strong>extraer → transformar → cargar → verificar</strong>. El
+resultado debe poder <strong>volver a ejecutarse</strong> y producir lo
+mismo, sin inventar ni perder registros.</p>
+<h2 id="materiales-y-preparación-previa">Materiales y preparación
+previa</h2>
+<ol type="1">
+<li>Subir a Moodle: <code>datos/encuesta_profesores_recorte.csv</code>,
+<code>datos/diccionario_recorte.md</code> y esta guía.</li>
+<li>Tener preparada una <strong>hoja de demostración</strong> con el
+pipeline resuelto (para el Modo B).</li>
+<li>Escenarios de caso imprimibles/compartibles: A, B, C, D, E
+(abajo).</li>
+<li>Pedir que cada equipo tenga la hoja de cálculo lista y sesión
+iniciada.</li>
+</ol>
+<h2 id="reparto-del-tiempo-65-min-en-línea">Reparto del tiempo (65 min,
+en línea)</h2>
+<table>
+<thead>
+<tr>
+<th>Momento</th>
+<th>Tiempo</th>
+<th>Quién</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Consigna, escenarios y preguntas de diseño</td>
+<td>10 min</td>
+<td>Docente</td>
+</tr>
+<tr>
+<td><strong>Modo A</strong> (salas) o <strong>Modo B</strong>
+(demostración)</td>
+<td>45 min</td>
+<td>Participantes / Docente</td>
+</tr>
+<tr>
+<td>Puesta en común y entrega</td>
+<td>10 min</td>
+<td>Todos</td>
+</tr>
+</tbody>
+</table>
+<h2 id="escenarios-de-caso">Escenarios de caso</h2>
+<p>Cada equipo recibe un escenario y, antes de construir, responde
+<strong>frecuencia, volumen y fiabilidad</strong> y elige un
+<strong>patrón</strong>:</p>
+<ul>
+<li><strong>A.</strong> Consolidar a diario los datos nuevos de una
+dependencia.</li>
+<li><strong>B.</strong> Alimentar un tablero operativo que se debe
+actualizar en cuanto llega un caso.</li>
+<li><strong>C.</strong> Sincronizar una vez al mes el padrón
+completo.</li>
+<li><strong>D.</strong> Detectar al instante si un caso supera su
+plazo.</li>
+<li><strong>E.</strong> Actualizar una vez por semana un inventario que
+cambia de a poco.</li>
+</ul>
+<blockquote>
+<p>El pipeline que se construye es <strong>batch</strong>, de
+<strong>carga completa</strong> (se recarga toda la encuesta). En la
+puesta en común se discute qué cambiaría en cada escenario
+(A→incremental, B/D→streaming o CDC, E→incremental).</p>
+</blockquote>
+<hr />
+<h2 id="el-pipeline-etapa-por-etapa">El pipeline, etapa por etapa</h2>
+<h3 id="1-extraer">1. Extraer</h3>
+<p><strong>Google Sheets:</strong>
+<code>Archivo → Importar → Cargar → encuesta_profesores_recorte.csv → Reemplazar hoja de cálculo → Separador: Coma</code>.
+<strong>Excel:</strong>
+<code>Datos → Obtener datos → Desde archivo → Desde texto/CSV → UTF-8, delimitador Coma</code>.</p>
+<p>Renombrar la pestaña como <strong><code>crudo</code></strong>.
+Verificar: <strong>871 filas de datos × 17 columnas</strong>.</p>
+<h3 id="2-transformar">2. Transformar</h3>
+<p><strong>a) Renombrar las columnas.</strong> Crear una pestaña nueva
+<strong><code>limpio</code></strong> copiando el encabezado y, con el
+diccionario (<code>diccionario_recorte.md</code>), reemplazar cada
+código por su pregunta:</p>
+<table>
+<thead>
+<tr>
+<th>Código</th>
+<th>Nuevo encabezado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a0</code></td>
+<td>Fue parte del proyecto</td>
+</tr>
+<tr>
+<td><code>a1</code></td>
+<td>Sexo</td>
+</tr>
+<tr>
+<td><code>a2</code></td>
+<td>Edad</td>
+</tr>
+<tr>
+<td><code>a3</code></td>
+<td>Departamento</td>
+</tr>
+<tr>
+<td><code>a4</code></td>
+<td>Ciudad</td>
+</tr>
+<tr>
+<td><code>b2</code></td>
+<td>Años de experiencia</td>
+</tr>
+<tr>
+<td><code>b3</code></td>
+<td>Tiempo en la unidad educativa</td>
+</tr>
+<tr>
+<td><code>b4</code></td>
+<td>Años en la unidad educativa</td>
+</tr>
+<tr>
+<td><code>b8</code></td>
+<td>Capacitación en TIC</td>
+</tr>
+<tr>
+<td><code>c3</code></td>
+<td>Número de computadoras</td>
+</tr>
+<tr>
+<td><code>d2</code></td>
+<td>Celular inteligente</td>
+</tr>
+<tr>
+<td><code>e7</code></td>
+<td>Tipo de conexión</td>
+</tr>
+<tr>
+<td><code>e8</code></td>
+<td>Lugar de acceso a internet</td>
+</tr>
+<tr>
+<td><code>g1</code></td>
+<td>Sistema operativo</td>
+</tr>
+<tr>
+<td><code>g21</code></td>
+<td>Autocalificación software libre (1–5)</td>
+</tr>
+<tr>
+<td><code>h1</code></td>
+<td>Conoce licencias libres</td>
+</tr>
+<tr>
+<td><code>h3</code></td>
+<td>Conoce datos abiertos</td>
+</tr>
+</tbody>
+</table>
+<p><strong>b) Unificar los "sin dato".</strong> Seleccionar los datos y
+usar <strong>Buscar y reemplazar</strong> con la opción
+<strong>"Coincidir con toda la celda"</strong> (Google Sheets:
+<code>Editar → Buscar y reemplazar</code>; Excel:
+<code>Inicio → Buscar y seleccionar → Reemplazar</code>):</p>
+<ol type="1">
+<li>buscar <code>N/A</code> → reemplazar por <em>(vacío)</em>;</li>
+<li>buscar <code>NA</code> → reemplazar por <em>(vacío)</em>.</li>
+</ol>
+<p><strong>c) Ajustar tipos.</strong> Seleccionar las columnas
+<strong>Edad</strong>, <strong>Años de experiencia</strong>,
+<strong>Años en la unidad educativa</strong>, <strong>Número de
+computadoras</strong> y <strong>Autocalificación</strong> →
+<code>Formato → Número</code>.</p>
+<h3 id="3-cargar">3. Cargar</h3>
+<p>Copiar el rango <strong>ya limpio</strong> a la pestaña
+<strong><code>limpio</code></strong> (destino). Ese es el "cargar": los
+datos quedan en un lugar confiable y con formato uniforme.</p>
+<h3 id="4-verificar">4. Verificar</h3>
+<p>En la pestaña <code>limpio</code>, agregar estas comprobaciones y
+compararlas con la <strong>tabla esperada</strong> de abajo:</p>
+<pre class="text"><code>Filas de datos:            =CONTARA(A2:A)
+Fueron parte del proyecto: =CONTAR.SI(A2:A;&quot;Sí&quot;)
+Departamentos distintos:   =CONTARA(UNICOS(C2:C))
+Edad mínima / máxima:      =MIN(D2:D)  /  =MAX(D2:D)
+Quedan &quot;NA&quot;/&quot;N/A&quot;:         =CONTAR.SI(D2:Q;&quot;NA&quot;) + CONTAR.SI(D2:Q;&quot;N/A&quot;)</code></pre>
+<p><strong>Excel equivalente:</strong> <code>CONTARA</code>,
+<code>CONTAR.SI</code>, <code>MIN</code>, <code>MAX</code>.</p>
+<blockquote>
+<p><strong>Lección clave:</strong> la encuesta <strong>no tiene una
+columna identificadora única</strong> (un ID). Sin ella, no se puede
+comprobar "no duplicar" con certeza. Eso conecta con la idea de
+<strong>contrato de datos</strong>: una fuente confiable necesita una
+clave y reglas de calidad explícitas.</p>
+</blockquote>
+<hr />
+<h2 id="modo-a--trabajo-de-participantes-salas">Modo A — Trabajo de
+participantes (salas)</h2>
+<p><strong>Consigna:</strong> "Construyan el pipeline sobre el archivo
+asignado. Puede volver a ejecutarse y debe pasar las verificaciones.
+Documenten qué hace cada etapa y qué patrón usaron."</p>
+<p>Rol del docente: circular por las salas, resolver dudas puntuales y
+recordar las cuatro etapas. Intervenir solo si un equipo no avanza;
+dejar que prueben y se equivoquen.</p>
+<h2
+id="modo-b--demostración-del-docente-guion-para-compartir-pantalla">Modo
+B — Demostración del docente (guion para compartir pantalla)</h2>
+<p>Versión <strong>totalmente guiada</strong>: el docente construye el
+pipeline en vivo, narrando. Duración sugerida: <strong>20–25
+min</strong>.</p>
+<ol type="1">
+<li><strong>Encuadre (2 min).</strong> "Vamos a construir un pipeline
+completo de punta a punta sobre datos abiertos reales. Primero
+decidimos, después construimos, y al final
+<strong>verificamos</strong>."</li>
+<li><strong>Diseño (3 min).</strong> Escribir en pantalla: frecuencia =
+batch; volumen = 871 filas (bajo); fiabilidad = no perder registros.
+Patrón = <strong>carga completa</strong>.</li>
+<li><strong>Extraer (4 min).</strong> Importar
+<code>encuesta_profesores_recorte.csv</code> y renombrar la pestaña
+<code>crudo</code>. Mostrar las 871 filas × 17 columnas.</li>
+<li><strong>Transformar (8 min).</strong>
+<ul>
+<li>Crear la pestaña <code>limpio</code> y reemplazar los encabezados
+por sus etiquetas (usar el diccionario en pantalla).</li>
+<li><code>Editar → Buscar y reemplazar</code>: pasar <code>N/A</code> y
+<code>NA</code> a vacío con <strong>"Coincidir con toda la
+celda"</strong>.</li>
+<li>Cambiar a formato Número las columnas numéricas.</li>
+<li><strong>Pausar</strong> y preguntar: "¿qué pasaría si dejo un
+<code>NA</code> en la columna Edad y luego calculo un promedio?".</li>
+</ul></li>
+<li><strong>Cargar (3 min).</strong> Copiar el rango limpio a
+<code>limpio</code>. Explicar por qué separamos crudo y limpio.</li>
+<li><strong>Verificar (4 min).</strong> Escribir las fórmulas de conteo
+y contrastar con la tabla esperada. Mostrar que el conteo <strong>no
+cambió</strong> (871) y que ya <strong>no quedan</strong>
+<code>NA</code>/<code>N/A</code>.</li>
+<li><strong>Cierre (2 min).</strong> Repetir el esqueleto: extraer →
+transformar → cargar → verificar. Señalar que el pipeline "se puede
+volver a correr mañana".</li>
+</ol>
+<blockquote>
+<p><strong>Consejo de pantalla:</strong> hacerlo despacio, pensar en voz
+alta y mantener el diccionario en una ventana al costado. Si algo falla,
+mostrarlo y corregirlo: es parte del aprendizaje.</p>
+</blockquote>
+<hr />
+<h2 id="tabla-de-verificación-esperada">Tabla de verificación
+esperada</h2>
+<table>
+<thead>
+<tr>
+<th>Verificación</th>
+<th>Resultado esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filas de datos tras transformar</td>
+<td><strong>871</strong> (no se pierde ninguna)</td>
+</tr>
+<tr>
+<td>Registros que fueron parte del proyecto (<code>a0</code> = Sí)</td>
+<td><strong>848</strong></td>
+</tr>
+<tr>
+<td>Departamentos distintos (<code>a3</code>)</td>
+<td><strong>9</strong></td>
+</tr>
+<tr>
+<td>Edad mínima / máxima (<code>a2</code>)</td>
+<td><strong>20 / 78</strong></td>
+</tr>
+<tr>
+<td>Celdas con <code>NA</code> o <code>N/A</code> tras limpiar</td>
+<td><strong>0</strong></td>
+</tr>
+<tr>
+<td>Autocalificación (<code>g21</code>)</td>
+<td>valores <strong>1–5</strong> o vacío</td>
+</tr>
+</tbody>
+</table>
+<h2 id="problemas-frecuentes-y-qué-hacer">Problemas frecuentes (y qué
+hacer)</h2>
+<table>
+<thead>
+<tr>
+<th>Síntoma</th>
+<th>Causa</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Acentos raros</td>
+<td>Codificación</td>
+<td>Reimportar con UTF-8 (Excel) / no forzar codificación (Sheets).</td>
+</tr>
+<tr>
+<td>Al reemplazar <code>NA</code> desaparecen letras de otras
+palabras</td>
+<td>Falta "coincidir con toda la celda"</td>
+<td>Activar esa opción y repetir.</td>
+</tr>
+<tr>
+<td>El conteo baja de 871</td>
+<td>Se borraron filas al limpiar</td>
+<td>Recargar del <code>crudo</code> y reemplazar
+<strong>valores</strong>, no filas.</td>
+</tr>
+<tr>
+<td>Las fórmulas no calculan</td>
+<td>Celdas de texto</td>
+<td>Cambiar las columnas numéricas a formato Número.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="evaluación-y-entrega">Evaluación y entrega</h2>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Funciona de extremo a extremo</td>
+<td>Los datos aparecen en la pestaña <code>limpio</code></td>
+</tr>
+<tr>
+<td>No pierde registros</td>
+<td>El conteo se mantiene en 871</td>
+</tr>
+<tr>
+<td>Unifica y ajusta los datos</td>
+<td>Sin <code>NA</code>/<code>N/A</code>; columnas numéricas con formato
+Número</td>
+</tr>
+<tr>
+<td>Está documentado</td>
+<td>Explica qué hace cada etapa y qué patrón usó</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Entrega:</strong> el enlace o archivo de la hoja con las
+pestañas <code>crudo</code> y <code>limpio</code>, las fórmulas de
+verificación y una breve descripción (etapas + patrón).</p>
+  <footer class="docfoot">Generado desde <a href="taller_sesion3_pipeline_online.md"><code>taller_sesion3_pipeline_online.md</code></a> · Módulo 2 — Ingesta de Datos · IDT 601</footer>
+</div>
+</body>
+</html>

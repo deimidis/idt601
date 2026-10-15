@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde Sesion_03_demo_pipeline_herramientas.md — no editar a mano. -->
+<title>Demo docente — Pipeline de ingesta con dos herramientas (Sesión 3)</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 2 — Ingesta de Datos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1
+id="demo-docente--pipeline-de-ingesta-con-dos-herramientas-sesión-3">Demo
+docente — Pipeline de ingesta con dos herramientas (Sesión 3)</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601) · Bloque 2 —
+Sesión 3 <strong>Duración de la demo:</strong> ~20–25 min (encaja en el
+bloque "Del diseño al pipeline", antes o después del taller)
+<strong>Fuente de datos:</strong> CSV público de AGETIC en internet (ver
+más abajo) <strong>Destino:</strong> una tabla en <strong>NocoDB
+Cloud</strong> (grilla tipo hoja de cálculo) <strong>Objetivo:</strong>
+mostrar el <strong>armado de un pipeline de punta a punta</strong> con
+dos herramientas distintas (<strong>Python/Colab</strong> y
+<strong>n8n</strong>), y que quede claro que <em>la herramienta cambia,
+las etapas no</em>.</p>
+<hr />
+<h2 id="el-pipeline">El pipeline</h2>
+<p>Mismo esqueleto de la sesión: <strong>extraer → transformar → cargar
+→ verificar</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Etapa</th>
+<th>Qué se hace</th>
+<th>Herramienta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Extraer</strong></td>
+<td>Descargar el CSV de AGETIC desde su URL</td>
+<td><code>requests</code> / nodo HTTP Request</td>
+</tr>
+<tr>
+<td><strong>Transformar</strong></td>
+<td>Quedarse con 17 columnas, renombrar a etiquetas legibles, unificar
+<code>NA</code>/<code>N/A</code> → vacío, castear numéricas</td>
+<td>pandas / nodo Code</td>
+</tr>
+<tr>
+<td><strong>Cargar</strong></td>
+<td>Insertar en la tabla de NocoDB, patrón <strong>carga completa
+idempotente</strong> (borra y recarga)</td>
+<td>API REST / nodo NocoDB/HTTP</td>
+</tr>
+<tr>
+<td><strong>Verificar</strong></td>
+<td>Contar filas y valores y comparar con lo esperado</td>
+<td>pandas / nodo Code</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Fuente (internet).</strong> Encuesta Final-Profesores de
+Inclusión Digital (AGETIC, 2019, CC-BY):</p>
+<pre><code>https://datos.gob.bo/dataset/bf97cf5a-a8d3-4694-926c-2a3da3df40e5/resource/119afffe-8e0a-4657-9cea-40fd6837b90c/download/profesores_fin.csv</code></pre>
+<p>CSV, 189 columnas × 871 filas. Nos quedamos con las 17 columnas del
+recorte que ya usa el taller.</p>
+<blockquote>
+<p><strong>Detalle técnico:</strong> el servidor de AGETIC responde
+<strong>403</strong> al <em>User-Agent</em> por defecto. En el notebook
+se usa <code>requests</code> con <code>User-Agent: Mozilla/5.0</code>;
+en n8n, ese encabezado se agrega al nodo de descarga.</p>
+</blockquote>
+<h2 id="tabla-de-verificación-esperada">Tabla de verificación
+esperada</h2>
+<table>
+<thead>
+<tr>
+<th>Verificación</th>
+<th>Resultado esperado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filas</td>
+<td><strong>871</strong></td>
+</tr>
+<tr>
+<td>Fueron parte del proyecto (<code>a0</code> = Sí)</td>
+<td><strong>848</strong></td>
+</tr>
+<tr>
+<td>Departamentos distintos (<code>a3</code>)</td>
+<td><strong>9</strong></td>
+</tr>
+<tr>
+<td>Edad mínima / máxima (<code>a2</code>)</td>
+<td><strong>20 / 78</strong></td>
+</tr>
+<tr>
+<td>Celdas <code>NA</code>/<code>N/A</code> tras limpiar</td>
+<td><strong>0</strong> (originalmente 371)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="setup-de-nocodb-una-sola-vez-5-min">Setup de NocoDB (una sola
+vez, ~5 min)</h2>
+<ol type="1">
+<li><p>Entrá a <a
+href="https://app.nocodb.com">https://app.nocodb.com</a> y creá una
+cuenta (plan gratis) y una <strong>base</strong>.</p></li>
+<li><p>Creá una <strong>tabla</strong> (podés llamarla
+<code>encuesta_profesores</code>) con estos <strong>17
+campos</strong>:</p>
+<p><code>Fue parte del proyecto</code> · <code>Sexo</code> ·
+<code>Edad</code> · <code>Departamento</code> · <code>Ciudad</code> ·
+<code>Años de experiencia</code> ·
+<code>Tiempo en la unidad educativa</code> ·
+<code>Años en la unidad educativa</code> ·
+<code>Capacitación en TIC</code> · <code>Número de computadoras</code> ·
+<code>Celular inteligente</code> · <code>Tipo de conexión</code> ·
+<code>Lugar de acceso a internet</code> · <code>Sistema operativo</code>
+· <code>Autocalificación software libre (1–5)</code> ·
+<code>Conoce licencias libres</code> ·
+<code>Conoce datos abiertos</code></p>
+<blockquote>
+<p>Los nombres deben coincidir <strong>exactamente</strong> (incluidos
+tildes y espacios): el pipeline escribe por nombre de campo. A las 5
+numéricas (<code>Edad</code>, <code>Años de experiencia</code>,
+<code>Años en la unidad educativa</code>,
+<code>Número de computadoras</code>, <code>Autocalificación…</code>)
+podés darles tipo <strong>Number</strong>.</p>
+</blockquote></li>
+<li><p>Generá un <strong>API Token</strong>: menú de la cuenta (arriba a
+la derecha) → <strong>Tokens</strong> → <em>Create token</em>.</p></li>
+<li><p>Anotá el <strong>Table ID</strong>: aparece en la URL de la tabla
+(un valor tipo <code>tblXXXXXXXXXXXX</code>).</p></li>
+</ol>
+<p>Tené a mano: <strong>URL</strong>
+(<code>https://app.nocodb.com</code>), <strong>API Token</strong> y
+<strong>Table ID</strong>.</p>
+<hr />
+<h2 id="demo-parte-1--python--colab-pipeline_colabipynb">Demo, Parte 1 —
+Python / Colab (<code>pipeline_colab.ipynb</code>)</h2>
+<p>Abrí el notebook en <a
+href="https://colab.research.google.com">https://colab.research.google.com</a>
+(Archivo → Subir notebook) o en Jupyter.</p>
+<ol type="1">
+<li><strong>Celda de configuración:</strong> pegá
+<code>NOCODB_URL</code>, <code>NOCODB_API_TOKEN</code> y
+<code>TABLE_ID</code>.</li>
+<li><strong>Extraer:</strong> corre la descarga y muestra <strong>871
+filas × 189 columnas</strong>.</li>
+<li><strong>Transformar:</strong> selecciona 17 columnas, renombra,
+limpia <code>NA</code>/<code>N/A</code> y castea. Mostrá
+<code>limpio.head()</code>.</li>
+<li><strong>Verificar (local):</strong> aparecen los conteos
+esperados.</li>
+<li><strong>Cargar:</strong> <code>borrar_todo()</code> +
+<code>cargar()</code> → inserta en lotes de 200.</li>
+<li><strong>Verificar (NocoDB):</strong> relee la tabla y confirma los
+mismos números.</li>
+<li><strong>Mostrar la grilla</strong> de NocoDB con las 871 filas
+cargadas.</li>
+</ol>
+<blockquote>
+<p>Idea para narrar: "primero decidimos, después construimos, y al final
+<strong>verificamos</strong>. El patrón es <strong>carga
+completa</strong>: borro y recargo. Si lo corro mañana, obtengo lo
+mismo, sin duplicados."</p>
+</blockquote>
+<h2 id="demo-parte-2--n8n-pipeline_n8njson">Demo, Parte 2 — n8n
+(<code>pipeline_n8n.json</code>)</h2>
+<p>En tu instancia de n8n: <strong>Workflows → Import from File
+→</strong> <code>pipeline_n8n.json</code>.</p>
+<ol type="1">
+<li>Reemplazá el valor <code>TU_TOKEN</code> en los <strong>tres nodos
+HTTP</strong> que lo usan (header <code>xc-token</code>), y
+<code>TABLE_ID</code> en las URLs
+(<code>.../tables/TABLE_ID/records</code>).</li>
+<li>Recorré el workflow y nombralo como el pipeline:
+<ul>
+<li><strong>Inicio</strong> (disparo manual).</li>
+<li><strong>Borrar: leer IDs → Armar IDs → Borrar: eliminar</strong> →
+la carga completa idempotente.</li>
+<li><strong>Descargar CSV → Leer CSV</strong> (nodo <em>Extract from
+File</em>) → el <em>extraer</em>.</li>
+<li><strong>Transformar</strong> (nodo <em>Code</em>) → el
+<em>transformar</em>.</li>
+<li><strong>Por lotes → Armar lote → Insertar lote</strong> (bucle en
+lotes de 200) → el <em>cargar</em>.</li>
+<li><strong>Verificar: leer → Resumen</strong> → el
+<em>verificar</em>.</li>
+</ul></li>
+<li>Ejecutá con <strong>Execute Workflow</strong> y mostrá el resultado
+del nodo <strong>Resumen</strong> (<code>filas</code>,
+<code>fueron_parte_del_proyecto</code>,
+<code>departamentos</code>).</li>
+</ol>
+<blockquote>
+<p>Igual que en Colab: mismo pipeline, armado por <strong>bloques
+visuales</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="guion-sugerido-2025-min">Guion sugerido (20–25 min)</h2>
+<table>
+<thead>
+<tr>
+<th>Min</th>
+<th>Momento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–2</td>
+<td>Encuadre: "vamos a armar un pipeline real, de internet a una base, y
+lo verificamos"</td>
+</tr>
+<tr>
+<td>2–4</td>
+<td>Diseño: frecuencia = batch · volumen = 871 · fiabilidad = no perder
+ni duplicar · patrón = <strong>carga completa</strong></td>
+</tr>
+<tr>
+<td>4–11</td>
+<td><strong>Colab:</strong> correr celda por celda; ver 871 filas en
+NocoDB</td>
+</tr>
+<tr>
+<td>11–19</td>
+<td><strong>n8n:</strong> importar, mostrar los nodos y ejecutar</td>
+</tr>
+<tr>
+<td>19–23</td>
+<td>Verificación: <strong>los dos caminos dan el mismo conteo</strong>;
+mostrar la grilla de NocoDB</td>
+</tr>
+<tr>
+<td>23–25</td>
+<td>Cierre: la herramienta cambia, las etapas no; idempotencia; conexión
+con el taller</td>
+</tr>
+</tbody>
+</table>
+<h2 id="problemas-frecuentes">Problemas frecuentes</h2>
+<table>
+<thead>
+<tr>
+<th>Síntoma</th>
+<th>Causa</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>403 Forbidden</code> al descargar</td>
+<td>El servidor exige <em>User-Agent</em></td>
+<td>Usar el encabezado <code>User-Agent: Mozilla/5.0</code> (ya está en
+los artefactos)</td>
+</tr>
+<tr>
+<td>Error de campo desconocido en NocoDB</td>
+<td>El nombre del campo no coincide</td>
+<td>Revisar tildes/espacios; el pipeline escribe por nombre exacto</td>
+</tr>
+<tr>
+<td><code>xc-token invalid</code></td>
+<td>Token mal pegado</td>
+<td>Regenerar el token y actualizar en notebook/n8n</td>
+</tr>
+<tr>
+<td>Se duplican filas</td>
+<td>No corrió el borrado</td>
+<td>Correr el paso de borrado antes de insertar (idempotencia)</td>
+</tr>
+<tr>
+<td>n8n da error en el nodo de borrado con tabla vacía</td>
+<td>Se envía un body <code>[]</code></td>
+<td>Es inocuo; si molesta, activar "Continue on Fail" en ese nodo</td>
+</tr>
+</tbody>
+</table>
+<h2 id="marca-de-calidad-para-la-pizarra">Marca de calidad (para la
+pizarra)</h2>
+<p>La encuesta <strong>no tiene una clave única</strong> (un ID). Igual
+que en el taller: sin clave, "no duplicar" no se puede garantizar del
+todo. Eso conecta con la idea de <strong>contrato de datos</strong>: una
+fuente confiable necesita clave y reglas explícitas.</p>
+<hr />
+<h2 id="archivos">Archivos</h2>
+<table>
+<thead>
+<tr>
+<th>Archivo</th>
+<th>Qué es</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pipeline_colab.ipynb</code></td>
+<td>Pipeline completo en Python (Colab/Jupyter)</td>
+</tr>
+<tr>
+<td><code>pipeline_n8n.json</code></td>
+<td>Workflow de n8n (importable)</td>
+</tr>
+<tr>
+<td><code>Sesion_03_demo_pipeline_herramientas.md</code></td>
+<td>Esta guía</td>
+</tr>
+<tr>
+<td><code>datos/encuesta_profesores_recorte.csv</code></td>
+<td>Recorte local (respaldo si falla internet)</td>
+</tr>
+</tbody>
+</table>
+  <footer class="docfoot">Generado desde <a href="Sesion_03_demo_pipeline_herramientas.md"><code>Sesion_03_demo_pipeline_herramientas.md</code></a> · Módulo 2 — Ingesta de Datos · IDT 601</footer>
+</div>
+</body>
+</html>

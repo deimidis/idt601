@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde 02_Ingesta_de_Datos.md — no editar a mano. -->
+<title>Bloque 2 — Ingesta de Datos</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 2 — Ingesta de Datos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="bloque-2--ingesta-de-datos">Bloque 2 — Ingesta de Datos</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601)
+<strong>Sesiones:</strong> 2 y 3 · <strong>Carga del bloque:</strong> 8
+teóricas + 4 prácticas (Plan de Clases) · dictado en 2 sesiones de 3 h
+cada una</p>
+<hr />
+<h2 id="de-qué-trata-este-bloque">¿De qué trata este bloque?</h2>
+<p>Ya sabemos de dónde salen los datos y qué forma tienen. Ahora llega
+la pregunta práctica: <strong>¿cómo los movemos desde su fuente hasta el
+lugar donde se van a usar?</strong>. Ese proceso se llama
+<strong>ingesta de datos</strong>.</p>
+<p>La ingesta es el primer eslabón real de un pipeline de datos. Si
+falla aquí, todo lo que viene después (análisis, reportes, modelos) se
+construye sobre una base débil. En este bloque aprenderás qué es
+ingerir, con qué métodos y herramientas se hace, qué decisiones de
+diseño hay que tomar, qué patrones reutilizar y cómo implementar un
+pipeline de ingesta completo.</p>
+<p><strong>Cómo se reparte en dos sesiones de 3 horas (180 min cada
+una):</strong></p>
+<ul>
+<li><strong>Sesión 2</strong> — qué es ingerir, extracción y carga,
+batch vs. streaming, métodos y herramientas, y una práctica de conexión
+a una fuente sencilla.</li>
+<li><strong>Sesión 3</strong> — decisiones de diseño, patrones de
+ingesta, el esqueleto del pipeline y un taller de implementación de
+punta a punta.</li>
+</ul>
+<hr />
+<h2 id="lectura">Lectura</h2>
+<h3 id="1-qué-es-la-ingesta-de-datos">1. ¿Qué es la ingesta de
+datos?</h3>
+<p>Ingerir es <strong>tomar datos de una o varias fuentes y llevarlos a
+un lugar donde se puedan almacenar, procesar o analizar</strong>. Es el
+<strong>puente</strong> entre la fuente y el destino: no es análisis, es
+el paso previo que lo hace posible.</p>
+<p>La ingesta cumple tres tareas:</p>
+<ol type="1">
+<li><strong>Recolectar</strong> — juntar información que ya existe pero
+está dispersa (planillas, sistemas, formularios, sensores).</li>
+<li><strong>Transportar</strong> — mover los datos desde su origen hasta
+un destino confiable.</li>
+<li><strong>Preparar el terreno</strong> — dejar los datos listos para
+el almacenamiento y el procesamiento que vienen después.</li>
+</ol>
+<p>¿Por qué importa? Porque <strong>evita decisiones a ciegas</strong>
+(sin datos, se decide con información incompleta), <strong>ahorra
+trabajo manual</strong> (reemplaza horas de copiar y pegar) y
+<strong>habilita todo lo demás</strong> (calidad, análisis y aprendizaje
+automático dependen de que los datos fluyan).</p>
+<blockquote>
+<p>Idea para la pizarra: <strong>Ingesta = recolectar + transportar +
+dejar listo.</strong></p>
+</blockquote>
+<h3 id="2-extracción-y-carga-los-dos-extremos">2. Extracción y carga:
+los dos extremos</h3>
+<p>Toda ingesta tiene dos extremos:</p>
+<ul>
+<li><strong>Extracción</strong> — es <strong>tomar</strong> el dato de
+su origen (una base de datos, un archivo, un formulario, una API, un
+sensor). Implica saber <strong>dónde está</strong> el dato y
+<strong>cómo acceder</strong> a él. <em>Ejemplo:</em> descargar el
+reporte mensual de recaudación desde el sistema de impuestos.</li>
+<li><strong>Carga</strong> — es <strong>llevar</strong> el dato a su
+destino (una base de datos central, un almacén de datos, un archivo
+consolidado). Implica saber <strong>a dónde</strong> va y en <strong>qué
+formato</strong> debe quedar. <em>Ejemplo:</em> volcar esos datos en la
+base central de la alcaldía para que todos los analistas los
+consulten.</li>
+</ul>
+<p>Entre los extremos casi siempre hay un paso intermedio de
+<strong>transformación</strong> (limpiar, renombrar, convertir
+formatos), que se trabaja con más detalle en la Unidad de Integración de
+Datos.</p>
+<pre><code>Fuente ──extraer──► (transformar) ──cargar──► Destino</code></pre>
+<p><strong>Mensaje clave:</strong> <em>extraer sin cargar es quedarse
+con el dato en la mano; cargar sin extraer no es posible. La ingesta es
+el recorrido completo.</em></p>
+<h3 id="3-batch-vs-streaming-dos-modos-de-mover">3. Batch vs. streaming:
+dos modos de mover</h3>
+<p>Hay dos grandes formas de ingerir, y la pregunta que decide es:
+<strong>¿cuán frescos deben estar los datos, y cuánto cuesta mantenerlos
+así?</strong></p>
+<p><strong>Por lotes (batch)</strong> — se <strong>acumulan</strong>
+datos durante un período y se mueven <strong>juntos</strong>, a
+intervalos (cada hora, cada noche, cada mes). Es la forma <strong>más
+común y más económica</strong>. Ventaja: simple y tolera bien los
+errores (se reintenta el lote). Desventaja: los datos tienen un
+<strong>desfase</strong>. <em>Ejemplo:</em> cada noche se consolida la
+recaudación del día.</p>
+<p><strong>En tiempo real (streaming)</strong> — cada dato se mueve
+<strong>en cuanto se genera</strong>, sin esperar a acumular. Se usa
+cuando la frescura importa y el volumen es continuo. Ventaja: datos
+<strong>siempre frescos</strong>. Desventaja: más compleja y costosa de
+operar. <em>Ejemplo:</em> un tablero que muestra en vivo los reclamos
+que entran, o las lecturas de semáforos y medidores.</p>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Batch (por lotes)</th>
+<th>Streaming (tiempo real)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cuándo se mueve el dato</td>
+<td>En bloques, a intervalos</td>
+<td>En cuanto llega</td>
+</tr>
+<tr>
+<td>Frescura</td>
+<td>Horas o días de desfase</td>
+<td>Segundos o menos</td>
+</tr>
+<tr>
+<td>Costo y complejidad</td>
+<td>Baja</td>
+<td>Alta</td>
+</tr>
+<tr>
+<td>Tolerancia a errores</td>
+<td>Fácil de reintentar</td>
+<td>Más delicada</td>
+</tr>
+<tr>
+<td>Uso típico</td>
+<td>Reportes, cierres, históricos</td>
+<td>Alertas, tableros en vivo, sensores</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Regla práctica:</strong> <em>batch cubre casi todo lo que una
+institución necesita; streaming se reserva para lo que no puede
+esperar.</em></p>
+</blockquote>
+<h3 id="4-métodos-y-herramientas-conectores-scripts-y-apis">4. Métodos y
+herramientas: conectores, scripts y APIs</h3>
+<p>Conviene separar dos preguntas: el <strong>método</strong> responde a
+<em>"¿cómo y cuándo movemos los datos?"</em> (batch o streaming); la
+<strong>herramienta</strong> responde a <em>"¿con qué lo hacemos?"</em>.
+Las herramientas se agrupan en tres familias:</p>
+<ul>
+<li><strong>Conectores</strong> — piezas <strong>ya construidas</strong>
+que saben leer de una fuente o escribir en un destino específicos.
+Rápidos y confiables; sirven para fuentes conocidas. Se configuran, no
+se programan.</li>
+<li><strong>Scripts</strong> — <strong>código propio</strong> (Python,
+R, etc.) que hace la extracción y la carga a medida. Control total, pero
+hay que saber programar y mantenerlo.</li>
+<li><strong>APIs</strong> — <strong>puertas de acceso
+estandarizadas</strong> que exponen datos de un sistema para que otros
+los lean. Acceso controlado y automatizable; exigen entender el contrato
+(endpoints, claves, límites).</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Herramienta</th>
+<th>¿Qué es?</th>
+<th>¿Cuándo usarla?</th>
+<th>¿Requiere programar?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conector</td>
+<td>Pieza hecha para una fuente/destino</td>
+<td>Fuentes conocidas y repetidas</td>
+<td>No (configuración)</td>
+</tr>
+<tr>
+<td>Script</td>
+<td>Código propio</td>
+<td>Casos a medida o transformaciones</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>API</td>
+<td>Puerta de acceso estandarizada</td>
+<td>Cuando el sistema la ofrece</td>
+<td>Un poco (llamadas)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>La mayoría empieza con archivos y scripts, y agrega conectores y APIs
+cuando la ingesta se vuelve repetida y crítica.</p>
+</blockquote>
+<h3 id="5-decisiones-de-diseño-frecuencia-volumen-y-fiabilidad">5.
+Decisiones de diseño: frecuencia, volumen y fiabilidad</h3>
+<p>Antes de elegir herramienta o método, hay que responder tres
+preguntas que condicionan todo el diseño:</p>
+<ul>
+<li><strong>Frecuencia — ¿cada cuánto?</strong> Determina el método
+(batch vs. streaming) y la periodicidad. <em>Ejemplo:</em> la nómina se
+procesa una vez al mes; los reclamos, varias veces al día.</li>
+<li><strong>Volumen — ¿cuánto?</strong> Determina el esfuerzo y la
+técnica para no saturar el sistema. <em>Ejemplo:</em> consolidar 500
+registros mensuales es trivial; ingerir miles de lecturas por hora exige
+otro diseño.</li>
+<li><strong>Fiabilidad — ¿qué pasa si falla?</strong> Determina las
+garantías: reintentos, monitoreo y <strong>idempotencia</strong>
+(repetir una carga no debe duplicar ni corromper datos).</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Decisión que condiciona</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>¿Cada cuánto? (frecuencia)</td>
+<td>Método y periodicidad</td>
+</tr>
+<tr>
+<td>¿Cuánto? (volumen)</td>
+<td>Técnica y capacidad</td>
+</tr>
+<tr>
+<td>¿Qué pasa si falla? (fiabilidad)</td>
+<td>Reintentos, idempotencia, monitoreo</td>
+</tr>
+</tbody>
+</table>
+<p><em>Ejemplo de fiabilidad:</em> si la carga nocturna falla y se
+reintenta, el informe no debe contar dos veces la misma recaudación.</p>
+<h3 id="6-patrones-de-ingesta-completa-incremental-cdc-pull-y-push">6.
+Patrones de ingesta: completa, incremental, CDC, pull y push</h3>
+<p>Un <strong>patrón</strong> es una forma probada y reutilizable de
+resolver un problema recurrente. No hay que inventar de cero.</p>
+<ul>
+<li><strong>Carga completa (full load)</strong> — se mueve
+<strong>todo</strong> el conjunto cada vez, reemplazando lo anterior.
+Cuándo: volúmenes pequeños o datos que cambian por completo.</li>
+<li><strong>Carga incremental</strong> — se mueve <strong>solo lo nuevo
+o lo modificado</strong> desde la última carga. Cuándo: volúmenes
+grandes que crecen con el tiempo.</li>
+<li><strong>Captura de cambios (CDC)</strong> — la <strong>propia
+fuente</strong> registra y entrega solo los cambios (altas, bajas,
+modificaciones). Cuándo: se necesita saber exactamente qué cambió, casi
+en tiempo real.</li>
+<li><strong>Pull vs. push</strong> — en <strong>pull</strong>, nuestro
+sistema <strong>va a buscar</strong> los datos; en
+<strong>push</strong>, la fuente <strong>nos envía</strong> los datos
+cuando hay novedades.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Patrón</th>
+<th>Idea central</th>
+<th>Cuándo usarlo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Carga completa</td>
+<td>Mover todo y reemplazar</td>
+<td>Datos pequeños o que cambian por completo</td>
+</tr>
+<tr>
+<td>Carga incremental</td>
+<td>Mover solo lo nuevo</td>
+<td>Volúmenes grandes y crecientes</td>
+</tr>
+<tr>
+<td>CDC</td>
+<td>La fuente entrega solo los cambios</td>
+<td>Necesidad de cambios exactos y a tiempo</td>
+</tr>
+<tr>
+<td>Pull</td>
+<td>Nosotros buscamos los datos</td>
+<td>Control de horario, fuentes que no notifican</td>
+</tr>
+<tr>
+<td>Push</td>
+<td>La fuente envía los datos</td>
+<td>Frescura alta, alertas</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Elegir el patrón correcto evita rehacer el trabajo y previene
+duplicados.</p>
+</blockquote>
+<h3
+id="7-del-diseño-al-pipeline-extraer--transformar--cargar--verificar">7.
+Del diseño al pipeline: extraer → transformar → cargar → verificar</h3>
+<p>Un <strong>pipeline de ingesta</strong> es la secuencia repetible que
+lleva los datos desde la fuente hasta el destino. Su esqueleto tiene
+cuatro etapas:</p>
+<ol type="1">
+<li><strong>Extraer</strong> — definir la fuente y cómo acceder;
+escribir el paso que <strong>lee</strong> los datos. <em>Ejemplo:</em>
+leer un CSV con la recaudación diaria.</li>
+<li><strong>Transformar</strong> — aplicar las correcciones mínimas para
+que los datos sean útiles (renombrar columnas, limpiar espacios,
+convertir formatos, quitar nulos).</li>
+<li><strong>Cargar</strong> — definir el destino y cómo escribir;
+aplicar el <strong>patrón</strong> elegido. <em>Ejemplo:</em> insertar
+los registros en una tabla de recaudación, sin duplicar.</li>
+<li><strong>Verificar</strong> — confirmar que <strong>llegó lo que
+debía llegar</strong>: número de registros, ausencia de duplicados,
+valores sensatos. Es la etapa que vuelve el pipeline confiable.</li>
+</ol>
+<pre><code>Fuente ──extraer──► (transformar) ──cargar──► Destino
+                        ▲
+                   ───verificar───</code></pre>
+<p><strong>Mensaje clave:</strong> <em>un pipeline funcional es el que
+se puede volver a correr mañana y produce lo mismo, sin duplicados ni
+pérdidas.</em></p>
+<hr />
+<h2 id="ideas-clave">Ideas clave</h2>
+<ul>
+<li>La ingesta es <strong>extraer y cargar</strong> datos de una fuente
+a un destino; es el puente hacia el resto del ciclo de vida.</li>
+<li>Hay dos modos: <strong>batch</strong> (por lotes, programado) y
+<strong>streaming</strong> (tiempo real). <strong>Batch cubre casi todo;
+streaming, solo lo que no puede esperar.</strong></li>
+<li>Las herramientas habituales son <strong>conectores, scripts y
+APIs</strong>.</li>
+<li>Antes de ingerir se deciden <strong>frecuencia, volumen y
+fiabilidad</strong> (con <strong>idempotencia</strong>).</li>
+<li>Los patrones más usados son <strong>carga completa, incremental,
+CDC, pull y push</strong>.</li>
+<li>Un pipeline recorre <strong>extraer → transformar → cargar →
+verificar</strong>.</li>
+</ul>
+<h2 id="glosario">Glosario</h2>
+<table>
+<thead>
+<tr>
+<th>Término</th>
+<th>Definición</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ingesta de datos</td>
+<td>Proceso de tomar datos de una o varias fuentes y llevarlos a un
+destino.</td>
+</tr>
+<tr>
+<td>Extracción</td>
+<td>Tomar el dato de su origen.</td>
+</tr>
+<tr>
+<td>Carga</td>
+<td>Llevar el dato a su destino, en el formato acordado.</td>
+</tr>
+<tr>
+<td>Batch</td>
+<td>Ingesta que mueve los datos en bloques, a intervalos
+programados.</td>
+</tr>
+<tr>
+<td>Streaming</td>
+<td>Ingesta que mueve cada dato en cuanto se genera.</td>
+</tr>
+<tr>
+<td>Conector</td>
+<td>Pieza ya construida que lee de una fuente o escribe en un
+destino.</td>
+</tr>
+<tr>
+<td>Script</td>
+<td>Código propio que hace la extracción y la carga a medida.</td>
+</tr>
+<tr>
+<td>API</td>
+<td>Puerta de acceso estandarizada para leer datos de otro sistema.</td>
+</tr>
+<tr>
+<td>Patrón de ingesta</td>
+<td>Solución probada y reutilizable para un problema recurrente.</td>
+</tr>
+<tr>
+<td>CDC</td>
+<td>Captura de cambios: la fuente entrega solo lo que cambió.</td>
+</tr>
+<tr>
+<td>Idempotencia</td>
+<td>Repetir una carga no produce duplicados ni datos corrompidos.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="para-repasar-autoevaluación">Para repasar (autoevaluación)</h2>
+<ol type="1">
+<li>¿Cuál es la diferencia entre ingesta batch y streaming? Da un
+ejemplo de cada una.</li>
+<li>Nombra las tres familias de herramientas de ingesta y di cuándo
+conviene cada una.</li>
+<li>¿Qué tres decisiones de diseño hay que tomar antes de ingerir?</li>
+<li>Describe las cuatro etapas de un pipeline de ingesta y por qué la
+verificación importa.</li>
+</ol>
+<h2 id="referencias-recomendadas">Referencias recomendadas</h2>
+<ul>
+<li>Martin Kleppmann, <em>Diseño de aplicaciones con uso intensivo en
+datos</em> (Marcombo, 2022). Procesamiento por lotes, streaming y
+pipelines.</li>
+<li>Josep Curto, <em>Fundamentos de big data</em> (FUOC/UOC, acceso
+abierto en línea). Ingesta y procesamiento de datos.</li>
+<li>Luis Joyanes Aguilar, <em>Big Data: Análisis de grandes volúmenes de
+datos en organizaciones</em> (Alfaomega, 2013). Fuentes, tecnologías y
+ciclo de vida del dato.</li>
+</ul>
+<h2 id="presentaciones-del-bloque">Presentaciones del bloque</h2>
+<ul>
+<li>Sesión 2 — Ingesta: conceptos, métodos y herramientas:
+<code>presentacion_sesion2.html</code></li>
+<li>Sesión 3 — Ingesta: patrones e implementación de pipelines:
+<code>presentacion_sesion3.html</code></li>
+</ul>
+  <footer class="docfoot">Generado desde <a href="02_Ingesta_de_Datos.md"><code>02_Ingesta_de_Datos.md</code></a> · Módulo 2 — Ingesta de Datos · IDT 601</footer>
+</div>
+</body>
+</html>

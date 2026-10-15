@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde Sesion_03_Ingesta_Patrones_Pipelines.md — no editar a mano. -->
+<title>Sesión 3 — Ingesta: patrones de diseño e implementación de pipelines</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 2 — Ingesta de Datos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1
+id="sesión-3--ingesta-patrones-de-diseño-e-implementación-de-pipelines">Sesión
+3 — Ingesta: patrones de diseño e implementación de pipelines</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601)
+<strong>Bloque:</strong> 2 — Ingesta de Datos <strong>Duración:</strong>
+3 horas (180 min) — teóricas y prácticas <strong>Público:</strong>
+Profesionales no especializados en ingeniería de datos</p>
+<hr />
+<h2 id="objetivos-de-la-sesión">Objetivos de la sesión</h2>
+<ul>
+<li>Identificar las <strong>decisiones de diseño</strong> clave al
+plantear una ingesta: frecuencia, volumen y fiabilidad.</li>
+<li>Reconocer los <strong>patrones de ingesta</strong> más comunes y
+elegir el que mejor encaja con un escenario real.</li>
+<li>Implementar un <strong>pipeline de ingesta</strong> completo
+aplicando las etapas extraer → transformar → cargar → verificar.</li>
+<li>Entregar un pipeline <strong>funcional, reproducible y
+documentado</strong> como evidencia del bloque.</li>
+</ul>
+<h2 id="ideas-clave-qué-debe-quedar-al-final">Ideas clave (qué debe
+quedar al final)</h2>
+<ol type="1">
+<li>Antes de ingerir hay que responder tres preguntas: <strong>¿cada
+cuánto?</strong> (frecuencia), <strong>¿cuánto?</strong> (volumen) y
+<strong>¿qué pasa si falla?</strong> (fiabilidad).</li>
+<li>Un <strong>patrón de ingesta</strong> es una solución probada y
+reutilizable para un problema recurrente; no hay que inventar de
+cero.</li>
+<li>Los patrones más usados son: <strong>carga completa</strong>,
+<strong>carga incremental</strong>, <strong>captura de cambios
+(CDC)</strong> y <strong>carga a pedido (pull)</strong> vs.
+<strong>envío de eventos (push)</strong>.</li>
+<li>La fiabilidad (idempotencia, reintentos, no duplicar) es lo que
+distingue una ingesta robusta de una que falla en silencio.</li>
+<li>Todo pipeline se construye con el mismo esqueleto: <strong>extraer →
+transformar → cargar</strong>, más una etapa de
+<strong>verificación</strong>.</li>
+<li>Un pipeline funcional no es perfecto a la primera: se valida, se
+corrige y se <strong>documenta</strong> para que otro pueda
+reproducirlo.</li>
+</ol>
+<h2 id="cronograma-sugerido-180-min">Cronograma sugerido (180 min)</h2>
+<table>
+<thead>
+<tr>
+<th>Bloque</th>
+<th>Duración</th>
+<th>Qué ocurre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apertura y encuadre</td>
+<td>10 min</td>
+<td>Bienvenida, síntesis del bloque y preguntas de la sesión.</td>
+</tr>
+<tr>
+<td>Consideraciones de diseño</td>
+<td>30 min</td>
+<td>Frecuencia, volumen y fiabilidad.</td>
+</tr>
+<tr>
+<td>Patrones de ingesta</td>
+<td>30 min</td>
+<td>Carga completa, incremental, CDC y pull vs. push.</td>
+</tr>
+<tr>
+<td>Pausa</td>
+<td>10 min</td>
+<td>Receso.</td>
+</tr>
+<tr>
+<td>Del diseño al pipeline</td>
+<td>25 min</td>
+<td>El esqueleto: extraer → transformar → cargar → verificar.</td>
+</tr>
+<tr>
+<td>Taller: implementar el pipeline</td>
+<td>65 min</td>
+<td>Trabajo guiado por parejas o equipos.</td>
+</tr>
+<tr>
+<td>Cierre, puesta en común y preguntas</td>
+<td>10 min</td>
+<td>Entrega, demostración y puente a la próxima sesión.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="apertura-y-encuadre-10-min">Apertura y encuadre (10 min)</h2>
+<ul>
+<li>Ubicar la sesión dentro del <strong>Bloque 2 — Ingesta de
+Datos</strong>: ya conocemos qué es ingerir, con qué métodos y
+herramientas; hoy respondemos <strong>qué decidir antes</strong> y
+<strong>cómo construirlo de punta a punta</strong>.</li>
+<li>Conectar con una idea simple: <em>"Conectar una fuente una vez es
+fácil. Lo difícil es que funcione todos los días, sin duplicar y sin
+perderse datos."</em></li>
+<li>Presentar las tres preguntas que ordenan la sesión: <strong>¿qué
+considerar antes de ingerir?</strong>, <strong>¿qué patrón reutilizable
+me sirve?</strong> y <strong>¿cómo armo el pipeline?</strong></li>
+<li>Palabras clave que se usarán todo el día: <strong>frecuencia,
+volumen, fiabilidad, patrón, idempotencia, CDC, pipeline,
+verificación</strong>.</li>
+</ul>
+<blockquote>
+<p>Momento de enganche: preguntar <em>"¿qué pasaría si el informe de
+mañana duplica datos, o si se pierden los trámites de hoy?"</em> y
+anotar 4 o 5 respuestas en la pizarra. Esas respuestas ilustran la
+importancia de la fiabilidad y se retoman en el taller.</p>
+</blockquote>
+<hr />
+<h2 id="consideraciones-de-diseño-30-min">Consideraciones de diseño (30
+min)</h2>
+<p>Explicar que antes de elegir herramienta o método, hay que responder
+tres preguntas que condicionan todo el diseño:</p>
+<h3 id="frecuencia--cada-cuánto">Frecuencia — ¿cada cuánto?</h3>
+<ul>
+<li>Determina el <strong>método</strong> (batch vs. streaming) y la
+periodicidad.</li>
+<li>Preguntas guía: ¿el dato cambia cada minuto o cada trimestre? ¿cuán
+frescos deben estar los informes?</li>
+<li><strong>Ejemplo:</strong> la nómina se procesa una vez al mes; los
+reclamos, idealmente varias veces al día.</li>
+</ul>
+<h3 id="volumen--cuánto">Volumen — ¿cuánto?</h3>
+<ul>
+<li>Determina el <strong>esfuerzo</strong> y la técnica para no saturar
+el sistema.</li>
+<li>Preguntas guía: ¿son decenas de registros o millones? ¿el volumen es
+estable o crece?</li>
+<li><strong>Ejemplo:</strong> consolidar 500 registros mensuales es
+trivial; ingerir lecturas de miles de medidores cada hora exige otro
+diseño.</li>
+</ul>
+<h3 id="fiabilidad--qué-pasa-si-falla">Fiabilidad — ¿qué pasa si
+falla?</h3>
+<ul>
+<li>Determina las <strong>garantías</strong> que debe tener la
+ingesta.</li>
+<li>Preguntas guía: ¿qué ocurre si se corta la conexión a mitad de
+carga? ¿se puede repetir sin duplicar? ¿sabemos si algo no llegó?</li>
+<li><strong>Concepto clave — idempotencia:</strong> repetir una carga no
+debe producir datos duplicados ni corrompidos.</li>
+<li><strong>Ejemplo:</strong> si la carga nocturna falla y se reintenta,
+el informe no debe contar dos veces la misma recaudación.</li>
+</ul>
+<p><strong>Idea para la pizarra:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Decisión que condiciona</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>¿Cada cuánto? (frecuencia)</td>
+<td>Método y periodicidad</td>
+</tr>
+<tr>
+<td>¿Cuánto? (volumen)</td>
+<td>Técnica y capacidad</td>
+</tr>
+<tr>
+<td>¿Qué pasa si falla? (fiabilidad)</td>
+<td>Reintentos, idempotencia, monitoreo</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="patrones-de-ingesta-30-min">Patrones de ingesta (30 min)</h2>
+<p>Explicar que un <strong>patrón</strong> es una forma probada y
+reutilizable de resolver un problema recurrente. Presentar los más
+comunes:</p>
+<h3 id="carga-completa-full-load">Carga completa (full load)</h3>
+<ul>
+<li>Se mueve <strong>todo el conjunto de datos</strong>, cada vez,
+reemplazando lo anterior.</li>
+<li><strong>Cuándo:</strong> volúmenes pequeños o datos que cambian por
+completo.</li>
+<li><strong>Ejemplo:</strong> un catálogo de códigos de trámites que se
+vuelve a cargar entero cada mes.</li>
+</ul>
+<h3 id="carga-incremental">Carga incremental</h3>
+<ul>
+<li>Se mueve <strong>solo lo nuevo o lo modificado</strong> desde la
+última carga.</li>
+<li><strong>Cuándo:</strong> volúmenes grandes que crecen con el
+tiempo.</li>
+<li><strong>Ejemplo:</strong> cada día se agregan solo los trámites
+nuevos del día, no toda la historia.</li>
+</ul>
+<h3 id="captura-de-cambios-cdc--change-data-capture">Captura de cambios
+(CDC — Change Data Capture)</h3>
+<ul>
+<li>La <strong>propia fuente</strong> registra y entrega solo los
+cambios (altas, bajas, modificaciones).</li>
+<li><strong>Cuándo:</strong> se necesita saber exactamente qué cambió,
+casi en tiempo real.</li>
+<li><strong>Ejemplo:</strong> una base de datos del registro civil que
+emite eventos cada vez que se actualiza un dato.</li>
+</ul>
+<h3 id="carga-a-pedido-pull-vs-envío-de-eventos-push">Carga a pedido
+(pull) vs. envío de eventos (push)</h3>
+<ul>
+<li><strong>Pull:</strong> nuestro sistema <strong>va a buscar</strong>
+los datos cuando los necesita.</li>
+<li><strong>Push:</strong> la fuente <strong>nos envía</strong> los
+datos cuando hay novedades.</li>
+<li><strong>Ejemplo pull:</strong> un script que consulta una API cada
+noche. <strong>Ejemplo push:</strong> una API que notifica cuando entra
+un reclamo.</li>
+</ul>
+<h3 id="tabla-comparativa">Tabla comparativa</h3>
+<table>
+<thead>
+<tr>
+<th>Patrón</th>
+<th>Idea central</th>
+<th>Cuándo usarlo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Carga completa</td>
+<td>Mover todo y reemplazar</td>
+<td>Datos pequeños o que cambian por completo</td>
+</tr>
+<tr>
+<td>Carga incremental</td>
+<td>Mover solo lo nuevo</td>
+<td>Volúmenes grandes y crecientes</td>
+</tr>
+<tr>
+<td>CDC</td>
+<td>La fuente entrega solo los cambios</td>
+<td>Necesidad de cambios exactos y a tiempo</td>
+</tr>
+<tr>
+<td>Pull</td>
+<td>Nosotros buscamos los datos</td>
+<td>Control de horario, fuentes que no notifican</td>
+</tr>
+<tr>
+<td>Push</td>
+<td>La fuente envía los datos</td>
+<td>Frescura alta, alertas</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mensaje puente:</strong> <em>"Elegir el patrón correcto evita
+rehacer el trabajo y previene duplicados. Ahora veremos cómo se lleva
+todo esto a un pipeline."</em></p>
+<hr />
+<h2 id="pausa-10-min">Pausa (10 min)</h2>
+<hr />
+<h2 id="del-diseño-al-pipeline-25-min">Del diseño al pipeline (25
+min)</h2>
+<p>Explicar que un <strong>pipeline de ingesta</strong> es la secuencia
+repetible que lleva los datos desde la fuente hasta el destino.
+Presentar el esqueleto en cuatro etapas:</p>
+<h3 id="1-extraer">1. Extraer</h3>
+<ul>
+<li>Definir <strong>la fuente</strong> y <strong>cómo acceder</strong>:
+un archivo (CSV, Excel), una base de datos, una API.</li>
+<li>Escribir el paso que <strong>lee</strong> los datos.</li>
+<li><strong>Ejemplo:</strong> leer un CSV con la recaudación
+diaria.</li>
+</ul>
+<h3 id="2-transformar">2. Transformar</h3>
+<ul>
+<li>Aplicar las correcciones mínimas para que los datos sean útiles:
+renombrar columnas, limpiar espacios, convertir formatos, eliminar
+nulos.</li>
+<li>La transformación no tiene que ser exhaustiva: lo justo para el
+destino.</li>
+<li><strong>Ejemplo:</strong> convertir los montos a número, normalizar
+fechas, quitar filas vacías.</li>
+</ul>
+<h3 id="3-cargar">3. Cargar</h3>
+<ul>
+<li>Definir <strong>el destino</strong> y <strong>cómo
+escribir</strong>: una base central, un archivo consolidado, una
+tabla.</li>
+<li>Aplicar el <strong>patrón</strong> elegido (completa, incremental o
+CDC) según el caso.</li>
+<li><strong>Ejemplo:</strong> insertar los registros en una tabla de
+recaudación, sin duplicar.</li>
+</ul>
+<h3 id="4-verificar">4. Verificar</h3>
+<ul>
+<li>Confirmar que <strong>llegó lo que debía llegar</strong>: número de
+registros, ausencia de duplicados, valores sensatos.</li>
+<li>Es la etapa que vuelve el pipeline <strong>confiable</strong>.</li>
+<li><strong>Ejemplo:</strong> comparar el conteo de filas de entrada y
+de salida; revisar que no haya montos negativos.</li>
+</ul>
+<p><strong>Idea para la pizarra:</strong></p>
+<pre><code>Fuente ──extraer──► (transformar) ──cargar──► Destino
+                        ▲
+                   ───verificar───</code></pre>
+<p><strong>Mensaje clave:</strong> <em>"Un pipeline funcional es el que
+se puede volver a correr mañana y produce lo mismo, sin duplicados ni
+pérdidas."</em></p>
+<hr />
+<h2 id="taller-implementar-el-pipeline-65-min">Taller: implementar el
+pipeline (65 min)</h2>
+<p><strong>Objetivo:</strong> construir y entregar un pipeline de
+ingesta funcional, aplicando el diseño y el patrón elegidos.</p>
+<p><strong>Preparación previa:</strong></p>
+<ul>
+<li>Guía de laboratorio con el paso a paso.</li>
+<li>Entorno de trabajo listo (editor o plataforma simple).</li>
+<li>Fuente de datos de muestra (CSV) y destino definido.</li>
+</ul>
+<p><strong>Pasos del taller:</strong></p>
+<ol type="1">
+<li>Formar parejas o equipos de 2–3 personas.</li>
+<li>Leer la guía y la fuente de datos asignada.</li>
+<li>Responder las tres preguntas de diseño (<strong>frecuencia, volumen,
+fiabilidad</strong>) y elegir un <strong>patrón</strong>.</li>
+<li>Implementar por etapas: <strong>extraer</strong> →
+<strong>transformar</strong> → <strong>cargar</strong> →
+<strong>verificar</strong>.</li>
+<li>Probar el pipeline completo y corregir lo que falle.</li>
+<li>Documentar brevemente: qué hace cada etapa y qué patrón se usó.</li>
+<li>Demostrar el pipeline al grupo.</li>
+</ol>
+<p><strong>Escenarios sugeridos (para ambientar el taller):</strong></p>
+<ul>
+<li><strong>A.</strong> Consolidar diariamente los trámites nuevos de
+una alcaldía en su base central.</li>
+<li><strong>B.</strong> Alimentar un tablero en vivo de reclamos
+ciudadanos.</li>
+<li><strong>C.</strong> Sincronizar cada mes el padrón de contribuyentes
+completo.</li>
+<li><strong>D.</strong> Detectar al instante si un trámite supera su
+plazo legal.</li>
+<li><strong>E.</strong> Actualizar un inventario de bienes que cambia de
+a poco, una vez por semana.</li>
+</ul>
+<p><strong>Rol del docente:</strong> circular, resolver dudas puntuales
+y recordar las cuatro etapas. Detenerse solo cuando un equipo no puede
+avanzar; dejar que prueben y se equivoquen.</p>
+<p><strong>Guía de corrección:</strong> valorar que el pipeline
+<strong>funcione de extremo a extremo</strong> (los datos aparecen en el
+destino), que <strong>no duplique</strong> registros y que esté
+<strong>documentado</strong>.</p>
+<p><strong>Criterios de evaluación:</strong> entrega de un pipeline de
+ingesta funcional y demostración de su ejecución.</p>
+<hr />
+<h2 id="cierre-y-preguntas-10-min">Cierre y preguntas (10 min)</h2>
+<ul>
+<li>Cada equipo demuestra su pipeline en pocos minutos: fuente, etapas y
+resultado.</li>
+<li>Retroalimentación breve: qué funcionó, qué fue lo más difícil y qué
+harían distinto.</li>
+<li>Síntesis con el grupo: releer la tabla comparativa de patrones y
+reforzar la idea central: <em>"Antes de ingerir, responde frecuencia,
+volumen y fiabilidad; luego elige el patrón y construye el pipeline de
+forma repetible."</em></li>
+<li>Anticipar la próxima sesión: <em>"Con la ingesta resuelta, el
+siguiente paso es ordenar todo el recorrido del dato: la arquitectura de
+datos, sus conceptos y sus componentes."</em></li>
+<li>Espacio de preguntas y dudas.</li>
+</ul>
+<hr />
+<h2 id="recursos">Recursos</h2>
+<ul>
+<li>Presentación (láminas con consideraciones, tabla de patrones y el
+esqueleto del pipeline).</li>
+<li>Pizarra o pizarra digital para el esquema de las tres preguntas y de
+las cuatro etapas.</li>
+<li>Escenarios de caso impresos para la práctica y la ambientación del
+taller.</li>
+<li>Plantilla de análisis (frecuencia / volumen / fiabilidad /
+patrón).</li>
+<li>Guía de laboratorio con el paso a paso de implementación
+(<code>taller_sesion3_pipeline_online.md</code>).</li>
+<li>Entorno de trabajo (editor o plataforma simple) preparado.</li>
+<li>Fuente de datos de muestra (CSV) y destino definido:
+<code>datos/encuesta_profesores_recorte.csv</code> (AGETIC, CC-BY).</li>
+</ul>
+<h2 id="evaluación-de-la-sesión">Evaluación de la sesión</h2>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identifica frecuencia, volumen y fiabilidad</td>
+<td>Análisis del escenario y del taller</td>
+</tr>
+<tr>
+<td>Reconoce los patrones de ingesta</td>
+<td>Participación en el bloque de patrones</td>
+</tr>
+<tr>
+<td>Selecciona y justifica un patrón adecuado</td>
+<td>Propuesta del equipo en la práctica</td>
+</tr>
+<tr>
+<td>Aplica las cuatro etapas del pipeline</td>
+<td>Estructura del pipeline entregado</td>
+</tr>
+<tr>
+<td>Logra una ingesta funcional de extremo a extremo</td>
+<td>Datos visibles en el destino</td>
+</tr>
+<tr>
+<td>Evita duplicados y pérdidas</td>
+<td>Verificación (conteos, idempotencia)</td>
+</tr>
+<tr>
+<td>Documenta y explica el pipeline</td>
+<td>Demostración y puesta en común</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Entrega:</strong> pipeline de ingesta funcional (fuente,
+etapas, patrón usado y verificación), más una breve documentación de su
+ejecución.</p>
+  <footer class="docfoot">Generado desde <a href="Sesion_03_Ingesta_Patrones_Pipelines.md"><code>Sesion_03_Ingesta_Patrones_Pipelines.md</code></a> · Módulo 2 — Ingesta de Datos · IDT 601</footer>
+</div>
+</body>
+</html>

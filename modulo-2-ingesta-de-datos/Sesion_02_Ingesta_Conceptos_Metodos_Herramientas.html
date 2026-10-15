@@ -1,0 +1,491 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde Sesion_02_Ingesta_Conceptos_Metodos_Herramientas.md — no editar a mano. -->
+<title>Sesión 2 — Ingesta: conceptos, métodos y herramientas</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 2 — Ingesta de Datos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="sesión-2--ingesta-conceptos-métodos-y-herramientas">Sesión 2 —
+Ingesta: conceptos, métodos y herramientas</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601)
+<strong>Bloque:</strong> 2 — Ingesta de Datos <strong>Duración:</strong>
+3 horas (180 min) — teóricas y prácticas <strong>Público:</strong>
+Profesionales no especializados en ingeniería de datos</p>
+<hr />
+<h2 id="objetivos-de-la-sesión">Objetivos de la sesión</h2>
+<ul>
+<li>Comprender qué es la ingesta de datos, por qué importa y cuál es su
+lugar en el ciclo de vida de los datos.</li>
+<li>Distinguir los conceptos de <strong>extracción</strong> y
+<strong>carga</strong> como los dos extremos del proceso de
+ingesta.</li>
+<li>Diferenciar la ingesta <strong>por lotes (batch)</strong> de la
+ingesta <strong>en tiempo real (streaming)</strong> y reconocer cuándo
+conviene cada una.</li>
+<li>Identificar las <strong>herramientas habituales</strong> de ingesta:
+conectores, scripts y APIs.</li>
+<li>Realizar una primera <strong>conexión a una fuente de datos
+sencilla</strong> como práctica.</li>
+</ul>
+<h2 id="ideas-clave-qué-debe-quedar-al-final">Ideas clave (qué debe
+quedar al final)</h2>
+<ol type="1">
+<li>La ingesta es el <strong>puente</strong> entre las fuentes de datos
+y los sistemas que los almacenan o analizan.</li>
+<li>Toda ingesta se compone de al menos dos momentos:
+<strong>extraer</strong> (tomar el dato de su origen) y
+<strong>cargar</strong> (llevarlo a su destino).</li>
+<li>Hay dos grandes formas de ingerir: <strong>por lotes
+(batch)</strong> —acumular y mover en bloques— y <strong>en tiempo real
+(streaming)</strong> —mover a medida que llega cada dato.</li>
+<li>No existe una sola forma de ingerir: hay <strong>métodos</strong>
+(cómo y cuándo mover) y <strong>herramientas</strong> (con qué mover), y
+conviene elegirlos por separado.</li>
+<li>Las <strong>herramientas</strong> se agrupan en tres familias:
+<strong>conectores</strong> (piezas ya hechas), <strong>scripts</strong>
+(código propio) y <strong>APIs</strong> (puertas de acceso
+estandarizadas).</li>
+<li>Conectar una fuente sencilla (un CSV, una hoja de cálculo o una API
+pública) ya es un <strong>pipeline de ingesta en
+miniatura</strong>.</li>
+</ol>
+<h2 id="cronograma-sugerido-180-min">Cronograma sugerido (180 min)</h2>
+<table>
+<thead>
+<tr>
+<th>Bloque</th>
+<th>Duración</th>
+<th>Qué ocurre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apertura y encuadre</td>
+<td>10 min</td>
+<td>Bienvenida, ubicación del Bloque 2 y pregunta de enganche.</td>
+</tr>
+<tr>
+<td>¿Qué es la ingesta de datos?</td>
+<td>15 min</td>
+<td>Definición, rol en el ciclo de vida y por qué importa.</td>
+</tr>
+<tr>
+<td>Extracción y carga</td>
+<td>15 min</td>
+<td>Los dos extremos del proceso, con ejemplos de gestión pública.</td>
+</tr>
+<tr>
+<td>Batch vs. streaming</td>
+<td>30 min</td>
+<td>Los dos modos de ingesta, cuándo usar cada uno y dinámica de
+clasificación.</td>
+</tr>
+<tr>
+<td>Pausa</td>
+<td>10 min</td>
+<td>Receso.</td>
+</tr>
+<tr>
+<td>Herramientas: conectores, scripts y APIs</td>
+<td>30 min</td>
+<td>Recorrido por las tres familias de herramientas.</td>
+</tr>
+<tr>
+<td>Demostración guiada</td>
+<td>15 min</td>
+<td>El docente muestra una conexión en vivo.</td>
+</tr>
+<tr>
+<td>Práctica: conectar una fuente sencilla</td>
+<td>45 min</td>
+<td>Trabajo guiado de conexión a una fuente de datos.</td>
+</tr>
+<tr>
+<td>Cierre y preguntas</td>
+<td>10 min</td>
+<td>Síntesis, dudas y puente a la siguiente sesión.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="apertura-y-encuadre-10-min">Apertura y encuadre (10 min)</h2>
+<ul>
+<li>Ubicar el Bloque 2 — Ingesta de Datos como la continuación natural
+del recorrido: ya sabemos <strong>de dónde vienen</strong> los datos y
+cómo <strong>medir su calidad</strong> (Bloque 1); ahora toca
+<strong>cómo moverlos</strong>.</li>
+<li>Conectar con una idea simple: <em>"Tener datos guardados en muchos
+lugares no sirve si no podemos juntarlos para decidir. Alguien tiene que
+ir a buscarlos y traerlos. Eso es ingerir."</em></li>
+<li>Presentar las preguntas que ordenan la sesión: <strong>¿qué es la
+ingesta?</strong>, <strong>¿cómo movemos los datos?</strong> y
+<strong>¿con qué herramientas lo hacemos?</strong></li>
+<li>Palabras clave que se usarán todo el día: <strong>ingesta,
+extracción, carga, batch, streaming, método, conector, script, API,
+pipeline</strong>.</li>
+</ul>
+<blockquote>
+<p>Momento de enganche: preguntar al grupo <em>"¿cómo llegan hoy los
+datos de su área al lugar donde se consultan o analizan?"</em> y anotar
+4 o 5 respuestas (a mano, archivos, correos, sistemas automáticos). Esos
+ejemplos se retoman en la dinámica de batch vs. streaming.</p>
+</blockquote>
+<hr />
+<h2 id="qué-es-la-ingesta-de-datos-15-min">¿Qué es la ingesta de datos?
+(15 min)</h2>
+<p>Explicar que la ingesta es el <strong>proceso de tomar datos de una o
+varias fuentes y llevarlos a un lugar donde se puedan almacenar,
+procesar o analizar</strong>. Es el primer paso operativo del ciclo de
+vida: sin ingesta no hay análisis ni reporte.</p>
+<p>La ingesta cumple tres tareas:</p>
+<ol type="1">
+<li><strong>Recolectar</strong> — juntar información que ya existe pero
+está dispersa (planillas, sistemas, formularios, sensores).</li>
+<li><strong>Transportar</strong> — mover los datos desde su origen hasta
+un destino confiable.</li>
+<li><strong>Preparar el terreno</strong> — dejar los datos listos para
+el almacenamiento y el procesamiento que vienen después.</li>
+</ol>
+<p><strong>Por qué importa:</strong></p>
+<ul>
+<li><strong>Evita decisiones a ciegas:</strong> si los datos no llegan,
+la institución decide con información incompleta.</li>
+<li><strong>Ahorra trabajo manual:</strong> una ingesta automatizada
+reemplaza horas de copiar y pegar.</li>
+<li><strong>Habilita todo lo demás:</strong> calidad, análisis y
+aprendizaje automático dependen de que los datos fluyan.</li>
+</ul>
+<p><strong>Ejemplo de gestión pública:</strong> una alcaldía reúne cada
+mes los datos de recaudación, los trámites atendidos y los reclamos para
+armar un informe de gestión. Si nadie "trae" esos datos, el informe no
+existe.</p>
+<p><strong>Idea para la pizarra:</strong></p>
+<ul>
+<li>Ingesta = <strong>recolectar + transportar + dejar
+listo</strong>.</li>
+<li>Es el <strong>puente</strong> entre la fuente y el destino.</li>
+</ul>
+<hr />
+<h2 id="extracción-y-carga-15-min">Extracción y carga (15 min)</h2>
+<p>Presentar los <strong>dos extremos</strong> de todo proceso de
+ingesta:</p>
+<h3 id="extracción">Extracción</h3>
+<ul>
+<li>Es <strong>tomar</strong> el dato de su origen (una base de datos,
+un archivo, un formulario, una API, un sensor).</li>
+<li>Implica saber <strong>dónde está</strong> el dato y <strong>cómo
+acceder</strong> a él.</li>
+<li><strong>Ejemplo:</strong> descargar el reporte mensual de
+recaudación desde el sistema de impuestos.</li>
+</ul>
+<h3 id="carga">Carga</h3>
+<ul>
+<li>Es <strong>llevar</strong> el dato a su destino (una base de datos
+central, un almacén de datos, un archivo consolidado).</li>
+<li>Implica saber <strong>a dónde</strong> va y en <strong>qué
+formato</strong> debe quedar.</li>
+<li><strong>Ejemplo:</strong> volcar esos datos en la base central de la
+alcaldía para que todos los analistas los consulten.</li>
+</ul>
+<p><strong>Entre los extremos:</strong> en la práctica casi siempre hay
+un paso intermedio de <strong>transformación</strong> (limpiar,
+renombrar, convertir formatos). Ese proceso completo se trabajará más
+adelante en el módulo.</p>
+<p><strong>Idea para la pizarra:</strong></p>
+<pre><code>Fuente ──extraer──► (transformar) ──cargar──► Destino</code></pre>
+<p><strong>Mensaje clave:</strong> <em>"Extraer sin cargar es quedarse
+con el dato en la mano; cargar sin extraer no es posible. La ingesta es
+el recorrido completo."</em></p>
+<hr />
+<h2 id="batch-vs-streaming-30-min">Batch vs. streaming (30 min)</h2>
+<h3 id="ingesta-por-lotes-batch">Ingesta por lotes (batch)</h3>
+<ul>
+<li>Se <strong>acumulan</strong> datos durante un período y se mueven
+<strong>juntos</strong>, a intervalos (cada hora, cada noche, cada
+mes).</li>
+<li>Es la forma <strong>más común</strong> y la más económica.</li>
+<li><strong>Ejemplo:</strong> cada noche se consolida la recaudación del
+día; cada fin de mes se cierran los trámites.</li>
+<li><strong>Ventaja:</strong> simple, barata, tolera bien los errores
+(se puede reintentar el lote entero).</li>
+<li><strong>Desventaja:</strong> los datos no están al instante; hay un
+<strong>desfase</strong>.</li>
+</ul>
+<h3 id="ingesta-en-tiempo-real-streaming">Ingesta en tiempo real
+(streaming)</h3>
+<ul>
+<li>Cada dato se mueve <strong>en cuanto se genera</strong>, sin esperar
+a acumular.</li>
+<li>Se usa cuando la frescura importa y el volumen es continuo.</li>
+<li><strong>Ejemplo:</strong> un tablero que muestra en vivo los
+reclamos que entran, o las lecturas de semáforos y medidores que llegan
+minuto a minuto.</li>
+<li><strong>Ventaja:</strong> datos <strong>siempre
+frescos</strong>.</li>
+<li><strong>Desventaja:</strong> más compleja y costosa de operar.</li>
+</ul>
+<h3 id="tabla-comparativa">Tabla comparativa</h3>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Batch (por lotes)</th>
+<th>Streaming (tiempo real)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cuándo se mueve el dato</td>
+<td>En bloques, a intervalos</td>
+<td>En cuanto llega</td>
+</tr>
+<tr>
+<td>Frescura</td>
+<td>Horas o días de desfase</td>
+<td>Segundos o menos</td>
+</tr>
+<tr>
+<td>Costo y complejidad</td>
+<td>Baja</td>
+<td>Alta</td>
+</tr>
+<tr>
+<td>Tolerancia a errores</td>
+<td>Fácil de reintentar</td>
+<td>Más delicada</td>
+</tr>
+<tr>
+<td>Uso típico</td>
+<td>Reportes, cierres, históricos</td>
+<td>Alertas, tableros en vivo, sensores</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dinámica-batch-o-streaming-incluida-en-los-30-min">Dinámica:
+¿batch o streaming? (incluida en los 30 min)</h3>
+<p><strong>Objetivo:</strong> decidir, para cada caso, qué modo de
+ingesta conviene y por qué.</p>
+<p><strong>Pasos:</strong></p>
+<ol type="1">
+<li>Conformar equipos de 3–4 personas.</li>
+<li>Cada equipo recibe una lista breve de situaciones.</li>
+<li>Responde: <strong>¿batch o streaming?</strong> y <strong>¿por
+qué?</strong></li>
+<li>Puesta en común breve: cada equipo comparte un caso y justifica su
+decisión.</li>
+</ol>
+<p><strong>Casos sugeridos:</strong></p>
+<ul>
+<li>El cierre mensual de la nómina de la institución.</li>
+<li>Un tablero de emergencias que muestra incidentes en vivo.</li>
+<li>La consolidación nocturna de la recaudación diaria de
+impuestos.</li>
+<li>Las lecturas de semáforos inteligentes que se usan para ajustar el
+tránsito.</li>
+<li>El informe anual de ejecución presupuestaria.</li>
+<li>Alertas de que un trámite superó su plazo legal de respuesta.</li>
+</ul>
+<p><strong>Guía de corrección:</strong> valorar que distingan
+<strong>frescura necesaria</strong> (¿puede esperar?) y
+<strong>costo</strong> (¿vale la pena el esfuerzo en tiempo real?). La
+mayoría son batch; las alertas y los tableros en vivo son streaming.</p>
+<p><strong>Mensaje puente:</strong> <em>"No se trata de que una sea
+mejor que la otra: batch cubre casi todo lo que una institución
+necesita; streaming se reserva para lo que no puede esperar. Ahora
+veremos las herramientas concretas para hacer ambas."</em></p>
+<hr />
+<h2 id="pausa-10-min">Pausa (10 min)</h2>
+<hr />
+<h2 id="herramientas-conectores-scripts-y-apis-30-min">Herramientas:
+conectores, scripts y APIs (30 min)</h2>
+<p>Recordar que el <strong>método</strong> responde a <em>"¿cómo y
+cuándo movemos los datos?"</em> y la <strong>herramienta</strong>
+responde a <em>"¿con qué lo hacemos?"</em>. Presentar las tres
+familias:</p>
+<h3 id="conectores">Conectores</h3>
+<ul>
+<li>Piezas <strong>ya construidas</strong> que saben leer de una fuente
+o escribir en un destino específicos.</li>
+<li>Vienen incluidas en muchas plataformas de datos o herramientas de
+integración.</li>
+<li><strong>Ejemplo:</strong> un conector que lee directamente una hoja
+de cálculo de Google o una base de datos PostgreSQL y la vuelca en el
+almacén, sin escribir código.</li>
+<li><strong>Ventaja:</strong> rápido y confiable.
+<strong>Límite:</strong> sirven para fuentes conocidas; si la fuente es
+rara, quizá no exista conector.</li>
+</ul>
+<h3 id="scripts">Scripts</h3>
+<ul>
+<li><strong>Código propio</strong> (en Python, R, etc.) que hace la
+extracción y la carga a medida.</li>
+<li>Dan <strong>control total</strong> sobre qué se mueve y cómo se
+transforma.</li>
+<li><strong>Ejemplo:</strong> un script en Python que abre un CSV de
+recaudación, limpia los montos y los inserta en la base central.</li>
+<li><strong>Ventaja:</strong> flexibilidad total.
+<strong>Límite:</strong> hay que saber programar y mantenerlo.</li>
+</ul>
+<h3 id="apis">APIs</h3>
+<ul>
+<li><strong>Puertas de acceso estandarizadas</strong> que exponen datos
+de un sistema para que otros los lean.</li>
+<li>Son la forma moderna en que los sistemas se pasan datos entre
+sí.</li>
+<li><strong>Ejemplo:</strong> una API del registro civil que entrega
+datos de nacimiento a otra institución, o una API pública de clima que
+devuelve datos en JSON.</li>
+<li><strong>Ventaja:</strong> acceso controlado y automatizable.
+<strong>Límite:</strong> hay que entender el contrato de la API
+(endpoints, claves, límites).</li>
+</ul>
+<h3 id="tabla-comparativa-1">Tabla comparativa</h3>
+<table>
+<thead>
+<tr>
+<th>Herramienta</th>
+<th>¿Qué es?</th>
+<th>¿Cuándo usarla?</th>
+<th>¿Requiere programar?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conector</td>
+<td>Pieza hecha para una fuente/destino</td>
+<td>Fuentes conocidas y repetidas</td>
+<td>No (configuración)</td>
+</tr>
+<tr>
+<td>Script</td>
+<td>Código propio</td>
+<td>Casos a medida o transformaciones</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>API</td>
+<td>Puerta de acceso estandarizada</td>
+<td>Cuando el sistema la ofrece</td>
+<td>Un poco (llamadas)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mensaje puente:</strong> <em>"La mayoría empieza con archivos
+y scripts, y agrega conectores y APIs cuando la ingesta se vuelve
+repetida y crítica. Ahora lo vamos a tocar en la práctica."</em></p>
+<hr />
+<h2 id="demostración-guiada-15-min">Demostración guiada (15 min)</h2>
+<ul>
+<li>El docente muestra, en vivo, una conexión sencilla: leer un archivo
+CSV y mostrarlo en pantalla (o conectarse a una API pública de clima)
+usando una herramienta simple.</li>
+<li>Enfatizar los tres momentos vistos: <strong>extraer</strong> (leer
+la fuente), <strong>transformar</strong> (si aplica) y
+<strong>cargar</strong> (ver el resultado).</li>
+<li>Verificar que todos entienden el entorno antes de la práctica.</li>
+</ul>
+<hr />
+<h2 id="práctica-conectar-una-fuente-sencilla-45-min">Práctica: conectar
+una fuente sencilla (45 min)</h2>
+<p><strong>Objetivo:</strong> lograr una conexión exitosa a una fuente
+de datos y visualizar su contenido.</p>
+<p><strong>Pasos:</strong></p>
+<ol type="1">
+<li>Entregar a cada participante (o pareja) una fuente sencilla: un
+archivo CSV o una API pública documentada.</li>
+<li>Guiar el primer intento: abrir la fuente, identificar su formato y
+cargarla en la herramienta del entorno.</li>
+<li>Cada participante muestra en pantalla el resultado (filas/columnas o
+respuesta JSON).</li>
+<li>Registrar: <strong>¿qué método usamos (batch)?</strong> y
+<strong>¿qué herramienta (script/conector/API)?</strong></li>
+</ol>
+<p><strong>Fuentes sugeridas:</strong></p>
+<ul>
+<li>Un CSV de muestra con datos de trámites o recaudación.</li>
+<li>Una API pública de clima que devuelve JSON.</li>
+<li>Una hoja de cálculo compartida de ejemplo.</li>
+</ul>
+<p><strong>Guía de corrección:</strong> valorar que la conexión funcione
+(se vean los datos) y que el participante sepa explicar qué método y
+herramienta usó.</p>
+<p><strong>Criterios de evaluación:</strong> conexión exitosa a la
+fuente y explicación del método/herramienta empleados.</p>
+<hr />
+<h2 id="cierre-y-preguntas-10-min">Cierre y preguntas (10 min)</h2>
+<ul>
+<li>Síntesis con el grupo: releer en voz alta la tabla comparativa de
+herramientas y la de batch vs. streaming.</li>
+<li>Reforzar la idea central: <em>"Ingerir es mover los datos de donde
+están a donde se necesitan. El método es el cómo y cuándo; la
+herramienta es el con qué."</em></li>
+<li>Anticipar la próxima sesión: <em>"La próxima vez veremos qué
+decisiones de diseño tomar al ingerir y los patrones más comunes para
+implementar un pipeline. Y analizaremos un escenario."</em></li>
+<li>Espacio de preguntas y dudas.</li>
+</ul>
+<hr />
+<h2 id="recursos">Recursos</h2>
+<ul>
+<li>Presentación (láminas con definición de ingesta, extracción/carga,
+batch vs. streaming y tabla de herramientas).</li>
+<li>Pizarra o pizarra digital para los esquemas fuente → transformación
+→ destino y método vs. herramienta.</li>
+<li>Ejemplos impresos para la dinámica de clasificación
+batch/streaming.</li>
+<li>Herramientas de demostración: entorno con un editor o una plataforma
+de datos simple, un CSV de muestra y una API pública documentada.</li>
+<li>Guía de la práctica con los pasos de conexión
+(<code>taller_sesion2_practica_online.md</code>).</li>
+<li>Dataset real: <code>datos/encuesta_profesores_recorte.csv</code>
+(AGETIC, datos abiertos, CC-BY).</li>
+</ul>
+<h2 id="evaluación-de-la-sesión">Evaluación de la sesión</h2>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Define con sus palabras qué es la ingesta de datos</td>
+<td>Participación en el enganche y en la puesta en común</td>
+</tr>
+<tr>
+<td>Distingue extracción de carga</td>
+<td>Aportes en el bloque de extracción y carga</td>
+</tr>
+<tr>
+<td>Diferencia batch de streaming y justifica la elección</td>
+<td>Respuestas en la dinámica grupal</td>
+</tr>
+<tr>
+<td>Reconoce conectores, scripts y APIs</td>
+<td>Aportes en el bloque de herramientas</td>
+</tr>
+<tr>
+<td>Conecta una fuente de datos sencilla</td>
+<td>Resultado visible en la práctica</td>
+</tr>
+<tr>
+<td>Explica el método y la herramienta usados</td>
+<td>Registro y puesta en común de la práctica</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Entrega:</strong> resultado de la práctica de conexión
+(fuente abierta y visible) con la explicación del método y la
+herramienta empleados.</p>
+  <footer class="docfoot">Generado desde <a href="Sesion_02_Ingesta_Conceptos_Metodos_Herramientas.md"><code>Sesion_02_Ingesta_Conceptos_Metodos_Herramientas.md</code></a> · Módulo 2 — Ingesta de Datos · IDT 601</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde notas-sesion-02.md — no editar a mano. -->
+<title>Notas del orador — Sesión 2</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 2 — Ingesta de Datos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="notas-del-orador--sesión-2">Notas del orador — Sesión 2</h1>
+<p><strong>Deck:</strong> <code>deck-sesion-02.html</code> · 15
+diapositivas · 180 min <strong>Tema:</strong> Ingesta de datos:
+conceptos, métodos y herramientas</p>
+<blockquote>
+<p>Guion punteado por diapositiva. Cada viñeta es algo para decir en voz
+alta; <strong>No olvidar</strong> marca lo imprescindible.</p>
+</blockquote>
+<hr />
+<h2 id="slide-1--ingesta-conceptos-métodos-y-herramientas">Slide 1 —
+Ingesta: conceptos, métodos y herramientas</h2>
+<ul>
+<li>Dar la bienvenida y presentarse; ubicar la sesión en el Bloque 2 —
+Ingesta de Datos, como continuación del Bloque 1 (de dónde vienen los
+datos y cómo se mide su calidad).</li>
+<li>Encuadrar la pregunta que ordena todo el día: <em>"¿cómo llegan los
+datos desde la fuente hasta el sistema?"</em>.</li>
+<li>Aclarar que el público no es especialista: no hace falta saber
+programar hoy, solo entender las ideas.</li>
+<li>Anunciar el recorrido en una frase: qué es ingerir, extraer y
+cargar, batch vs. streaming, herramientas y una práctica de
+conexión.</li>
+<li><strong>No olvidar:</strong> avisar desde el arranque que habrá una
+pausa de 10 minutos tras el bloque de batch vs. streaming y que al final
+hay práctica de conexión.</li>
+</ul>
+<h2 id="slide-2--hoja-de-ruta">Slide 2 — Hoja de ruta</h2>
+<ul>
+<li>Recorrer la tabla de tramos en voz alta y fijar el contrato de
+tiempo: 15 + 15 + 30 + 30 + 60 + 10 minutos.</li>
+<li>Explicar que el tramo "Práctica" agrupa la demostración del docente
+y la conexión guiada de cada participante.</li>
+<li>Señalar que la dinámica de clasificación batch/streaming va dentro
+del tramo de 30 minutos de modos de ingesta.</li>
+<li>Ubicar la pausa: después de batch vs. streaming, antes de
+herramientas.</li>
+<li><strong>No olvidar:</strong> pedir que nadie se retire en la pausa
+sin haber anotado su duda, porque el cierre reserva 10 minutos para
+preguntas.</li>
+</ul>
+<h2 id="slide-3--qué-es-la-ingesta">Slide 3 — ¿Qué es la ingesta?</h2>
+<ul>
+<li>Definir con palabras simples: ingerir es <strong>tomar datos de una
+o varias fuentes y llevarlos</strong> a un lugar donde se puedan
+almacenar, procesar o analizar.</li>
+<li>Instalar la metáfora central del bloque: la ingesta es el
+<strong>puente</strong> entre la fuente y el destino; no es análisis, es
+el paso previo que lo hace posible.</li>
+<li>Contar el ejemplo de la alcaldía: recaudación, trámites y reclamos
+de un mes dispersos; si nadie los "trae", el informe de gestión no
+existe.</li>
+<li>Aterrizar en la institución del público: preguntar quién arma hoy un
+informe juntando datos a mano.</li>
+<li><strong>No olvidar:</strong> dejar claro que sin ingesta no hay
+análisis ni reporte; es el primer paso operativo del ciclo de vida de
+los datos.</li>
+</ul>
+<h2 id="slide-4--qué-hace-la-ingesta">Slide 4 — Qué hace la ingesta</h2>
+<ul>
+<li>Explicar las tres tareas como una secuencia:
+<strong>recolectar</strong> (juntar lo disperso),
+<strong>transportar</strong> (mover al destino confiable) y
+<strong>preparar el terreno</strong> (dejar listo para almacenar y
+procesar).</li>
+<li>Dibujar el esquema en la pizarra: ingesta = recolectar + transportar
++ dejar listo.</li>
+<li>Justificar por qué importa con tres beneficios: <strong>evita
+decisiones a ciegas</strong>, <strong>ahorra trabajo manual</strong> y
+<strong>habilita</strong> el análisis y el aprendizaje automático.</li>
+<li>Dar un caso cotidiano: horas de copiar y pegar planillas que una
+ingesta automatizada reemplaza.</li>
+<li><strong>No olvidar:</strong> remarcar que la ingesta no decide ni
+interpreta; su valor es que los datos <em>lleguen</em> completos y a
+tiempo.</li>
+</ul>
+<h2 id="slide-5--extracción-y-carga">Slide 5 — Extracción y carga</h2>
+<ul>
+<li>Presentar <strong>extracción</strong> como tomar el dato de su
+origen (base de datos, archivo, formulario, API, sensor) y saber dónde
+está y cómo acceder.</li>
+<li>Presentar <strong>carga</strong> como llevar el dato a su destino
+(base central, almacén, archivo consolidado) sabiendo a dónde va y en
+qué formato queda.</li>
+<li>Escribir el recorrido en la pizarra: Fuente → extraer →
+(transformar) → cargar → Destino.</li>
+<li>Avisar que entre los extremos casi siempre hay una
+<strong>transformación</strong> (limpiar, renombrar, convertir formatos)
+que se verá más adelante en el módulo.</li>
+<li><strong>No olvidar:</strong> la frase que resume todo: <em>"extraer
+sin cargar es quedarse con el dato en la mano; cargar sin extraer no es
+posible"</em>.</li>
+</ul>
+<h2 id="slide-6--dos-formas-de-ingerir">Slide 6 — Dos formas de
+ingerir</h2>
+<ul>
+<li>Introducir que hay dos grandes modos: <strong>por lotes
+(batch)</strong> —acumular y mover en bloques, a intervalos— y
+<strong>en tiempo real (streaming)</strong> —mover cada dato en cuanto
+llega.</li>
+<li>Plantear la pregunta que decide todo: <strong>¿cuán frescos deben
+estar los datos?</strong> y <strong>¿cuánto cuesta mantenerlos
+así?</strong>.</li>
+<li>Anticipar que ninguna es mejor: la elección depende de la necesidad
+de frescura y del costo de operarla.</li>
+<li>Anunciar que vienen dos slides con cada modo y luego una comparación
+y una dinámica.</li>
+<li><strong>No olvidar:</strong> pedir al grupo que escuche pensando en
+sus propios casos; la dinámica los usará.</li>
+</ul>
+<h2 id="slide-7--ingesta-por-lotes">Slide 7 — Ingesta por lotes</h2>
+<ul>
+<li>Describir el batch: los datos se <strong>acumulan</strong> y se
+mueven <strong>juntos</strong>, a intervalos (cada hora, cada noche,
+cada mes).</li>
+<li>Destacar que es la forma <strong>más común y económica</strong>, y
+que <strong>tolera bien los errores</strong> porque el lote entero se
+puede reintentar.</li>
+<li>Nombrar su límite: hay un <strong>desfase</strong>; los datos no
+están al instante.</li>
+<li>Ilustrar con el ejemplo local: cada noche se consolida la
+recaudación del día; cada fin de mes se cierran los trámites.</li>
+<li><strong>No olvidar:</strong> subrayar que el batch es la base de
+casi toda la operación diaria de una institución pública.</li>
+</ul>
+<h2 id="slide-8--ingesta-en-tiempo-real">Slide 8 — Ingesta en tiempo
+real</h2>
+<ul>
+<li>Describir el streaming: cada dato se mueve <strong>en cuanto se
+genera</strong>, sin esperar a acumular.</li>
+<li>Explicar cuándo se usa: cuando la <strong>frescura importa</strong>
+y el volumen es continuo.</li>
+<li>Reconocer su costo: es <strong>más compleja y costosa</strong> de
+operar y mantener.</li>
+<li>Ilustrar con ejemplos: un tablero en vivo de reclamos, o lecturas de
+semáforos y medidores minuto a minuto.</li>
+<li><strong>No olvidar:</strong> aclarar que el streaming se reserva
+para lo que no puede esperar (alertas, monitoreo); no es la opción por
+defecto.</li>
+</ul>
+<h2 id="slide-9--batch-vs-streaming">Slide 9 — Batch vs streaming</h2>
+<ul>
+<li>Recorrer la tabla criterio por criterio, leyendo en voz alta las dos
+columnas: cuándo se mueve, frescura, costo, tolerancia a errores y uso
+típico.</li>
+<li>Detenerse en la <strong>frescura</strong>: horas o días en batch
+frente a segundos o menos en streaming.</li>
+<li>Traducir la tabla a una regla práctica: batch para reportes, cierres
+e históricos; streaming para alertas, tableros en vivo y sensores.</li>
+<li>Insistir en que no hay una "mejor": <strong>batch cubre casi todo;
+streaming se reserva para lo urgente</strong>.</li>
+<li><strong>No olvidar:</strong> cerrar el slide lanzando la dinámica de
+clasificación para que el grupo aplique la tabla.</li>
+</ul>
+<h2 id="slide-10--método-y-herramienta">Slide 10 — Método y
+herramienta</h2>
+<ul>
+<li>Separar las dos decisiones: el <strong>método</strong> responde
+<em>¿cómo y cuándo movemos los datos?</em> (batch o streaming); la
+<strong>herramienta</strong> responde <em>¿con qué lo hacemos?</em>
+(conectores, scripts, APIs).</li>
+<li>Enfatizar que se eligen <strong>por separado</strong>: primero se
+decide el método según la necesidad, después la herramienta según la
+fuente y el entorno.</li>
+<li>Aclarar que confundirlos es el error más común: "usar Python" no es
+un método, es una herramienta.</li>
+<li>Anunciar que el próximo bloque entra de lleno en las
+herramientas.</li>
+<li><strong>No olvidar:</strong> dejar escrito en la pizarra el par de
+preguntas "¿cómo y cuándo?" / "¿con qué?" para usarlo durante toda la
+práctica.</li>
+</ul>
+<h2 id="slide-11--herramientas-tres-familias">Slide 11 — Herramientas
+tres familias</h2>
+<ul>
+<li>Presentar las tres familias de un vistazo:
+<strong>conectores</strong> (piezas ya hechas), <strong>scripts</strong>
+(código propio) y <strong>APIs</strong> (puertas de acceso
+estandarizadas).</li>
+<li>Explicar cada una con su ejemplo: conector que lee una hoja de
+cálculo y la vuelca en el almacén; script en Python que abre un CSV y lo
+inserta en la base; API del registro civil o de clima que entrega datos
+en JSON.</li>
+<li>Señalar la ventaja y el límite de cada familia: el conector es
+rápido pero depende de que exista; el script da control total pero hay
+que mantenerlo; la API automatiza pero exige entender su contrato.</li>
+<li>Contar cómo evoluciona una institución: empieza con archivos y
+scripts, y suma conectores y APIs cuando la ingesta se vuelve repetida y
+crítica.</li>
+<li><strong>No olvidar:</strong> aclarar que estas tres familias sirven
+tanto para batch como para streaming; la herramienta no define el
+método.</li>
+</ul>
+<h2 id="slide-12--herramientas-comparadas">Slide 12 — Herramientas
+comparadas</h2>
+<ul>
+<li>Recorrer la tabla de las tres familias con las columnas qué es,
+cuándo usarla y si requiere programar.</li>
+<li>Remarcar que el <strong>conector</strong> es cuestión de
+configuración, el <strong>script</strong> exige programar y mantener, y
+la <strong>API</strong> requiere un poco de programación (llamadas) y
+entender endpoints, claves y límites.</li>
+<li>Dar la heurística de elección: fuente conocida y repetida →
+conector; caso a medida → script; el sistema ofrece API → úsala.</li>
+<li>Vincular con la práctica que viene: cada participante reconocerá qué
+familia usó.</li>
+<li><strong>No olvidar:</strong> repetir que la mayoría de las
+instituciones no necesita programar para empezar; con conectores y APIs
+sencillas ya se ingiere.</li>
+</ul>
+<h2 id="slide-13--práctica">Slide 13 — Práctica</h2>
+<ul>
+<li>Dar la consigna con los tres pasos: <strong>1) extrae</strong>
+(abrir el CSV o la API e identificar el formato), <strong>2)
+carga</strong> (llevar los datos a la herramienta del entorno y
+visualizarlos), <strong>3) registra</strong> (anotar qué método y qué
+herramienta se usó).</li>
+<li>Presentar las fuentes sugeridas: un CSV de trámites o recaudación,
+una API pública de clima o una hoja de cálculo compartida.</li>
+<li>Fijar el objetivo concreto: lograr una <strong>conexión
+exitosa</strong> y ver los datos en pantalla (filas y columnas, o
+respuesta JSON).</li>
+<li>Circular por los puestos para destrabar errores y verificar que
+todos logren ver el resultado.</li>
+<li><strong>No olvidar:</strong> al cerrar cada puesto, pedir que
+expliquen en voz alta qué método y qué herramienta usaron; esa
+explicación es la evidencia de aprendizaje.</li>
+</ul>
+<h2 id="slide-14--cierre">Slide 14 — Cierre</h2>
+<ul>
+<li>Sintetizar en tres frases: la ingesta es el <strong>puente</strong>
+entre fuentes y sistemas; el <strong>método</strong> es el cómo y
+cuándo; la <strong>herramienta</strong> es el con qué.</li>
+<li>Releer con el grupo, en voz alta, la regla final: batch para casi
+todo, streaming para lo urgente y continuo.</li>
+<li>Recuperar dos o tres respuestas del enganche inicial y mostrar cómo
+ahora se clasifican (batch o streaming) y con qué herramienta.</li>
+<li>Anticipar la próxima sesión: decisiones de diseño y patrones de
+implementación de <strong>pipelines de ingesta</strong>, con análisis de
+escenarios.</li>
+<li><strong>No olvidar:</strong> recordar la entrega: el resultado
+visible de la práctica con la explicación del método y la herramienta
+empleados.</li>
+</ul>
+<h2 id="slide-15--gracias">Slide 15 — Gracias</h2>
+<ul>
+<li>Agradecer la participación y el trabajo en la práctica.</li>
+<li>Abrir el espacio de preguntas y dudas, priorizando las anotadas
+durante la pausa.</li>
+<li>Reiterar que la próxima sesión trabaja los patrones de diseño e
+implementación de pipelines de ingesta.</li>
+<li>Dejar los canales de contacto y recordar dónde encontrar el material
+y la guía de la práctica.</li>
+<li><strong>No olvidar:</strong> despedirse confirmando día y hora de la
+próxima sesión.</li>
+</ul>
+  <footer class="docfoot">Generado desde <a href="notas-sesion-02.md"><code>notas-sesion-02.md</code></a> · Módulo 2 — Ingesta de Datos · IDT 601</footer>
+</div>
+</body>
+</html>

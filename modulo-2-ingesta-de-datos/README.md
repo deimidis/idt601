@@ -32,6 +32,7 @@ Materiales de la **Unidad/Bloque 2 — Ingesta de Datos** del módulo *Ingenier�
 
 ## Cómo se mantiene
 
+- Los **documentos** (planes, notas, talleres, guías, plantillas, insumos) tienen una versión de lectura `.html` con el diseño del sitio, generada con `./render-docs.sh` (`pandoc` + `assets/doc-template.html` + `assets/docs.css`). El `.md` sigue siendo la fuente: tras editarlo, volver a correr el script.
 - Esta carpeta es una **copia de trabajo** de los materiales de la raíz del proyecto. La raíz
   **no se actualiza sola**: si se cambia un material en la raíz, hay que volver a copiarlo aquí.
 - Las presentaciones reveal usan **reveal.js 6.0.1 vía CDN** y el tema local `assets/theme-egpp.css`.
