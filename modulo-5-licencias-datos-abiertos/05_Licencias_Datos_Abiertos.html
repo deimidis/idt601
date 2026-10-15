@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde 05_Licencias_Datos_Abiertos.md — no editar a mano. -->
+<title>Bloque 5 — Licencias de Datos y Datos Abiertos</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 5 — Licencias de Datos y Datos Abiertos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="bloque-5--licencias-de-datos-y-datos-abiertos">Bloque 5 —
+Licencias de Datos y Datos Abiertos</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601)
+<strong>Sesión:</strong> 7 · <strong>Carga:</strong> 3 teóricas (Plan de
+Clases) · dictado en una sesión de 3 h</p>
+<h2 id="de-qué-trata-este-bloque">¿De qué trata este bloque?</h2>
+<p>Los bloques anteriores enseñaron <strong>de dónde salen los
+datos</strong>, <strong>cómo se ingieren</strong>, <strong>cómo se
+arquitectura</strong> su almacenamiento y <strong>cómo se integran y
+automatizan</strong>. Todas esas son dimensiones técnicas. Este bloque
+agrega la dimensión <strong>legal y de gobernanza</strong>: no alcanza
+con tener los datos; hay que saber <strong>bajo qué condiciones</strong>
+se pueden usar, compartir y reutilizar.</p>
+<p>El bloque responde tres preguntas: <strong>¿qué es una licencia de
+datos?</strong>, <strong>¿qué es un dato abierto?</strong> y
+<strong>¿qué dice Bolivia al respecto?</strong>. Con ellas, cualquier
+persona puede decidir con criterio si un conjunto de datos puede
+reutilizarse y qué se debe publicar y qué no.</p>
+<h2 id="lectura">Lectura</h2>
+<h3 id="1-qué-es-una-licencia-de-datos">1. Qué es una licencia de
+datos</h3>
+<p>Una <strong>licencia</strong> es un permiso formal que establece los
+derechos y las obligaciones de quien usa un conjunto de datos. Su
+función central es <strong>dar certeza</strong>: al autor, qué protege;
+al usuario, qué puede hacer sin arriesgarse. Un conjunto de datos
+<strong>sin licencia</strong> es jurídicamente ambiguo: nadie sabe si
+puede copiarlo, mezclarlo o publicarlo.</p>
+<p>La licencia es el <strong>puente</strong> entre "tener datos" y "usar
+datos ajenos con seguridad". En el sector público, las licencias claras
+permiten que ciudadanía, empresas, periodistas y otras instituciones
+construyan sobre los datos del Estado. Ejemplo: un municipio publica su
+ejecución presupuestaria en un PDF <strong>sin</strong> nota de
+licencia; otra entidad no sabe si puede redistribuirla o armar un
+reporte con esos datos.</p>
+<h3 id="2-el-espectro-de-cerrado-a-abierto">2. El espectro: de cerrado a
+abierto</h3>
+<p>Las licencias se ordenan de <strong>más cerrado</strong> a
+<strong>más abierto</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Qué permite</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Todos los derechos reservados</td>
+<td>Nada, salvo permiso expreso</td>
+<td>Informe con "© todos los derechos reservados"</td>
+</tr>
+<tr>
+<td>Licencias con condiciones</td>
+<td>Usar bajo reglas (citar, no comercial)</td>
+<td>CC BY-NC</td>
+</tr>
+<tr>
+<td>Licencias abiertas</td>
+<td>Usar, reutilizar y redistribuir</td>
+<td>CC BY</td>
+</tr>
+<tr>
+<td>Dominio público</td>
+<td>Todo, sin condiciones</td>
+<td>CC0 / ODC PDDL</td>
+</tr>
+</tbody>
+</table>
+<p>Si no se elige ninguna licencia, por defecto se cae en "todos los
+derechos reservados". Abrir un dato es, entonces, una <strong>decisión
+deliberada</strong>, no un estado por defecto.</p>
+<h3
+id="3-las-licencias-abiertas-creative-commons-y-open-data-commons">3.
+Las licencias abiertas: Creative Commons y Open Data Commons</h3>
+<p><strong>Creative Commons (CC)</strong> nació para obras creativas y
+hoy se usa mucho en datos y documentos:</p>
+<ul>
+<li><strong>CC0</strong> — renuncia total de derechos; equivale al
+dominio público. "Se puede hacer cualquier cosa, sin pedir permiso ni
+citar."</li>
+<li><strong>CC BY</strong> — cualquier uso con la única condición de
+<strong>atribuir</strong>.</li>
+<li><strong>CC BY-SA</strong> (compartir igual) y <strong>CC
+BY-NC</strong> (no comercial) agregan condiciones y dejan de ser
+plenamente abiertas en sentido estricto.</li>
+</ul>
+<p><strong>Open Data Commons (ODC)</strong> está pensado específicamente
+para <strong>bases de datos</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Licencia</th>
+<th>Condición</th>
+<th>Equivalente CC</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ODC PDDL</td>
+<td>Dominio público, sin condiciones</td>
+<td>CC0</td>
+</tr>
+<tr>
+<td>ODC-By</td>
+<td>Atribución obligatoria</td>
+<td>CC BY</td>
+</tr>
+<tr>
+<td>ODbL</td>
+<td>Atribución + compartir igual</td>
+<td>CC BY-SA</td>
+</tr>
+</tbody>
+</table>
+<p>Para un conjunto de datos, ODC es técnicamente más adecuado que CC;
+para una obra creativa, CC.</p>
+<h3 id="4-la-definición-de-abierto-y-por-qué-gratis-no-es-abierto">4. La
+definición de "abierto" (y por qué gratis no es abierto)</h3>
+<p>Un dato es <strong>abierto</strong> si cualquiera puede
+<strong>usarlo, reutilizarlo y redistribuirlo</strong>. Las condiciones
+aceptadas son, a lo sumo, <strong>atribución</strong> y
+<strong>compartir igual</strong>. Restricciones como "solo uso no
+comercial" o "solo fines educativos" hacen que un dato <strong>deje de
+ser abierto</strong>.</p>
+<p>El malentendido más común: <strong>gratis ≠ abierto</strong>. Un dato
+puede verse sin costo y, a la vez, estar prohibido de redistribuir.
+"Abierto" es una condición jurídica precisa, no una sensación de
+disponibilidad en la web.</p>
+<h3 id="5-datos-abiertos-principios-y-beneficios">5. Datos abiertos:
+principios y beneficios</h3>
+<p>El movimiento de <strong>datos abiertos</strong> parte de una idea
+simple: los datos producidos con <strong>fondos públicos</strong> deben
+volver a la ciudadanía en formatos reutilizables. Sus principios:</p>
+<ol type="1">
+<li><strong>Abiertos por defecto</strong> — publicar salvo razón
+fundada.</li>
+<li><strong>Oportunos y completos</strong> — actualizados y sin recortes
+arbitrarios.</li>
+<li><strong>Accesibles y usables</strong> — formatos legibles por
+máquina (CSV, JSON), no solo PDF o imágenes.</li>
+<li><strong>Interoperables y comparables</strong> — estándares comunes
+para cruzar datos entre instituciones.</li>
+<li><strong>Para la mejora y la innovación</strong> — orientados a la
+reutilización.</li>
+</ol>
+<p><strong>Beneficios:</strong> transparencia (la ciudadanía verifica el
+uso de recursos), reutilización (otros construyen servicios), innovación
+(aplicaciones y emprendimientos) y control social (prensa y
+organizaciones vigilan la gestión). En Bolivia, los portales de
+referencia son <strong><code>datos.gob.bo</code></strong> y
+<strong><code>gob.bo</code></strong> (sección "Datos abiertos del
+Estado").</p>
+<p><strong>Un dato abierto real:</strong> la <em>Encuesta
+Final-Profesores de Inclusión Digital</em> de AGETIC (datos.gob.bo,
+2019) es un conjunto publicado bajo <strong>CC-BY</strong> que se usa
+como insumo del taller de la sesión 7. Su caso combina todas las ideas
+del bloque: licencia, atribución, reutilización y datos personales de
+los encuestados en un solo objeto.</p>
+<blockquote>
+<p>Fuente: AGETIC, <em>Encuesta Final-Profesores de Inclusión
+Digital</em>, Datos Abiertos Bolivia (datos.gob.bo, 2019). Licencia
+CC-BY.</p>
+</blockquote>
+<h3 id="6-límites-datos-abiertos-y-datos-personales">6. Límites: datos
+abiertos y datos personales</h3>
+<p><strong>Datos personales</strong> son los que identifican o hacen
+identificable a una persona (nombre, DNI, teléfono, domicilio, salud).
+La apertura <strong>nunca</strong> implica publicar datos personales: se
+aplican <strong>anonimización</strong> (quitar o alterar
+identificadores) y <strong>agregación</strong> (agrupar y resumir).</p>
+<p>La regla práctica es <strong>abrir el dato agregado, proteger el dato
+individual</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Escenario</th>
+<th>¿Publicar?</th>
+<th>Por qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cantidad de beneficiarios por municipio</td>
+<td>Sí</td>
+<td>Dato agregado; no identifica personas</td>
+</tr>
+<tr>
+<td>Listado de beneficiarios con DNI y domicilio</td>
+<td>No</td>
+<td>Dato personal identificable</td>
+</tr>
+<tr>
+<td>Presupuesto ejecutado por programa</td>
+<td>Sí</td>
+<td>Información pública de gestión</td>
+</tr>
+<tr>
+<td>Historia clínica individual</td>
+<td>No</td>
+<td>Dato sensible; requiere protección</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-el-marco-normativo-boliviano">7. El marco normativo
+boliviano</h3>
+<p>Se citan las normas por su número y objeto, sin inventar
+artículos:</p>
+<ul>
+<li><strong>Constitución Política del Estado (2009), art. 21.2</strong>
+— reconoce los derechos a la intimidad, privacidad, honor y propia
+imagen.</li>
+<li><strong>Constitución Política del Estado (2009), art.
+130–131</strong> — <strong>acción de protección de la
+privacidad</strong> (antes hábeas data): permite acceder, rectificar y
+eliminar datos de registros públicos o privados. Es la <strong>base
+constitucional de la protección de datos personales</strong> en
+Bolivia.</li>
+<li><strong>Ley N.º 164 (2011)</strong> — ley marco de
+telecomunicaciones y TIC; sienta las bases del gobierno
+electrónico.</li>
+<li><strong>D.S. 1793 (2013)</strong> — reglamenta el gobierno
+electrónico; impulsa el <strong>software libre</strong> y los
+<strong>estándares abiertos</strong>.</li>
+<li><strong>D.S. 2514 (2015)</strong> — crea la <strong>AGETIC</strong>,
+entidad rectora del gobierno electrónico.</li>
+<li><strong>D.S. 3251 (2017)</strong> — aprueba los planes de gobierno
+electrónico y de software libre y estándares abiertos.</li>
+<li><strong>D.S. 5340 (2025)</strong> — crea la plataforma
+<strong>gob.bo</strong>, administrada por AGETIC; uno de sus componentes
+es <strong>"Datos abiertos del Estado"</strong>.</li>
+<li><strong>D.S. 5468 (2025)</strong> — actualiza el Plan de
+Implementación de Gobierno Electrónico (vigencia hasta 2028) y mantiene
+el de Software Libre y Estándares Abiertos.</li>
+<li><strong>Lineamientos de Datos Abiertos de AGETIC</strong> — guías
+técnicas para publicar con estándares, metadatos y licencias.</li>
+<li><strong>LPG-Bolivia</strong> — Licencia Pública General de Bolivia,
+de <strong>software libre</strong> del Estado (aplica a software, no a
+datos).</li>
+</ul>
+<p><strong>Sobre la protección de datos personales:</strong> Bolivia
+<strong>no cuenta todavía con una ley integral</strong>. La protección
+vigente es <strong>constitucional</strong> (art. 21.2 y 130–131) y hay
+proyectos en trámite (un proyecto de ley de acceso a la información
+pública aprobado por el Senado en 2026 y remitido a Diputados, y un
+anteproyecto de datos personales de AGETIC).</p>
+<h2 id="ideas-clave">Ideas clave</h2>
+<ol type="1">
+<li>Una <strong>licencia</strong> es un permiso formal: sin licencia
+clara, los datos no se reutilizan con seguridad.</li>
+<li>Los datos <strong>abiertos</strong> son los que cualquiera puede
+usar, reutilizar y redistribuir.</li>
+<li><strong>Abierto no es "sin reglas"</strong>: a lo sumo se exige
+atribución y compartir igual; y "gratis ≠ abierto".</li>
+<li><strong>Datos abiertos ≠ datos personales</strong>: abrir lo
+agregado, proteger lo individual.</li>
+<li>Bolivia tiene <strong>marco normativo</strong> (CPE 130–131, Ley
+164, D.S. 1793/2514/3251/5340/5468, lineamientos de AGETIC y
+LPG-Bolivia) y su protección de datos personales está <strong>en
+desarrollo</strong>.</li>
+</ol>
+<h2 id="glosario">Glosario</h2>
+<table>
+<thead>
+<tr>
+<th>Término</th>
+<th>Definición breve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Licencia de datos</td>
+<td>Permiso formal sobre qué se puede hacer con un conjunto de
+datos.</td>
+</tr>
+<tr>
+<td>Licencia abierta</td>
+<td>Permite usar, reutilizar y redistribuir con pocas o ninguna
+condición.</td>
+</tr>
+<tr>
+<td>Dominio público</td>
+<td>Sin restricciones; el autor renuncia a los derechos.</td>
+</tr>
+<tr>
+<td>CC0 / ODC PDDL</td>
+<td>Renuncia total de derechos (dominio público).</td>
+</tr>
+<tr>
+<td>CC BY / ODC-By</td>
+<td>Cualquier uso con la condición de atribuir.</td>
+</tr>
+<tr>
+<td>Atribución</td>
+<td>Citar al autor o la fuente.</td>
+</tr>
+<tr>
+<td>Compartir igual</td>
+<td>Lo derivado conserva la misma licencia.</td>
+</tr>
+<tr>
+<td>Dato abierto</td>
+<td>Dato que cualquiera puede usar, reutilizar y redistribuir.</td>
+</tr>
+<tr>
+<td>Datos personales</td>
+<td>Los que identifican o hacen identificable a una persona.</td>
+</tr>
+<tr>
+<td>Anonimización / agregación</td>
+<td>Técnicas para publicar sin exponer individuos.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="para-repasar-autoevaluación">Para repasar (autoevaluación)</h2>
+<ol type="1">
+<li>¿Qué es una licencia de datos y por qué da certeza?</li>
+<li>¿Qué diferencia hay entre CC BY y CC BY-NC? ¿Cuál es abierta?</li>
+<li>¿Por qué "gratis" no es lo mismo que "abierto"?</li>
+<li>¿Qué base constitucional protege los datos personales en
+Bolivia?</li>
+</ol>
+<h2 id="referencias-recomendadas">Referencias recomendadas</h2>
+<ul>
+<li>Creative Commons: <a
+href="https://creativecommons.org/licenses/">https://creativecommons.org/licenses/</a>.</li>
+<li>Open Data Commons: <a
+href="https://opendatacommons.org/licenses/">https://opendatacommons.org/licenses/</a>.</li>
+<li>Open Definition (Open Knowledge): <a
+href="https://opendefinition.org/">https://opendefinition.org/</a>.</li>
+<li>AGETIC / Datos Abiertos Bolivia: <a
+href="https://www.gob.bo/">https://www.gob.bo/</a>.</li>
+</ul>
+<h2 id="presentación-del-bloque">Presentación del bloque</h2>
+<ul>
+<li><code>presentacion_sesion7.html</code> — presentación reveal del
+bloque.</li>
+<li><code>deck-sesion-07.html</code> — deck del participante (funciona
+sin internet).</li>
+</ul>
+  <footer class="docfoot">Generado desde <a href="05_Licencias_Datos_Abiertos.md"><code>05_Licencias_Datos_Abiertos.md</code></a> · Módulo 5 — Licencias de Datos y Datos Abiertos · IDT 601</footer>
+</div>
+</body>
+</html>

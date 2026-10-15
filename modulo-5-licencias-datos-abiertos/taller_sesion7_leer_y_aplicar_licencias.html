@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde taller_sesion7_leer_y_aplicar_licencias.md — no editar a mano. -->
+<title>Taller — Sesión 7: leer y aplicar una licencia</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 5 — Licencias de Datos y Datos Abiertos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="taller--sesión-7-leer-y-aplicar-una-licencia">Taller — Sesión 7:
+leer y aplicar una licencia</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601) · Bloque 5 —
+Licencias de Datos y Datos Abiertos <strong>Duración:</strong> 35 min de
+taller (5 de consigna + 20 de trabajo + 10 de puesta en común), dentro
+de la sesión de 3 horas <strong>Modalidad:</strong> 100 % en línea (Zoom
++ salas) · <strong>Modo A</strong> (equipos) o <strong>Modo B</strong>
+(demostración del docente) <strong>Herramienta:</strong> ninguna que
+instalar — lectura + documento compartido (Google Docs/Sheets o Word en
+línea). El entregable es la <strong>ficha de decisión</strong>.
+<strong>Insumos:</strong>
+<code>datos/encuesta_profesores_completo.csv</code> +
+<code>datos/diccionario_recorte.md</code> + <code>datos/FUENTE.md</code>
++ <code>datos/licencias/{CC0-1.0,CC-BY-4.0,ODC-By-1.0}.md</code></p>
+<hr />
+<h2 id="objetivo">Objetivo</h2>
+<p>Que cada equipo <strong>lea el texto de una licencia abierta</strong>
+y lo <strong>aplique a un conjunto de datos público real</strong>,
+decidiendo:</p>
+<ol type="1">
+<li><strong>Qué permite</strong> la licencia.</li>
+<li><strong>Qué condición</strong> exige.</li>
+<li><strong>Qué licencia</strong> le pondrían a <em>su</em> propio
+conjunto de datos y por qué.</li>
+<li><strong>Qué datos NO publicarían</strong> para proteger datos
+personales.</li>
+<li><strong>Cómo redactarían la atribución</strong> (crédito a la
+fuente).</li>
+</ol>
+<p>No se escribe código: se lee, se decide y se documenta en una
+ficha.</p>
+<h2 id="caso-institucional">Caso institucional</h2>
+<blockquote>
+<p><em>Una institución quiere publicar como <strong>datos
+abiertos</strong> una encuesta educativa que ya realizó. La encuesta
+existe, tiene miles de respuestas y está publicada por otra entidad bajo
+<strong>CC-BY</strong>. El equipo debe decidir qué licencia le pondría a
+su propia publicación y, sobre todo, <strong>qué datos no puede
+publicar</strong> para no exponer a las personas encuestadas.</em></p>
+</blockquote>
+<p><strong>Dataset de trabajo:</strong>
+<code>datos/encuesta_profesores_completo.csv</code> — dato abierto real
+de <strong>AGETIC</strong> (<em>Encuesta Final-Profesores de Inclusión
+Digital</em>, 2019), publicado bajo <strong>CC-BY</strong>.</p>
+<blockquote>
+<p><strong>Atribución:</strong> Fuente: AGETIC, <em>Encuesta
+Final-Profesores de Inclusión Digital</em>, Datos Abiertos Bolivia
+(datos.gob.bo, 2019). Licencia CC-BY.</p>
+</blockquote>
+<p><strong>Variantes por equipo</strong> (todos usan el mismo dataset;
+cambia el énfasis):</p>
+<ul>
+<li><strong>Énfasis A — Uso y reutilización:</strong> demostrar
+<strong>qué permite</strong> la licencia y cómo se puede reutilizar el
+dato.</li>
+<li><strong>Énfasis B — Atribución:</strong> enfocarse en <strong>cómo
+se cumple</strong> la condición de citar la fuente correctamente.</li>
+<li><strong>Énfasis C — Privacidad:</strong> decidir <strong>qué datos
+no se publicarían</strong> y con qué criterio (dato personal, sensible,
+agregación).</li>
+</ul>
+<h2 id="insumo-y-preparación-previa-el-día-anterior">Insumo y
+preparación previa (el día anterior)</h2>
+<ol type="1">
+<li>Subir a Moodle (o pegar en el chat) estos archivos:
+<code>datos/encuesta_profesores_completo.csv</code>,
+<code>datos/diccionario_recorte.md</code>, <code>datos/FUENTE.md</code>
+y los tres textos de <code>datos/licencias/</code>.</li>
+<li>Asignar a cada equipo una licencia (CC0, CC BY u ODC-By) y una
+variante (A/B/C).</li>
+<li>Tener preparada una <strong>ficha de decisión de ejemplo</strong>
+(para el Modo B) usando la licencia CC-BY del dataset.</li>
+<li>Tener listo un <strong>documento compartido o pizarra</strong> para
+pegar las fichas en la puesta en común.</li>
+</ol>
+<h2 id="reparto-del-tiempo-35-min-en-línea">Reparto del tiempo (35 min,
+en línea)</h2>
+<table>
+<thead>
+<tr>
+<th>Momento</th>
+<th>Tiempo</th>
+<th>Quién</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Consigna, conformación de equipos (3–4) y reparto de
+licencia/variante</td>
+<td>5 min</td>
+<td>Docente</td>
+</tr>
+<tr>
+<td><strong>Trabajo:</strong> leer la licencia y completar la ficha de
+decisión</td>
+<td>20 min</td>
+<td>Equipos</td>
+</tr>
+<tr>
+<td>Puesta en común y entrega</td>
+<td>10 min</td>
+<td>Todos</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="pasos-del-trabajo-20-min">Pasos del trabajo (20 min)</h2>
+<p><strong>Consigna:</strong> "Lean el texto de su licencia y completen
+la ficha de decisión. No se trata de memorizar: se trata de
+<strong>decidir</strong> y <strong>justificar</strong>."</p>
+<ol type="1">
+<li><strong>Leer la licencia asignada.</strong> Identifiquen su nombre y
+su enlace canónico.</li>
+<li><strong>Qué permite.</strong> En una frase: ¿se puede copiar,
+modificar, usar con fines comerciales, redistribuir?</li>
+<li><strong>Qué condición exige.</strong> ¿Ninguna? ¿Atribuir?
+¿Compartir igual? ¿Alguna restricción extra?</li>
+<li><strong>Qué licencia pondrían a su dataset.</strong> Con el dataset
+AGETIC en la mano, elijan una licencia y <strong>justifiquen</strong>
+por qué.</li>
+<li><strong>Qué NO publicarían.</strong> Revisen el diccionario
+(<code>diccionario_recorte.md</code>): ¿qué columnas podrían permitir
+reidentificar a una persona (por ejemplo, cruzar ciudad, edad y sexo)?
+¿Qué se debe publicar solo <strong>agregado</strong>?</li>
+<li><strong>Redactar la atribución.</strong> Escriban el crédito
+completo, listo para pegar.</li>
+</ol>
+<h2 id="plantilla-de-entrega">Plantilla de entrega</h2>
+<p>Completar <code>plantilla-ficha-decision.md</code> (o su copia en el
+documento compartido). Debe tener:</p>
+<ol type="1">
+<li><strong>Qué permite la licencia.</strong></li>
+<li><strong>Qué condición exige.</strong></li>
+<li><strong>Qué licencia le pondrían a su dataset y por
+qué.</strong></li>
+<li><strong>Qué datos NO publicarían</strong> (y con qué criterio).</li>
+<li><strong>Atribución lista para pegar.</strong></li>
+</ol>
+<h2 id="modo-a--trabajo-de-participantes-salas">Modo A — Trabajo de
+participantes (salas)</h2>
+<p><strong>Consigna (pegar en el chat):</strong> "Lean la licencia y
+completen la ficha de decisión. Entregan la ficha. Guarden el enlace con
+permiso de edición."</p>
+<ul>
+<li>Roles del equipo: <strong>coordinador</strong> (cuida el tiempo) y
+<strong>relator</strong> (comparte pantalla).</li>
+<li>Rol del docente: <strong>rotar por las salas cada 4–5 min</strong>,
+destrabar sobre todo la <strong>diferencia entre "gratis" y
+"abierto"</strong> y la <strong>identificación de datos
+personales</strong>.</li>
+</ul>
+<h2
+id="modo-b--demostración-del-docente-guion-para-compartir-pantalla-20-min">Modo
+B — Demostración del docente (guion para compartir pantalla, 20
+min)</h2>
+<p>Versión totalmente guiada. Los participantes siguen con la vista y
+anotan.</p>
+<ol type="1">
+<li><strong>Encuadre (2 min).</strong> "Vamos a leer una licencia real y
+decidir cómo publicar un dato público sin exponer a nadie."</li>
+<li><strong>Leer CC-BY (4 min).</strong> Mostrar el texto de
+<code>datos/licencias/CC-BY-4.0.md</code>: cualquier uso, con
+<strong>atribución</strong>.</li>
+<li><strong>Comparar (4 min).</strong> Mostrar CC0 (ninguna condición) y
+ODC-By (atribución, para bases de datos) y ubicarlas en el
+espectro.</li>
+<li><strong>Aplicar al dataset (5 min).</strong> Decidir la licencia del
+dataset AGETIC: <strong>CC BY</strong>, coherente con la fuente, y
+redactar la atribución.</li>
+<li><strong>Proteger (5 min).</strong> Revisar el diccionario y decidir
+qué publicar <strong>agregado</strong> y qué <strong>no</strong>
+publicar (ciudad + edad + sexo podrían reidentificar; se agrupan).</li>
+<li><strong>Cierre (2 min).</strong> Repetir: abrir el
+<strong>agregado</strong>, proteger el <strong>individual</strong>, y
+<strong>atribuir</strong> siempre.</li>
+</ol>
+<blockquote>
+<p><strong>Consejo de pantalla:</strong> hacerlo despacio, pensar en voz
+alta y mantener el texto de la licencia y el diccionario en ventanas al
+costado.</p>
+</blockquote>
+<h2 id="puesta-en-común-10-min">Puesta en común (10 min)</h2>
+<p>El <strong>relator</strong> de cada equipo comparte pantalla (2 min
+por equipo; con muchos equipos, solo <strong>un equipo por énfasis
+A/B/C</strong>). Cuenta:</p>
+<ul>
+<li><strong>Qué licencia eligió</strong> y por qué.</li>
+<li><strong>Qué dato decidió no publicar</strong> y con qué
+criterio.</li>
+</ul>
+<p>El docente contrasta las elecciones y refuerza las ideas fuerza:
+<em>sin licencia clara no hay reutilización segura; "gratis" no es
+"abierto"; y la apertura nunca expone datos personales.</em></p>
+<hr />
+<h2 id="evaluación-y-entrega">Evaluación y entrega</h2>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identifica qué permite la licencia</td>
+<td>Punto 1 de la ficha</td>
+</tr>
+<tr>
+<td>Identifica la condición</td>
+<td>Punto 2 de la ficha</td>
+</tr>
+<tr>
+<td>Elige una licencia y la justifica</td>
+<td>Punto 3, coherente con la fuente del dataset</td>
+</tr>
+<tr>
+<td>Aplica criterios de protección de datos personales</td>
+<td>Punto 4, con anonimización/agregación</td>
+</tr>
+<tr>
+<td>Redacta la atribución</td>
+<td>Punto 5, con la fuente AGETIC y la licencia CC-BY</td>
+</tr>
+<tr>
+<td>Coherencia con su énfasis</td>
+<td>La ficha responde a la variante A/B/C asignada</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Entrega por equipo:</strong> la <strong>ficha de
+decisión</strong> completada (o el enlace del documento). Se cierra
+<strong>dentro de la sesión</strong>.</p>
+<h2 id="guía-de-corrección--rúbrica-con-niveles">Guía de corrección /
+rúbrica con niveles</h2>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>A quién corresponde</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Insuficiente</strong></td>
+<td>No distingue "gratis" de "abierto"; no identifica la condición;
+publicaría datos personales.</td>
+</tr>
+<tr>
+<td><strong>Suficiente</strong></td>
+<td>Identifica qué permite la licencia y su condición, pero no justifica
+la elección ni protege datos personales.</td>
+</tr>
+<tr>
+<td><strong>Alto</strong></td>
+<td>Identifica permisos y condición, elige y justifica una licencia
+coherente, y decide qué no publicar con criterio de agregación.</td>
+</tr>
+<tr>
+<td><strong>Excelente</strong></td>
+<td>Todo lo anterior, más: redacta una atribución completa y correcta y
+justifica con el diccionario qué columnas podrían reidentificar a una
+persona.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Escala del módulo (Plan de Clases): 1–59 inicial · 60–69 muy parcial
+· 70–84 suficiente · 85–94 alto porcentaje · 95–100 logro total.</p>
+</blockquote>
+<h2 id="problemas-frecuentes-y-qué-hacer">Problemas frecuentes (y qué
+hacer)</h2>
+<table>
+<thead>
+<tr>
+<th>Síntoma</th>
+<th>Causa</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Está gratis, entonces es abierto"</td>
+<td>Se confunde precio con licencia</td>
+<td>Recordar: abierto exige permitir usar, reutilizar y redistribuir;
+"no comercial" no es abierto.</td>
+</tr>
+<tr>
+<td>Eligen CC BY-NC "porque es una institución pública"</td>
+<td>Creen que no comercial es más seguro</td>
+<td>Aclarar que NC deja de ser abierto; si el fin es abrir, usar CC
+BY.</td>
+</tr>
+<tr>
+<td>No atribuyen</td>
+<td>Creen que la fuente ya es conocida</td>
+<td>Revisar el punto 5: la atribución es obligatoria en CC BY y
+ODC-By.</td>
+</tr>
+<tr>
+<td>Publicarían microdatos "porque son anónimos"</td>
+<td>No ven la reidentificación</td>
+<td>Mostrar que cruzar ciudad + edad + sexo puede identificar a una
+persona; agregar.</td>
+</tr>
+<tr>
+<td>Confunden CC con ODC</td>
+<td>Nombres parecidos</td>
+<td>CC nació para obras; ODC para bases de datos; las condiciones se
+corresponden.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="plan-b-si-falla-la-conexión-o-el-acceso">Plan B (si falla la
+conexión o el acceso)</h2>
+<ul>
+<li><strong>Sin salas:</strong> cada equipo trabaja en un documento
+compartido coordinado por el chat.</li>
+<li><strong>Sin poder abrir los textos:</strong> el docente comparte
+pantalla con la licencia y el diccionario, y los equipos completan la
+ficha.</li>
+<li><strong>Sin audio:</strong> la consigna y la puesta en común se
+hacen por chat y pantalla compartida.</li>
+</ul>
+<hr />
+<h2 id="nota-para-el-docente">Nota para el docente</h2>
+<ul>
+<li>Este taller <strong>reemplaza</strong> el "Análisis guiado" de 15
+min del plan de la sesión 7, que era inviable con una actividad de
+análisis de datos personales.</li>
+<li>Usa un <strong>dato abierto real</strong> (AGETIC, CC-BY) como
+insumo: permite discutir licencia, atribución, reutilización y datos
+personales en un solo objeto.</li>
+<li>La <strong>solución modelo</strong> (respuestas por licencia, ficha
+resuelta y rúbrica) está en
+<code>guia-solucion-docente-sesion7.md</code>.</li>
+</ul>
+  <footer class="docfoot">Generado desde <a href="taller_sesion7_leer_y_aplicar_licencias.md"><code>taller_sesion7_leer_y_aplicar_licencias.md</code></a> · Módulo 5 — Licencias de Datos y Datos Abiertos · IDT 601</footer>
+</div>
+</body>
+</html>

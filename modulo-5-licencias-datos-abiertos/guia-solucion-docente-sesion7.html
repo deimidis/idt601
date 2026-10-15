@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde guia-solucion-docente-sesion7.md — no editar a mano. -->
+<title>Guía de solución del docente — Taller Sesión 7</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 5 — Licencias de Datos y Datos Abiertos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="guía-de-solución-del-docente--taller-sesión-7">Guía de solución
+del docente — Taller Sesión 7</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601) · Bloque 5 —
+Licencias de Datos y Datos Abiertos <strong>Taller:</strong>
+<code>taller_sesion7_leer_y_aplicar_licencias.md</code>
+<strong>Uso:</strong> respuestas modelo por licencia, ficha resuelta y
+rúbrica.</p>
+<hr />
+<h2 id="1-respuestas-por-licencia">1. Respuestas por licencia</h2>
+<table>
+<thead>
+<tr>
+<th>Licencia</th>
+<th>Qué permite</th>
+<th>Condición</th>
+<th>En una frase</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CC0 1.0</strong></td>
+<td>Copiar, modificar, distribuir y usar con fines comerciales.</td>
+<td><strong>Ninguna.</strong></td>
+<td>"Puedo hacer cualquier cosa, sin pedir permiso ni citar."</td>
+</tr>
+<tr>
+<td><strong>CC BY 4.0</strong></td>
+<td>Compartir y adaptar con cualquier propósito, incluso comercial.</td>
+<td><strong>Atribución.</strong></td>
+<td>"Cualquier uso, con una sola condición: atribuir."</td>
+</tr>
+<tr>
+<td><strong>ODC-By 1.0</strong></td>
+<td>Compartir, crear y adaptar la base de datos con cualquier
+propósito.</td>
+<td><strong>Atribución.</strong></td>
+<td>"Compartir y adaptar la base, con la condición de atribuir."</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Las tres son <strong>abiertas</strong>: permiten usar, reutilizar y
+redistribuir, y a lo sumo exigen atribución. Si el texto trajera "no
+comercial" (NC) o "solo educativo", <strong>dejaría de ser
+abierta</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="2-ficha-de-decisión--solución-modelo-dataset-agetic">2. Ficha de
+decisión — solución modelo (dataset AGETIC)</h2>
+<p><strong>Dataset:</strong>
+<code>datos/encuesta_profesores_completo.csv</code> — AGETIC,
+<em>Encuesta Final-Profesores de Inclusión Digital</em> (2019),
+publicado bajo <strong>CC-BY</strong>.</p>
+<p><strong>1. Qué permite la licencia (CC BY):</strong> compartir y
+adaptar el conjunto con cualquier propósito, incluso comercial.</p>
+<p><strong>2. Qué condición exige:</strong> <strong>atribución</strong>
+— dar crédito a AGETIC, indicar la licencia y si hubo cambios.</p>
+<p><strong>3. Qué licencia pondríamos a <em>nuestro</em> dataset y por
+qué:</strong> <strong>CC BY</strong> (o su equivalente
+<strong>ODC-By</strong> por tratarse de una base de datos). Es coherente
+con la fuente original, que ya es CC-BY, y habilita la reutilización
+exigiendo solo el crédito. CC0 también sería válido si se quiere
+renunciar a toda condición; <strong>CC BY-NC no</strong>, porque deja de
+ser abierto.</p>
+<p><strong>4. Qué datos NO publicaríamos:</strong> los que, combinados,
+permiten <strong>reidentificar</strong> a una persona.</p>
+<table>
+<thead>
+<tr>
+<th>Dato o columna</th>
+<th>¿Publicar?</th>
+<th>Por qué</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a3</code> departamento + <code>a2</code> edad +
+<code>a1</code> sexo (microdato por fila)</td>
+<td>No</td>
+<td>La combinación puede identificar a un docente concreto; se publica
+<strong>agregado</strong>.</td>
+</tr>
+<tr>
+<td>Cantidad de docentes por departamento (agregado)</td>
+<td>Sí</td>
+<td>Dato agregado; no identifica personas.</td>
+</tr>
+<tr>
+<td>Datos de contacto o de salud, si existieran</td>
+<td>No</td>
+<td>Dato personal / sensible.</td>
+</tr>
+<tr>
+<td>Respuestas abiertas que mencionen nombres</td>
+<td>No (o se anonimizan)</td>
+<td>Texto libre que puede contener datos personales.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>5. Atribución lista para pegar:</strong></p>
+<blockquote>
+<p>Fuente: AGETIC, <em>Encuesta Final-Profesores de Inclusión
+Digital</em>, Datos Abiertos Bolivia (datos.gob.bo, 2019). Licencia
+CC-BY.</p>
+</blockquote>
+<hr />
+<h2 id="3-errores-frecuentes-y-cómo-orientarlos">3. Errores frecuentes y
+cómo orientarlos</h2>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Cómo se detecta</th>
+<th>Cómo orientar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Confundir "gratis" con "abierto"</td>
+<td>Dicen "está en internet, es abierto"</td>
+<td>Abierto exige permitir usar, reutilizar y redistribuir; "no
+comercial" rompe la apertura.</td>
+</tr>
+<tr>
+<td>Elegir CC BY-NC "por seguridad"</td>
+<td>Eligen la variante no comercial</td>
+<td>Aclarar que NC deja de ser abierta; si el fin es abrir, usar CC
+BY.</td>
+</tr>
+<tr>
+<td>No atribuir</td>
+<td>No redactan el crédito</td>
+<td>La atribución es <strong>obligatoria</strong> en CC BY y ODC-By;
+recordar el punto 5.</td>
+</tr>
+<tr>
+<td>Publicar microdatos</td>
+<td>Publican fila por fila</td>
+<td>Mostrar la reidentificación (ciudad + edad + sexo); publicar
+<strong>agregado</strong>.</td>
+</tr>
+<tr>
+<td>Confundir CC con ODC</td>
+<td>Nombres parecidos</td>
+<td>CC nació para obras; ODC para bases de datos; condiciones
+equivalentes.</td>
+</tr>
+<tr>
+<td>"Bolivia tiene ley integral de datos"</td>
+<td>Afirmación incorrecta</td>
+<td>La protección es constitucional (CPE 21.2 y 130–131); la ley
+integral está en trámite.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-rúbrica-con-niveles">4. Rúbrica con niveles</h2>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Descriptor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Insuficiente (1–59)</strong></td>
+<td>No distingue "gratis" de "abierto"; no identifica la condición;
+publicaría datos personales.</td>
+</tr>
+<tr>
+<td><strong>Suficiente (70–84)</strong></td>
+<td>Identifica qué permite la licencia y su condición, pero no justifica
+la elección ni protege datos personales.</td>
+</tr>
+<tr>
+<td><strong>Alto (85–94)</strong></td>
+<td>Identifica permisos y condición, elige y justifica una licencia
+coherente con la fuente, y decide qué no publicar con criterio de
+agregación.</td>
+</tr>
+<tr>
+<td><strong>Excelente (95–100)</strong></td>
+<td>Todo lo anterior + atribución completa y correcta + justifica con el
+diccionario qué columnas podrían reidentificar a una persona.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Escala del módulo: 1–59 inicial · 60–69 muy parcial · 70–84
+suficiente · 85–94 alto porcentaje · 95–100 logro total esperado.</p>
+</blockquote>
+  <footer class="docfoot">Generado desde <a href="guia-solucion-docente-sesion7.md"><code>guia-solucion-docente-sesion7.md</code></a> · Módulo 5 — Licencias de Datos y Datos Abiertos · IDT 601</footer>
+</div>
+</body>
+</html>
