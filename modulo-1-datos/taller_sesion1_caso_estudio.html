@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde taller_sesion1_caso_estudio.md — no editar a mano. -->
+<title>Caso de estudio — Gobierno Autónomo Municipal de Río Verde</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 1 — Datos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="caso-de-estudio--gobierno-autónomo-municipal-de-río-verde">Caso
+de estudio — Gobierno Autónomo Municipal de Río Verde</h1>
+<p><strong>Dirección de Atención Ciudadana y Servicios</strong></p>
+<blockquote>
+<p>Material para el taller de la Sesión 1 (Bloque 1 — Datos), modalidad
+<strong>online</strong>. El caso es ficticio, pero representa
+situaciones típicas de la gestión pública.</p>
+</blockquote>
+<hr />
+<h2 id="cómo-se-trabaja-en-línea">Cómo se trabaja en línea</h2>
+<ul>
+<li>El docente comparte por el <strong>chat</strong> el enlace de este
+caso y de la <strong>planilla colaborativa</strong>.</li>
+<li>En <strong>salas de 3–4</strong>, cada equipo completa la planilla
+(una hoja por equipo).</li>
+<li>Cada equipo designa un <strong>coordinador</strong> y un
+<strong>relator</strong>; al final, el relator <strong>comparte
+pantalla</strong> en la puesta en común.</li>
+</ul>
+<hr />
+<h2 id="contexto">Contexto</h2>
+<p>El Gobierno Autónomo Municipal de Río Verde atiende a 180 000
+habitantes. Su <strong>Dirección de Atención Ciudadana</strong> recibe
+reclamos, otorga permisos y licencias, y coordina los servicios de
+alumbrado, agua y recaudación de impuestos. La dirección quiere mejorar
+la toma de decisiones, pero hoy no tiene claro <strong>qué datos maneja,
+de dónde salen ni qué tan buenos son</strong>.</p>
+<p>Te pidieron (como parte del equipo de datos) levantar un
+<strong>inventario de datos</strong> para orientar el trabajo
+futuro.</p>
+<hr />
+<h2 id="los-datos-que-maneja-la-dirección">Los datos que maneja la
+Dirección</h2>
+<p>Lee la lista y, para cada dato, identifica <strong>fuente</strong> y
+<strong>tipo</strong>. Luego completa la planilla de inventario.</p>
+<h3 id="1-reclamos-registrados-en-el-sistema-de-trámites">1. Reclamos
+registrados en el sistema de trámites</h3>
+<p>Cada reclamo se guarda en la base de datos interna con campos fijos:
+número de reclamo, DNI del ciudadano, zona, tipo de servicio, fecha y
+estado.</p>
+<h3 id="2-reclamos-recibidos-por-el-formulario-web">2. Reclamos
+recibidos por el formulario web</h3>
+<p>El portal recibe reclamos a través de un formulario en línea. Cada
+envío llega como un objeto JSON con etiquetas: tipo de reclamo, fecha,
+datos del ciudadano y un campo de descripción en texto libre.</p>
+<h3 id="3-comentarios-en-redes-sociales">3. Comentarios en redes
+sociales</h3>
+<p>Los ciudadanos publican reclamos y comentarios en la página de
+Facebook de la municipalidad. Son mensajes de texto libre, sin
+estructura fija, que se acumulan a diario.</p>
+<h3 id="4-registro-de-las-cámaras-de-tránsito">4. Registro de las
+cámaras de tránsito</h3>
+<p>Las cámaras instaladas en los principales cruces graban video de
+forma continua para monitorear el tránsito.</p>
+<h3 id="5-encuestas-de-satisfacción">5. Encuestas de satisfacción</h3>
+<p>Al cierre de cada trámite se envía una encuesta con preguntas de
+opción (calificación de 1 a 5) y un campo de comentario abierto.</p>
+<h3 id="6-lectura-de-medidores-de-agua">6. Lectura de medidores de
+agua</h3>
+<p>Cada medidor de agua envía una lectura numérica cada hora, registrada
+automáticamente en una tabla de la base de datos.</p>
+<h3 id="7-recaudación-diaria-de-impuestos">7. Recaudación diaria de
+impuestos</h3>
+<p>El área de recaudación exporta cada día un archivo CSV con el total
+recaudado por impuesto y por zona.</p>
+<h3 id="8-padrón-de-contribuyentes">8. Padrón de contribuyentes</h3>
+<p>La base de datos mantiene un padrón con los datos de los
+contribuyentes (nombre, dirección, actividad). Sin embargo, <strong>hace
+más de tres años que no se actualiza</strong>.</p>
+<h3 id="9-actas-escaneadas">9. Actas escaneadas</h3>
+<p>Los permisos y licencias aprobados en papel se escanean y se guardan
+como archivos PDF en una carpeta compartida.</p>
+<h3 id="10-registro-de-atenciones-en-papel">10. Registro de atenciones
+en papel</h3>
+<p>Algunas oficinas todavía anotan las atenciones diarias en cuadernos.
+Ese registro <strong>no está digitalizado</strong>.</p>
+<hr />
+<h2 id="preguntas-guía-para-la-discusión">Preguntas guía para la
+discusión</h2>
+<ol type="1">
+<li>¿Cuáles de estos datos son <strong>estructurados</strong>, cuáles
+<strong>semiestructurados</strong> y cuáles <strong>no
+estructurados</strong>?</li>
+<li>¿Qué datos combinan más de un tipo? (pista: mira la encuesta y el
+formulario web).</li>
+<li>¿Qué <strong>problemas de calidad</strong> detectas? ¿De
+completitud, exactitud o actualidad?</li>
+<li>¿Qué decisión de la Dirección podría mejorar si resolvieran esos
+problemas?</li>
+</ol>
+  <footer class="docfoot">Generado desde <a href="taller_sesion1_caso_estudio.md"><code>taller_sesion1_caso_estudio.md</code></a> · Módulo 1 — Datos · IDT 601</footer>
+</div>
+</body>
+</html>

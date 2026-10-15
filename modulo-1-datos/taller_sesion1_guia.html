@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde taller_sesion1_guia.md — no editar a mano. -->
+<title>Taller — Inventario de datos (online)</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 1 — Datos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="taller--inventario-de-datos-online">Taller — Inventario de datos
+(online)</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601) · Bloque 1 ·
+Sesión 1 <strong>Modalidad:</strong> online sincrónica —
+videoconferencia con salas de trabajo <strong>Duración:</strong> 30 min
+(dentro de la Sesión 1) <strong>Equipos:</strong> 3–4 personas por sala
+<strong>Planilla:</strong> colaborativa en línea (Google Sheets / Excel
+en línea)</p>
+<hr />
+<h2 id="objetivo">Objetivo</h2>
+<p>Levantar un <strong>inventario de datos</strong> de un caso
+institucional, identificando para cada dato su <strong>fuente</strong>,
+su <strong>tipo</strong> (estructurado, semiestructurado o no
+estructurado), su <strong>formato</strong>, su
+<strong>frecuencia</strong>, su <strong>responsable</strong> y las
+<strong>observaciones de calidad</strong> detectadas.</p>
+<h2 id="materiales">Materiales</h2>
+<ul>
+<li>Caso de estudio (<code>taller_sesion1_caso_estudio.md</code>): se
+comparte el texto o el enlace por el <strong>chat</strong> de la
+videoconferencia.</li>
+<li>Planilla colaborativa en línea, creada a partir de
+<code>taller_sesion1_inventario.csv</code> (una hoja por equipo, o una
+hoja con una columna de equipo).</li>
+<li>Pizarra digital colaborativa (Miro, Jamboard, etc.) —
+<strong>opcional</strong>, para la puesta en común.</li>
+<li>Un dispositivo con micrófono y, si es posible, cámara por
+persona.</li>
+</ul>
+<h2 id="preparación-antes-de-la-sesión">Preparación (antes de la
+sesión)</h2>
+<ol type="1">
+<li>Subí <code>taller_sesion1_inventario.csv</code> a una planilla en
+línea (Google Sheets / Excel en línea) y dejá el enlace con
+<strong>permiso de edición</strong> para quien lo tenga.</li>
+<li>Definí los equipos (3–4 personas) y creá una <strong>sala</strong>
+por equipo.</li>
+<li>Tené a mano los enlaces para pegar en el chat:
+<strong>caso</strong>, <strong>planilla</strong> y (opcional)
+<strong>pizarra</strong>.</li>
+</ol>
+<h2 id="pasos-del-taller-30-min">Pasos del taller (30 min)</h2>
+<h3 id="1-consigna-3-min">1. Consigna (3 min)</h3>
+<ul>
+<li>Pegá en el chat el enlace del <strong>caso</strong> y de la
+<strong>planilla</strong>.</li>
+<li>Explicá la consigna y el <strong>entregable</strong>: la planilla
+completada.</li>
+<li>Recordá los roles de cada equipo: <strong>coordinador</strong>
+(ordena el trabajo y cuida el tiempo) y <strong>relator</strong>
+(comparte pantalla en la puesta en común).</li>
+</ul>
+<h3 id="2-trabajo-en-salas-18-min">2. Trabajo en salas (18 min)</h3>
+<ol type="1">
+<li><strong>Leer el caso</strong> y detectar todos los datos que la
+institución maneja.</li>
+<li><strong>Por cada dato</strong>, completar una fila en la planilla
+con:
+<ul>
+<li><strong>Nombre del dato:</strong> qué dato es.</li>
+<li><strong>Fuente:</strong> de dónde proviene (sistema interno, web,
+sensores, redes sociales, encuesta, papel).</li>
+<li><strong>Tipo:</strong> estructurado, semiestructurado o no
+estructurado.</li>
+<li><strong>Formato:</strong> en qué se guarda (tabla/BD, CSV, JSON,
+imagen, PDF, video, texto).</li>
+<li><strong>Frecuencia:</strong> cada cuánto se genera o actualiza
+(diaria, mensual, continua, a demanda).</li>
+<li><strong>Responsable:</strong> qué área o persona lo produce o
+administra.</li>
+<li><strong>Observación de calidad:</strong> anotar si hay problemas de
+completitud, exactitud o actualidad.</li>
+</ul></li>
+<li><strong>Detectar al menos un problema de calidad</strong> por equipo
+y proponer una mejora concreta.</li>
+</ol>
+<blockquote>
+<p><strong>Ritmo sugerido:</strong> si el tiempo aprieta, completen
+primero 5–6 datos y prioricen detectar el problema de calidad.</p>
+</blockquote>
+<h3 id="3-puesta-en-común-9-min">3. Puesta en común (9 min)</h3>
+<ul>
+<li>El <strong>relator</strong> de cada equipo <strong>comparte
+pantalla</strong> con su planilla y cuenta: un dato <strong>bien
+inventariado</strong> y un <strong>problema de calidad</strong>
+detectado.</li>
+<li>El docente cierra reforzando los tres lentes: <strong>completitud,
+exactitud y actualidad</strong>.</li>
+</ul>
+<h2 id="rol-del-docente-durante-las-salas">Rol del docente durante las
+salas</h2>
+<ul>
+<li><strong>Rotar por las salas</strong> cada 4–5 minutos para destrabar
+dudas de clasificación.</li>
+<li>Avisar por el <strong>chat</strong> el tiempo restante (quedan 10',
+quedan 5').</li>
+<li>Si un equipo se queda sin audio, continuar por el
+<strong>chat</strong> de la sala.</li>
+</ul>
+<h2 id="estructura-de-la-planilla">Estructura de la planilla</h2>
+<p>La planilla (base <code>taller_sesion1_inventario.csv</code>) tiene
+estas columnas:</p>
+<table>
+<thead>
+<tr>
+<th>Columna</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>nombre_del_dato</code></td>
+<td>Identificador breve del dato</td>
+</tr>
+<tr>
+<td><code>fuente</code></td>
+<td>Origen del dato</td>
+</tr>
+<tr>
+<td><code>tipo</code></td>
+<td>estructurado / semiestructurado / no estructurado</td>
+</tr>
+<tr>
+<td><code>formato</code></td>
+<td>Tabla (BD), CSV, JSON, imagen, PDF, video, texto</td>
+</tr>
+<tr>
+<td><code>frecuencia</code></td>
+<td>diaria, semanal, mensual, continua, a demanda</td>
+</tr>
+<tr>
+<td><code>responsable</code></td>
+<td>Área o persona responsable</td>
+</tr>
+<tr>
+<td><code>observacion_calidad</code></td>
+<td>Problemas de completitud / exactitud / actualidad</td>
+</tr>
+</tbody>
+</table>
+<h2 id="entregable">Entregable</h2>
+<p>La planilla colaborativa completada por el equipo. Se entrega el
+<strong>enlace</strong> (con permiso de edición) o una
+<strong>exportación CSV</strong> subida al chat o a la tarea del aula
+virtual.</p>
+<p>Se valora que cada dato tenga <strong>todos los campos
+llenos</strong> y que las observaciones de calidad sean
+<strong>específicas</strong> (no genéricas).</p>
+<h2 id="guía-de-corrección--criterios-de-evaluación">Guía de corrección
+/ criterios de evaluación</h2>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insuficiente</td>
+<td>Planilla incompleta o con tipos mal clasificados.</td>
+</tr>
+<tr>
+<td>Suficiente</td>
+<td>La mayoría de los datos inventariados; tipos correctos.</td>
+</tr>
+<tr>
+<td>Alto</td>
+<td>Inventario completo, tipos y fuentes correctos, y al menos un
+problema de calidad bien identificado.</td>
+</tr>
+<tr>
+<td>Excelente</td>
+<td>Todo lo anterior, más una mejora concreta y realista para el
+problema de calidad.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Nota para el docente: el caso está diseñado para que aparezcan los
+tres tipos de datos y al menos dos problemas de calidad evidentes
+(padrón desactualizado y formulario con datos faltantes).</p>
+</blockquote>
+<h2 id="plan-b-si-falla-la-conexión">Plan B (si falla la conexión)</h2>
+<ul>
+<li><strong>Sin salas:</strong> cada equipo trabaja en un documento o
+pizarra compartida coordinado por el chat.</li>
+<li><strong>Sin planilla en línea:</strong> cada equipo completa un CSV
+local y lo comparte al final.</li>
+<li><strong>Sin audio:</strong> la consigna y la puesta en común se
+hacen por chat y pantalla compartida.</li>
+</ul>
+<hr />
+<h2 id="clave-de-respuestas-para-el-docente">Clave de respuestas (para
+el docente)</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Dato</th>
+<th>Fuente</th>
+<th>Tipo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Reclamos en sistema de trámites</td>
+<td>Sistema interno</td>
+<td>Estructurado</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Reclamos del formulario web</td>
+<td>Web y formularios</td>
+<td>Semiestructurado</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Comentarios en redes sociales</td>
+<td>Redes sociales</td>
+<td>No estructurado</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Registro de cámaras de tránsito</td>
+<td>Sensores y dispositivos</td>
+<td>No estructurado</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Encuestas de satisfacción</td>
+<td>Encuestas</td>
+<td>Semiestructurado (combina estructurado + no estructurado)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Lectura de medidores de agua</td>
+<td>Sensores y dispositivos</td>
+<td>Estructurado</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Recaudación diaria de impuestos</td>
+<td>Sistema interno</td>
+<td>Estructurado</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Padrón de contribuyentes</td>
+<td>Sistema interno</td>
+<td>Estructurado</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Actas escaneadas</td>
+<td>Papel digitalizado</td>
+<td>No estructurado</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Registro de atenciones en papel</td>
+<td>Papel</td>
+<td>No estructurado</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Problemas de calidad esperados:</strong></p>
+<ul>
+<li><strong>Actualidad:</strong> el padrón de contribuyentes sin
+actualizar en más de tres años (dato #8).</li>
+<li><strong>Completitud:</strong> el formulario web con descripciones
+vacías (dato #2) y los reclamos que a veces no registran la zona (dato
+#1).</li>
+<li><strong>Exactitud/completitud:</strong> el registro en papel no
+digitalizado (dato #10), donde la información puede perderse o
+transcribirse con errores.</li>
+</ul>
+<p><strong>Respuestas a las preguntas guía:</strong></p>
+<ol type="1">
+<li>Estructurados: #1, #6, #7, #8. Semiestructurados: #2, #5. No
+estructurados: #3, #4, #9, #10.</li>
+<li>Combinan tipos: #5 (opciones estructuradas + comentario no
+estructurado) y #2 (JSON semiestructurado + descripción en texto
+libre).</li>
+<li>Problemas de calidad: actualidad (#8), completitud (#1 y #2), y
+riesgo de exactitud por no digitalización (#10).</li>
+<li>Ejemplo de decisión: con un padrón actualizado y reclamos con zona,
+la Dirección podría decidir dónde reforzar cuadrillas o ventanillas
+según la demanda real.</li>
+</ol>
+  <footer class="docfoot">Generado desde <a href="taller_sesion1_guia.md"><code>taller_sesion1_guia.md</code></a> · Módulo 1 — Datos · IDT 601</footer>
+</div>
+</body>
+</html>

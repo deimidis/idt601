@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde Sesion_01_Datos_Fuentes_Tipos_Calidad.md — no editar a mano. -->
+<title>Sesión 1 — Datos: fuentes, tipos, importancia y calidad</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 1 — Datos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="sesión-1--datos-fuentes-tipos-importancia-y-calidad">Sesión 1 —
+Datos: fuentes, tipos, importancia y calidad</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601)
+<strong>Bloque:</strong> 1 — Datos <strong>Duración:</strong> 3 horas
+(180 min) — teóricas y prácticas <strong>Público:</strong> Profesionales
+no especializados en ingeniería de datos</p>
+<hr />
+<h2 id="objetivos-de-la-sesión">Objetivos de la sesión</h2>
+<ul>
+<li>Identificar de dónde provienen los datos (fuentes) y clasificarlos
+según su estructura.</li>
+<li>Distinguir datos estructurados, semiestructurados y no
+estructurados, y reconocer las implicaciones de cada tipo para su
+almacenamiento, procesamiento y análisis.</li>
+<li>Valorar por qué los datos son un activo estratégico para la gestión
+pública.</li>
+<li>Comprender las dimensiones básicas de la calidad de datos
+(completitud, exactitud y actualidad).</li>
+<li>Aplicar lo aprendido en un inventario breve de datos de un caso
+institucional.</li>
+</ul>
+<h2 id="ideas-clave-qué-debe-quedar-al-final">Ideas clave (qué debe
+quedar al final)</h2>
+<ol type="1">
+<li>Todo dato proviene de una <strong>fuente</strong>; conocer la fuente
+ayuda a anticipar su forma y su calidad.</li>
+<li>Los datos se clasifican por su <strong>estructura</strong>:
+estructurados (tablas), semiestructurados (JSON/XML) y no estructurados
+(texto libre, imagen, audio, video).</li>
+<li>El tipo de dato condiciona <strong>cómo se almacena, procesa y
+analiza</strong>: no todos los datos se tratan igual.</li>
+<li>Los datos <strong>no son un subproducto</strong>: son un insumo para
+describir, explicar y predecir, y sostienen decisiones sobre recursos y
+servicios.</li>
+<li>Un dato de mala calidad puede llevar a decisiones equivocadas; la
+calidad se mira con tres lentes: <strong>completitud, exactitud y
+actualidad</strong>.</li>
+<li>Antes de usar datos hay que <strong>saber qué se tiene</strong>: por
+eso se levanta un inventario.</li>
+</ol>
+<h2 id="cronograma-sugerido-180-min">Cronograma sugerido (180 min)</h2>
+<table>
+<thead>
+<tr>
+<th>Bloque</th>
+<th>Duración</th>
+<th>Qué ocurre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apertura y encuadre</td>
+<td>10 min</td>
+<td>Bienvenida, encuadre del módulo y las preguntas de la sesión.</td>
+</tr>
+<tr>
+<td>Fuentes de datos</td>
+<td>20 min</td>
+<td>Recorrido por los orígenes más comunes de los datos.</td>
+</tr>
+<tr>
+<td>Tipos de datos</td>
+<td>35 min</td>
+<td>Estructurados, semiestructurados y no estructurados.</td>
+</tr>
+<tr>
+<td>Implicaciones para el tratamiento</td>
+<td>20 min</td>
+<td>Qué significa cada tipo al almacenar, procesar y analizar.</td>
+</tr>
+<tr>
+<td>Pausa</td>
+<td>10 min</td>
+<td>Receso.</td>
+</tr>
+<tr>
+<td>Los datos como activo estratégico</td>
+<td>20 min</td>
+<td>Por qué los datos importan para decidir.</td>
+</tr>
+<tr>
+<td>Calidad de datos</td>
+<td>25 min</td>
+<td>Completitud, exactitud y actualidad.</td>
+</tr>
+<tr>
+<td>Taller relámpago: inventario de datos</td>
+<td>30 min</td>
+<td>Clasificar fuentes y tipos; detectar problemas de calidad.</td>
+</tr>
+<tr>
+<td>Cierre y preguntas</td>
+<td>10 min</td>
+<td>Síntesis, dudas y puente a la Sesión 2.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="apertura-y-encuadre-10-min">Apertura y encuadre (10 min)</h2>
+<ul>
+<li>Presentar brevemente el módulo (IDT 601) y ubicar el Bloque 1 —
+Datos como el punto de partida de todo el recorrido.</li>
+<li>Conectar con una idea simple: <em>"Para gestionar un servicio o para
+que un sistema aprenda, primero necesitamos datos. ¿De dónde salen, qué
+forma tienen y qué tan buenos son?"</em></li>
+<li>Presentar las cuatro preguntas que ordenan la sesión: <strong>¿de
+dónde provienen los datos?</strong>, <strong>¿qué forma
+tienen?</strong>, <strong>¿por qué valen?</strong> y <strong>¿qué tan
+buenos son?</strong></li>
+<li>Palabras clave que se usarán todo el día: <strong>fuente, formato,
+estructura, tabla, JSON, texto libre, calidad</strong>.</li>
+</ul>
+<blockquote>
+<p>Momento de enganche: preguntar al grupo <em>"¿qué datos genera su
+institución en un día normal?"</em> y anotar 4 o 5 ejemplos en una
+pizarra digital (o en el chat). Esos ejemplos se retoman en el taller
+final.</p>
+</blockquote>
+<hr />
+<h2 id="fuentes-de-datos-20-min">Fuentes de datos (20 min)</h2>
+<p>Explicar que toda información que registramos proviene de alguna
+parte. Presentar las fuentes más comunes, con ejemplos cercanos a la
+gestión pública boliviana:</p>
+<ol type="1">
+<li><strong>Sistemas internos</strong> — las aplicaciones y bases de
+datos propias de la institución (registro de trámites, nóminas,
+presupuesto, inventarios, padrón de contribuyentes). Suelen ser datos
+<strong>ordenados y confiables</strong>.</li>
+<li><strong>Web y formularios en línea</strong> — portales de servicios,
+formularios de contacto y reclamos. Pueden mezclar datos ordenados con
+texto libre.</li>
+<li><strong>Sensores y dispositivos</strong> — cámaras de tránsito,
+medidores de agua, GPS de patrullas o camiones, estaciones
+meteorológicas. Generan datos <strong>continuos y en gran
+volumen</strong>.</li>
+<li><strong>Redes sociales y medios</strong> — menciones, comentarios y
+publicaciones en las cuentas de la institución. Datos <strong>textuales,
+desordenados y cambiantes</strong>.</li>
+<li><strong>Encuestas y censos</strong> — respuestas estructuradas
+(opciones) y abiertas (opiniones). Combinan ambos mundos; por ejemplo,
+una encuesta de satisfacción al final de un trámite.</li>
+</ol>
+<p><strong>Idea para la pizarra digital:</strong></p>
+<ul>
+<li>Fuente = <strong>origen</strong> del dato.</li>
+<li>Cada fuente entrega datos con una <strong>forma</strong> y una
+<strong>calidad</strong> características.</li>
+</ul>
+<hr />
+<h2 id="tipos-de-datos-35-min">Tipos de datos (35 min)</h2>
+<h3 id="datos-estructurados">Datos estructurados</h3>
+<ul>
+<li>Organizados en <strong>tablas</strong> con filas y columnas bien
+definidas.</li>
+<li>Cada columna tiene un tipo fijo (número, fecha, texto corto,
+categoría).</li>
+<li>Se almacenan en <strong>bases de datos</strong> y hojas de
+cálculo.</li>
+<li><strong>Ejemplo:</strong> una tabla de ciudadanos atendidos (cédula
+de identidad, nombre, trámite, fecha, estado).</li>
+</ul>
+<h3 id="datos-semiestructurados">Datos semiestructurados</h3>
+<ul>
+<li>No viven en una tabla rígida, pero <strong>tienen una
+organización</strong> que se puede leer (etiquetas, pares
+clave-valor).</li>
+<li>Formatos típicos: <strong>JSON</strong> y <strong>XML</strong>.</li>
+<li><strong>Ejemplo:</strong> la respuesta de un formulario web o de una
+API:</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;tramite&quot;</span><span class="fu">:</span> <span class="st">&quot;reclamo&quot;</span><span class="fu">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;fecha&quot;</span><span class="fu">:</span> <span class="st">&quot;2026-08-25&quot;</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;ciudadano&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;nombre&quot;</span><span class="fu">:</span> <span class="st">&quot;Ana&quot;</span><span class="fu">,</span> <span class="dt">&quot;dni&quot;</span><span class="fu">:</span> <span class="st">&quot;1234567&quot;</span> <span class="fu">},</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;descripcion&quot;</span><span class="fu">:</span> <span class="st">&quot;El alumbrado de la calle 5 no funciona&quot;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<h3 id="datos-no-estructurados">Datos no estructurados</h3>
+<ul>
+<li>Sin una organización interna fija: <strong>texto libre, imágenes,
+audio, video</strong>.</li>
+<li>Son la mayoría de los datos del mundo y los más difíciles de
+procesar directamente.</li>
+<li><strong>Ejemplo:</strong> un correo de reclamo escrito en lenguaje
+natural, una foto del bache de una calle, una grabación de una audiencia
+o el video de una cámara de tránsito.</li>
+</ul>
+<h3 id="tabla-comparativa">Tabla comparativa</h3>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>¿Cómo se ve?</th>
+<th>Formato típico</th>
+<th>Almacenamiento</th>
+<th>Dificultad de procesar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Estructurado</td>
+<td>Tablas de filas y columnas</td>
+<td>BD, CSV, Excel</td>
+<td>Base de datos</td>
+<td>Baja</td>
+</tr>
+<tr>
+<td>Semiestructurado</td>
+<td>Etiquetas / clave-valor</td>
+<td>JSON, XML</td>
+<td>NoSQL, archivos</td>
+<td>Media</td>
+</tr>
+<tr>
+<td>No estructurado</td>
+<td>Texto, imagen, audio, video</td>
+<td>.txt, .jpg, .mp3</td>
+<td>Archivos, objetos</td>
+<td>Alta</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Idea para la pizarra digital:</strong> un mismo elemento
+puede contener <strong>varios tipos</strong>. Una encuesta de
+satisfacción combina opciones estructuradas (1 a 5) con un comentario no
+estructurado.</p>
+<hr />
+<h2 id="implicaciones-para-el-tratamiento-20-min">Implicaciones para el
+tratamiento (20 min)</h2>
+<p>Conectar cada tipo con lo que implica "tratarlo":</p>
+<ul>
+<li><strong>Estructurado:</strong> se consulta con fórmulas o lenguajes
+de consulta; es fácil de ordenar, filtrar y resumir. Queda listo para
+reportes y tableros.</li>
+<li><strong>Semiestructurado:</strong> hay que
+<strong>interpretar</strong> las etiquetas para extraer lo que importa;
+es flexible pero exige transformación.</li>
+<li><strong>No estructurado:</strong> requiere técnicas específicas
+(procesamiento de texto, visión por computadora, transcripción) antes de
+poder analizarlo.</li>
+</ul>
+<p><strong>Mensaje puente:</strong> <em>"No se trata de que un tipo sea
+mejor que otro. Se trata de saber qué tipo es para elegir la herramienta
+correcta. Después veremos por qué estos datos son un activo y cómo medir
+su calidad."</em></p>
+<hr />
+<h2 id="pausa-10-min">Pausa (10 min)</h2>
+<hr />
+<h2 id="los-datos-como-activo-estratégico-20-min">Los datos como activo
+estratégico (20 min)</h2>
+<ul>
+<li>Los datos permiten <strong>describir</strong> (¿qué pasó?),
+<strong>explicar</strong> (¿por qué pasó?) y <strong>predecir</strong>
+(¿qué pasará?).</li>
+<li>En la gestión pública, los datos sostienen decisiones sobre
+recursos, servicios y políticas públicas.</li>
+<li><strong>Ejemplo:</strong> saber cuántos trámites se atienden por día
+y en qué zonas permite decidir dónde abrir una ventanilla, reforzar
+personal o priorizar cuadrillas de alumbrado.</li>
+</ul>
+<p><strong>Idea para la pizarra digital:</strong></p>
+<ul>
+<li>Dato + contexto = <strong>información</strong>; información +
+decisión = <strong>valor</strong>.</li>
+</ul>
+<blockquote>
+<p>Momento de enganche: preguntar <em>"¿qué decisión de su institución
+mejoraría si tuviera mejores datos?"</em></p>
+</blockquote>
+<hr />
+<h2 id="calidad-de-datos-25-min">Calidad de datos (25 min)</h2>
+<p>Presentar las tres dimensiones básicas con ejemplos de gestión
+pública:</p>
+<ol type="1">
+<li><strong>Completitud</strong> — ¿faltan datos?
+<ul>
+<li><em>Ejemplo:</em> un formulario de reclamos donde el 40% no registra
+la zona. No podemos saber dónde concentrar la atención.</li>
+</ul></li>
+<li><strong>Exactitud</strong> — ¿los datos son correctos?
+<ul>
+<li><em>Ejemplo:</em> direcciones con errores de tipeo o cédulas mal
+cargadas. Se decide sobre datos errados.</li>
+</ul></li>
+<li><strong>Actualidad</strong> — ¿los datos están al día?
+<ul>
+<li><em>Ejemplo:</em> un padrón de contribuyentes sin actualizar en
+años. Se toman decisiones con una foto vieja.</li>
+</ul></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Dimensión</th>
+<th>Pregunta</th>
+<th>Riesgo si falla</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Completitud</td>
+<td>¿Faltan datos?</td>
+<td>No se puede focalizar ni comparar.</td>
+</tr>
+<tr>
+<td>Exactitud</td>
+<td>¿Los datos son correctos?</td>
+<td>Decisiones basadas en errores.</td>
+</tr>
+<tr>
+<td>Actualidad</td>
+<td>¿Están al día?</td>
+<td>Se decide con información vencida.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mensaje puente:</strong> <em>"Un dato incompleto, inexacto o
+desactualizado puede ser peor que no tener dato, porque da una falsa
+seguridad. En el taller vamos a mirar cada dato con estos tres
+lentes."</em></p>
+<hr />
+<h2 id="taller-relámpago-inventario-de-datos-30-min">Taller relámpago:
+inventario de datos (30 min)</h2>
+<p><strong>Objetivo:</strong> aplicar en un caso breve la clasificación
+de fuentes y tipos, y detectar problemas de calidad.</p>
+<p><strong>Caso sugerido:</strong> el Gobierno Autónomo Municipal de Río
+Verde y su Dirección de Atención Ciudadana (materiales
+<code>taller_sesion1_caso_estudio.md</code> y
+<code>taller_sesion1_inventario.csv</code>, usados aquí de forma
+abreviada).</p>
+<p><strong>Pasos:</strong></p>
+<ol type="1">
+<li>Conformar equipos de 3–4 personas.</li>
+<li>Leer el caso y detectar los datos que la institución maneja
+(reclamos del sistema, formulario web, comentarios en redes, cámaras de
+tránsito, encuestas, medidores de agua, recaudación, padrón de
+contribuyentes, actas escaneadas, registros en papel).</li>
+<li>Por cada dato, completar en la planilla: <strong>fuente</strong>,
+<strong>tipo</strong>, <strong>formato</strong> y
+<strong>frecuencia</strong>.</li>
+<li>Señalar al menos <strong>un problema de calidad</strong>
+(completitud, exactitud o actualidad) y proponer una mejora
+concreta.</li>
+</ol>
+<p><strong>Puesta en común (incluida en los 30 min):</strong> cada
+equipo comparte un dato bien inventariado y un problema de calidad
+detectado.</p>
+<p><strong>Rol del docente:</strong> rotar por las salas de trabajo para
+destrabar dudas de clasificación y orientar la reflexión sobre
+calidad.</p>
+<p><strong>Criterios de evaluación:</strong> tipos y fuentes bien
+clasificados, todos los campos de la planilla completos y observaciones
+de calidad específicas (no genéricas).</p>
+<hr />
+<h2 id="cierre-y-preguntas-10-min">Cierre y preguntas (10 min)</h2>
+<ul>
+<li>Síntesis con el grupo: releer en voz alta la tabla comparativa de
+los tres tipos y las tres dimensiones de calidad.</li>
+<li>Reforzar la idea central: <em>"Conocer la fuente, el tipo y la
+calidad es el primer paso para gestionar los datos."</em></li>
+<li>Anticipar la próxima sesión: <em>"La próxima vez empezamos a mover
+los datos: la ingesta (extraer y cargar información desde las fuentes) y
+los pipelines de datos."</em></li>
+<li>Espacio de preguntas y dudas.</li>
+</ul>
+<hr />
+<h2 id="recursos">Recursos</h2>
+<ul>
+<li>Presentación (láminas con fuentes, tipos, valor del dato y
+calidad).</li>
+<li>Pizarra digital colaborativa para el esquema de fuentes y
+tipos.</li>
+<li>Muestras de archivos para mostrar en vivo: un CSV, un JSON, una
+imagen y un texto libre.</li>
+<li>Caso de estudio (<code>taller_sesion1_caso_estudio.md</code>) y
+planilla de inventario (<code>taller_sesion1_inventario.csv</code>) para
+el taller relámpago.</li>
+<li>Guía de taller (<code>taller_sesion1_guia.md</code>) como apoyo del
+docente.</li>
+</ul>
+<h2 id="evaluación-de-la-sesión">Evaluación de la sesión</h2>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identifica las fuentes de origen de los datos</td>
+<td>Participación en el enganche y en el taller</td>
+</tr>
+<tr>
+<td>Clasifica correctamente los tipos de datos</td>
+<td>Respuestas en el taller y en la planilla</td>
+</tr>
+<tr>
+<td>Relaciona el tipo de dato con su tratamiento</td>
+<td>Aportes en el bloque de implicaciones</td>
+</tr>
+<tr>
+<td>Reconoce los datos como activo estratégico</td>
+<td>Participación en la discusión del bloque</td>
+</tr>
+<tr>
+<td>Detecta problemas de calidad (completitud, exactitud,
+actualidad)</td>
+<td>Observaciones de calidad y mejoras propuestas</td>
+</tr>
+<tr>
+<td>Usa la terminología adecuada</td>
+<td>Precisión de términos en la puesta en común</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Entrega:</strong> inventario breve del caso trabajado
+(planilla con fuente, tipo, formato, frecuencia y observación de
+calidad).</p>
+  <footer class="docfoot">Generado desde <a href="Sesion_01_Datos_Fuentes_Tipos_Calidad.md"><code>Sesion_01_Datos_Fuentes_Tipos_Calidad.md</code></a> · Módulo 1 — Datos · IDT 601</footer>
+</div>
+</body>
+</html>
