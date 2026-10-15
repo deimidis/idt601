@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 780" role="img" aria-labelledby="t d" font-family="'Segoe UI',Helvetica,Arial,sans-serif">
+  <title id="t">Esquema de la interfaz de Apache Airflow — vista Graph de un DAG</title>
+  <desc id="d">Vista Graph de un DAG de reclamos con tareas conectadas por flechas y coloreadas según su estado: verde éxito, azul en ejecución, rojo falló, gris en cola.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#90a4ae"/>
+    </marker>
+    <style>
+      .nav-txt { fill:#5f6368; font-size:18px; }
+      .nav-active { fill:#017cee; font-size:18px; font-weight:700; }
+      .logo { fill:#017cee; font-size:26px; font-weight:700; letter-spacing:.5px; }
+      .tab { fill:#5f6368; font-size:19px; }
+      .tab-active { fill:#017cee; font-size:19px; font-weight:700; }
+      .meta { fill:#5f6368; font-size:16px; }
+      .dag { fill:#202124; font-size:24px; font-weight:700; }
+      .task { fill:#ffffff; stroke-width:2.5; }
+      .task-label { font-size:18px; font-weight:600; }
+      .edge { stroke:#90a4ae; stroke-width:2.5; fill:none; marker-end:url(#arrow); }
+      .legend { font-size:15px; fill:#3c4043; }
+      .box { fill:#ffffff; stroke:#d0d7de; }
+      .box-txt { fill:#5f6368; font-size:16px; }
+    </style>
+  </defs>
+
+  <!-- Fondo -->
+  <rect x="0" y="0" width="1600" height="780" fill="#ffffff"/>
+
+  <!-- Barra superior -->
+  <rect x="0" y="0" width="1600" height="60" fill="#ffffff"/>
+  <line x1="0" y1="60" x2="1600" y2="60" stroke="#e3e6ea" stroke-width="1.5"/>
+  <path d="M40,30 m-9,0 a9,9 0 0 1 9,-9 a9,9 0 0 1 9,9 a9,9 0 0 1 -9,9 a9,9 0 0 1 -9,-9" fill="#017cee"/>
+  <text class="logo" x="60" y="38">Airflow</text>
+  <text class="nav-active" x="220" y="38">DAGs</text>
+  <text class="nav-txt" x="300" y="38">Datasets</text>
+  <text class="nav-txt" x="410" y="38">Browse</text>
+  <text class="nav-txt" x="505" y="38">Admin</text>
+  <text class="nav-txt" x="590" y="38">Docs</text>
+  <rect class="box" x="1360" y="16" width="200" height="30" rx="6"/>
+  <text class="box-txt" x="1374" y="36">Buscar…</text>
+
+  <!-- Cabecera del DAG -->
+  <rect x="0" y="60" width="1600" height="66" fill="#f8f9fa"/>
+  <line x1="0" y1="126" x2="1600" y2="126" stroke="#e3e6ea" stroke-width="1.5"/>
+  <text class="dag" x="40" y="100">reclamos_pipeline</text>
+  <text class="meta" x="40" y="120">Schedule: @daily · Última ejecución: 2026-10-10 06:00 (00:01:42)</text>
+  <text class="tab" x="1010" y="104">Grid</text>
+  <text class="tab-active" x="1090" y="104">Graph</text>
+  <line x1="1090" y1="112" x2="1158" y2="112" stroke="#017cee" stroke-width="3"/>
+  <text class="tab" x="1180" y="104">Calendar</text>
+  <text class="tab" x="1290" y="104">Code</text>
+  <text class="tab" x="1380" y="104">Details</text>
+
+  <!-- Área del grafo -->
+  <rect x="0" y="126" width="1600" height="654" fill="#fbfbfd"/>
+  <text class="meta" x="40" y="172">Vista Graph — cada caja es una tarea; las flechas, las dependencias</text>
+
+  <!-- Aristas -->
+  <path class="edge" d="M320,333 L360,333"/>
+  <path class="edge" d="M560,333 L600,333"/>
+  <path class="edge" d="M800,333 L840,213"/>
+  <path class="edge" d="M800,333 L840,453"/>
+  <path class="edge" d="M1040,213 L1080,213"/>
+  <path class="edge" d="M1180,246 L1180,420"/>
+  <path class="edge" d="M1040,453 L1080,453"/>
+
+  <!-- Tareas -->
+  <g>
+    <rect class="task" x="120" y="300" width="200" height="66" rx="8" fill="#e6f4ea" stroke="#34a853"/>
+    <text class="task-label" x="140" y="340" fill="#1e7e34">extraer_reclamos</text>
+
+    <rect class="task" x="360" y="300" width="200" height="66" rx="8" fill="#e6f4ea" stroke="#34a853"/>
+    <text class="task-label" x="380" y="340" fill="#1e7e34">limpiar_datos</text>
+
+    <rect class="task" x="600" y="300" width="200" height="66" rx="8" fill="#e6f4ea" stroke="#34a853"/>
+    <text class="task-label" x="620" y="340" fill="#1e7e34">combinar_zonas</text>
+
+    <rect class="task" x="840" y="180" width="200" height="66" rx="8" fill="#e8f0fe" stroke="#1a73e8"/>
+    <text class="task-label" x="860" y="220" fill="#1a73e8">cargar_almacen</text>
+
+    <rect class="task" x="840" y="420" width="200" height="66" rx="8" fill="#fce8e6" stroke="#d93025"/>
+    <text class="task-label" x="860" y="460" fill="#c5221f">detectar_alerta</text>
+
+    <rect class="task" x="1080" y="180" width="200" height="66" rx="8" fill="#f1f3f4" stroke="#9aa0a6"/>
+    <text class="task-label" x="1100" y="220" fill="#5f6368">calcular_reporte</text>
+
+    <rect class="task" x="1080" y="420" width="200" height="66" rx="8" fill="#fef7e0" stroke="#f9ab00"/>
+    <text class="task-label" x="1100" y="460" fill="#b06000">enviar_aviso</text>
+  </g>
+
+  <!-- Estado del run -->
+  <text class="meta" x="40" y="200">Run: manual · 2026-10-10 06:00</text>
+
+  <!-- Leyenda -->
+  <g transform="translate(40,700)">
+    <text class="legend" x="0" y="0" font-weight="700" fill="#202124">Estado de las tareas:</text>
+    <rect x="190" y="-13" width="22" height="18" rx="4" fill="#e6f4ea" stroke="#34a853" stroke-width="2"/>
+    <text class="legend" x="220" y="2">éxito</text>
+    <rect x="290" y="-13" width="22" height="18" rx="4" fill="#e8f0fe" stroke="#1a73e8" stroke-width="2"/>
+    <text class="legend" x="320" y="2">en ejecución</text>
+    <rect x="440" y="-13" width="22" height="18" rx="4" fill="#fce8e6" stroke="#d93025" stroke-width="2"/>
+    <text class="legend" x="470" y="2">falló</text>
+    <rect x="540" y="-13" width="22" height="18" rx="4" fill="#f1f3f4" stroke="#9aa0a6" stroke-width="2"/>
+    <text class="legend" x="570" y="2">en cola</text>
+    <rect x="650" y="-13" width="22" height="18" rx="4" fill="#fef7e0" stroke="#f9ab00" stroke-width="2"/>
+    <text class="legend" x="680" y="2">detenido por una tarea previa</text>
+  </g>
+</svg>

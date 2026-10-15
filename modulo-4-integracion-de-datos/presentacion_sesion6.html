@@ -295,6 +295,23 @@ Note:
 - Aclarar cuándo conviene: flujos con varias etapas dependientes que requieren monitoreo.
 - **No olvidar:** mencionar las alternativas (Dagster, Prefect, Luigi) y los programadores de nube (Azure Scheduler, Cloud Scheduler, EventBridge).
 
+
+---
+
+<div class="topline"><span class="kicker">11 / Orquestación</span><span class="mark">Interfaz</span></div>
+<div class="content single"><h2 class="slide-title">Airflow en pantalla: la vista Graph</h2>
+  <p class="body-copy">Cada caja es una tarea y las flechas marcan las dependencias. Los colores muestran el estado: verde (éxito), azul (en ejecución), rojo (falló) y gris (en cola).</p>
+  <img src="assets/airflow-ui.svg" alt="Esquema de la interfaz de Apache Airflow: vista Graph de un DAG de reclamos con tareas conectadas por flechas y coloreadas por estado." style="width:100%; margin-top:16px; border:1px solid #a9bebd; border-radius:6px;" />
+</div>
+<div class="footer"><span>Interfaz de Airflow</span><span>16</span></div>
+
+Note:
+- Mostrar la **vista Graph** de un DAG: cada caja es una tarea y las flechas, las dependencias.
+- Señalar los **colores de estado**: verde (éxito), azul (en ejecución), rojo (falló), gris (en cola) y ámbar (detenida por una tarea previa); la leyenda está abajo.
+- Explicar que esa vista es el "director de orquesta": de un vistazo se ve qué corrió, qué está corriendo y qué falló.
+- Relacionar con la **trazabilidad**: la interfaz es donde se consulta qué pasó en cada corrida.
+- **No olvidar:** es un **esquema** de la interfaz (no una captura); sirve para reconocer el aspecto real cuando lo vean.
+
 ---
 
 <div class="topline"><span class="kicker">11 / Orquestación</span><span class="mark">Cron y Airflow</span></div>
@@ -308,7 +325,7 @@ Note:
     </tbody>
   </table>
 </div>
-<div class="footer"><span>Herramientas de orquestación</span><span>16</span></div>
+<div class="footer"><span>Herramientas de orquestación</span><span>17</span></div>
 
 Note:
 - Recorrer la tabla criterio por criterio: complejidad, dependencias entre tareas y cuándo usarla.
@@ -328,7 +345,7 @@ Note:
   </div>
   <p class="body-copy">Variantes: <strong>A</strong> reporte mensual · <strong>B</strong> alerta temprana · <strong>C</strong> trazabilidad.</p>
 </div>
-<div class="footer"><span>Taller</span><span>17</span></div>
+<div class="footer"><span>Taller</span><span>18</span></div>
 
 Note:
 - Dar la consigna en dos partes: **limpiar y preparar** el CSV de reclamos (unificar canal, tipo y zona; quitar duplicados; marcar `SIN ZONA`; unificar fechas) y **diseñar el flujo que corre solo**.
@@ -348,7 +365,7 @@ Note:
   </div>
   <p class="quote">Próxima sesión: <em>licencias de datos y datos abiertos</em> — qué se puede usar y cómo se comparte.</p>
 </div>
-<div class="footer"><span>Fin de la sesión</span><span>18</span></div>
+<div class="footer"><span>Fin de la sesión</span><span>19</span></div>
 
 Note:
 - Sintetizar los tres pilares: **integrar** (ETL/ELT reúne los datos para que cuenten una sola historia), **limpiar** (corregir, unificar y combinar) y **orquestar** (que corra solo, en orden y con aviso).
@@ -366,7 +383,7 @@ Note:
   <p class="lead">Bloque 4 · Sesión 6 · Integración de datos</p>
   <p class="quote">Integrar, limpiar y hacer que corra solo, en orden y con aviso si falla.</p>
 </div>
-<div class="footer"><span>EGPP · Escuela de Gestión Pública Plurinacional</span><span>19</span></div>
+<div class="footer"><span>EGPP · Escuela de Gestión Pública Plurinacional</span><span>20</span></div>
 
 Note:
 - Agradecer la asistencia y la participación, en especial durante el taller.
