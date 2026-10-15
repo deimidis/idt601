@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde Sesion_05_Arquitectura_Patrones_Diseno.md — no editar a mano. -->
+<title>Sesión 5 — Arquitectura: patrones y diseño</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 3 — Arquitectura de Datos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="sesión-5--arquitectura-patrones-y-diseño">Sesión 5 —
+Arquitectura: patrones y diseño</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601)
+<strong>Bloque:</strong> 3 — Arquitectura de Datos
+<strong>Duración:</strong> 3 horas (180 min) — teóricas y prácticas
+<strong>Público:</strong> Profesionales no especializados en ingeniería
+de datos</p>
+<hr />
+<h2 id="objetivos-de-la-sesión">Objetivos de la sesión</h2>
+<ul>
+<li>Reconocer los patrones de arquitectura de datos más usados.</li>
+<li>Explicar las diferencias entre data warehouse, data lake, data
+lakehouse y lambda.</li>
+<li>Elegir, de forma fundamentada, un patrón para un caso concreto.</li>
+<li>Diseñar una arquitectura de datos paso a paso para un caso
+institucional.</li>
+<li>Producir y entregar un diseño de arquitectura documentado.</li>
+</ul>
+<h2 id="ideas-clave-qué-debe-quedar-al-final">Ideas clave (qué debe
+quedar al final)</h2>
+<ol type="1">
+<li>Un <strong>patrón de arquitectura</strong> es una forma típica y
+probada de organizar los datos para un propósito.</li>
+<li>El <strong>data warehouse</strong> organiza datos ya procesados y
+confiables para reportes; el <strong>data lake</strong> guarda datos
+crudos y diversos; el <strong>data lakehouse</strong> combina ambos; y
+<strong>lambda</strong> suma un camino por lotes y otro en tiempo
+real.</li>
+<li>No hay un patrón "mejor": la elección depende del <strong>caso, el
+volumen y la necesidad de tiempo real</strong>.</li>
+<li>Diseñar una arquitectura es seguir un <strong>proceso
+ordenado</strong>: entender el caso, mapear fuentes, definir
+componentes, elegir patrón y documentar.</li>
+<li>El diseño se hace <strong>antes</strong> de pensar en herramientas:
+primero el plano, después la tecnología.</li>
+<li>Un buen diseño responde siempre a tres preguntas:
+<strong>dónde</strong> se guarda, <strong>cómo</strong> se procesa y
+<strong>quién</strong> lo usa.</li>
+<li>Documentar el diseño (con catálogo y reglas) es tan importante como
+dibujar el flujo; el diseño entregado es la <strong>evidencia</strong>
+de haber integrado el bloque.</li>
+</ol>
+<h2 id="cronograma-sugerido-180-min">Cronograma sugerido (180 min)</h2>
+<table>
+<thead>
+<tr>
+<th>Bloque</th>
+<th>Duración</th>
+<th>Qué ocurre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apertura y encuadre</td>
+<td>10 min</td>
+<td>Bienvenida y repaso breve de la Sesión 4.</td>
+</tr>
+<tr>
+<td>Patrones de arquitectura</td>
+<td>35 min</td>
+<td>Data warehouse, data lake, data lakehouse y lambda.</td>
+</tr>
+<tr>
+<td>Comparativa de patrones</td>
+<td>10 min</td>
+<td>Lado a lado y criterios de elección.</td>
+</tr>
+<tr>
+<td>Pausa</td>
+<td>10 min</td>
+<td>Receso.</td>
+</tr>
+<tr>
+<td>Diseño paso a paso</td>
+<td>20 min</td>
+<td>El proceso de diseño y la plantilla.</td>
+</tr>
+<tr>
+<td>Taller: diseñar la arquitectura</td>
+<td>60 min</td>
+<td>Trabajo en equipos de 4 con la plantilla de diseño.</td>
+</tr>
+<tr>
+<td>Puesta en común</td>
+<td>25 min</td>
+<td>Cada énfasis expone su diseño; contraste de patrones.</td>
+</tr>
+<tr>
+<td>Cierre y preguntas</td>
+<td>10 min</td>
+<td>Síntesis, dudas y puente a la Sesión 6.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Ajuste de tiempos:</strong> "Diseño paso a paso" baja de 30 a
+20 min —los cinco pasos ya están en la plantilla del taller, que los
+vuelve a guiar— y esos 10 min pasan a la puesta en común, que es el
+tramo con más riesgo de desborde (ver abajo).</p>
+</blockquote>
+<blockquote>
+<p><strong>Trabajo asincrónico asociado</strong> (cuenta para las 20 h
+del contrato): asignar la lección interactiva
+<code>modulo-3-arquitectura-de-datos/lessons/0002-patrones-de-arquitectura.html</code>
+<strong>antes</strong> de esta sesión y
+<code>lessons/0003-diseno-de-arquitectura.html</code> <strong>al
+cierre</strong>. Son 10 ítems de quiz con corrección automática y
+explicación del "por qué", y dan evidencia de los objetivos que hoy solo
+se evalúan por participación.</p>
+</blockquote>
+<blockquote>
+<p><strong>Preparación previa (el día antes):</strong> subir a Moodle la
+guía del taller, la plantilla y la rúbrica; crear la hoja colaborativa
+con una pestaña por equipo; dejar listos los enlaces para pegar en el
+chat.</p>
+</blockquote>
+<hr />
+<h2 id="apertura-y-encuadre-10-min">Apertura y encuadre (10 min)</h2>
+<ul>
+<li>Recuperar la Sesión 4: <em>"Ya sabemos qué es una arquitectura y
+cuáles son sus piezas (almacenamiento, procesamiento, catálogo y
+gobernanza). Hoy vemos cómo se combinan en patrones probados y cómo se
+diseña una para un caso concreto."</em></li>
+<li>Presentar las dos preguntas que ordenan la sesión: <strong>¿qué
+patrones de arquitectura existen y cuándo usar cada uno?</strong> y
+<strong>¿cómo se diseña la arquitectura de un caso
+institucional?</strong></li>
+<li>Palabras clave: <strong>patrón, data warehouse, data lake, data
+lakehouse, lambda, lote, tiempo real, diseño, plantilla</strong>.</li>
+<li>Encuadrar la sesión como el <strong>cierre práctico del Bloque
+3</strong>: hoy se elige y se documenta.</li>
+</ul>
+<blockquote>
+<p>Momento de enganche: preguntar <em>"¿necesitan sus datos para
+reportes del mes pasado, para análisis en el momento, o para
+ambos?"</em> y anotar las respuestas en la pizarra. Esas respuestas
+anticipan el criterio de elección de patrón.</p>
+</blockquote>
+<hr />
+<h2 id="patrones-de-arquitectura-35-min">Patrones de arquitectura (35
+min)</h2>
+<p>Un <strong>patrón de arquitectura</strong> es una forma típica y
+probada de organizar los datos para un propósito. No se inventa cada
+vez: se elige entre soluciones conocidas. Veremos cuatro.</p>
+<h3 id="data-warehouse">Data warehouse</h3>
+<ul>
+<li>Almacena <strong>datos ya procesados, limpios y
+estructurados</strong>, listos para reportes y análisis.</li>
+<li>Responde preguntas del tipo <em>"¿cuánto recaudamos el trimestre
+pasado por departamento?"</em></li>
+<li>Características: <strong>esquema fijo</strong>, alta confiabilidad,
+optimizado para consultas.</li>
+</ul>
+<p><strong>Ejemplo:</strong> un almacén institucional que consolida la
+recaudación tributaria mensual, depurada y validada, para reportes de
+gestión.</p>
+<p><strong>A favor:</strong> datos confiables y consistentes. <strong>En
+contra:</strong> exige transformar los datos antes de guardarlos; poco
+flexible para datos nuevos o no estructurados.</p>
+<h3 id="data-lake">Data lake</h3>
+<ul>
+<li>Guarda <strong>datos en su forma cruda y original</strong>, de
+cualquier tipo y a gran escala.</li>
+<li>Responde a la necesidad de <em>"guardar todo lo que se genera,
+aunque aún no sepamos para qué lo usaremos."</em></li>
+<li>Características: <strong>esquema al leer</strong> (no se define al
+guardar), flexible, de bajo costo por volumen.</li>
+</ul>
+<p><strong>Ejemplo:</strong> un repositorio que acumula lecturas de
+medidores de agua, logs de sistemas y documentos escaneados sin
+procesar.</p>
+<p><strong>A favor:</strong> flexibilidad y capacidad para datos
+diversos. <strong>En contra:</strong> sin gobierno puede volverse un
+"pantano de datos" (data swamp) difícil de aprovechar.</p>
+<h3 id="data-lakehouse">Data lakehouse</h3>
+<ul>
+<li><strong>Combina</strong> la flexibilidad del lake con la estructura
+y el gobierno del warehouse.</li>
+<li>Permite guardar datos crudos <strong>y</strong> consultarlos con
+esquema, sobre un mismo repositorio.</li>
+<li>Responde a instituciones que quieren <strong>analizar sin perder el
+dato original</strong>.</li>
+</ul>
+<p><strong>Ejemplo:</strong> una institución que guarda datos crudos de
+trámites, les aplica esquema y gobierno, y sobre ellos genera reportes
+confiables.</p>
+<p><strong>A favor:</strong> un solo lugar para datos crudos y
+analíticos. <strong>En contra:</strong> requiere más herramientas y
+madurez de gobierno.</p>
+<h3 id="arquitectura-lambda">Arquitectura lambda</h3>
+<ul>
+<li>Combina <strong>dos caminos</strong>:
+<ol type="1">
+<li><strong>Capa batch (lotes):</strong> procesa la historia completa,
+con precisión, cada cierto tiempo.</li>
+<li><strong>Capa de velocidad (tiempo real):</strong> procesa lo que
+acaba de llegar, con menor precisión pero de inmediato.</li>
+</ol></li>
+<li>Responde a la necesidad de <strong>reportes confiables + alertas
+inmediatas</strong>.</li>
+</ul>
+<p><strong>Ejemplo:</strong> un sistema de tránsito que consolida los
+reportes históricos cada noche (batch) y al mismo tiempo alerta en
+tiempo real sobre un congestionamiento.</p>
+<p><strong>A favor:</strong> cubre ambos mundos. <strong>En
+contra:</strong> dos lógicas que mantener y a veces duplicar; mayor
+complejidad.</p>
+<hr />
+<h2 id="comparativa-de-patrones-10-min">Comparativa de patrones (10
+min)</h2>
+<table>
+<thead>
+<tr>
+<th>Patrón</th>
+<th>Qué guarda</th>
+<th>Foco principal</th>
+<th>Tiempo real</th>
+<th>Riesgo o costo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data warehouse</td>
+<td>Datos procesados y limpios</td>
+<td>Reportes confiables</td>
+<td>No</td>
+<td>Poco flexible ante datos nuevos.</td>
+</tr>
+<tr>
+<td>Data lake</td>
+<td>Datos crudos y diversos</td>
+<td>Guardar todo</td>
+<td>No</td>
+<td>Sin gobierno se vuelve un pantano de datos.</td>
+</tr>
+<tr>
+<td>Data lakehouse</td>
+<td>Crudo + esquema y gobierno</td>
+<td>Analizar ambos mundos</td>
+<td>Parcial</td>
+<td>Exige más herramientas y madurez.</td>
+</tr>
+<tr>
+<td>Lambda</td>
+<td>Batch + velocidad</td>
+<td>Reportes y alertas</td>
+<td>Sí</td>
+<td>Dos lógicas que mantener; mayor complejidad.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Idea para la pizarra:</strong> <em>"No hay un patrón mejor;
+hay un patrón adecuado para cada caso."</em> Los criterios de decisión
+son el <strong>caso</strong>, el <strong>volumen</strong>, la
+<strong>estructura del dato</strong> y la <strong>necesidad de tiempo
+real</strong>.</p>
+<hr />
+<h2 id="pausa-10-min">Pausa (10 min)</h2>
+<hr />
+<h2 id="diseño-paso-a-paso-20-min">Diseño paso a paso (20 min)</h2>
+<p>Presentar el diseño como una secuencia de pasos, con un ejemplo
+breve.</p>
+<h3 id="paso-1--entender-el-caso">Paso 1 — Entender el caso</h3>
+<ul>
+<li>¿Qué necesita la institución? ¿Qué preguntas debe responder con
+datos?</li>
+<li><strong>Ejemplo:</strong> <em>"reportar mensualmente el avance de
+los trámites de licencias."</em></li>
+</ul>
+<h3 id="paso-2--mapear-las-fuentes">Paso 2 — Mapear las fuentes</h3>
+<ul>
+<li>¿De dónde salen los datos? ¿Qué tipo son? (retomar la Sesión
+1.)</li>
+<li><strong>Ejemplo:</strong> sistema de trámites (tablas), formularios
+web (JSON), documentos escaneados.</li>
+</ul>
+<h3 id="paso-3--definir-los-componentes">Paso 3 — Definir los
+componentes</h3>
+<ul>
+<li>Almacenamiento, procesamiento, catálogo y gobernanza (retomar la
+Sesión 4).</li>
+<li><strong>Ejemplo:</strong> base operacional + data warehouse +
+proceso nocturno + diccionario de datos + política de acceso.</li>
+</ul>
+<h3 id="paso-4--elegir-el-patrón">Paso 4 — Elegir el patrón</h3>
+<ul>
+<li>Según el caso: warehouse, lake, lakehouse o lambda (retomar el
+bloque anterior).</li>
+<li><strong>Ejemplo:</strong> data warehouse para reportes mensuales
+confiables.</li>
+</ul>
+<h3 id="paso-5--documentar">Paso 5 — Documentar</h3>
+<ul>
+<li>Dibujar el flujo, nombrar cada componente y registrar las reglas de
+gobernanza.</li>
+</ul>
+<p><strong>Plantilla de diseño (para el taller):</strong></p>
+<table>
+<thead>
+<tr>
+<th>Sección</th>
+<th>Qué completar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Caso y objetivo</td>
+<td>Qué necesita la institución y qué pregunta responde</td>
+</tr>
+<tr>
+<td>Fuentes de datos</td>
+<td>De dónde salen los datos y su tipo</td>
+</tr>
+<tr>
+<td>Componentes</td>
+<td>Almacenamiento, procesamiento, catálogo, gobernanza</td>
+</tr>
+<tr>
+<td>Patrón elegido</td>
+<td>Cuál y por qué</td>
+</tr>
+<tr>
+<td>Diagrama de flujo</td>
+<td>Esquema desde la fuente hasta el uso</td>
+</tr>
+<tr>
+<td>Reglas de gobernanza</td>
+<td>Quién accede, calidad y seguridad</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Idea para la pizarra:</strong> <em>"El plano no es la
+casa."</em> Hoy dibujamos el plano; la tecnología vendrá después.</p>
+<hr />
+<h2
+id="taller-diseñar-la-arquitectura-60-min--25-de-puesta-en-común">Taller:
+diseñar la arquitectura (60 min + 25 de puesta en común)</h2>
+<p><strong>Objetivo:</strong> producir el diseño de arquitectura
+completo y documentado para el caso asignado.</p>
+<p><strong>Caso institucional (único para todos, o variantes por
+equipo):</strong> <em>"Una gobernación quiere mejorar la atención al
+ciudadano. Hoy los reclamos se registran en tres sistemas (ventanilla,
+teléfono y formulario web), las inspecciones se anotan en papel y los
+indicadores se arman a mano en Excel. Se necesita un reporte mensual
+confiable de reclamos atendidos y una alerta inmediata cuando un reclamo
+crítico se repite en la misma zona."</em></p>
+<blockquote>
+<p>Variante sugerida: asignar a cada equipo un énfasis (reportes
+mensuales, alerta inmediata o análisis histórico) para comparar
+elecciones de patrón.</p>
+</blockquote>
+<p><strong>Fuentes del caso (insumo para el Paso 2):</strong> entregar
+junto con el caso esta tabla, para que el mapeo de fuentes se haga sobre
+datos y no de memoria.</p>
+<table>
+<thead>
+<tr>
+<th>Fuente</th>
+<th>Qué registra</th>
+<th>Tipo de dato</th>
+<th>Formato</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sistema de ventanilla</td>
+<td>Reclamos presenciales, con número de expediente</td>
+<td>Estructurado</td>
+<td>Tablas de base de datos</td>
+</tr>
+<tr>
+<td>Sistema telefónico</td>
+<td>Reclamos y consultas por llamada</td>
+<td>Estructurado</td>
+<td>Tablas de base de datos</td>
+</tr>
+<tr>
+<td>Formulario web</td>
+<td>Reclamos con texto libre del ciudadano</td>
+<td>Semiestructurado</td>
+<td>JSON</td>
+</tr>
+<tr>
+<td>Inspecciones en papel</td>
+<td>Actas de inspección con observaciones manuscritas</td>
+<td>No estructurado</td>
+<td>Documentos escaneados</td>
+</tr>
+<tr>
+<td>Planilla de indicadores</td>
+<td>Indicadores armados a mano por el área</td>
+<td>Estructurado</td>
+<td>Excel</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Pasos del trabajo en equipos:</strong></p>
+<ol type="1">
+<li>Leer el caso y definir el objetivo (Paso 1).</li>
+<li>Listar las fuentes de datos y su tipo (Paso 2).</li>
+<li>Definir los cuatro componentes (Paso 3).</li>
+<li>Elegir y justificar el patrón (Paso 4).</li>
+<li>Dibujar el diagrama de flujo y completar la plantilla (Paso 5).</li>
+</ol>
+<p><strong>Rol del docente:</strong> circular entre los equipos,
+resolver dudas y recordar las tres preguntas (dónde, cómo, quién).
+Detectar bloqueos típicos:</p>
+<ul>
+<li>Confundir almacenamiento con procesamiento.</li>
+<li>Elegir patrón sin justificarlo en el caso.</li>
+<li>Olvidar catálogo y gobernanza (capas transversales).</li>
+</ul>
+<p><strong>Entregable por equipo:</strong> el diagrama + la plantilla
+completa + la justificación del patrón.</p>
+<p><strong>Organización de los equipos:</strong> equipos de <strong>4
+personas</strong>, con un coordinador y un relator.</p>
+<p><strong>Evaluación del taller:</strong> se aplica la <strong>rúbrica
+de 5 criterios con 3 anclajes</strong> (caso y fuentes · componentes ·
+patrón elegido · diagrama y gobernanza · coherencia interna) que está en
+la guía del taller y en
+<code>modulo-3-arquitectura-de-datos/REPASO_DOCENTE_BLOQUE3.md</code>
+§8.2. Compartirla con los equipos al dar la consigna, no al final.</p>
+<hr />
+<h2 id="puesta-en-común-25-min">Puesta en común (25 min)</h2>
+<ul>
+<li><strong>Reparto del tiempo:</strong> con 25 min, expone <strong>un
+equipo por énfasis</strong> (A reportes · B alerta · C histórico), 3–4
+min cada uno ≈ 12 min; quedan ~13 min para preguntas y contraste. Si hay
+más equipos, usar <em>lightning talks</em> de 2 min o <em>gallery
+walk</em> (todos publican el diagrama en el tablero compartido y se
+comenta en plenario).</li>
+<li>Cada equipo expone su diseño en 3–4 minutos: diagrama, componentes y
+patrón elegido.</li>
+<li>El docente y los demás equipos plantean preguntas: <em>¿por qué ese
+patrón? ¿cómo garantizan la calidad? ¿quién accede?</em></li>
+<li>Registrar las distintas elecciones de patrón en la pizarra para
+contrastar.</li>
+</ul>
+<p><strong>Guía de corrección:</strong> valorar la coherencia entre el
+caso, las fuentes, los componentes y el patrón, y la presencia de
+catálogo y gobernanza en el diseño. Aplicar la <strong>rúbrica de 3
+anclajes</strong> incluida en la guía del taller.</p>
+<p><strong>Criterios de evaluación:</strong> entrega del diseño
+completo, coherencia interna y justificación fundamentada.</p>
+<hr />
+<h2 id="cierre-y-preguntas-10-min">Cierre y preguntas (10 min)</h2>
+<ul>
+<li>Síntesis con el grupo: releer la tabla comparativa de patrones y la
+secuencia de diseño.</li>
+<li>Reforzar la idea central: <em>"No hay un patrón mejor; hay un patrón
+adecuado para cada caso, y el diseño se documenta."</em></li>
+<li>Anticipar la próxima sesión: <em>"La próxima vez integramos los
+datos: ETL/ELT, automatización y orquestación de flujos."</em></li>
+<li>Espacio de preguntas y dudas.</li>
+</ul>
+<hr />
+<h2 id="recursos">Recursos</h2>
+<ul>
+<li>Presentación (láminas de cada patrón, tabla comparativa y proceso de
+diseño).</li>
+<li>Guía del taller (caso institucional + insumo de fuentes + plantilla
+de diseño + <strong>rúbrica</strong>).</li>
+<li><strong>Hoja colaborativa en línea con una pestaña por
+equipo</strong> (Google Sheets o Docs) para la plantilla, y Google
+Drawings o Miro para el diagrama. En modalidad virtual esta es la vía
+por defecto; las plantillas impresas quedan como respaldo.</li>
+<li>Pizarra o pizarra digital para comparar patrones lado a lado.</li>
+<li>Lecciones interactivas <code>lessons/0002</code> (trabajo previo) y
+<code>lessons/0003</code> (cierre) para el trabajo asincrónico.</li>
+</ul>
+<h2 id="evaluación-de-la-sesión">Evaluación de la sesión</h2>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Describe cada patrón y sus diferencias</td>
+<td>Participación en los bloques teóricos</td>
+</tr>
+<tr>
+<td>Relaciona el patrón con el tipo de necesidad</td>
+<td>Aportes en el enganche y en cada patrón</td>
+</tr>
+<tr>
+<td>Elige un patrón para un caso dado</td>
+<td>Respuestas en la práctica grupal</td>
+</tr>
+<tr>
+<td>Fundamenta la elección y descarta alternativas</td>
+<td>Justificación en la puesta en común</td>
+</tr>
+<tr>
+<td>Sigue el proceso de diseño paso a paso</td>
+<td>Avance del trabajo en equipos</td>
+</tr>
+<tr>
+<td>Identifica fuentes, componentes y patrón</td>
+<td>Plantilla de diseño completada</td>
+</tr>
+<tr>
+<td>Incluye catálogo y gobernanza</td>
+<td>Diagrama y ficha de componentes</td>
+</tr>
+<tr>
+<td>Entrega un diseño completo y coherente</td>
+<td>Entrega final del diseño de arquitectura</td>
+</tr>
+<tr>
+<td>Reconoce los patrones y el proceso de diseño</td>
+<td>Resultado de las lecciones <code>0002</code> (previo) y
+<code>0003</code> (cierre)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Calificación del entregable:</strong> se aplica la rúbrica de
+5 criterios con 3 anclajes (guía del taller y
+<code>REPASO_DOCENTE_BLOQUE3.md</code> §8.2).</p>
+<p><strong>Entrega:</strong> diseño de arquitectura del caso trabajado
+(diagrama de flujo + plantilla completa + justificación del patrón
+elegido).</p>
+  <footer class="docfoot">Generado desde <a href="Sesion_05_Arquitectura_Patrones_Diseno.md"><code>Sesion_05_Arquitectura_Patrones_Diseno.md</code></a> · Módulo 3 — Arquitectura de Datos · IDT 601</footer>
+</div>
+</body>
+</html>

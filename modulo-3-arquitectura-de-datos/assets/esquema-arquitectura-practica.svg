@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1260 430" role="img" aria-label="Diagrama de flujo incompleto para practicar: fuentes (lecturas de medidores y logs de sistemas), almacenamiento operacional, procesamiento por lotes, un almacenamiento de análisis sin definir y el uso (reporte de consumo); catálogo de datos y gobernanza son capas transversales que atraviesan todo el flujo.">
+  <defs>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#507A6E" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1260" height="430" fill="#F5F3EB" />
+
+  <!-- Capas transversales -->
+  <rect x="0" y="0" width="1260" height="62" fill="#DABC6E" opacity="0.22" />
+  <text x="28" y="40" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#2A4D40">Catálogo de datos</text>
+  <text x="1232" y="40" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#3D6558">capa transversal · atraviesa todo el flujo</text>
+  <rect x="0" y="368" width="1260" height="62" fill="#DABC6E" opacity="0.22" />
+  <text x="28" y="408" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#2A4D40">Gobernanza</text>
+  <text x="1232" y="408" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#3D6558">capa transversal · atraviesa todo el flujo</text>
+
+  <!-- Encabezados de etapa -->
+  <g font-family="Helvetica, Arial, sans-serif" text-anchor="middle" fill="#2A4D40" font-size="20" font-weight="bold">
+    <text x="170" y="112">Fuentes</text>
+
+    <text x="400" y="104">Almacenamiento</text>
+    <text x="400" y="130">operacional</text>
+
+    <text x="630" y="112">Procesamiento</text>
+
+    <text x="860" y="104">Almacenamiento</text>
+    <text x="860" y="130">de análisis</text>
+
+    <text x="1090" y="112">Uso</text>
+  </g>
+
+  <!-- Fuentes (dos cajas) -->
+  <g font-family="Helvetica, Arial, sans-serif" text-anchor="middle">
+    <rect x="75" y="168" width="190" height="64" rx="8" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+    <text x="170" y="192" font-size="18" fill="#2A4D40">Lecturas de</text>
+    <text x="170" y="220" font-size="18" fill="#2A4D40">medidores</text>
+
+    <rect x="75" y="244" width="190" height="64" rx="8" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+    <text x="170" y="268" font-size="18" fill="#2A4D40">Logs de</text>
+    <text x="170" y="296" font-size="18" fill="#2A4D40">sistemas</text>
+  </g>
+
+  <!-- Etapas del flujo -->
+  <g font-family="Helvetica, Arial, sans-serif" text-anchor="middle">
+    <rect x="305" y="178" width="190" height="120" rx="8" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+    <text x="400" y="230" font-size="18" fill="#2A4D40">Base de medidores</text>
+    <text x="400" y="258" font-size="18" fill="#2A4D40">(registro diario)</text>
+
+    <rect x="535" y="178" width="190" height="120" rx="8" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+    <text x="630" y="230" font-size="18" fill="#2A4D40">Consolidación</text>
+    <text x="630" y="258" font-size="18" fill="#2A4D40">nocturna por lotes</text>
+
+    <rect x="765" y="178" width="190" height="120" rx="8" fill="#FFFFFF" stroke="#C9A84C" stroke-width="2" stroke-dasharray="8 6" />
+    <text x="860" y="245" font-size="19" font-style="italic" fill="#8A6A16">¿cuál falta?</text>
+
+    <rect x="995" y="178" width="190" height="120" rx="8" fill="#FFFFFF" stroke="#A9BEBD" stroke-width="2" />
+    <text x="1090" y="230" font-size="18" fill="#2A4D40">Reporte</text>
+    <text x="1090" y="258" font-size="18" fill="#2A4D40">de consumo</text>
+  </g>
+
+  <!-- Flechas -->
+  <g stroke="#507A6E" stroke-width="3" fill="none">
+    <path d="M265,200 C285,200 288,230 303,232" marker-end="url(#arw)" />
+    <path d="M265,276 C285,276 288,246 303,244" marker-end="url(#arw)" />
+    <path d="M495,238 L533,238" marker-end="url(#arw)" />
+    <path d="M725,238 L763,238" marker-end="url(#arw)" />
+    <path d="M955,238 L993,238" marker-end="url(#arw)" />
+  </g>
+</svg>

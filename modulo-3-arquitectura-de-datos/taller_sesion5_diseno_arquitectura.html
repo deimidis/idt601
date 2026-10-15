@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde taller_sesion5_diseno_arquitectura.md — no editar a mano. -->
+<title>Taller — Sesión 5: diseñar la arquitectura de un caso institucional</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 3 — Arquitectura de Datos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1
+id="taller--sesión-5-diseñar-la-arquitectura-de-un-caso-institucional">Taller
+— Sesión 5: diseñar la arquitectura de un caso institucional</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601) · Bloque 3 —
+Arquitectura de Datos <strong>Duración:</strong> 75 min de taller (10 de
+consigna + 50 de trabajo + 15 de puesta en común), dentro de la sesión
+de 3 horas <strong>Modalidad:</strong> presencial o en línea (salas)
+<strong>Materiales:</strong> esta guía, plantilla de diseño impresa o
+compartida, papelógrafos o pizarra digital</p>
+<hr />
+<h2 id="objetivo">Objetivo</h2>
+<p>Producir el <strong>diseño de arquitectura completo y
+documentado</strong> para el caso asignado: entender el caso, mapear
+fuentes, definir componentes, elegir y justificar el patrón, y dibujar y
+documentar el flujo con sus reglas de gobernanza.</p>
+<h2 id="caso-institucional">Caso institucional</h2>
+<blockquote>
+<p><em>Una gobernación quiere mejorar la atención al ciudadano. Hoy los
+reclamos se registran en tres sistemas (ventanilla, teléfono y
+formulario web), las inspecciones se anotan en papel y los indicadores
+se arman a mano en Excel. Se necesita un <strong>reporte mensual
+confiable</strong> de reclamos atendidos y una <strong>alerta
+inmediata</strong> cuando un reclamo crítico se repite en la misma
+zona.</em></p>
+</blockquote>
+<p><strong>Variantes por equipo</strong> (para comparar elecciones de
+patrón):</p>
+<ul>
+<li><strong>Énfasis A — reportes mensuales:</strong> prioriza datos
+limpios y confiables.</li>
+<li><strong>Énfasis B — alerta inmediata:</strong> prioriza frescura de
+los datos.</li>
+<li><strong>Énfasis C — análisis histórico:</strong> prioriza guardar
+todo para explorar después.</li>
+</ul>
+<h2 id="reparto-del-tiempo">Reparto del tiempo</h2>
+<table>
+<thead>
+<tr>
+<th>Momento</th>
+<th>Tiempo</th>
+<th>Quién</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apertura: consigna y conformación de equipos (4 personas)</td>
+<td>10 min</td>
+<td>Docente</td>
+</tr>
+<tr>
+<td>Trabajo en equipos con la plantilla</td>
+<td>50 min</td>
+<td>Equipos</td>
+</tr>
+<tr>
+<td>Puesta en común</td>
+<td>15 min</td>
+<td>Todos</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pasos-del-trabajo-en-equipos">Pasos del trabajo en equipos</h2>
+<ol type="1">
+<li><strong>Entender el caso.</strong> Definir el objetivo y las
+preguntas que la arquitectura debe responder.</li>
+<li><strong>Mapear las fuentes.</strong> Listar de dónde salen los datos
+y de qué tipo son (estructurado, semiestructurado, no
+estructurado).</li>
+<li><strong>Definir los componentes.</strong> Almacenamiento,
+procesamiento, catálogo y gobernanza (con atención a las capas
+transversales).</li>
+<li><strong>Elegir y justificar el patrón.</strong> Data warehouse, data
+lake, data lakehouse o lambda y por qué.</li>
+<li><strong>Dibujar y documentar.</strong> Trazar el diagrama de flujo
+de la fuente al uso y completar las reglas de gobernanza.</li>
+</ol>
+<h2 id="plantilla-de-diseño">Plantilla de diseño</h2>
+<table>
+<thead>
+<tr>
+<th>Sección</th>
+<th>Qué completar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Caso y objetivo</strong></td>
+<td>Qué necesita la institución y qué pregunta responde</td>
+</tr>
+<tr>
+<td><strong>Fuentes de datos</strong></td>
+<td>De dónde salen los datos y su tipo</td>
+</tr>
+<tr>
+<td><strong>Componentes</strong></td>
+<td>Almacenamiento, procesamiento, catálogo, gobernanza</td>
+</tr>
+<tr>
+<td><strong>Patrón elegido</strong></td>
+<td>Cuál y por qué (contrastar con al menos una alternativa
+descartada)</td>
+</tr>
+<tr>
+<td><strong>Diagrama de flujo</strong></td>
+<td>Esquema desde la fuente hasta el uso</td>
+</tr>
+<tr>
+<td><strong>Reglas de gobernanza</strong></td>
+<td>Quién accede, calidad y seguridad</td>
+</tr>
+</tbody>
+</table>
+<h2 id="puesta-en-común">Puesta en común</h2>
+<p>Cada equipo expone su diseño en <strong>3–4 minutos</strong>:
+diagrama, componentes y patrón elegido. El docente y los demás equipos
+preguntan: <em>¿por qué ese patrón? ¿cómo garantizan la calidad? ¿quién
+accede?</em>. Registrar en la pizarra las distintas elecciones de patrón
+para contrastarlas.</p>
+<h2 id="guía-de-corrección-y-bloqueos-típicos">Guía de corrección y
+bloqueos típicos</h2>
+<table>
+<thead>
+<tr>
+<th>Bloqueo</th>
+<th>Cómo se detecta</th>
+<th>Cómo orientar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Confunden almacenamiento con procesamiento</td>
+<td>"Guardamos y limpiamos" en la misma caja</td>
+<td>Separar dónde se guarda de lo que transforma.</td>
+</tr>
+<tr>
+<td>Eligen patrón sin justificarlo</td>
+<td>El patrón no se conecta con el caso</td>
+<td>Volver a las cuatro preguntas: uso, volumen, estructura, tiempo
+real.</td>
+</tr>
+<tr>
+<td>Olvidan catálogo y gobernanza</td>
+<td>No aparecen en el diagrama</td>
+<td>Recordar que son capas transversales obligatorias.</td>
+</tr>
+<tr>
+<td>Ignoran el tipo de dato</td>
+<td>Tratan igual el formulario web y las inspecciones en papel</td>
+<td>Retomar los tipos de datos (Bloque 1).</td>
+</tr>
+</tbody>
+</table>
+<h2 id="evaluación-y-entrega">Evaluación y entrega</h2>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Comprende el caso y define el objetivo</td>
+<td>Sección "Caso y objetivo" de la plantilla</td>
+</tr>
+<tr>
+<td>Mapea las fuentes y su tipo</td>
+<td>Sección "Fuentes de datos"</td>
+</tr>
+<tr>
+<td>Define los cuatro componentes</td>
+<td>Sección "Componentes"</td>
+</tr>
+<tr>
+<td>Elige y justifica el patrón</td>
+<td>Sección "Patrón elegido" + alternativa descartada</td>
+</tr>
+<tr>
+<td>Dibuja el flujo de la fuente al uso</td>
+<td>Diagrama</td>
+</tr>
+<tr>
+<td>Incluye catálogo y gobernanza</td>
+<td>Diagrama + "Reglas de gobernanza"</td>
+</tr>
+<tr>
+<td>Entrega un diseño coherente</td>
+<td>Conjunto de la plantilla</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Entrega por equipo:</strong> diagrama de flujo + plantilla
+completa + justificación del patrón elegido.</p>
+<h2 id="variante-en-línea">Variante en línea</h2>
+<p>Compartir la plantilla en una hoja colaborativa (Google Docs o
+Sheets). Cada equipo trabaja en su pestaña y dibuja el diagrama con una
+herramienta sencilla (Google Drawings, Miro o incluso una tabla). La
+puesta en común se hace proyectando cada diseño en la sala general.</p>
+  <footer class="docfoot">Generado desde <a href="taller_sesion5_diseno_arquitectura.md"><code>taller_sesion5_diseno_arquitectura.md</code></a> · Módulo 3 — Arquitectura de Datos · IDT 601</footer>
+</div>
+</body>
+</html>

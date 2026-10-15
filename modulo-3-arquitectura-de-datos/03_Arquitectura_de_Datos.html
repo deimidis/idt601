@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde 03_Arquitectura_de_Datos.md — no editar a mano. -->
+<title>Bloque 3 — Arquitectura de Datos</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 3 — Arquitectura de Datos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="bloque-3--arquitectura-de-datos">Bloque 3 — Arquitectura de
+Datos</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601)
+<strong>Sesiones:</strong> 4 y 5 · <strong>Carga del bloque:</strong> 8
+teóricas + 4 prácticas (Plan de Clases) · dictado en 2 sesiones de 3 h
+cada una</p>
+<hr />
+<h2 id="de-qué-trata-este-bloque">¿De qué trata este bloque?</h2>
+<p>Ya sabemos de dónde salen los datos, qué forma tienen y cómo llegan a
+la institución. Ahora llega la pregunta de fondo: <strong>¿cómo los
+organizamos para que toda la institución pueda usarlos con
+confianza?</strong> La respuesta es una <strong>arquitectura de
+datos</strong>.</p>
+<p>Una arquitectura de datos es el <strong>plano</strong> que define qué
+datos existen, dónde se guardan, cómo se mueven y quién los usa con qué
+reglas. Sin ese plano, cada área guarda "su" dato en "su" sistema:
+aparecen duplicados, versiones que no coinciden y reportes que nadie
+puede conciliar. Con un plano, la información se vuelve un activo
+compartido y confiable.</p>
+<p><strong>Cómo se reparte en dos sesiones de 3 horas (180 min cada
+una):</strong></p>
+<ul>
+<li><strong>Sesión 4</strong> — qué es una arquitectura de datos, por
+qué importa el diseño, sus cuatro componentes y el flujo entre ellos;
+una práctica de identificación de componentes.</li>
+<li><strong>Sesión 5</strong> — los patrones de arquitectura (data
+warehouse, data lake, data lakehouse y lambda), el proceso de diseño
+paso a paso y un taller de diseño con entrega.</li>
+</ul>
+<hr />
+<h2 id="lectura">Lectura</h2>
+<h3 id="1-qué-es-una-arquitectura-de-datos">1. ¿Qué es una arquitectura
+de datos?</h3>
+<p>La arquitectura de datos es el <strong>diseño global de cómo una
+organización guarda, mueve, procesa y gobierna sus datos</strong>. Es
+como el plano de una casa: antes de construir se define dónde van las
+habitaciones, las cañerías y las conexiones eléctricas. El plano no es
+la casa, pero determina cómo funcionará.</p>
+<p>Conviene una distinción clave: la arquitectura <strong>no es una
+herramienta ni un software</strong>. Es un <strong>conjunto de
+decisiones de diseño</strong> que antecede a la tecnología. Dos
+instituciones pueden usar el mismo sistema y tener arquitecturas muy
+distintas según cómo deciden organizar sus datos. Primero se decide el
+diseño; después se elige la tecnología.</p>
+<p>La arquitectura responde tres preguntas:</p>
+<ol type="1">
+<li><strong>¿Dónde</strong> vive cada dato? (almacenamiento)</li>
+<li><strong>¿Cómo</strong> se mueve y transforma? (procesamiento)</li>
+<li><strong>¿Quién</strong> puede usarlo y con qué reglas? (acceso y
+gobernanza)</li>
+</ol>
+<blockquote>
+<p>Idea para la pizarra: <strong>arquitectura de datos = el plano de la
+información institucional.</strong></p>
+</blockquote>
+<h3 id="2-por-qué-importa-el-diseño">2. Por qué importa el diseño</h3>
+<p>Diseñar no es un lujo técnico: es una decisión con consecuencias
+prácticas. Cuando no hay un plano compartido ocurren cuatro problemas
+típicos:</p>
+<ul>
+<li><strong>Silos de información</strong> — cada área guarda "su" dato y
+nadie ve el conjunto.</li>
+<li><strong>Duplicación y retrabajo</strong> — el mismo dato se captura
+varias veces, con valores distintos.</li>
+<li><strong>Desconfianza</strong> — cada reporte cuenta una historia
+distinta y se pierde credibilidad.</li>
+<li><strong>No poder crecer</strong> — sumar una fuente o un servicio
+obliga a reconstruir todo desde cero.</li>
+</ul>
+<p>Estos problemas se reconocen en síntomas cotidianos: el mismo padrón
+con valores distintos entre dos reparticiones, datos encerrados por
+área, reportes que se arman a mano durante días, migraciones traumáticas
+y reglas poco claras sobre quién es dueño del dato.</p>
+<p><strong>Mensaje puente:</strong> <em>diseñar es barato; reparar una
+arquitectura improvisada es caro.</em></p>
+<h3 id="3-los-cuatro-componentes">3. Los cuatro componentes</h3>
+<p>Toda arquitectura se arma con cuatro piezas, y cada una responde una
+pregunta distinta:</p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Pregunta que responde</th>
+<th>Ejemplo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Almacenamiento</strong></td>
+<td>¿Dónde vive el dato y en qué forma?</td>
+<td>Base de trámites + repositorio de escaneos</td>
+</tr>
+<tr>
+<td><strong>Procesamiento</strong></td>
+<td>¿Cómo se mueve y transforma?</td>
+<td>Consolidación nocturna de pagos</td>
+</tr>
+<tr>
+<td><strong>Catálogo</strong></td>
+<td>¿Qué datos existen y qué significan?</td>
+<td>Diccionario que define "DNI"</td>
+</tr>
+<tr>
+<td><strong>Gobernanza</strong></td>
+<td>¿Quién puede usarlo y con qué reglas?</td>
+<td>Solo Personal modifica el sueldo</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>El <strong>almacenamiento</strong> responde <em>dónde</em>: bases de
+datos, data warehouse, data lake, archivos; guarda datos estructurados y
+no estructurados.</li>
+<li>El <strong>procesamiento</strong> responde <em>cómo</em>: limpieza,
+unión y cálculo de indicadores, por lotes (batch) o en tiempo real
+(streaming).</li>
+<li>El <strong>catálogo</strong> responde <em>qué es</em>: documenta
+cada dato con sus <strong>metadatos</strong> (definición, formato, dueño
+y origen); su forma más conocida es el <strong>diccionario de
+datos</strong>.</li>
+<li>La <strong>gobernanza</strong> responde <em>quién y con qué
+reglas</em>: define dueños del dato y condiciones de calidad, seguridad,
+privacidad y acceso.</li>
+</ul>
+<h3 id="4-el-flujo-entre-componentes-y-las-capas-transversales">4. El
+flujo entre componentes y las capas transversales</h3>
+<p>Los componentes no actúan aislados: forman un <strong>flujo</strong>
+desde la fuente hasta el uso.</p>
+<pre><code>Fuente → Almacenamiento → Procesamiento → Almacenamiento de análisis → Uso</code></pre>
+<p>Los datos <strong>entran</strong> desde las fuentes (sistemas,
+formularios, sensores), se <strong>guardan</strong>, se
+<strong>transforman</strong> para unirlos y limpiarlos, y quedan
+<strong>disponibles</strong> para reportes y análisis.</p>
+<p>El catálogo y la gobernanza no son "una caja más" del flujo: son
+<strong>capas transversales</strong> que atraviesan todo el trayecto.
+Documentan y regulan la información de la fuente al uso. Es el error
+frecuente dibujarlos como un paso adicional.</p>
+<p>Para leer cualquier diagrama basta un procedimiento de cinco
+preguntas: ¿dónde <strong>nacen</strong> los datos?, ¿dónde se
+<strong>guardan</strong>?, ¿qué los <strong>transforma</strong>?, ¿dónde
+está su <strong>definición</strong>?, ¿quién controla el
+<strong>acceso</strong>?</p>
+<h3 id="5-los-patrones-warehouse-lake-lakehouse-y-lambda">5. Los
+patrones: warehouse, lake, lakehouse y lambda</h3>
+<p>Un <strong>patrón de arquitectura</strong> es una forma típica y
+probada de organizar los datos para un propósito. No hay que inventar de
+cero: se elige entre soluciones conocidas.</p>
+<ul>
+<li><strong>Data warehouse</strong> — almacena <strong>datos ya
+procesados, limpios y estructurados</strong>, listos para reportes.
+Esquema fijo, alta confiabilidad. A favor: datos confiables y
+consistentes. En contra: poco flexible ante datos nuevos o no
+estructurados.</li>
+<li><strong>Data lake</strong> — guarda <strong>datos crudos y
+diversos</strong>, de cualquier tipo y a gran escala. Esquema al leer. A
+favor: flexibilidad. En contra: sin gobierno se vuelve un "pantano de
+datos" (data swamp).</li>
+<li><strong>Data lakehouse</strong> — <strong>combina</strong> la
+flexibilidad del lake con la estructura y el gobierno del warehouse.
+Guarda crudo y permite consultarlo con esquema. A favor: un solo lugar
+para datos crudos y analíticos. En contra: exige más herramientas y
+madurez de gobierno.</li>
+<li><strong>Arquitectura lambda</strong> — combina <strong>dos
+caminos</strong>: una <strong>capa batch</strong> (procesa la historia
+completa, con precisión) y una <strong>capa de velocidad</strong>
+(procesa lo recién llegado, de inmediato). Ideal para reportes
+confiables <strong>y</strong> alertas inmediatas. En contra: dos lógicas
+que mantener.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Patrón</th>
+<th>Qué guarda</th>
+<th>Foco</th>
+<th>Tiempo real</th>
+<th>Riesgo o costo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data warehouse</td>
+<td>Datos procesados y limpios</td>
+<td>Reportes confiables</td>
+<td>No</td>
+<td>Poco flexible ante datos nuevos.</td>
+</tr>
+<tr>
+<td>Data lake</td>
+<td>Datos crudos y diversos</td>
+<td>Guardar todo</td>
+<td>No</td>
+<td>Sin gobierno, pantano de datos.</td>
+</tr>
+<tr>
+<td>Data lakehouse</td>
+<td>Crudo + esquema y gobierno</td>
+<td>Analizar ambos mundos</td>
+<td>Parcial</td>
+<td>Exige más herramientas y madurez.</td>
+</tr>
+<tr>
+<td>Lambda</td>
+<td>Batch + velocidad</td>
+<td>Reportes y alertas</td>
+<td>Sí</td>
+<td>Dos lógicas; mayor complejidad.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>No hay un patrón "mejor":</strong> la elección depende del
+<strong>caso</strong>, el <strong>volumen</strong>, la
+<strong>estructura del dato</strong> y la <strong>necesidad de tiempo
+real</strong>.</p>
+<h3 id="6-diseñar-una-arquitectura-paso-a-paso">6. Diseñar una
+arquitectura paso a paso</h3>
+<p>Diseñar una arquitectura sigue un proceso ordenado. Primero el plano;
+la tecnología viene después.</p>
+<ol type="1">
+<li><strong>Entender el caso</strong> — ¿qué necesita la institución y
+qué preguntas debe responder con datos?</li>
+<li><strong>Mapear las fuentes</strong> — ¿de dónde salen los datos y
+qué tipo son? (Bloque 1).</li>
+<li><strong>Definir los componentes</strong> — almacenamiento,
+procesamiento, catálogo y gobernanza (Sesión 4).</li>
+<li><strong>Elegir el patrón</strong> — warehouse, lake, lakehouse o
+lambda, según el caso.</li>
+<li><strong>Documentar</strong> — dibujar el flujo, nombrar cada
+componente y registrar las reglas de gobernanza.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Sección de la plantilla</th>
+<th>Qué completar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Caso y objetivo</td>
+<td>Qué necesita la institución y qué pregunta responde</td>
+</tr>
+<tr>
+<td>Fuentes de datos</td>
+<td>De dónde salen los datos y su tipo</td>
+</tr>
+<tr>
+<td>Componentes</td>
+<td>Almacenamiento, procesamiento, catálogo, gobernanza</td>
+</tr>
+<tr>
+<td>Patrón elegido</td>
+<td>Cuál y por qué</td>
+</tr>
+<tr>
+<td>Diagrama de flujo</td>
+<td>Esquema desde la fuente hasta el uso</td>
+</tr>
+<tr>
+<td>Reglas de gobernanza</td>
+<td>Quién accede, calidad y seguridad</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mensaje puente:</strong> <em>el plano no es la casa.</em> Hoy
+dibujamos el plano; la implementación tecnológica viene después.</p>
+<hr />
+<h2 id="ideas-clave">Ideas clave</h2>
+<ul>
+<li>La arquitectura de datos es el <strong>plano</strong> de cómo se
+guardan, procesan y gobiernan los datos; <strong>no es una
+herramienta</strong>.</li>
+<li>Importa porque evita <strong>silos, duplicación,
+desconfianza</strong> y la incapacidad de crecer.</li>
+<li>Sus componentes son <strong>almacenamiento, procesamiento, catálogo
+y gobernanza</strong>; catálogo y gobernanza son <strong>capas
+transversales</strong>.</li>
+<li>Los patrones comunes son <strong>data warehouse, data lake, data
+lakehouse y lambda</strong>.</li>
+<li>Elegir el patrón depende del <strong>caso, el volumen, la estructura
+del dato y el tiempo real</strong>.</li>
+<li>Diseñar es responder, en orden: <strong>qué datos → dónde se guardan
+→ cómo se procesan → quién los gobierna</strong>, y documentarlo.</li>
+</ul>
+<h2 id="glosario">Glosario</h2>
+<table>
+<thead>
+<tr>
+<th>Término</th>
+<th>Definición</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Arquitectura de datos</td>
+<td>Plano que define qué datos existen, dónde se guardan, cómo se mueven
+y quién los usa con qué reglas.</td>
+</tr>
+<tr>
+<td>Almacenamiento</td>
+<td>Dónde vive el dato y en qué forma.</td>
+</tr>
+<tr>
+<td>Procesamiento</td>
+<td>Cómo se mueven y transforman los datos.</td>
+</tr>
+<tr>
+<td>Catálogo de datos</td>
+<td>Inventario que documenta qué datos existen y qué significan.</td>
+</tr>
+<tr>
+<td>Metadatos</td>
+<td>Datos que describen a los datos (definición, formato, dueño,
+origen).</td>
+</tr>
+<tr>
+<td>Gobernanza de datos</td>
+<td>Reglas y responsables sobre calidad, acceso, seguridad y uso.</td>
+</tr>
+<tr>
+<td>Silo de datos</td>
+<td>Datos encerrados en un área o sistema que los demás no ven.</td>
+</tr>
+<tr>
+<td>Data warehouse</td>
+<td>Almacén de datos procesados y estructurados, listos para
+reportar.</td>
+</tr>
+<tr>
+<td>Data lake</td>
+<td>Repositorio de datos crudos y diversos, en cualquier formato.</td>
+</tr>
+<tr>
+<td>Data lakehouse</td>
+<td>Combinación de lake y warehouse: crudo + esquema y gobierno.</td>
+</tr>
+<tr>
+<td>Arquitectura lambda</td>
+<td>Patrón con dos caminos: capa batch y capa de velocidad.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="para-repasar-autoevaluación">Para repasar (autoevaluación)</h2>
+<ol type="1">
+<li>¿Por qué se dice que la arquitectura de datos es "el plano" y no "la
+herramienta"?</li>
+<li>Nombra y explica los cuatro componentes, y di qué pregunta responde
+cada uno.</li>
+<li>¿Cuál es la diferencia entre data warehouse y data lake? ¿Qué agrega
+el lakehouse?</li>
+<li>¿Qué patrón combina reportes confiables con alertas en tiempo real y
+a qué costo?</li>
+</ol>
+<h2 id="referencias-recomendadas">Referencias recomendadas</h2>
+<ul>
+<li>Martin Kleppmann, <em>Diseño de aplicaciones con uso intensivo en
+datos</em> (Marcombo, 2022). Arquitecturas de sistemas de datos,
+procesamiento por lotes y por flujos.</li>
+<li>Luis Joyanes Aguilar, <em>Ciencia de Datos: Un enfoque práctico</em>
+(Alfaomega, 2024). Data warehouse, data lake y data lakehouse.</li>
+<li>Josep Curto, <em>Fundamentos de big data</em> (FUOC/UOC, acceso
+abierto en línea). Arquitecturas y componentes.</li>
+</ul>
+<h2 id="presentaciones-del-bloque">Presentaciones del bloque</h2>
+<ul>
+<li>Sesión 4 — Arquitectura: conceptos y componentes:
+<code>presentacion_sesion4.html</code></li>
+<li>Sesión 5 — Arquitectura: patrones y diseño:
+<code>presentacion_sesion5.html</code></li>
+</ul>
+  <footer class="docfoot">Generado desde <a href="03_Arquitectura_de_Datos.md"><code>03_Arquitectura_de_Datos.md</code></a> · Módulo 3 — Arquitectura de Datos · IDT 601</footer>
+</div>
+</body>
+</html>

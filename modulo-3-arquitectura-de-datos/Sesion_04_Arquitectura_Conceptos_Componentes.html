@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde Sesion_04_Arquitectura_Conceptos_Componentes.md — no editar a mano. -->
+<title>Sesión 4 — Arquitectura de datos: conceptos y componentes</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 3 — Arquitectura de Datos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="sesión-4--arquitectura-de-datos-conceptos-y-componentes">Sesión
+4 — Arquitectura de datos: conceptos y componentes</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601)
+<strong>Bloque:</strong> 3 — Arquitectura de Datos
+<strong>Duración:</strong> 3 horas (180 min) — teóricas y prácticas
+<strong>Público:</strong> Profesionales no especializados en ingeniería
+de datos</p>
+<hr />
+<h2 id="objetivos-de-la-sesión">Objetivos de la sesión</h2>
+<ul>
+<li>Comprender qué es una arquitectura de datos, para qué sirve y por
+qué importa el diseño.</li>
+<li>Distinguir la arquitectura de datos de las herramientas concretas
+que la implementan.</li>
+<li>Reconocer los componentes principales de una arquitectura y la
+función de cada uno: almacenamiento, procesamiento, catálogo y
+gobernanza.</li>
+<li>Describir el flujo de los datos entre componentes, de la fuente al
+uso.</li>
+<li>Leer e identificar los componentes en un esquema sencillo de
+arquitectura.</li>
+</ul>
+<h2 id="ideas-clave-qué-debe-quedar-al-final">Ideas clave (qué debe
+quedar al final)</h2>
+<ol type="1">
+<li>La <strong>arquitectura de datos es el plano</strong> que define
+cómo los datos se almacenan, circulan y usan en una organización.</li>
+<li>No es una herramienta ni un software: es una <strong>decisión de
+diseño</strong> que antecede a la tecnología.</li>
+<li>El diseño importa porque <strong>decidir sin arquitectura</strong>
+produce silos, duplicación, desconfianza y poca capacidad de
+crecer.</li>
+<li>Toda arquitectura se compone de <strong>piezas con funciones
+distintas</strong>: el <strong>almacenamiento</strong> responde a dónde
+guardar; el <strong>procesamiento</strong>, a cómo mover y transformar;
+el <strong>catálogo</strong>, a qué datos existen y qué significan; la
+<strong>gobernanza</strong>, a quién y con qué reglas.</li>
+<li>Los componentes no son islas: forman un <strong>flujo</strong> desde
+la fuente hasta el uso, con el catálogo y la gobernanza como
+<strong>capas transversales</strong>.</li>
+<li>Saber nombrar cada componente permite <strong>leer cualquier
+diagrama</strong> de arquitectura y conectarlo con el diseño
+institucional.</li>
+</ol>
+<h2 id="cronograma-sugerido-180-min">Cronograma sugerido (180 min)</h2>
+<table>
+<thead>
+<tr>
+<th>Bloque</th>
+<th>Duración</th>
+<th>Qué ocurre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apertura y encuadre</td>
+<td>10 min</td>
+<td>Bienvenida, ubicación del Bloque 3 y pregunta central.</td>
+</tr>
+<tr>
+<td>¿Qué es una arquitectura de datos?</td>
+<td>25 min</td>
+<td>Definición, analogía del plano y límites del concepto.</td>
+</tr>
+<tr>
+<td>Por qué importa el diseño</td>
+<td>20 min</td>
+<td>Consecuencias de diseñar (o no) la arquitectura.</td>
+</tr>
+<tr>
+<td>Pausa</td>
+<td>10 min</td>
+<td>Receso.</td>
+</tr>
+<tr>
+<td>Los cuatro componentes</td>
+<td>30 min</td>
+<td>Almacenamiento, procesamiento, catálogo y gobernanza.</td>
+</tr>
+<tr>
+<td>El flujo entre componentes y lectura de diagramas</td>
+<td>25 min</td>
+<td>Cómo se conectan las piezas y cómo leer un esquema.</td>
+</tr>
+<tr>
+<td>Práctica: identificar componentes</td>
+<td>50 min</td>
+<td>Actividad grupal con un esquema sin etiquetas.</td>
+</tr>
+<tr>
+<td>Cierre y preguntas</td>
+<td>10 min</td>
+<td>Síntesis, dudas y puente a la Sesión 5.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="apertura-y-encuadre-10-min">Apertura y encuadre (10 min)</h2>
+<ul>
+<li>Presentar el <strong>Bloque 3 — Arquitectura de Datos</strong> y
+ubicarlo tras los bloques de Datos, Calidad y Almacenamiento.</li>
+<li>Conectar con lo ya visto: <em>"Ya sabemos de dónde salen los datos,
+cómo medir su calidad y dónde guardarlos. Ahora: ¿cómo los organizamos
+para que toda la institución pueda usarlos?"</em></li>
+<li>Presentar la pregunta central de la sesión: <strong>¿qué es una
+arquitectura de datos y cuáles son sus componentes?</strong></li>
+<li>Palabras clave que se usarán durante toda la sesión:
+<strong>arquitectura, plano, diseño, componente, flujo, silo, catálogo,
+gobernanza</strong>.</li>
+</ul>
+<blockquote>
+<p>Momento de enganche: preguntar al grupo <em>"¿alguna vez pidieron un
+dato a otra área y tardaron semanas en conseguirlo, o recibieron el
+mismo dato con valores distintos?"</em> Anotar 4 o 5 respuestas en la
+pizarra. Esos ejemplos se retoman al hablar de por qué importa el
+diseño.</p>
+</blockquote>
+<hr />
+<h2 id="qué-es-una-arquitectura-de-datos-25-min">¿Qué es una
+arquitectura de datos? (25 min)</h2>
+<p>Explicar el concepto partiendo de una analogía cercana:</p>
+<ul>
+<li><strong>La casa y el plano.</strong> Antes de construir una casa se
+dibuja un plano: dónde van las habitaciones, las cañerías y las
+conexiones eléctricas. El plano no es la casa, pero define cómo
+funcionará.</li>
+<li>La <strong>arquitectura de datos es ese plano</strong>, pero para
+los datos de una organización: define <strong>qué datos existen, dónde
+se guardan, cómo se mueven, quién los usa y con qué
+reglas</strong>.</li>
+<li>No es un software: es el <strong>conjunto de decisiones de
+diseño</strong> que luego se implementan con herramientas (bases de
+datos, procesos, catálogos).</li>
+</ul>
+<p><strong>Tres preguntas que responde la arquitectura:</strong></p>
+<ol type="1">
+<li><strong>¿Dónde</strong> vive cada dato? (almacenamiento)</li>
+<li><strong>¿Cómo</strong> se mueve y transforma? (procesamiento)</li>
+<li><strong>¿Quién</strong> puede usarlo y con qué reglas? (acceso y
+gobernanza)</li>
+</ol>
+<p><strong>Idea para la pizarra:</strong></p>
+<ul>
+<li>Arquitectura de datos = <strong>plano</strong> de la información
+institucional.</li>
+<li>Herramienta ≠ arquitectura: el plano no es el ladrillo.</li>
+</ul>
+<hr />
+<h2 id="por-qué-importa-el-diseño-20-min">Por qué importa el diseño (20
+min)</h2>
+<p>Argumentar que el diseño no es un lujo técnico, sino una decisión con
+consecuencias prácticas:</p>
+<ul>
+<li><strong>Evitar silos de información.</strong> Sin un plano
+compartido, cada área guarda "su" dato en "su" sistema y nadie ve el
+conjunto. Resultado: el dato del ciudadano existe cinco veces, con cinco
+valores distintos.</li>
+<li><strong>Evitar duplicación y re-trabajo.</strong> Cada área vuelve a
+capturar lo que otra ya tiene. Costo de tiempo, almacenamiento y
+errores.</li>
+<li><strong>Garantizar calidad y confianza.</strong> Si no se define
+cuál es el dato "oficial", cada reporte cuenta una historia distinta y
+se pierde credibilidad.</li>
+<li><strong>Poder crecer.</strong> Una arquitectura pensada permite
+sumar nuevas fuentes o servicios sin reconstruir todo desde cero.</li>
+</ul>
+<p><strong>Mensaje puente:</strong> <em>"El costo de no diseñar se paga
+después, en forma de datos que no coinciden, decisiones lentas y
+proyectos que no escalan. Diseñar es barato; reparar una arquitectura
+improvisada es caro."</em></p>
+<hr />
+<h2 id="pausa-10-min">Pausa (10 min)</h2>
+<hr />
+<h2 id="los-cuatro-componentes-30-min">Los cuatro componentes (30
+min)</h2>
+<p>Presentar cada componente con su función y un ejemplo cercano a la
+gestión pública.</p>
+<h3 id="1-almacenamiento">1. Almacenamiento</h3>
+<ul>
+<li><strong>Dónde</strong> se guardan los datos: bases de datos, data
+warehouse, data lake, archivos.</li>
+<li>Responde: <em>¿dónde vive el dato y en qué forma?</em></li>
+<li><strong>Ejemplo:</strong> la base de datos de trámites
+(estructurado) y un repositorio de documentos escaneados (no
+estructurado).</li>
+</ul>
+<h3 id="2-procesamiento">2. Procesamiento</h3>
+<ul>
+<li><strong>Cómo</strong> se mueven y transforman los datos: limpieza,
+unión, cálculo de indicadores.</li>
+<li>Puede ser por <strong>lotes</strong> (batch, cada noche) o en
+<strong>tiempo real</strong> (streaming).</li>
+<li><strong>Ejemplo:</strong> cada noche se consolidan los pagos del día
+para actualizar el reporte de recaudación.</li>
+</ul>
+<h3 id="3-catálogo-de-datos">3. Catálogo de datos</h3>
+<ul>
+<li><strong>Documentación</strong> de qué datos existen, qué significan
+y de dónde provienen.</li>
+<li>Incluye <strong>metadatos</strong> (diccionario de datos, dueño,
+formato, definición).</li>
+<li><strong>Ejemplo:</strong> un diccionario que define que "DNI" es el
+número de identificación oficial, con formato y área responsable.</li>
+</ul>
+<h3 id="4-gobernanza">4. Gobernanza</h3>
+<ul>
+<li>Las <strong>reglas</strong> de la información: calidad, seguridad,
+privacidad, responsabilidad y acceso.</li>
+<li>Responde: <em>¿quién puede ver o modificar el dato? ¿cómo se
+protege?</em></li>
+<li><strong>Ejemplo:</strong> solo el área de personal puede modificar
+el sueldo registrado; el acceso a datos personales exige
+autorización.</li>
+</ul>
+<p><strong>Idea para la pizarra:</strong></p>
+<ul>
+<li>Almacenamiento = <strong>dónde</strong> · Procesamiento =
+<strong>cómo</strong> · Catálogo = <strong>qué es</strong> · Gobernanza
+= <strong>quién y con qué reglas</strong>.</li>
+</ul>
+<hr />
+<h2 id="el-flujo-entre-componentes-y-lectura-de-diagramas-25-min">El
+flujo entre componentes y lectura de diagramas (25 min)</h2>
+<p>Explicar que los componentes no actúan solos; se conectan en un
+<strong>flujo</strong>:</p>
+<p><strong>Fuente → Almacenamiento → Procesamiento → Almacenamiento de
+análisis → Uso</strong></p>
+<ul>
+<li>Los datos <strong>entran</strong> desde las fuentes (sistemas,
+formularios, sensores).</li>
+<li>Se <strong>guardan</strong> en el almacenamiento.</li>
+<li>Se <strong>transforman</strong> (procesamiento) para unirlos y
+limpiarlos.</li>
+<li>Quedan <strong>disponibles</strong> para reportes y análisis.</li>
+<li>Todo el trayecto está <strong>documentado</strong> (catálogo) y
+<strong>regulado</strong> (gobernanza).</li>
+</ul>
+<p><strong>Mensaje:</strong> el catálogo y la gobernanza atraviesan todo
+el flujo; no son una etapa, son <strong>capas
+transversales</strong>.</p>
+<p>Luego, leer en conjunto un diagrama sencillo de arquitectura. Mostrar
+o dibujar un esquema con:</p>
+<ol type="1">
+<li><strong>Fuentes:</strong> sistema de trámites, formulario web,
+lecturas de medidores.</li>
+<li><strong>Almacenamiento:</strong> base de datos operacional + data
+warehouse.</li>
+<li><strong>Procesamiento:</strong> proceso nocturno de limpieza y
+unión.</li>
+<li><strong>Catálogo:</strong> diccionario de datos que describe cada
+tabla.</li>
+<li><strong>Gobernanza:</strong> políticas de acceso y calidad.</li>
+</ol>
+<p><strong>Preguntas guía para leerlo en voz alta:</strong></p>
+<ul>
+<li>¿Dónde nacen los datos? (fuentes)</li>
+<li>¿Dónde se guardan? (almacenamiento)</li>
+<li>¿Qué los transforma? (procesamiento)</li>
+<li>¿Dónde está la definición de cada dato? (catálogo)</li>
+<li>¿Quién controla el acceso? (gobernanza)</li>
+</ul>
+<blockquote>
+<p>Esta lectura es el "puente" hacia la práctica: se usa el mismo
+procedimiento, pero ahora en equipos y con otro esquema.</p>
+</blockquote>
+<hr />
+<h2 id="práctica-identificar-componentes-50-min">Práctica: identificar
+componentes (50 min)</h2>
+<p><strong>Objetivo:</strong> identificar y nombrar los componentes de
+una arquitectura en un esquema dado.</p>
+<p><strong>Materiales:</strong> un esquema impreso por equipo, con cajas
+<strong>sin etiquetas</strong> (rotuladas de forma genérica: "Caja
+A"…"Caja G") y las flechas del flujo sin rótulo.</p>
+<p><strong>Pasos:</strong></p>
+<ol type="1">
+<li>Conformar equipos de 4 personas.</li>
+<li>Entregar a cada equipo el esquema y una hoja de trabajo con las
+cuatro categorías: almacenamiento, procesamiento, catálogo,
+gobernanza.</li>
+<li>Cada equipo debe <strong>etiquetar cada elemento</strong> del
+esquema con su componente y justificarlo.</li>
+<li>Además, responder: <em>¿cuál es el flujo de datos, de la fuente al
+uso?</em></li>
+<li>Puesta en común (incluida en los 50 min): cada equipo expone un
+componente y su justificación.</li>
+</ol>
+<p><strong>Rol del docente:</strong> circular entre equipos para
+destrabar dudas y orientar la lectura del esquema.</p>
+<p><strong>Guía de corrección:</strong> valorar que los equipos
+distingan almacenamiento (donde se guarda) de procesamiento (lo que
+transforma) y que reconozcan el catálogo y la gobernanza como capas
+transversales, no como cajas del flujo.</p>
+<p><strong>Criterios de evaluación:</strong> identificación correcta de
+componentes y coherencia en la justificación.</p>
+<hr />
+<h2 id="cierre-y-preguntas-10-min">Cierre y preguntas (10 min)</h2>
+<ul>
+<li>Síntesis con el grupo: releer en voz alta la frase de la pizarra
+(<strong>dónde / cómo / qué es / quién</strong>).</li>
+<li>Reforzar la idea central: <em>"La arquitectura de datos es el plano
+que hace que los datos sirvan a toda la institución; conocer sus
+componentes permite leer y diseñar cualquier arquitectura."</em></li>
+<li>Anticipar la próxima sesión: <em>"La próxima vez veremos patrones de
+arquitectura: data warehouse, data lake, data lakehouse y lambda. Y
+habrá práctica."</em></li>
+<li>Espacio de preguntas y dudas.</li>
+</ul>
+<hr />
+<h2 id="recursos">Recursos</h2>
+<ul>
+<li>Presentación (láminas de definición, analogía del plano,
+componentes, flujo y práctica).</li>
+<li>Pizarra o pizarra digital para el esquema de las tres preguntas y la
+frase dónde / cómo / qué es / quién.</li>
+<li>Diagrama de arquitectura para la lectura guiada (proyectado o en
+pizarra).</li>
+<li>Esquemas sin etiquetas impresos para la práctica.</li>
+<li>Hojas de trabajo por equipo.</li>
+</ul>
+<h2 id="evaluación-de-la-sesión">Evaluación de la sesión</h2>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Explica qué es una arquitectura de datos</td>
+<td>Respuestas en el enganche y en el bloque "¿Qué es una
+arquitectura?"</td>
+</tr>
+<tr>
+<td>Distingue arquitectura de herramienta</td>
+<td>Aportes en el bloque "¿Qué es una arquitectura?"</td>
+</tr>
+<tr>
+<td>Argumenta por qué importa el diseño</td>
+<td>Intervenciones en "Por qué importa el diseño"</td>
+</tr>
+<tr>
+<td>Nombra y explica los cuatro componentes</td>
+<td>Participación en "Los cuatro componentes"</td>
+</tr>
+<tr>
+<td>Describe el flujo entre componentes</td>
+<td>Aportes en "El flujo entre componentes"</td>
+</tr>
+<tr>
+<td>Lee un diagrama de arquitectura</td>
+<td>Respuestas en la lectura guiada</td>
+</tr>
+<tr>
+<td>Identifica componentes en un esquema dado</td>
+<td>Hoja de trabajo y puesta en común de la práctica</td>
+</tr>
+<tr>
+<td>Usa la terminología adecuada</td>
+<td>Precisión de términos al justificar</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Entrega:</strong> hoja de trabajo con el esquema etiquetado
+(componente y justificación) y la descripción del flujo de datos, de la
+fuente al uso.</p>
+  <footer class="docfoot">Generado desde <a href="Sesion_04_Arquitectura_Conceptos_Componentes.md"><code>Sesion_04_Arquitectura_Conceptos_Componentes.md</code></a> · Módulo 3 — Arquitectura de Datos · IDT 601</footer>
+</div>
+</body>
+</html>

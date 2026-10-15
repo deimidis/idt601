@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde taller_sesion4_componentes.md — no editar a mano. -->
+<title>Taller — Sesión 4: identificar los componentes de una arquitectura</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 3 — Arquitectura de Datos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1
+id="taller--sesión-4-identificar-los-componentes-de-una-arquitectura">Taller
+— Sesión 4: identificar los componentes de una arquitectura</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601) · Bloque 3 —
+Arquitectura de Datos <strong>Duración:</strong> 50 min de práctica
+(dentro de la sesión de 3 horas) <strong>Modalidad:</strong> presencial
+o en línea (salas) <strong>Materiales:</strong>
+<code>assets/esquema-arquitectura-sin-etiquetas.svg</code> (uno por
+equipo), hoja de trabajo, y
+<code>assets/esquema-arquitectura-resuelto.svg</code> (docente)</p>
+<hr />
+<h2 id="objetivo">Objetivo</h2>
+<p>Identificar y <strong>nombrar los componentes</strong> de una
+arquitectura sobre un esquema dado: distinguir dónde se guarda el dato
+de lo que lo transforma, y reconocer el catálogo y la gobernanza como
+<strong>capas transversales</strong>.</p>
+<h2 id="preparación-previa">Preparación previa</h2>
+<ol type="1">
+<li>Imprimir o compartir
+<code>assets/esquema-arquitectura-sin-etiquetas.svg</code> (uno por
+equipo). El esquema tiene cajas rotuladas de forma genérica ("Caja
+A"…"Caja G") y dos bandas rotuladas "Capa 1" y "Capa 2". Las flechas
+<strong>no</strong> llevan rótulo: indican el flujo y no se
+etiquetan.</li>
+<li>Preparar la hoja de trabajo (abajo) o pedir que la copien.</li>
+<li>Tener a mano el esquema resuelto
+(<code>assets/esquema-arquitectura-resuelto.svg</code>) para la puesta
+en común. Los dos esquemas comparten la <strong>misma geometría</strong>
+(cajas, bandas y flechas en las mismas posiciones), así que se pueden
+superponer al comparar.</li>
+</ol>
+<h2 id="reparto-del-tiempo-50-min">Reparto del tiempo (50 min)</h2>
+<table>
+<thead>
+<tr>
+<th>Momento</th>
+<th>Tiempo</th>
+<th>Quién</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Consigna y conformación de equipos (4 personas)</td>
+<td>10 min</td>
+<td>Docente</td>
+</tr>
+<tr>
+<td>Trabajo en equipos sobre el esquema</td>
+<td>30 min</td>
+<td>Equipos</td>
+</tr>
+<tr>
+<td>Puesta en común</td>
+<td>10 min</td>
+<td>Todos</td>
+</tr>
+</tbody>
+</table>
+<h2 id="pasos">Pasos</h2>
+<ol type="1">
+<li><strong>Etiquetar cada caja.</strong> Cada equipo asigna a cada caja
+uno de los cuatro componentes (almacenamiento, procesamiento, catálogo,
+gobernanza) y, si aplica, identifica fuentes y uso. Las flechas
+describen el flujo, no un componente.</li>
+<li><strong>Justificar cada elección.</strong> Para cada etiqueta,
+escribir la razón en una frase (<em>"es almacenamiento porque aquí se
+guarda el dato"</em>).</li>
+<li><strong>Describir el flujo.</strong> Ordenar el recorrido de los
+datos de la fuente al uso:
+<code>Fuente → Almacenamiento → Procesamiento → Almacenamiento de análisis → Uso</code>.</li>
+<li><strong>Detectar las capas transversales.</strong> Indicar qué
+representan "Capa 1" y "Capa 2" y por qué no son una etapa del
+flujo.</li>
+</ol>
+<h2 id="hoja-de-trabajo">Hoja de trabajo</h2>
+<table>
+<thead>
+<tr>
+<th>Elemento del esquema</th>
+<th>Componente asignado</th>
+<th>Justificación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Caja A</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Caja B</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Caja C</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Caja D</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Caja E</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Caja F</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Caja G</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Capa 1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Capa 2</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Flujo de datos (de la fuente al uso):</strong>
+______________________________________________</p>
+<p><strong>¿Qué representan la Capa 1 y la Capa 2 y por qué son
+transversales?</strong> _________________</p>
+<h2 id="clave-de-corrección-para-el-docente">Clave de corrección (para
+el docente)</h2>
+<table>
+<thead>
+<tr>
+<th>Elemento</th>
+<th>Componente</th>
+<th>Pista</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Caja A</td>
+<td>Fuente</td>
+<td>Sistema de trámites.</td>
+</tr>
+<tr>
+<td>Caja B</td>
+<td>Fuente</td>
+<td>Formulario web.</td>
+</tr>
+<tr>
+<td>Caja C</td>
+<td>Fuente</td>
+<td>Lecturas de medidores.</td>
+</tr>
+<tr>
+<td>Caja D</td>
+<td>Almacenamiento</td>
+<td>Base operacional (donde se registra el día a día).</td>
+</tr>
+<tr>
+<td>Caja E</td>
+<td>Procesamiento</td>
+<td>Proceso nocturno (limpieza y unión).</td>
+</tr>
+<tr>
+<td>Caja F</td>
+<td>Almacenamiento</td>
+<td>Data warehouse (almacenamiento de análisis).</td>
+</tr>
+<tr>
+<td>Caja G</td>
+<td>Uso</td>
+<td>Reportes y análisis.</td>
+</tr>
+<tr>
+<td>Capa 1</td>
+<td>Catálogo</td>
+<td>Documenta qué datos existen y qué significan.</td>
+</tr>
+<tr>
+<td>Capa 2</td>
+<td>Gobernanza</td>
+<td>Define dueños, acceso y reglas.</td>
+</tr>
+</tbody>
+</table>
+<p>La versión resuelta está en
+<code>assets/esquema-arquitectura-resuelto.svg</code>.</p>
+<h2 id="puesta-en-común">Puesta en común</h2>
+<p>Cada equipo expone <strong>un componente y su justificación</strong>
+(3–4 min en total). El docente contrasta las respuestas y refuerza dos
+ideas:</p>
+<ul>
+<li><strong>Almacenamiento ≠ procesamiento:</strong> guardar no es
+transformar.</li>
+<li><strong>Catálogo y gobernanza son capas transversales</strong>, no
+una caja más del flujo.</li>
+</ul>
+<h2 id="guía-de-corrección">Guía de corrección</h2>
+<p>Valorar que los equipos:</p>
+<ul>
+<li>Distingan almacenamiento (donde se guarda) de procesamiento (lo que
+transforma).</li>
+<li>Reconozcan las fuentes como el punto de nacimiento del dato y el uso
+como su destino.</li>
+<li>Identifiquen el catálogo y la gobernanza como capas que atraviesan
+todo el trayecto.</li>
+</ul>
+<h2 id="evaluación-y-entrega">Evaluación y entrega</h2>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identifica los componentes correctamente</td>
+<td>Hoja de trabajo completa.</td>
+</tr>
+<tr>
+<td>Justifica cada elección</td>
+<td>Frase de justificación por elemento.</td>
+</tr>
+<tr>
+<td>Describe el flujo de la fuente al uso</td>
+<td>Recorrido ordenado.</td>
+</tr>
+<tr>
+<td>Reconoce las capas transversales</td>
+<td>Explicación de la Capa 1 y la Capa 2.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Entrega:</strong> hoja de trabajo con el esquema etiquetado,
+las justificaciones y la descripción del flujo.</p>
+<h2 id="variante-en-línea">Variante en línea</h2>
+<p>Compartir el SVG por el chat de la sesión y pedir que cada equipo lo
+anote en una pizarra colaborativa (Google Jamboard, Miro o una hoja de
+cálculo compartida). La puesta en común se hace en la sala general,
+proyectando el esquema resuelto.</p>
+  <footer class="docfoot">Generado desde <a href="taller_sesion4_componentes.md"><code>taller_sesion4_componentes.md</code></a> · Módulo 3 — Arquitectura de Datos · IDT 601</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde notas-sesion-04.md — no editar a mano. -->
+<title>Notas del orador — Sesión 4</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 3 — Arquitectura de Datos · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="notas-del-orador--sesión-4">Notas del orador — Sesión 4</h1>
+<p><strong>Deck:</strong> <code>deck-sesion-04.html</code> · 16
+diapositivas · 180 min <strong>Tema:</strong> Arquitectura de datos:
+conceptos y componentes</p>
+<blockquote>
+<p>Guion punteado por diapositiva. Cada viñeta es algo para decir en voz
+alta; <strong>No olvidar</strong> marca lo imprescindible.</p>
+</blockquote>
+<hr />
+<h2 id="slide-1--arquitectura-de-datos-conceptos-y-componentes">Slide 1
+— Arquitectura de datos: conceptos y componentes</h2>
+<ul>
+<li>Dar la bienvenida, presentarse y ubicar la sesión: <strong>Bloque 3
+— Arquitectura de Datos</strong>, después de los bloques de Datos,
+Calidad y Almacenamiento.</li>
+<li>Conectar con lo ya visto: "ya sabemos de dónde salen los datos, cómo
+medir su calidad y dónde guardarlos; hoy: ¿cómo los organizamos para que
+toda la institución pueda usarlos?".</li>
+<li>Encuadrar el público no especialista: no hace falta saber programar,
+hablamos de <strong>decisiones de diseño</strong>.</li>
+<li>Anunciar la pregunta central de la sesión y el recorrido: definir,
+entender por qué importa, conocer las piezas y practicar.</li>
+<li><strong>No olvidar:</strong> aclarar que hoy hay una práctica en
+equipos al final y que la sesión dura 180 minutos con una pausa.</li>
+</ul>
+<h2 id="slide-2--hoja-de-ruta">Slide 2 — Hoja de ruta</h2>
+<ul>
+<li>Recorrer los seis tramos de la tabla y dar el ritmo: 25 min de
+concepto, 20 de por qué importa, 30 de componentes, 25 de flujo y
+diagramas, 50 de práctica y 10 de cierre.</li>
+<li>Ubicar la <strong>pausa de 10 minutos</strong> justo antes del
+bloque de los cuatro componentes.</li>
+<li>Avisar que la práctica de 50 minutos incluye la puesta en común, así
+que el tiempo es ajustado.</li>
+<li>Anticipar que todo el bloque gira sobre una frase clave que se
+escribirá en la pizarra y se retomará al cierre.</li>
+<li><strong>No olvidar:</strong> decir explícitamente que la práctica
+final es obligatoria y que cada equipo se llevará un esquema sin
+etiquetas para completar.</li>
+</ul>
+<h2 id="slide-3--qué-es">Slide 3 — ¿Qué es?</h2>
+<ul>
+<li>Definir sin rodeos: la arquitectura de datos es el
+<strong>plano</strong> que define qué datos existen, dónde se guardan,
+cómo se mueven, quién los usa y con qué reglas.</li>
+<li>Recurrir a la analogía de la casa y el plano: antes de construir se
+dibuja dónde van las habitaciones, las cañerías y las conexiones
+eléctricas.</li>
+<li>Remarcar el límite del concepto: <strong>no es un software</strong>,
+es una <strong>decisión de diseño</strong> que antecede a la
+tecnología.</li>
+<li>Escribir en la pizarra: <strong>plano ≠ ladrillo</strong>; las
+herramientas implementan el diseño, no lo reemplazan.</li>
+<li><strong>No olvidar:</strong> preguntar al grupo "¿alguna vez
+pidieron un dato a otra área y tardaron semanas, o lo recibieron con
+valores distintos?" y anotar 4 o 5 respuestas para retomarlas más
+adelante.</li>
+</ul>
+<h2 id="slide-4--tres-preguntas">Slide 4 — Tres preguntas</h2>
+<ul>
+<li>Presentar las tres preguntas que toda arquitectura responde:
+<strong>¿dónde vive?</strong>, <strong>¿cómo se mueve?</strong>,
+<strong>¿quién lo usa?</strong>.</li>
+<li>Mapear cada pregunta con su componente: dónde →
+<strong>almacenamiento</strong>; cómo → <strong>procesamiento</strong>;
+quién y con qué reglas → <strong>acceso y gobernanza</strong>.</li>
+<li>Aclarar que estas tres preguntas son la columna vertebral del bloque
+y de toda la sesión.</li>
+<li>Pedir al grupo que repita las tres preguntas en voz alta para
+fijarlas.</li>
+<li><strong>No olvidar:</strong> remarcar que estas preguntas son la
+base para identificar componentes en cualquier esquema, incluida la
+práctica.</li>
+</ul>
+<h2 id="slide-5--por-qué-importa">Slide 5 — Por qué importa</h2>
+<ul>
+<li>Explicar las tres consecuencias de decidir sin arquitectura:
+<strong>silos</strong> (cada área guarda "su" dato),
+<strong>duplicación</strong> (el mismo dato capturado con valores
+distintos) y <strong>desconfianza</strong> (cada reporte cuenta una
+historia distinta).</li>
+<li>Enfatizar que sin plano común la institución <strong>no puede
+crecer</strong>: sumar una fuente o un servicio obliga a reconstruir
+todo desde cero.</li>
+<li>Retomar las respuestas anotadas en el enganche y mostrarlas como
+ejemplos reales de estos síntomas.</li>
+<li>Cerrar con el mensaje puente: <strong>diseñar es barato; reparar una
+arquitectura improvisada es caro</strong>.</li>
+<li><strong>No olvidar:</strong> insistir en que el costo de no diseñar
+se paga después, en decisiones lentas y proyectos que no escalan.</li>
+</ul>
+<h2 id="slide-6--síntomas">Slide 6 — Síntomas</h2>
+<ul>
+<li>Recorrer la tabla de síntomas y traducir cada uno a la vida
+institucional cotidiana.</li>
+<li>Detenerse en el ejemplo fuerte: el <strong>padrón de
+contribuyentes</strong> que no coincide entre Recaudaciones y
+Catastro.</li>
+<li>Señalar los otros síntomas: datos encerrados por área, reportes
+lentos o manuales, migraciones traumáticas y reglas poco claras.</li>
+<li>Preguntar al grupo cuál de estos síntomas reconoce en su propia
+institución y pedir que lo describa en una frase.</li>
+<li><strong>No olvidar:</strong> vincular el último síntoma (reglas poco
+claras) con la pregunta "¿quién es dueño del dato?", que se responderá
+al hablar de gobernanza.</li>
+</ul>
+<h2 id="slide-7--cuatro-componentes">Slide 7 — Cuatro componentes</h2>
+<ul>
+<li>Presentar la tabla con las <strong>cuatro piezas</strong>:
+almacenamiento, procesamiento, catálogo y gobernanza.</li>
+<li>Recorrer cada componente con su pregunta y un ejemplo: base de
+trámites y escaneos, consolidación nocturna de pagos, diccionario que
+define "DNI" y autorización para modificar el sueldo.</li>
+<li>Decir que estas cuatro piezas son la grilla con la que se leerá
+cualquier arquitectura de ahora en adelante.</li>
+<li>Preguntar al grupo: "si tuvieran que guardar, ordenar y repartir los
+datos de su institución, ¿qué piezas necesitarían?" y mapear sus
+respuestas a los cuatro componentes.</li>
+<li><strong>No olvidar:</strong> dejar claro que ninguno es opcional ni
+intercambiable; cada uno responde una pregunta distinta.</li>
+</ul>
+<h2 id="slide-8--almacenamiento">Slide 8 — Almacenamiento</h2>
+<ul>
+<li>Definir el almacenamiento como la respuesta a <strong>¿dónde vive el
+dato y en qué forma?</strong>.</li>
+<li>Nombrar los tipos: bases de datos, <strong>data warehouse</strong>,
+<strong>data lake</strong> y archivos.</li>
+<li>Distinguir datos <strong>estructurados</strong> (tablas, como la
+base de trámites) de <strong>no estructurados</strong> (documentos
+escaneados, imágenes, audios).</li>
+<li>Usar el ejemplo local: la base de datos de trámites junto al
+repositorio de documentos escaneados del municipio.</li>
+<li><strong>No olvidar:</strong> diferenciar el almacenamiento
+operacional (donde se registra el día a día) del de análisis (donde se
+consolida para consultar).</li>
+</ul>
+<h2 id="slide-9--procesamiento">Slide 9 — Procesamiento</h2>
+<ul>
+<li>Definir el procesamiento como la respuesta a <strong>¿cómo se mueven
+y transforman los datos?</strong>: limpieza, unión y cálculo de
+indicadores.</li>
+<li>Presentar las dos velocidades: por <strong>lotes</strong> (batch,
+cada noche) y en <strong>tiempo real</strong> (streaming).</li>
+<li>Usar el ejemplo: cada noche se consolidan los pagos del día para
+actualizar el reporte de recaudación.</li>
+<li>Explicar la analogía de la <strong>"cocina"</strong>: el
+procesamiento convierte datos crudos en datos utilizables.</li>
+<li><strong>No olvidar:</strong> aclarar que procesar no es guardar ni
+mover por mover; el objetivo es que el dato quede listo para
+usarse.</li>
+</ul>
+<h2 id="slide-10--catálogo">Slide 10 — Catálogo</h2>
+<ul>
+<li>Definir el catálogo como la respuesta a <strong>¿qué datos existen y
+qué significan?</strong>.</li>
+<li>Explicar qué documenta cada dato: definición, formato, dueño y
+origen.</li>
+<li>Introducir el término <strong>metadatos</strong> y su forma más
+conocida: el diccionario de datos.</li>
+<li>Ejemplificar con "DNI": un diccionario que define que es el número
+de identificación oficial, con su formato y el área responsable.</li>
+<li><strong>No olvidar:</strong> sin catálogo nadie sabe qué significa
+cada campo; es lo que permite que dos áreas hablen del mismo dato con el
+mismo nombre.</li>
+</ul>
+<h2 id="slide-11--gobernanza">Slide 11 — Gobernanza</h2>
+<ul>
+<li>Definir la gobernanza como la respuesta a <strong>¿quién puede
+usarlo y con qué reglas?</strong>.</li>
+<li>Enumerar lo que cubre: calidad, seguridad, privacidad,
+responsabilidad y acceso.</li>
+<li>Explicar que establece los <strong>dueños del dato</strong> y las
+condiciones de uso.</li>
+<li>Usar el ejemplo: solo el área de personal modifica el sueldo; ver
+datos personales exige autorización.</li>
+<li><strong>No olvidar:</strong> remarcar que la gobernanza no es
+burocracia; es lo que hace que el dato sea confiable y seguro.</li>
+</ul>
+<h2 id="slide-12--el-flujo">Slide 12 — El flujo</h2>
+<ul>
+<li>Dibujar el flujo completo en la pizarra: <strong>Fuente →
+Almacenamiento → Procesamiento → Uso</strong>.</li>
+<li>Explicar cada paso: los datos nacen en sistemas, formularios y
+sensores; se guardan; se limpian, unen y transforman; quedan disponibles
+para reportes y decisiones.</li>
+<li>Señalar la idea central: el <strong>catálogo</strong> y la
+<strong>gobernanza</strong> no son una etapa del flujo, son
+<strong>capas transversales</strong> que atraviesan todo el
+trayecto.</li>
+<li>Aclarar el error frecuente de dibujarlos como "una caja más" en la
+fila.</li>
+<li><strong>No olvidar:</strong> repetir que todo el trayecto está
+documentado (catálogo) y regulado (gobernanza), de la fuente al
+uso.</li>
+</ul>
+<h2 id="slide-13--leer-un-diagrama">Slide 13 — Leer un diagrama</h2>
+<ul>
+<li>Presentar el procedimiento de cinco preguntas para leer cualquier
+esquema: ¿dónde nacen?, ¿dónde se guardan?, ¿qué los transforma?, ¿dónde
+está su definición?, ¿quién controla el acceso?.</li>
+<li>Mostrar o dibujar un esquema sencillo y responder las cinco
+preguntas en voz alta junto con el grupo.</li>
+<li>Enfatizar que este mismo procedimiento se usará en la práctica, solo
+que en equipos y con otro esquema.</li>
+<li>Señalar que no hace falta saber tecnología: basta con responder las
+cinco preguntas para entender un diagrama.</li>
+<li><strong>No olvidar:</strong> este slide es el
+<strong>puente</strong> hacia la práctica; no pasar de largo sin haber
+leído un diagrama en conjunto.</li>
+</ul>
+<h2 id="slide-14--práctica">Slide 14 — Práctica</h2>
+<ul>
+<li>Dar la consigna: en equipos de <strong>4 personas</strong>, con un
+esquema sin etiquetas y una hoja de trabajo con las cuatro
+categorías.</li>
+<li>Explicar los tres pasos: etiquetar cada caja con su componente,
+justificar la elección y describir el flujo de la fuente al uso (las
+flechas se describen, no se etiquetan).</li>
+<li>Recordar el tiempo: 50 minutos en total, incluida la puesta en
+común.</li>
+<li>Circular entre los equipos para destrabar dudas y orientar la
+lectura del esquema.</li>
+<li><strong>No olvidar:</strong> en la puesta en común cada equipo
+expone <strong>un componente y su justificación</strong>; valorar que
+distingan almacenamiento de procesamiento y que reconozcan catálogo y
+gobernanza como capas transversales.</li>
+</ul>
+<h2 id="slide-15--cierre">Slide 15 — Cierre</h2>
+<ul>
+<li>Sintetizar con el grupo las tres ideas: la arquitectura es el
+<strong>plano</strong>, cuatro componentes (<strong>almacenamiento,
+procesamiento, catálogo y gobernanza</strong>), y un
+<strong>flujo</strong> de la fuente al uso con capas transversales.</li>
+<li>Releer en voz alta la frase de la pizarra: <strong>dónde / cómo /
+qué es / quién</strong>.</li>
+<li>Reforzar el mensaje central: conocer los componentes permite
+<strong>leer y diseñar cualquier arquitectura</strong>.</li>
+<li>Anticipar la Sesión 5: los <strong>patrones de arquitectura</strong>
+— data warehouse, data lake, data lakehouse y lambda, también con
+práctica.</li>
+<li><strong>No olvidar:</strong> dejar claro que la entrega es la hoja
+de trabajo con el esquema etiquetado, las justificaciones y la
+descripción del flujo.</li>
+</ul>
+<h2 id="slide-16--gracias">Slide 16 — Gracias</h2>
+<ul>
+<li>Agradecer la participación y abrir el espacio de <strong>preguntas y
+dudas</strong>.</li>
+<li>Repasar brevemente el recorrido de la sesión para quienes quedaron
+con dudas puntuales.</li>
+<li>Recordar la entrega pendiente y el material de la Sesión 5.</li>
+<li>Cerrar con el puente: la próxima sesión sigue en el Bloque 3 con los
+patrones de arquitectura y diseño.</li>
+<li><strong>No olvidar:</strong> quedarse disponible para consultas y
+confirmar el canal de contacto del curso.</li>
+</ul>
+  <footer class="docfoot">Generado desde <a href="notas-sesion-04.md"><code>notas-sesion-04.md</code></a> · Módulo 3 — Arquitectura de Datos · IDT 601</footer>
+</div>
+</body>
+</html>

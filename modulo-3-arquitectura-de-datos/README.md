@@ -21,10 +21,13 @@ Materiales de la **Unidad/Bloque 3 — Arquitectura de Datos** del módulo *Inge
 | `reference/` | Hojas de referencia rápida (componentes; patrones; leer un diagrama). |
 | `taller_sesion4_componentes.md` | Práctica de la sesión 4: identificar componentes en un esquema sin etiquetas. |
 | `taller_sesion5_diseno_arquitectura.md` | Taller de la sesión 5: diseñar la arquitectura de un caso institucional. |
+| `guia-solucion-docente-sesion5.md` | Guía de solución del taller 5: respuestas modelo por variante (A/B/C), diagrama, gobernanza y rúbrica. |
+| `handout-equipos-sesion5.md` | Handout de lectura para los equipos del taller 5: criterios, fuentes, plantilla, errores frecuentes y glosario. |
 | `assets/` | Tema visual EGPP (`theme-egpp.css`), estilos, `quiz.js` y los esquemas SVG de práctica. |
 
 ## Cómo se mantiene
 
+- Los **documentos** (planes, notas, talleres, guías, plantillas, insumos) tienen una versión de lectura `.html` con el diseño del sitio, generada con `./render-docs.sh` (`pandoc` + `assets/doc-template.html` + `assets/docs.css`). El `.md` sigue siendo la fuente: tras editarlo, volver a correr el script.
 - Esta carpeta es una **copia de trabajo** de los materiales de la raíz del proyecto. La raíz
   **no se actualiza sola**: si se cambia un material en la raíz, hay que volver a copiarlo aquí.
 - Las presentaciones reveal usan **reveal.js** desde `/home/deimidis/Proyectos/Presentaciones Revealjs`

@@ -31,9 +31,9 @@ Producir el **diseño de arquitectura completo y documentado** para el caso asig
 ## Pasos del trabajo en equipos
 
 1. **Entender el caso.** Definir el objetivo y las preguntas que la arquitectura debe responder.
-2. **Mapear las fuentes.** Listar de dónde salen los datos y qué tipo son (estructurado, semiestructurado, no estructurado).
+2. **Mapear las fuentes.** Listar de dónde salen los datos y de qué tipo son (estructurado, semiestructurado, no estructurado).
 3. **Definir los componentes.** Almacenamiento, procesamiento, catálogo y gobernanza (con atención a las capas transversales).
-4. **Elegir y justificar el patrón.** Data warehouse, data lake, data lakehouse o lambda, y por qué.
+4. **Elegir y justificar el patrón.** Data warehouse, data lake, data lakehouse o lambda y por qué.
 5. **Dibujar y documentar.** Trazar el diagrama de flujo de la fuente al uso y completar las reglas de gobernanza.
 
 ## Plantilla de diseño
