@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde Sesion_10_IA_Agentes_Taller.md — no editar a mano. -->
+<title>Sesión 10 — Agentes de IA y taller integrador</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 6 — Inteligencia Artificial · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="sesión-10--agentes-de-ia-y-taller-integrador">Sesión 10 —
+Agentes de IA y taller integrador</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601)
+<strong>Bloque:</strong> 6 — Historia y Desarrollo de la Inteligencia
+Artificial <strong>Duración:</strong> 3 horas (180 min)
+<strong>Público:</strong> Profesionales no especializados en ingeniería
+de datos <strong>Modalidad:</strong> 100 % virtual (Zoom + salas)</p>
+<hr />
+<h2 id="objetivos-de-la-sesión">Objetivos de la sesión</h2>
+<ul>
+<li>Entender qué es un agente de IA y cómo combina un LLM con
+herramientas.</li>
+<li>Reconocer los cuatro componentes de un agente: modelo, herramientas,
+memoria y planificación.</li>
+<li>Identificar usos comunes (asistentes, RAG, automatización) y sus
+riesgos en la gestión pública.</li>
+<li><strong>Diseñar y documentar</strong> el flujo de un agente —con su
+punto de control humano— e integrarlo en una mini-solución resuelta con
+chat y criterio, sin exigir una plataforma de agentes real.</li>
+<li>Cerrar el módulo sintetizando su recorrido y vinculándolo con el
+<strong>trabajo final integrador</strong>.</li>
+</ul>
+<h2 id="ideas-clave-qué-debe-quedar-al-final">Ideas clave (qué debe
+quedar al final)</h2>
+<ol type="1">
+<li>Un <strong>agente</strong> es un LLM que deja de solo responder y
+pasa a <strong>actuar</strong>: planifica pasos y usa
+<strong>herramientas</strong> para cumplir una tarea.</li>
+<li>Un agente combina cuatro componentes: <strong>modelo</strong>,
+<strong>herramientas</strong>, <strong>memoria</strong> y
+<strong>planificación</strong>.</li>
+<li>Los usos más comunes son <strong>asistentes</strong>,
+<strong>recuperación de información (RAG)</strong> y
+<strong>automatización</strong>.</li>
+<li>Los agentes <strong>amplifican los riesgos</strong> del LLM porque
+actúan; exigen <strong>supervisión humana</strong>: <em>el agente
+sugiere, el humano decide</em>.</li>
+<li>Construir una mini-solución sigue un método: <strong>definir la
+tarea</strong>, <strong>armar prompts o flujos</strong>,
+<strong>evaluar</strong> y <strong>mejorar</strong>. El flujo del agente
+<strong>se diseña y se documenta</strong> con la plantilla, aunque no se
+ejecute en vivo.</li>
+<li>El módulo es una <strong>cadena</strong>: datos → ingesta →
+arquitectura → integración → licencias → IA; cada eslabón habilita al
+siguiente y culmina en el <strong>trabajo final integrador</strong>, que
+suma <strong>dos componentes obligatorios</strong>: (a) la
+<strong>declaración de licencia del dataset</strong> usado (Bloque 5) y
+(b) un <strong>prompt o flujo de agente documentado con su punto de
+control humano</strong> (Bloque 6).</li>
+</ol>
+<h2 id="cronograma-sugerido-180-min">Cronograma sugerido (180 min)</h2>
+<table>
+<thead>
+<tr>
+<th>Bloque</th>
+<th>Duración</th>
+<th>Qué ocurre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apertura y encuadre</td>
+<td>10 min</td>
+<td>Bienvenida, cierre del módulo y preguntas disparadoras.</td>
+</tr>
+<tr>
+<td>Del chat al agente: qué cambia</td>
+<td>15 min</td>
+<td>De responder a actuar.</td>
+</tr>
+<tr>
+<td>Componentes de un agente</td>
+<td>20 min</td>
+<td>Modelo, herramientas, memoria y planificación.</td>
+</tr>
+<tr>
+<td>Ejemplos: asistentes, RAG, automatización</td>
+<td>15 min</td>
+<td>Casos aplicados a la gestión pública.</td>
+</tr>
+<tr>
+<td>Pausa</td>
+<td>10 min</td>
+<td>Receso.</td>
+</tr>
+<tr>
+<td>Riesgos y supervisión humana</td>
+<td>10 min</td>
+<td>Errores, control, responsabilidad y confidencialidad.</td>
+</tr>
+<tr>
+<td>Aplicación integrada: el método y la consigna</td>
+<td>15 min</td>
+<td>Definir, armar, evaluar y mejorar; formación de equipos.</td>
+</tr>
+<tr>
+<td>Taller: definir y armar</td>
+<td>35 min</td>
+<td>Tarea y prompts/flujo de la mini-solución.</td>
+</tr>
+<tr>
+<td>Taller: evaluar, mejorar y preparar la defensa</td>
+<td>25 min</td>
+<td>Prueba, mejora y preparación de la defensa.</td>
+</tr>
+<tr>
+<td>Presentación y defensa (2 min por equipo)</td>
+<td>15 min</td>
+<td>Cada equipo presenta su mini-solución.</td>
+</tr>
+<tr>
+<td>Cierre del módulo y preguntas</td>
+<td>10 min</td>
+<td>Síntesis integradora y trabajo final.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Ajuste de tiempos:</strong> el bloque "evaluar, mejorar y
+preparar la defensa" se amplía de 15 a <strong>25 min</strong> para que
+la prueba, la corrección y el ensayo de la defensa no queden apurados.
+La defensa se fija en <strong>2 min por equipo</strong> y su bloque baja
+de 25 a <strong>15 min</strong> (unos 6 equipos × 2 min más encuadre y
+transiciones). El cronograma así <strong>suma 180 min
+exactos</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="apertura-y-encuadre-10-min">Apertura y encuadre (10 min)</h2>
+<ul>
+<li>Dar la bienvenida y ubicar la sesión como la <strong>última del
+módulo</strong> y del Bloque 6.</li>
+<li>Conectar con las sesiones anteriores: <em>"Aprendimos a conversar
+con un LLM y a construir prompts. Hoy lo vemos dar un paso más: dejar de
+solo responder y empezar a actuar con herramientas. Después integramos
+todo en una mini-solución."</em></li>
+<li>Presentar las preguntas que ordenan la sesión: <strong>¿qué es un
+agente?</strong>, <strong>¿cómo se diseña su flujo de trabajo?</strong>
+y <strong>¿cómo integro lo aprendido en una solución útil para mi
+institución?</strong></li>
+<li>Palabras clave: <strong>agente, modelo, herramienta, memoria,
+planificación, RAG, supervisión, confidencialidad,
+mini-solución</strong>.</li>
+<li>Encuadrar el taller: trabajo en equipos, una entrega concreta y una
+defensa breve de <strong>2 min por equipo</strong>.</li>
+</ul>
+<blockquote>
+<p>Momento de enganche: comparar dos pedidos al mismo LLM: (a) <em>"¿qué
+trámites se pueden hacer en línea?"</em> — responde; (b) <em>"buscá en
+este documento y en la web la lista de trámites en línea y armá una
+tabla comparando requisitos"</em> — el agente consulta fuentes y produce
+un resultado. Preguntar: <em>"¿Qué cambió? Ya no solo responde: usa
+herramientas."</em></p>
+</blockquote>
+<hr />
+<h2 id="del-chat-al-agente-qué-cambia-15-min">Del chat al agente: qué
+cambia (15 min)</h2>
+<h3 id="el-chat-responde">El chat responde</h3>
+<ul>
+<li>El chat genera <strong>texto</strong> a partir del prompt: no actúa
+sobre el mundo.</li>
+<li>Sus respuestas se basan en lo que "recuerda" de su entrenamiento y
+en la conversación.</li>
+</ul>
+<h3 id="el-agente-actúa">El agente actúa</h3>
+<ul>
+<li>Un agente <strong>no se limita a responder</strong>: decide
+<strong>pasos</strong> y ejecuta <strong>acciones</strong>.</li>
+<li>Puede <strong>buscar información</strong>, <strong>leer
+documentos</strong>, <strong>usar una calculadora</strong>,
+<strong>consultar una base de datos</strong> o <strong>llamar a otro
+sistema</strong>.</li>
+<li>Piensa en una tarea y la <strong>descompone en pasos</strong> hasta
+cumplirla.</li>
+</ul>
+<p><strong>Ideas para la pizarra:</strong></p>
+<ul>
+<li>Chat: <strong>entrada → respuesta</strong>.</li>
+<li>Agente: <strong>tarea → plan → pasos (con herramientas) → resultado
+→ revisión</strong>.</li>
+</ul>
+<h3 id="la-analogía-del-asistente">La analogía del asistente</h3>
+<ul>
+<li>El chat es como <strong>preguntarle a un colega</strong>.</li>
+<li>El agente es como <strong>encargarle una tarea</strong>: "buscá
+esto, compará, resumí y traeme el resultado".</li>
+</ul>
+<hr />
+<h2 id="componentes-de-un-agente-20-min">Componentes de un agente (20
+min)</h2>
+<p>Explicar cada componente con ejemplos cercanos a la gestión pública.
+El esquema de apoyo es
+<code>assets/esquema-componentes-agente.svg</code>.</p>
+<h3 id="1-modelo-el-cerebro">1. Modelo (el "cerebro")</h3>
+<ul>
+<li>El <strong>LLM</strong> que razona y decide los pasos.</li>
+<li>Sigue siendo el motor de lenguaje; el agente le suma capacidades de
+acción.</li>
+</ul>
+<h3 id="2-herramientas-las-manos">2. Herramientas (las "manos")</h3>
+<ul>
+<li>Lo que el agente puede <strong>usar para actuar</strong>: buscar en
+la web, leer un PDF, ejecutar código, consultar una base de datos,
+enviar un correo.</li>
+<li>Cada herramienta tiene una <strong>descripción</strong> para que el
+modelo sepa cuándo usarla.</li>
+</ul>
+<h3 id="3-memoria-el-contexto-que-persiste">3. Memoria (el "contexto que
+persiste")</h3>
+<ul>
+<li>Lo que el agente <strong>recuerda</strong> dentro de la tarea (y a
+veces entre tareas).</li>
+<li>Puede ser la conversación o un registro de los pasos ya hechos.</li>
+</ul>
+<h3 id="4-planificación-el-método">4. Planificación (el "método")</h3>
+<ul>
+<li>La capacidad de <strong>descomponer</strong> una tarea en pasos y
+<strong>ordenarlos</strong>.</li>
+<li>Puede seguir un flujo definido por un humano o decidir pasos por su
+cuenta.</li>
+</ul>
+<p><strong>Síntesis en tabla:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Qué es</th>
+<th>Analogía</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Modelo</td>
+<td>El LLM que razona</td>
+<td>El cerebro</td>
+</tr>
+<tr>
+<td>Herramientas</td>
+<td>Lo que puede usar para actuar</td>
+<td>Las manos</td>
+</tr>
+<tr>
+<td>Memoria</td>
+<td>Lo que recuerda de la tarea</td>
+<td>La agenda</td>
+</tr>
+<tr>
+<td>Planificación</td>
+<td>Cómo ordena los pasos</td>
+<td>El método de trabajo</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ejemplos-asistentes-rag-automatización-15-min">Ejemplos:
+asistentes, RAG, automatización (15 min)</h2>
+<h3 id="asistentes">Asistentes</h3>
+<ul>
+<li>Agentes que <strong>conversan y resuelven</strong> dentro de un
+dominio, usando los documentos de la institución.</li>
+<li><strong>Ejemplo:</strong> un asistente que responde consultas sobre
+requisitos de trámites apoyándose en la normativa oficial de un gobierno
+municipal.</li>
+</ul>
+<h3 id="recuperación-de-información-rag">Recuperación de información
+(RAG)</h3>
+<ul>
+<li><strong>RAG = Retrieval-Augmented Generation:</strong> el agente
+<strong>busca</strong> en los documentos propios y luego
+<strong>genera</strong> la respuesta <strong>citando</strong> lo
+encontrado.</li>
+<li>Reduce las alucinaciones: responde <strong>a partir de
+fuentes</strong>, no solo de memoria.</li>
+<li><strong>Ejemplo:</strong> un agente que consulta el reglamento
+interno de la alcaldía y responde con la referencia exacta.</li>
+</ul>
+<h3 id="automatización-de-tareas">Automatización de tareas</h3>
+<ul>
+<li>Agentes que <strong>ejecutan pasos repetitivos</strong>: clasificar
+correos, llenar planillas, generar reportes, extraer datos de
+formularios.</li>
+<li><strong>Ejemplo:</strong> un agente que lee un formulario de
+reclamo, extrae los datos y completa una planilla de seguimiento.</li>
+</ul>
+<p><strong>Mensaje puente:</strong> <em>"Los agentes son útiles, pero
+actúan y por eso fallan distinto: un error no es solo una frase, puede
+ser una acción. Veamos los riesgos."</em></p>
+<hr />
+<h2 id="pausa-10-min">Pausa (10 min)</h2>
+<hr />
+<h2 id="riesgos-y-supervisión-humana-10-min">Riesgos y supervisión
+humana (10 min)</h2>
+<h3 id="por-qué-son-más-riesgosos">Por qué son más riesgosos</h3>
+<ul>
+<li>Un agente <strong>amplifica los límites del LLM</strong>
+(alucinación, sesgo) porque sus errores se traducen en
+<strong>acciones</strong>.</li>
+<li>Puede <strong>usar mal una herramienta</strong>, interpretar mal una
+instrucción o <strong>encadenar errores</strong>.</li>
+</ul>
+<h3 id="riesgos-típicos">Riesgos típicos</h3>
+<ul>
+<li><strong>Error de datos:</strong> busca mal, cita una fuente
+incorrecta o extrae un dato erróneo.</li>
+<li><strong>Acción indebida:</strong> envía, publica o modifica algo que
+no debía.</li>
+<li><strong>Falta de transparencia:</strong> no queda claro por qué tomó
+tal decisión.</li>
+</ul>
+<h3 id="supervisión-humana">Supervisión humana</h3>
+<ul>
+<li>Mantener al <strong>humano en el circuito</strong>
+(human-in-the-loop): revisar y aprobar las acciones críticas.</li>
+<li><strong>Principio de menor privilegio:</strong> limitar lo que el
+agente puede hacer (leer, pero no enviar; sugerir, pero no
+publicar).</li>
+<li><strong>Auditoría y trazabilidad:</strong> registrar qué hizo y con
+qué fuentes.</li>
+<li>En el sector público: <strong>la responsabilidad es del
+funcionario</strong>, no del agente.</li>
+</ul>
+<h3 id="confidencialidad">Confidencialidad</h3>
+<ul>
+<li>Antes de pegar cualquier cosa en un chat público: ¿son <strong>datos
+de ciudadanos</strong>, <strong>documentos reservados</strong> o
+<strong>información no pública</strong>? Si lo son, <strong>no se
+pegan</strong>.</li>
+<li>Se trabaja con <strong>ejemplos ficticios</strong>, datos ya
+públicos o documentos abiertos.</li>
+</ul>
+<p><strong>Idea para la pizarra:</strong> escribir en acento <strong>"el
+agente sugiere, el humano decide"</strong> como regla de oro.</p>
+<hr />
+<h2 id="aplicación-integrada-el-método-y-la-consigna-15-min">Aplicación
+integrada: el método y la consigna (15 min)</h2>
+<p>Conviene mirar la mini-solución como una aplicación de lo visto sobre
+agentes, dentro de una tarea acotada. Cualquier solución con LLM/agente
+sigue el mismo ciclo:</p>
+<ol type="1">
+<li><strong>Definir la tarea</strong> — ¿qué problema institucional
+resolvemos?, ¿para quién?, ¿qué resultado esperamos? Mejor un paso útil
+y concreto que un proyecto enorme.</li>
+<li><strong>Armar prompts o flujos</strong> — para
+<strong>chat</strong>, prompts con claridad, contexto, ejemplos y rol;
+para <strong>agente</strong>, definir modelo, herramientas, memoria,
+planificación y <strong>punto de supervisión humana</strong>. El flujo
+<strong>se diseña y se documenta</strong> con
+<code>plantilla-diseno-flujo-agente.md</code>, aunque no se ejecute en
+vivo.</li>
+<li><strong>Evaluar</strong> — probar con <strong>casos reales</strong>
+y revisar con criterio experto: ¿responde a lo pedido?, ¿es exacta?,
+¿hay alucinaciones o sesgos?, ¿el tono es el correcto?</li>
+<li><strong>Mejorar</strong> — ajustar prompts, flujos o fuentes a
+partir de lo observado, e iterar hasta una versión presentable.</li>
+</ol>
+<p><strong>Idea para la pizarra:</strong> dibujar el ciclo
+<strong>Definir → Armar → Evaluar → Mejorar</strong> (vuelve a Definir o
+Armar).</p>
+<h3 id="consigna-y-formación-de-equipos">Consigna y formación de
+equipos</h3>
+<p>Desarrollar una <strong>mini-solución</strong> con un LLM (chat o
+agente) para un <strong>caso institucional</strong>, documentando el
+método y el resultado.</p>
+<p><strong>Casos sugeridos de gestión pública boliviana</strong>
+(detallados, con los dos reescritos, en
+<code>insumos/casos-minisolucion-s10.md</code>):</p>
+<ol type="1">
+<li><strong>Asistente de trámites:</strong> un chat/agente que responde
+consultas frecuentes sobre requisitos, usando la normativa
+institucional.</li>
+<li><strong>Clasificador de reclamos</strong> <em>(reescrito):</em> un
+<strong>chat</strong> que, con un buen prompt, propone la categoría de
+cada reclamo a partir de ejemplos; la persona <strong>revisa y
+deriva</strong>, y <strong>no se suben reclamos reales</strong>.</li>
+<li><strong>Resumidor de informes:</strong> un chat que convierte un
+informe técnico en un resumen para una autoridad.</li>
+<li><strong>Verificador de expedientes</strong> <em>(reescrito):</em> un
+<strong>chat</strong> que, con una lista de verificación, marca qué
+documentos obligatorios figuran en un caso <strong>ficticio</strong>; la
+persona <strong>confirma</strong> antes de dar por válido el
+expediente.</li>
+<li><strong>Avisos a la ciudadanía:</strong> un chat que redacta avisos
+claros sobre servicios y trámites.</li>
+</ol>
+<p><strong>Criterios de entrega:</strong> tarea definida, prompts o
+flujo (con sus componentes), resultado de una prueba, evaluación crítica
+y mejora aplicada.</p>
+<hr />
+<h2 id="taller-definir-y-armar-35-min">Taller: definir y armar (35
+min)</h2>
+<ul>
+<li>Los equipos trabajan en la mini-solución.</li>
+<li>El docente <strong>circula</strong> entre equipos: ayuda a acotar la
+tarea, revisa los prompts y orienta el diseño del flujo.</li>
+<li>Al terminar el bloque, cada equipo debe tener <strong>tarea
+definida</strong> y <strong>prompts/flujo</strong> listos para
+probar.</li>
+</ul>
+<blockquote>
+<p>El taller completo —caso institucional, reparto minuto a minuto,
+entregables, Modo A/B, preparación previa, problemas frecuentes y Plan
+B— está en <code>taller_sesion10_minisolucion_ia.md</code>.</p>
+</blockquote>
+<hr />
+<h2 id="taller-evaluar-mejorar-y-preparar-la-defensa-25-min">Taller:
+evaluar, mejorar y preparar la defensa (25 min)</h2>
+<ul>
+<li>Probar la solución con un caso <strong>ficticio o público</strong> y
+<strong>evaluar</strong> la respuesta con las tres preguntas: ¿responde
+a lo pedido?, ¿es exacta y verificable?, ¿hay alucinaciones o
+sesgos?</li>
+<li>Aplicar al menos <strong>una mejora</strong> (prompt, flujo o
+fuente).</li>
+<li><strong>Anotar qué se tuvo que verificar o corregir</strong> y qué
+dato no se subiría a un chat público.</li>
+<li>Preparar una <strong>defensa breve (2 min por equipo)</strong> con
+la plantilla de entrega
+<code>plantilla-entrega-minisolucion.md</code>.</li>
+</ul>
+<hr />
+<h2 id="presentación-y-defensa-15-min">Presentación y defensa (15
+min)</h2>
+<p><strong>Por equipo (2 min cada uno):</strong></p>
+<ul>
+<li>Qué problema resolvieron y con qué herramienta (chat o agente
+<strong>diseñado</strong>).</li>
+<li>Mostrar el <strong>prompt o flujo</strong> y el
+<strong>resultado</strong> de la prueba.</li>
+<li>Señalar <strong>qué tuvieron que verificar o corregir</strong> y qué
+mejora aplicaron.</li>
+</ul>
+<p><strong>Guía de corrección:</strong> valorar la
+<strong>coherencia</strong> entre tarea, método y resultado; la
+<strong>calidad del prompt/flujo</strong>; la <strong>definición del
+punto de control humano</strong>; y la <strong>actitud crítica</strong>
+(saber qué verificar). El objetivo no es la perfección técnica, sino la
+<strong>integración consciente</strong> de lo aprendido.</p>
+<hr />
+<h2 id="cierre-del-módulo-y-preguntas-10-min">Cierre del módulo y
+preguntas (10 min)</h2>
+<ul>
+<li><strong>Síntesis integradora del módulo:</strong> recorrer la cadena
+mostrando que cada eslabón habilita al siguiente:
+<ol type="1">
+<li><strong>Datos y calidad</strong> — el activo de partida (Bloque
+1).</li>
+<li><strong>Ingesta</strong> — traer los datos de las fuentes, por lotes
+o en tiempo real (Bloque 2).</li>
+<li><strong>Arquitectura</strong> — organizar el almacenamiento y el
+procesamiento (Bloque 3).</li>
+<li><strong>Integración</strong> — transformar y combinar datos para que
+sean útiles (Bloque 4).</li>
+<li><strong>Licencias y datos abiertos</strong> — usar y compartir datos
+de forma legal y transparente (Bloque 5).</li>
+<li><strong>IA, LLMs y agentes</strong> — la capa que convierte los
+datos en respuestas y acciones (Bloque 6).</li>
+</ol></li>
+<li><strong>Trabajo final integrador (entrega fuera de clase):</strong>
+documentar el caso, las fuentes, la arquitectura, el flujo y los
+resultados; incluir los artefactos del pipeline (ingesta, transformación
+y orquestación); presentar y defender ante el grupo. <strong>Suma dos
+componentes obligatorios que cierran el arco del módulo:</strong>
+<ul>
+<li><strong>(a) Declaración de licencia del dataset usado</strong>
+(Bloque 5): qué licencia tiene —o qué licencia le pondrían— y qué no se
+publicaría por protección de datos personales.</li>
+<li><strong>(b) Un prompt o flujo de agente documentado</strong> (Bloque
+6): con claridad y contexto, su resultado de prueba y su <strong>punto
+de control humano</strong>. Se evalúa con la rúbrica del módulo
+(<code>rubrica-modulo.md</code>).</li>
+</ul></li>
+<li>Reforzar la idea fuerza: <em>"La IA no reemplaza al profesional
+público; lo potencia, siempre que los datos sean buenos y haya criterio
+y supervisión humana."</em></li>
+<li><strong>No hay próxima sesión:</strong> con esta sesión cierra el
+módulo. Agradecer y dejar espacio para preguntas.</li>
+</ul>
+<hr />
+<h2 id="recursos">Recursos</h2>
+<ul>
+<li>Presentación <code>presentacion_sesion10.html</code> y deck
+<code>deck-sesion-10.html</code>.</li>
+<li>Insumos del taller: <code>insumos/casos-minisolucion-s10.md</code>
+(los cinco casos).</li>
+<li>Plantillas: <code>plantilla-diseno-flujo-agente.md</code> (flujo y
+punto de control humano) y
+<code>plantilla-entrega-minisolucion.md</code> (entrega y defensa).</li>
+<li>Guía de solución del docente:
+<code>guia-solucion-docente-sesion10.md</code>.</li>
+<li>Lección <code>lessons/0006-agentes-de-ia.html</code> y referencia
+<code>reference/componentes-de-un-agente.html</code>.</li>
+<li>Entorno con acceso a un chat LLM (y, si es posible, a un agente)
+<strong>solo con datos ficticios o públicos</strong>; Plan B sin
+cuenta.</li>
+</ul>
+<h2 id="evaluación-de-la-sesión">Evaluación de la sesión</h2>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Explica qué es un agente y qué cambia frente al chat</td>
+<td>Participación en el bloque "del chat al agente"</td>
+</tr>
+<tr>
+<td>Identifica los cuatro componentes</td>
+<td>Plantilla de diseño del flujo completada</td>
+</tr>
+<tr>
+<td>Diseña un flujo coherente e incorpora supervisión humana</td>
+<td>Flujo presentado en la puesta en común</td>
+</tr>
+<tr>
+<td>Define una tarea institucional acotada</td>
+<td>Tarea documentada en la entrega</td>
+</tr>
+<tr>
+<td>Arma prompts o flujos coherentes</td>
+<td>Prompt/flujo presentado</td>
+</tr>
+<tr>
+<td>Evalúa críticamente el resultado y aplica una mejora</td>
+<td>Observaciones y mejora documentadas en la defensa</td>
+</tr>
+<tr>
+<td>Cuida la confidencialidad</td>
+<td>No usa datos de ciudadanos ni documentos reservados en el chat</td>
+</tr>
+<tr>
+<td>Integra los conceptos del módulo</td>
+<td>Aportes en el cierre y vínculo con el trabajo final</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Entrega:</strong> mini-solución documentada (tarea,
+prompt/flujo, resultado de una prueba, evaluación crítica y mejora
+aplicada). El <strong>trabajo final integrador</strong> se entrega fuera
+de clase al cierre de la cursada e incluye la declaración de licencia
+del dataset y el prompt/flujo con punto de control humano.</p>
+  <footer class="docfoot">Generado desde <a href="Sesion_10_IA_Agentes_Taller.md"><code>Sesion_10_IA_Agentes_Taller.md</code></a> · Módulo 6 — Inteligencia Artificial · IDT 601</footer>
+</div>
+</body>
+</html>

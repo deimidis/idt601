@@ -61,4 +61,5 @@ Materiales de la **Unidad/Bloque 6 — Historia y Desarrollo de la Inteligencia 
 - Esta carpeta es el origen; se publica en el sitio estático `../idt601/modulo-6-ia/`.
 - Si se cambia un material aquí, hay que volver a copiarlo allí.
 - Los `.docx` (`taller_sesion*`, `plantilla-*`, `guia-prompting`) se generan con `pandoc` desde el `.md` y **no se versionan** en el sitio.
+- Los **documentos de lectura** (planes, notas, talleres, guías, plantillas, insumos) tienen una versión `.html` con el diseño del sitio. Se generan con `./render-docs.sh` (usa `assets/doc-template.html` + `assets/styles.css` + `assets/docs.css`) y el sitio enlaza esa `.html`. El `.md` sigue siendo la fuente: tras editarlo, volver a correr el script y copiar el `.html`.
 - Las presentaciones reveal publicadas usan `reveal.js` por **CDN** (jsDelivr 6.0.1) y el tema `assets/theme-egpp.css` local.

@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde taller_sesion10_minisolucion_ia.md — no editar a mano. -->
+<title>Taller — Sesión 10: mini-solución de IA</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 6 — Inteligencia Artificial · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="taller--sesión-10-mini-solución-de-ia">Taller — Sesión 10:
+mini-solución de IA</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601) · Bloque 6 —
+Inteligencia Artificial <strong>Duración:</strong> 75 min de taller y
+defensa (35 + 25 + 15), dentro de la sesión de 180 min
+<strong>Modalidad:</strong> 100 % en línea (Zoom + salas) · <strong>Modo
+A</strong> (equipos) o <strong>Modo B</strong> (demostración del
+docente) <strong>Herramienta:</strong> un chat LLM en el navegador (sin
+instalar) o, si no hay cuenta, el <strong>Plan B</strong> del final.
+<strong>Insumos:</strong> <code>insumos/casos-minisolucion-s10.md</code>
+(los cinco casos) · <code>plantilla-diseno-flujo-agente.md</code> ·
+<code>plantilla-entrega-minisolucion.md</code></p>
+<hr />
+<h2 id="objetivo">Objetivo</h2>
+<p>Que cada equipo <strong>construya y documente una
+mini-solución</strong> con un LLM (chat o agente) para un caso
+institucional acotado, siguiendo el método <strong>Definir → Armar →
+Evaluar → Mejorar</strong> y dejando explícito su <strong>punto de
+control humano</strong>.</p>
+<p>Entregables <strong>nombrados</strong>:</p>
+<ol type="1">
+<li><strong>Mini-solución documentada</strong>
+(<code>plantilla-entrega-minisolucion.md</code>): tarea, prompt/flujo,
+resultado de una prueba, evaluación crítica y mejora aplicada.</li>
+<li><strong>Flujo del agente diseñado</strong>
+(<code>plantilla-diseno-flujo-agente.md</code>): modelo, herramientas,
+memoria, planificación y punto de control humano.</li>
+</ol>
+<blockquote>
+<p>El flujo del agente <strong>se diseña y se documenta</strong>, aunque
+no se ejecute en vivo. Los casos 2 (clasificador de reclamos) y 4
+(verificador de expedientes) se resuelven con <strong>chat + criterio +
+supervisión humana</strong>: no hacen falta plataformas de agentes
+reales.</p>
+</blockquote>
+<h2 id="caso-institucional">Caso institucional</h2>
+<blockquote>
+<p><em>Una institución pública quiere usar un LLM para aliviar una tarea
+repetitiva. El equipo elige <strong>una</strong> tarea acotada, define
+para quién es y qué resultado espera, arma el prompt (chat) o el flujo
+(agente), lo evalúa con un caso <strong>ficticio o público</strong> y lo
+mejora.</em></p>
+</blockquote>
+<p>Los cinco casos están detallados en
+<code>insumos/casos-minisolucion-s10.md</code>: asistente de trámites,
+clasificador de reclamos, resumidor de informes, verificador de
+expedientes y avisos a la ciudadanía.</p>
+<blockquote>
+<p><strong>Regla transversal:</strong> no se sube a un chat público
+ningún dato de ciudadanos, documento reservado ni información no
+pública. Se trabaja con ejemplos <strong>ficticios</strong> o datos ya
+<strong>públicos</strong>.</p>
+</blockquote>
+<h2 id="preparación-previa-el-día-anterior">Preparación previa (el día
+anterior)</h2>
+<ol type="1">
+<li>Subir a Moodle (o pegar en el chat) los insumos:
+<code>insumos/casos-minisolucion-s10.md</code> y las dos
+plantillas.</li>
+<li>Preparar una <strong>mini-solución de ejemplo</strong> (para el Modo
+B) usando el caso 3 (resumidor de informes) con un texto ficticio.</li>
+<li>Verificar que el chat LLM abre sin cuenta o tener listo el
+<strong>Plan B</strong>.</li>
+<li>Tener un <strong>documento compartido o pizarra</strong> para que
+los equipos peguen sus entregas en la defensa.</li>
+<li>Tener a mano la <code>guia-solucion-docente-sesion10.md</code> con
+los casos resueltos y la rúbrica.</li>
+</ol>
+<h2 id="reparto-minuto-a-minuto-75-min">Reparto minuto a minuto (75
+min)</h2>
+<table>
+<thead>
+<tr>
+<th>Momento</th>
+<th>Tiempo</th>
+<th>Quién</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Definir y armar</strong> — tarea y prompt/flujo</td>
+<td>35 min</td>
+<td>Equipos</td>
+</tr>
+<tr>
+<td><strong>Evaluar, mejorar y preparar la defensa</strong></td>
+<td>25 min</td>
+<td>Equipos</td>
+</tr>
+<tr>
+<td><strong>Defensa</strong> — 2 min por equipo</td>
+<td>15 min</td>
+<td>Todos</td>
+</tr>
+<tr>
+<td><strong>Total taller y defensa</strong></td>
+<td><strong>75 min</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>La <strong>consigna, la formación de equipos y la elección del
+caso</strong> (5 min) ocurren en el bloque anterior, "Aplicación
+integrada: el método y la consigna" (15 min), junto con la explicación
+del método de cuatro pasos.</p>
+</blockquote>
+<h3 id="dentro-de-definir-y-armar-35-min">Dentro de "Definir y armar"
+(35 min)</h3>
+<table>
+<thead>
+<tr>
+<th>Minutos</th>
+<th>Qué pasa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–10</td>
+<td>Escribir el problema, el destinatario y el criterio de éxito (punto
+1 de la entrega).</td>
+</tr>
+<tr>
+<td>10–25</td>
+<td>Armar el <strong>prompt</strong> (chat) o completar el <strong>flujo
+del agente</strong>
+(<code>plantilla-diseno-flujo-agente.md</code>).</td>
+</tr>
+<tr>
+<td>25–32</td>
+<td>Revisar que estén los cuatro componentes y el <strong>punto de
+control humano</strong>.</td>
+</tr>
+<tr>
+<td>32–35</td>
+<td>Chequeo interno con la lista de control y pedir ayuda al docente si
+hace falta.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dentro-de-evaluar-mejorar-y-preparar-la-defensa-25-min">Dentro
+de "Evaluar, mejorar y preparar la defensa" (25 min)</h3>
+<table>
+<thead>
+<tr>
+<th>Minutos</th>
+<th>Qué pasa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–8</td>
+<td><strong>Probar</strong> la solución con un caso ficticio o público y
+pegar el resultado.</td>
+</tr>
+<tr>
+<td>8–15</td>
+<td><strong>Evaluar</strong> con las tres preguntas: ¿responde a lo
+pedido?, ¿es exacto y verificable?, ¿hay alucinación o sesgo?</td>
+</tr>
+<tr>
+<td>15–21</td>
+<td>Aplicar <strong>una mejora</strong> (prompt, flujo o fuente) y
+anotar el antes y el después.</td>
+</tr>
+<tr>
+<td>21–25</td>
+<td><strong>Preparar la defensa de 2 min</strong> con la plantilla de
+entrega.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dentro-de-defensa-15-min">Dentro de "Defensa" (15 min)</h3>
+<table>
+<thead>
+<tr>
+<th>Minutos</th>
+<th>Qué pasa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–1</td>
+<td>Encuadre del docente: qué se muestra y en qué orden.</td>
+</tr>
+<tr>
+<td>1–13</td>
+<td><strong>2 min por equipo</strong> (unos 6 equipos). Cada equipo
+muestra prompt/flujo, resultado de la prueba y qué verificó.</td>
+</tr>
+<tr>
+<td>13–15</td>
+<td>Cierre del docente: contrasta elecciones y refuerza la regla de
+oro.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="pasos-del-trabajo">Pasos del trabajo</h2>
+<p><strong>Consigna:</strong> "Elijan un caso acotado, definan para
+quién es y qué resultado esperan, y documenten el prompt o el flujo.
+Después pruébenlo con un caso ficticio, evalúenlo con criterio y
+apliquen una mejora. No se busca la perfección: se busca un paso útil y
+bien pensado."</p>
+<ol type="1">
+<li><strong>Definir la tarea.</strong> Un problema acotado, un
+destinatario y un criterio de éxito.</li>
+<li><strong>Armar.</strong> Para <strong>chat</strong>: prompt con
+claridad, contexto, ejemplos y rol. Para <strong>agente</strong>:
+completar los cuatro componentes y el punto de control humano en
+<code>plantilla-diseno-flujo-agente.md</code>.</li>
+<li><strong>Probar.</strong> Un caso <strong>ficticio o
+público</strong>; pegar el resultado.</li>
+<li><strong>Evaluar.</strong> Tres preguntas: ¿responde a lo pedido?,
+¿es exacto y verificable?, ¿hay alucinación o sesgo? Anotar
+honestamente.</li>
+<li><strong>Mejorar.</strong> Un cambio concreto (prompt, flujo o
+fuente) y su efecto.</li>
+<li><strong>Preparar la defensa.</strong> 2 min por equipo con la
+plantilla de entrega.</li>
+</ol>
+<h2 id="modo-a--trabajo-de-participantes-salas">Modo A — Trabajo de
+participantes (salas)</h2>
+<p><strong>Consigna (pegar en el chat):</strong> "Elijan un caso,
+definan la tarea y armen el prompt/flujo. Luego prueben, evalúen y
+mejoren. Entreguen las dos plantillas. Guarden el enlace con permiso de
+edición."</p>
+<ul>
+<li>Roles del equipo: <strong>coordinador</strong> (cuida el tiempo) y
+<strong>relator</strong> (comparte pantalla en la defensa).</li>
+<li>Rol del docente: <strong>rotar por las salas cada 5–6 min</strong>,
+destrabar sobre todo el <strong>alcance de la tarea</strong> (que no sea
+enorme), la <strong>calidad del prompt/flujo</strong> y la
+<strong>ubicación del punto de control humano</strong>.</li>
+</ul>
+<h2
+id="modo-b--demostración-del-docente-guion-para-compartir-pantalla-35-min">Modo
+B — Demostración del docente (guion para compartir pantalla, 35
+min)</h2>
+<p>Versión totalmente guiada. Los participantes siguen con la vista y
+completan su plantilla.</p>
+<ol type="1">
+<li><strong>Encuadre (3 min).</strong> "Vamos a construir una
+mini-solución completa, de la tarea a la mejora."</li>
+<li><strong>Definir (5 min).</strong> Caso 3 (resumidor de informes):
+destinatario (una autoridad) y criterio de éxito (resumen fiel de 150
+palabras).</li>
+<li><strong>Armar (10 min).</strong> Escribir el prompt con rol,
+longitud, secciones y un ejemplo de estilo; mostrar el antes (prompt
+vago) y el después (prompt completo).</li>
+<li><strong>Probar (6 min).</strong> Pegar un <strong>texto
+ficticio</strong> y mostrar el resultado real del chat.</li>
+<li><strong>Evaluar (5 min).</strong> Verificar una cifra contra el
+texto original; señalar si el resumen cambió un dato y qué se debe
+revisar siempre.</li>
+<li><strong>Mejorar (4 min).</strong> Ajustar el prompt (pedir "no
+inventes cifras; cita el párrafo") y volver a probar.</li>
+<li><strong>Cerrar (2 min).</strong> Repetir el punto de control humano
+y la regla de confidencialidad.</li>
+</ol>
+<blockquote>
+<p><strong>Consejo de pantalla:</strong> hacerlo despacio, pensar en voz
+alta y dejar visibles el prompt y el resultado para comparar.</p>
+</blockquote>
+<h2 id="puesta-en-común--defensa-15-min">Puesta en común / defensa (15
+min)</h2>
+<p>El <strong>relator</strong> comparte pantalla (<strong>2 min por
+equipo</strong>). Cuenta:</p>
+<ul>
+<li><strong>Qué problema</strong> resolvió y <strong>para
+quién</strong>.</li>
+<li>El <strong>prompt o flujo</strong> y el <strong>resultado</strong>
+de la prueba.</li>
+<li><strong>Qué tuvo que verificar o corregir</strong> y <strong>qué
+mejora</strong> aplicó.</li>
+<li><strong>Dónde</strong> revisa una persona el resultado (punto de
+control humano).</li>
+</ul>
+<p>El docente contrasta las soluciones y refuerza las ideas fuerza:
+<em>un error del agente puede ser una acción; el agente sugiere y el
+humano decide; y la confidencialidad no se negocia.</em></p>
+<hr />
+<h2 id="evaluación-y-entrega">Evaluación y entrega</h2>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Define una tarea acotada y útil</td>
+<td>Punto 1 de la entrega</td>
+</tr>
+<tr>
+<td>Diseña el flujo (modelo, herramientas, memoria, planificación)</td>
+<td>Plantilla de diseño</td>
+</tr>
+<tr>
+<td>Incorpora supervisión humana</td>
+<td>Punto de control humano definido</td>
+</tr>
+<tr>
+<td>Prueba y evalúa</td>
+<td>Punto 3 y 4 de la entrega</td>
+</tr>
+<tr>
+<td>Aplica una mejora</td>
+<td>Punto 5 de la entrega</td>
+</tr>
+<tr>
+<td>Cuida la confidencialidad</td>
+<td>Usa caso ficticio o público</td>
+</tr>
+<tr>
+<td>Defiende con claridad</td>
+<td>Exposición de 2 min</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Entrega por equipo:</strong>
+<code>plantilla-entrega-minisolucion.md</code> +
+<code>plantilla-diseno-flujo-agente.md</code> completadas (o el enlace
+del documento). Se cierra <strong>dentro de la sesión</strong>.</p>
+<h2 id="rúbrica-con-niveles">Rúbrica con niveles</h2>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Descriptor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Insuficiente (1–59)</strong></td>
+<td>Tarea vaga o desmedida; no identifica los componentes ni prevé
+control humano; no prueba o no evalúa.</td>
+</tr>
+<tr>
+<td><strong>Suficiente (70–84)</strong></td>
+<td>Tarea acotada con destinatario; identifica los cuatro componentes;
+menciona revisión humana; prueba y evalúa con las tres preguntas.</td>
+</tr>
+<tr>
+<td><strong>Alto (85–94)</strong></td>
+<td>Justifica los componentes según la tarea; define <strong>puntos de
+control</strong> con menor privilegio y trazabilidad; detecta un
+problema y aplica una mejora.</td>
+</tr>
+<tr>
+<td><strong>Excelente (95–100)</strong></td>
+<td>Todo lo anterior, más: criterio de éxito explícito; detecta y
+documenta alucinación o sesgo; usa caso ficticio o público y prevé el
+resguardo de datos de ciudadanos.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Escala del módulo (Plan de Clases): 1–59 inicial · 60–69 muy parcial
+· 70–84 suficiente · 85–94 alto porcentaje · 95–100 logro total
+esperado.</p>
+</blockquote>
+<h2 id="problemas-frecuentes-y-qué-hacer">Problemas frecuentes (y qué
+hacer)</h2>
+<table>
+<thead>
+<tr>
+<th>Síntoma</th>
+<th>Causa</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tarea enorme ("un asistente para toda la institución")</td>
+<td>No acotan</td>
+<td>Reducir a <strong>un paso</strong>: un tipo de consulta, un tipo de
+reclamo, un informe.</td>
+</tr>
+<tr>
+<td>Prompt vago ("resumime esto")</td>
+<td>Faltan claridad y contexto</td>
+<td>Pedir rol, formato, longitud y un ejemplo de estilo.</td>
+</tr>
+<tr>
+<td>No aparece la supervisión humana</td>
+<td>Creen que el control va "implícito"</td>
+<td>Exigir que escriban <strong>en qué paso y qué revisa</strong> una
+persona.</td>
+</tr>
+<tr>
+<td>Pegan datos reales de ciudadanos</td>
+<td>Prueban con datos de trabajo</td>
+<td>Detener, borrar y usar un <strong>caso ficticio</strong>; repetir la
+regla de confidencialidad.</td>
+</tr>
+<tr>
+<td>"El agente es muy avanzado para documentarlo sin plataforma"</td>
+<td>Confunden ejecutar con diseñar</td>
+<td>Aclarar que el flujo <strong>se diseña y se documenta</strong>
+aunque no se ejecute en vivo.</td>
+</tr>
+<tr>
+<td>No aplican mejora</td>
+<td>Cierran con la primera versión</td>
+<td>Pedir el "antes y después" de un cambio concreto.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="plan-b-si-falla-la-conexión-el-acceso-o-la-cuenta">Plan B (si
+falla la conexión, el acceso o la cuenta)</h2>
+<ul>
+<li><strong>Sin cuenta en el chat:</strong> usar un chat que abra sin
+registro; si no, el docente comparte pantalla y la clase sigue el guion
+del <strong>Modo B</strong>.</li>
+<li><strong>Sin salas:</strong> cada equipo trabaja en un documento
+compartido coordinado por el chat.</li>
+<li><strong>Sin poder pegar texto:</strong> el equipo escribe el prompt
+y <strong>describe</strong> el resultado esperado; documenta igual el
+flujo, la evaluación y la mejora.</li>
+<li><strong>Sin audio:</strong> la consigna y la defensa se hacen por
+chat y pantalla compartida.</li>
+</ul>
+<hr />
+<h2 id="nota-para-el-docente">Nota para el docente</h2>
+<ul>
+<li>El taller continúa el método de la sesión 9 (prompts y verificación)
+y lo lleva a <strong>diseño de flujo</strong>.</li>
+<li>Los casos 2 y 4 se resolvieron con <strong>chat + criterio +
+supervisión humana</strong> para no depender de una plataforma de
+agentes real; el flujo del agente <strong>se diseña y se
+documenta</strong> con la plantilla.</li>
+<li>La <strong>solución modelo</strong> (casos resueltos, errores
+frecuentes y rúbrica del trabajo final) está en
+<code>guia-solucion-docente-sesion10.md</code>.</li>
+</ul>
+  <footer class="docfoot">Generado desde <a href="taller_sesion10_minisolucion_ia.md"><code>taller_sesion10_minisolucion_ia.md</code></a> · Módulo 6 — Inteligencia Artificial · IDT 601</footer>
+</div>
+</body>
+</html>

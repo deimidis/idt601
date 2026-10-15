@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde Sesion_09_IA_LLMs_Prompting.md — no editar a mano. -->
+<title>Sesión 9 — Modelos de lenguaje (LLM) y prompting</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 6 — Inteligencia Artificial · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="sesión-9--modelos-de-lenguaje-llm-y-prompting">Sesión 9 —
+Modelos de lenguaje (LLM) y prompting</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601)
+<strong>Bloque:</strong> 6 — Historia y Desarrollo de la Inteligencia
+Artificial <strong>Duración:</strong> 3 horas (180 min) — teóricas y
+prácticas <strong>Público:</strong> Profesionales no especializados en
+ingeniería de datos <strong>Modalidad:</strong> 100 % virtual</p>
+<hr />
+<h2 id="objetivos-de-la-sesión">Objetivos de la sesión</h2>
+<ul>
+<li>Entender qué son los modelos de lenguaje de gran escala (LLM) y cómo
+generan contenido.</li>
+<li>Reconocer los modelos generativos (texto y código) y sus alcances y
+límites.</li>
+<li>Usar modelos de lenguaje en formato de chat e identificar el papel
+del prompt.</li>
+<li>Aplicar técnicas de prompting (claridad, contexto, ejemplos y rol)
+para obtener mejores resultados.</li>
+<li>Iterar y verificar críticamente las respuestas antes de usarlas en
+la gestión pública.</li>
+<li>Instalar la regla de <strong>confidencialidad</strong>: no subir
+datos de ciudadanos, documentos reservados ni información no pública a
+un chat externo.</li>
+</ul>
+<h2 id="ideas-clave-qué-debe-quedar-al-final">Ideas clave (qué debe
+quedar al final)</h2>
+<ol type="1">
+<li>Un <strong>LLM</strong> es una <strong>red neuronal a gran
+escala</strong> entrenada sobre enormes volúmenes de texto; su tarea
+central es <strong>predecir la siguiente palabra</strong>.</li>
+<li>Generar contenido es <strong>predecir palabra por palabra usando
+probabilidades</strong>, no "pensar" ni copiar de una base de datos: por
+eso la respuesta puede cambiar cada vez.</li>
+<li>Conceptos que explican el comportamiento real:
+<strong>token</strong>, <strong>ventana de contexto</strong>,
+<strong>temperatura</strong> y <strong>embedding</strong>.</li>
+<li>Los <strong>modelos generativos</strong> producen <strong>texto y
+código</strong> (y también imagen, audio o video), y abren nuevas formas
+de trabajar, también en la gestión pública.</li>
+<li>Los LLM tienen <strong>límites serios</strong>:
+<strong>alucinan</strong> (inventan datos), <strong>reproducen
+sesgos</strong> del texto con que se entrenaron y tienen un
+<strong>conocimiento con fecha de corte</strong>.</li>
+<li>Un <strong>chat</strong> es la interfaz para conversar con un LLM;
+lo que escribimos (el <strong>prompt</strong>) condiciona fuertemente la
+calidad de la respuesta.</li>
+<li>Un <strong>buen prompt</strong> combina <strong>claridad</strong>,
+<strong>contexto</strong>, <strong>ejemplos</strong> y, cuando conviene,
+la definición de un <strong>rol</strong>; trabajar con un LLM es un
+proceso <strong>iterativo</strong>.</li>
+<li><strong>Nunca</strong> se da por cierta una respuesta: hay que
+<strong>verificarla</strong> contra fuentes confiables y el propio
+criterio experto.</li>
+<li>Antes de pegar algo en un chat público: <strong>¿son datos de
+ciudadanos, documentos reservados o información no pública? Si lo son,
+no se pega.</strong></li>
+</ol>
+<h2 id="cronograma-sugerido-180-min">Cronograma sugerido (180 min)</h2>
+<table>
+<thead>
+<tr>
+<th>Bloque</th>
+<th>Duración</th>
+<th>Qué ocurre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apertura y encuadre</td>
+<td>10 min</td>
+<td>Bienvenida, puente con la Sesión 8 y dos preguntas
+disparadoras.</td>
+</tr>
+<tr>
+<td>Qué es un LLM y cómo se entrena</td>
+<td>20 min</td>
+<td>De la red neuronal al modelo a gran escala, con la corrección del
+ciclo de entrenamiento.</td>
+</tr>
+<tr>
+<td>Generación por probabilidad y conceptos operativos</td>
+<td>15 min</td>
+<td>Predicción de la siguiente palabra; token, ventana de contexto,
+temperatura y embedding.</td>
+</tr>
+<tr>
+<td>Modelos generativos</td>
+<td>10 min</td>
+<td>Texto y código; el panorama multimodal.</td>
+</tr>
+<tr>
+<td>Pausa</td>
+<td>10 min</td>
+<td>Receso.</td>
+</tr>
+<tr>
+<td>Alcances, límites y confidencialidad</td>
+<td>20 min</td>
+<td>Alucinación, sesgo, fecha de corte y la regla de cuidado de la
+información.</td>
+</tr>
+<tr>
+<td>Interfaces de chat y qué es un prompt</td>
+<td>10 min</td>
+<td>Cómo acceder y cómo interactuar; el prompt condiciona la
+respuesta.</td>
+</tr>
+<tr>
+<td>Técnicas de prompting</td>
+<td>20 min</td>
+<td>Claridad, contexto, ejemplos y rol.</td>
+</tr>
+<tr>
+<td>Iteración y verificación</td>
+<td>15 min</td>
+<td>El ciclo pedir → revisar → verificar → re-pedir.</td>
+</tr>
+<tr>
+<td>Práctica: prompts para gestión pública</td>
+<td>30 min</td>
+<td>Redactar prompts, evaluar respuestas e iterar.</td>
+</tr>
+<tr>
+<td>Puesta en común y cierre</td>
+<td>20 min</td>
+<td>Compartir el prompt mejorado, síntesis y puente a la Sesión 10.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Ajuste de tiempos:</strong> se recortan "Qué es un LLM"
+(25→20) y "Generación por probabilidad" (25→15) para abrir un bloque
+propio de <strong>conceptos operativos</strong> (token, ventana de
+contexto, temperatura y embedding). "Modelos generativos" pasa a 10 min,
+"límites" sube a 20 para sumar la <strong>confidencialidad</strong> (con
+enlace al Bloque 5) y "chat" baja a 10. La <strong>práctica queda en 30
+min completos</strong> y la <strong>puesta en común se mueve al
+cierre</strong> (cierre de 20 min que incluye los últimos 10 para
+compartir el prompt mejorado).</p>
+</blockquote>
+<hr />
+<h2 id="apertura-y-encuadre-10-min">Apertura y encuadre (10 min)</h2>
+<ul>
+<li>Dar la bienvenida y ubicar la sesión en el Bloque 6 — Historia y
+Desarrollo de la Inteligencia Artificial.</li>
+<li>Conectar con la sesión anterior: <em>"Vimos la red neuronal y cómo
+aprende. Hoy la vemos a escala gigante: los modelos de lenguaje, los que
+están detrás de los chats que usamos a diario. Y aprendemos a usarlos
+bien."</em></li>
+<li>Presentar las dos preguntas que ordenan el día: <strong>¿qué es un
+LLM y cómo genera contenido?</strong> y <strong>¿cómo le pedimos para
+obtener una buena respuesta?</strong></li>
+<li>Palabras clave: <strong>modelo de lenguaje, entrenamiento,
+probabilidad, generativo, alucinación, sesgo, chat, prompt, verificar,
+confidencialidad</strong>.</li>
+</ul>
+<blockquote>
+<p>Momento de enganche: abrir un chat con un LLM y mostrar dos
+respuestas ante un pedido vago ("háblame de impuestos") y ante uno
+preciso ("explicá en 5 líneas y para un funcionario municipal qué es el
+impuesto predial"). Preguntar: <em>"¿Qué diferencia notan? ¿Qué
+cambió?"</em> — anticipa el poder del prompt y el corazón de la
+sesión.</p>
+</blockquote>
+<hr />
+<h2 id="qué-es-un-llm-y-cómo-se-entrena-20-min">Qué es un LLM y cómo se
+entrena (20 min)</h2>
+<p>Explicar sin tecnicismos, retomando la red neuronal de la sesión
+previa.</p>
+<h3 id="llm-modelo-de-lenguaje-de-gran-escala">LLM: "modelo de lenguaje
+de gran escala"</h3>
+<ul>
+<li><strong>Modelo de lenguaje:</strong> un sistema que aprende
+<strong>cómo se combina el lenguaje</strong> humano a partir de
+ejemplos.</li>
+<li><strong>Gran escala (large):</strong> miles de millones de
+parámetros (pesos) y entrenado sobre <strong>enormes volúmenes de
+texto</strong>: libros, artículos, sitios web, código, documentos
+públicos.</li>
+<li>Analogía: un LLM es como un <strong>lector incansable</strong> que
+leyó una biblioteca entera y, con eso, aprendió qué palabras suelen ir
+juntas y en qué orden.</li>
+</ul>
+<h3 id="cómo-se-entrena">Cómo se entrena</h3>
+<ol type="1">
+<li>Se le muestran <strong>miles de millones de frases</strong>.</li>
+<li>Se le pide, una y otra vez, <strong>predecir la siguiente
+palabra</strong>.</li>
+<li>Se <strong>compara su predicción con la palabra que realmente
+seguía</strong> en el texto. Si no coinciden, se calcula el
+<strong>error</strong> y se <strong>ajustan los pesos</strong> para
+reducirlo (el mismo ciclo de la red neuronal, a escala gigante).</li>
+<li>Se repite millones de veces.</li>
+</ol>
+<blockquote>
+<p><strong>Precisión importante (evita un error frecuente):</strong>
+durante el preentrenamiento <strong>no hay un "refuerzo" cuando
+acierta</strong>. El modelo no aprende con premios ni castigos:
+simplemente <strong>compara</strong> su salida con la palabra que seguía
+en el texto y <strong>corrige los pesos</strong> para acercarse cada vez
+más. Eso es <strong>descenso de gradiente</strong>, y <strong>no es
+aprendizaje por refuerzo</strong>. El aprendizaje por refuerzo (con
+recompensas) es otra cosa y se vio en la Sesión 8.</p>
+</blockquote>
+<p><strong>No hay un humano escribiendo reglas:</strong> el modelo
+<strong>descubre los patrones del lenguaje</strong> solo.</p>
+<p><strong>Idea para la pizarra:</strong> dibujar la red neuronal de la
+sesión anterior y "agrandarla" millones de veces; anotar al lado
+<strong>entrenamiento = comparar la predicción con la palabra real y
+corregir los pesos</strong>.</p>
+<blockquote>
+<p>Demostración sugerida: pedirle al LLM que complete la frase "La
+recaudación tributaria del municipio aumentó porque..." y mostrar que
+continúa de forma natural, no porque tenga la respuesta guardada, sino
+porque sabe cómo suele seguir la frase.</p>
+</blockquote>
+<hr />
+<h2
+id="generación-por-probabilidad-y-conceptos-operativos-15-min">Generación
+por probabilidad y conceptos operativos (15 min)</h2>
+<h3 id="la-predicción-de-la-siguiente-palabra">La "predicción" de la
+siguiente palabra</h3>
+<ul>
+<li>Cuando escribimos un pedido, el modelo calcula <strong>qué palabra
+es más probable que venga después</strong>, según todo lo que leyó.</li>
+<li><strong>No busca</strong> en una base de datos ni "recuerda" textos:
+<strong>genera palabra por palabra</strong>, eligiendo entre las
+opciones más probables.</li>
+<li>Cada palabra elegida pasa a formar parte del contexto para elegir la
+siguiente.</li>
+</ul>
+<p><strong>Ideas para la pizarra:</strong></p>
+<ol type="1">
+<li>Entrada: <em>"El informe de gestión del año 2025..."</em></li>
+<li>El modelo asigna <strong>probabilidades</strong> a la siguiente
+palabra: "señala" (0,42), "muestra" (0,31), "indica" (0,18), otras
+(0,09).</li>
+<li>Elige una y continúa. Por eso, ante la misma pregunta, la respuesta
+puede <strong>variar</strong> cada vez.</li>
+</ol>
+<p><strong>Qué implica que sea probabilístico:</strong> no hay
+<strong>una única respuesta correcta</strong>, sino respuestas
+<strong>más o menos probables</strong>; elige la palabra probable, no la
+verdad. Esto explica por qué es útil y por qué a veces falla.</p>
+<h3 id="cuatro-conceptos-que-explican-el-comportamiento-real">Cuatro
+conceptos que explican el comportamiento real</h3>
+<table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Qué es</th>
+<th>Por qué importa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Token</strong></td>
+<td>Fragmento de texto (palabra, parte de palabra o signo) que el modelo
+usa como unidad.</td>
+<td>El modelo no "lee" letras ni palabras completas: cuenta y predice
+tokens. Explica por qué se equivoca al contar letras o al escribir
+palabras raras.</td>
+</tr>
+<tr>
+<td><strong>Ventana de contexto</strong></td>
+<td>Cantidad máxima de texto que el modelo puede tener en cuenta en una
+conversación.</td>
+<td>Más allá de ese límite, los mensajes viejos <strong>se
+pierden</strong>: el modelo "olvida" lo dicho al principio si la
+conversación crece demasiado.</td>
+</tr>
+<tr>
+<td><strong>Temperatura</strong></td>
+<td>Parámetro que regula qué tan variadas o predecibles son las
+respuestas.</td>
+<td>Baja = respuestas más repetibles y prudentes; alta = más variadas y
+creativas, pero también más impredecibles. No es "inteligencia": es
+cuánto se arriesga a elegir opciones menos probables.</td>
+</tr>
+<tr>
+<td><strong>Embedding (vector)</strong></td>
+<td>Representación numérica del significado de un texto, que permite
+comparar y buscar por parecido.</td>
+<td>Es la base de la búsqueda por similitud y de la recuperación de
+información (RAG, que se verá en la Sesión 10).</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Idea puente:</strong> estos cuatro conceptos no son teoría de
+laboratorio; <strong>explican por qué el modelo a veces olvida, a veces
+repite y a veces inventa</strong>. La próxima vez que una respuesta se
+corte o se desvíe, probablemente sea por la ventana de contexto o por la
+temperatura.</p>
+</blockquote>
+<h3 id="modelos-generativos-texto-y-código">Modelos generativos: texto y
+código</h3>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Qué genera</th>
+<th>Ejemplo en gestión pública</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Texto</td>
+<td>Redacta, resume, traduce, explica y responde</td>
+<td>Primera versión de una nota o de una respuesta a un reclamo</td>
+</tr>
+<tr>
+<td>Código</td>
+<td>Escribe y explica código; ayuda a automatizar</td>
+<td>Fórmula de planilla o script para ordenar un archivo de datos</td>
+</tr>
+</tbody>
+</table>
+<p>También existen modelos que generan <strong>imagen, audio (voz) y
+video</strong>, y modelos <strong>multimodales</strong>, que combinan
+texto e imagen en la misma conversación.</p>
+<p><strong>Mensaje puente:</strong> <em>"Todos comparten la misma idea:
+un modelo entrenado que genera contenido nuevo. Ahora veamos qué tan
+confiable es todo eso."</em></p>
+<hr />
+<h2 id="pausa-10-min">Pausa (10 min)</h2>
+<hr />
+<h2 id="alcances-límites-y-confidencialidad-20-min">Alcances, límites y
+confidencialidad (20 min)</h2>
+<h3 id="alucinaciones">Alucinaciones</h3>
+<ul>
+<li>El modelo <strong>inventa información</strong> con total seguridad:
+citas, datos, leyes o referencias que <strong>no existen</strong>.</li>
+<li>Ocurre porque genera <strong>lo más probable</strong>, no <strong>lo
+verdadero</strong>.</li>
+<li><strong>Ejemplo:</strong> pedir el "artículo 45 de la Ley N° 1234" y
+recibir un texto inventado, coherente pero falso.</li>
+<li><strong>Regla práctica:</strong> todo lo que salga de un LLM debe
+<strong>verificarse</strong> contra fuentes confiables.</li>
+</ul>
+<h3 id="sesgos">Sesgos</h3>
+<ul>
+<li>El modelo <strong>reproduce los sesgos</strong> del texto con que se
+entrenó (género, edad, región, tono, prejuicios).</li>
+<li><strong>Ejemplo:</strong> preguntar por profesiones y observar que
+ciertos roles se asocian de forma estereotipada.</li>
+</ul>
+<h3 id="actualidad-del-conocimiento">Actualidad del conocimiento</h3>
+<ul>
+<li>El modelo <strong>"sabe" hasta su fecha de corte</strong> (cuando
+terminó su entrenamiento); no conoce hechos posteriores salvo que se le
+proporcione contexto nuevo o consulte internet.</li>
+<li><strong>Ejemplo:</strong> puede no conocer una norma aprobada el mes
+pasado.</li>
+</ul>
+<h3 id="síntesis-en-tabla">Síntesis en tabla</h3>
+<table>
+<thead>
+<tr>
+<th>Límite</th>
+<th>Qué es</th>
+<th>Riesgo en la gestión pública</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alucinación</td>
+<td>Inventa información verosímil pero falsa</td>
+<td>Cifras, normas o referencias incorrectas</td>
+</tr>
+<tr>
+<td>Sesgo</td>
+<td>Repite prejuicios del entrenamiento</td>
+<td>Trato desigual, lenguaje estereotipado</td>
+</tr>
+<tr>
+<td>Fecha de corte</td>
+<td>No conoce lo posterior a su entrenamiento</td>
+<td>Normativa o datos desactualizados</td>
+</tr>
+</tbody>
+</table>
+<h3 id="regla-de-confidencialidad-enlace-con-el-bloque-5">Regla de
+confidencialidad (enlace con el Bloque 5)</h3>
+<blockquote>
+<p>Antes de pegar cualquier cosa en un chat público: <strong>¿son datos
+de ciudadanos, documentos reservados o información no pública?</strong>
+Si lo son, <strong>no se pega</strong>. Se trabaja con <strong>ejemplos
+ficticios</strong>, con <strong>datos ya públicos</strong> o con
+<strong>documentos abiertos</strong>. En el Estado, la responsabilidad
+es del funcionario, no de la herramienta.</p>
+</blockquote>
+<ul>
+<li>Lo trabajado en el Bloque 5 vuelve aquí: una cosa es
+<strong>publicar un dato abierto</strong> con su licencia y otra es
+<strong>subir datos personales o información reservada a un servicio
+externo</strong>.</li>
+<li>Si se necesita usar un caso real, se <strong>anonimiza</strong> (se
+cambian nombres, se quitan identificadores) o se reemplaza por un caso
+ficticio equivalente.</li>
+</ul>
+<hr />
+<h2 id="interfaces-de-chat-y-qué-es-un-prompt-10-min">Interfaces de chat
+y qué es un prompt (10 min)</h2>
+<h3 id="cómo-se-accede-hoy">Cómo se accede hoy</h3>
+<ul>
+<li>La forma más común de usar un LLM es mediante un
+<strong>chat</strong>: un cuadro de texto donde escribimos y recibimos
+una respuesta.</li>
+<li>Es una <strong>plataforma genérica de chat</strong>: sirve
+cualquiera de las conocidas (<strong>ChatGPT, Gemini o Copilot</strong>,
+por ejemplo). No hay una obligatoria: el método de esta sesión funciona
+con cualquiera.</li>
+<li><strong>Plan B sin cuenta:</strong> si no se puede crear una cuenta,
+la práctica se hace con un <strong>documento compartido</strong> donde
+cada persona escribe su prompt, y el docente corre una
+<strong>demostración guiada</strong> en pantalla con el chat.</li>
+<li>Cada interacción forma parte de una <strong>conversación</strong>:
+el modelo usa lo anterior como <strong>contexto</strong> para
+responder.</li>
+<li>La conversación tiene <strong>límite de memoria</strong> (la
+<strong>ventana de contexto</strong>): más allá de cierta longitud, los
+mensajes viejos se pierden.</li>
+</ul>
+<p><strong>Ideas para la pizarra:</strong></p>
+<ul>
+<li>Entrada del usuario → <strong>prompt</strong>.</li>
+<li>Salida del modelo → <strong>respuesta generada</strong>.</li>
+<li>El historial de la conversación alimenta la siguiente respuesta
+(hasta el límite de la ventana de contexto).</li>
+</ul>
+<h3 id="buenas-prácticas-de-interacción">Buenas prácticas de
+interacción</h3>
+<ul>
+<li>Hacer <strong>una pregunta por vez</strong> para no dispersar al
+modelo.</li>
+<li>Pedir <strong>reformulación o aclaración</strong> si la respuesta no
+sirve.</li>
+<li>Saber que la respuesta <strong>no es la verdad</strong>, sino una
+propuesta a revisar.</li>
+</ul>
+<h3 id="qué-es-un-prompt">Qué es un prompt</h3>
+<ul>
+<li>El <strong>prompt</strong> es el texto que le damos al modelo: la
+<strong>instrucción</strong> o pedido.</li>
+<li>La calidad de la respuesta depende, en gran parte, de <strong>cómo
+está redactado</strong> el prompt.</li>
+</ul>
+<hr />
+<h2 id="técnicas-de-prompting-20-min">Técnicas de prompting (20
+min)</h2>
+<h3 id="técnica-1--claridad">Técnica 1 — Claridad</h3>
+<ul>
+<li>Pedir de forma <strong>específica y concreta</strong>: qué queremos,
+qué formato, qué extensión, qué tono.</li>
+<li><strong>Débil:</strong> "Háblame del trámite de licencia."</li>
+<li><strong>Fuerte:</strong> "Explicá en 5 líneas, en tono formal, los
+requisitos para tramitar una licencia de funcionamiento de un comercio
+en un municipio."</li>
+</ul>
+<h3 id="técnica-2--contexto">Técnica 2 — Contexto</h3>
+<ul>
+<li>Aportar <strong>antecedentes</strong> para que el modelo sepa para
+quién y para qué responde.</li>
+<li><strong>Ejemplo:</strong> "Soy funcionario de un gobierno municipal
+y debo responder una consulta ciudadana. Redactá la respuesta usando
+lenguaje claro."</li>
+</ul>
+<h3 id="técnica-3--ejemplos-few-shot">Técnica 3 — Ejemplos
+(few-shot)</h3>
+<ul>
+<li>Dar uno o dos <strong>ejemplos del resultado esperado</strong> para
+guiar el formato y el tono.</li>
+<li><strong>Ejemplo:</strong> "Redactá el aviso siguiendo este modelo:
+'Se informa a la población que…'"</li>
+</ul>
+<h3 id="técnica-4--rol">Técnica 4 — Rol</h3>
+<ul>
+<li>Pedirle que asuma un <strong>papel</strong> para ajustar la voz y el
+enfoque.</li>
+<li><strong>Ejemplo:</strong> "Actuá como un asesor de transparencia y
+explicá…"</li>
+</ul>
+<h3 id="resumen-en-tabla">Resumen en tabla</h3>
+<table>
+<thead>
+<tr>
+<th>Técnica</th>
+<th>Qué es</th>
+<th>Ejemplo breve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Claridad</td>
+<td>Pedido específico y con formato</td>
+<td>"En 5 líneas, tono formal…"</td>
+</tr>
+<tr>
+<td>Contexto</td>
+<td>Antecedentes de quién y para qué</td>
+<td>"Soy funcionario municipal…"</td>
+</tr>
+<tr>
+<td>Ejemplos</td>
+<td>Mostrar el resultado esperado</td>
+<td>"Seguí este modelo: 'Se informa…'"</td>
+</tr>
+<tr>
+<td>Rol</td>
+<td>Asumir un papel</td>
+<td>"Actuá como asesor de transparencia…"</td>
+</tr>
+</tbody>
+</table>
+<p>La guía ampliada, con un mismo pedido reescrito paso a paso, está en
+<code>guia-prompting.md</code>.</p>
+<hr />
+<h2 id="iteración-y-verificación-15-min">Iteración y verificación (15
+min)</h2>
+<h3 id="iterar">Iterar</h3>
+<ul>
+<li>La primera respuesta rara vez es la definitiva: trabajar con un LLM
+es <strong>diálogo</strong>.</li>
+<li>Ciclo sugerido: <strong>pedir → revisar → verificar →
+re-pedir</strong>.</li>
+<li>Se puede pedir que <strong>acorte, aclare, reformule, cambie el
+tono</strong> o <strong>detalle</strong> un punto.</li>
+<li><strong>Ejemplo:</strong> "Ahora resumí eso en tres viñetas" o
+"Escribilo en lenguaje más sencillo, para un ciudadano".</li>
+</ul>
+<h3 id="verificar">Verificar</h3>
+<ul>
+<li>Recordar los límites ya vistos: <strong>alucinaciones, sesgos y
+fecha de corte</strong>.</li>
+<li>Toda respuesta con <strong>datos, cifras, normas o
+referencias</strong> debe <strong>verificarse</strong> contra la fuente
+oficial.</li>
+<li>Usar el <strong>criterio experto</strong>: el profesional conoce su
+área y detecta lo incorrecto.</li>
+</ul>
+<p><strong>Idea para la pizarra:</strong> dibujar el ciclo <strong>Pedir
+→ Revisar → Verificar → Re-pedir</strong> y destacar "verificar" como
+paso obligatorio.</p>
+<blockquote>
+<p>Demostración: pedir al LLM un dato normativo que probablemente
+invente, detectar el error en grupo y mostrar cómo re-pedir con la
+fuente correcta.</p>
+</blockquote>
+<hr />
+<h2 id="práctica-prompts-para-gestión-pública-30-min">Práctica: prompts
+para gestión pública (30 min)</h2>
+<blockquote>
+<p>El taller completo, con reparto minuto a minuto, entregable, Modo
+A/B, Plan B y rúbrica, está en
+<code>taller_sesion9_prompts_gestion_publica.md</code>.</p>
+</blockquote>
+<p><strong>Objetivo:</strong> redactar prompts para una tarea real de
+gestión pública y evaluar críticamente las respuestas.</p>
+<p><strong>Consigna general:</strong> cada participante (o pareja) elige
+una tarea institucional y elabora un prompt que aplique al menos
+<strong>claridad + contexto</strong> y, si puede, <strong>rol o
+ejemplo</strong>.</p>
+<p><strong>Tareas sugeridas:</strong></p>
+<ol type="1">
+<li>Redactar una <strong>respuesta a un reclamo</strong> frecuente sobre
+un servicio municipal.</li>
+<li>Elaborar un <strong>aviso institucional</strong> para informar la
+suspensión temporal de un trámite.</li>
+<li>Resumir un <strong>informe técnico</strong> en un párrafo para una
+autoridad.</li>
+<li>Explicar un <strong>requisito de trámite</strong> en lenguaje
+sencillo para la ciudadanía.</li>
+<li>Generar una <strong>lista de verificación</strong> de documentos
+para un expediente.</li>
+</ol>
+<p><strong>Pasos:</strong></p>
+<ol type="1">
+<li>Redactar el prompt en el chat LLM (o en el documento compartido,
+Plan B).</li>
+<li>Leer la respuesta y <strong>evaluarla</strong> con tres preguntas:
+¿responde a lo pedido? ¿el tono y formato son los correctos? ¿hay algo
+dudoso que verificar?</li>
+<li><strong>Iterar</strong> al menos una vez: mejorar el prompt y
+comparar.</li>
+<li>Anotar el <strong>prompt mejorado + una observación de
+verificación</strong> en <code>plantilla-captura-prompt.md</code>.</li>
+</ol>
+<p><strong>Acceso:</strong> plataforma genérica de chat (cualquiera de
+las conocidas sirve). <strong>Plan B sin cuenta:</strong> documento
+compartido + demostración guiada del docente.</p>
+<p><strong>Guía de corrección:</strong> valorar que el prompt incluya
+<strong>claridad</strong> (qué, formato, extensión) y
+<strong>contexto</strong> (para quién y para qué), y que la persona
+<strong>identifique</strong> al menos un punto a verificar en la
+respuesta.</p>
+<p><strong>Criterios de evaluación:</strong> calidad del prompt
+elaborado y capacidad de evaluar críticamente la respuesta.</p>
+<hr />
+<h2 id="puesta-en-común-y-cierre-20-min">Puesta en común y cierre (20
+min)</h2>
+<h3 id="puesta-en-común-10-min">Puesta en común (10 min)</h3>
+<ul>
+<li>Cada participante o pareja comparte en 1–2 minutos su <strong>prompt
+mejorado</strong> y <strong>qué cambió</strong> respecto del
+primero.</li>
+<li>Cada uno nombra <strong>un dato que verificaría</strong> antes de
+usar la respuesta.</li>
+<li>El docente contrasta los prompts y refuerza las ideas fuerza: <em>un
+buen prompt más verificación son la diferencia entre un resultado útil y
+uno engañoso</em>.</li>
+</ul>
+<h3 id="síntesis-y-cierre-10-min">Síntesis y cierre (10 min)</h3>
+<ul>
+<li>Releer la tabla de técnicas (claridad, contexto, ejemplos, rol) y la
+tabla de límites (alucinación, sesgo, fecha de corte).</li>
+<li>Reforzar la idea central: <em>"Un LLM genera palabra por palabra
+usando probabilidades; un buen prompt y la verificación son la
+diferencia entre un resultado útil y uno engañoso."</em></li>
+<li>Repetir la <strong>regla de confidencialidad</strong>: no se suben
+datos de ciudadanos ni documentos reservados a un chat público.</li>
+<li>Anticipar la próxima sesión: <em>"La próxima vez el LLM deja de solo
+responder y empieza a actuar: los agentes de IA y el taller integrador
+del módulo."</em></li>
+<li>Espacio de preguntas y dudas.</li>
+</ul>
+<hr />
+<h2 id="recursos">Recursos</h2>
+<ul>
+<li>Presentación <code>presentacion_sesion9.html</code> y deck
+<code>deck-sesion-09.html</code>.</li>
+<li><code>guia-prompting.md</code>: guía de prompting (claridad,
+contexto, ejemplos, rol) con ejemplos.</li>
+<li><code>plantilla-captura-prompt.md</code>: plantilla de entregable
+(prompt v1 → evaluación → prompt v2).</li>
+<li><code>taller_sesion9_prompts_gestion_publica.md</code>: taller con
+reparto, Modo A/B, Plan B y rúbrica.</li>
+<li><code>insumos/tareas-practica-s9.md</code>: las cinco tareas
+sugeridas y las notas de acceso al chat.</li>
+<li>Un chat LLM accesible por navegador (plataforma genérica) y el Plan
+B sin cuenta (documento compartido).</li>
+<li>Pizarra o pizarra digital para el esquema de "predicción de la
+siguiente palabra" y el ciclo de iteración.</li>
+</ul>
+<h2 id="evaluación-de-la-sesión">Evaluación de la sesión</h2>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Explica qué es un LLM y cómo se entrena</td>
+<td>Participación en el bloque de LLM y en el cierre</td>
+</tr>
+<tr>
+<td>Describe la generación por probabilidad y los conceptos
+operativos</td>
+<td>Aportes al explicar por qué las respuestas varían, se cortan o se
+olvidan</td>
+</tr>
+<tr>
+<td>Reconoce tipos de modelos generativos</td>
+<td>Respuestas en el panorama de texto y código</td>
+</tr>
+<tr>
+<td>Identifica límites (alucinación, sesgo, corte)</td>
+<td>Observaciones en el bloque de alcances y límites</td>
+</tr>
+<tr>
+<td>Aplica claridad, contexto, ejemplos o rol en el prompt</td>
+<td>Prompt elaborado durante la práctica</td>
+</tr>
+<tr>
+<td>Evalúa críticamente la respuesta e itera</td>
+<td>Observaciones de verificación y prompt mejorado en la puesta en
+común</td>
+</tr>
+<tr>
+<td>Cuida la información</td>
+<td>Uso de casos ficticios o públicos y mención de la regla de
+confidencialidad</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Entrega:</strong> prompt mejorado de una tarea de gestión
+pública, con una observación de verificación sobre la respuesta
+obtenida.</p>
+  <footer class="docfoot">Generado desde <a href="Sesion_09_IA_LLMs_Prompting.md"><code>Sesion_09_IA_LLMs_Prompting.md</code></a> · Módulo 6 — Inteligencia Artificial · IDT 601</footer>
+</div>
+</body>
+</html>

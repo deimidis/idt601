@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde 06_Inteligencia_Artificial.md — no editar a mano. -->
+<title>Bloque 6 — Inteligencia Artificial: historia, redes, LLMs y agentes</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 6 — Inteligencia Artificial · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1
+id="bloque-6--inteligencia-artificial-historia-redes-llms-y-agentes">Bloque
+6 — Inteligencia Artificial: historia, redes, LLMs y agentes</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601)
+<strong>Bloque:</strong> 6 — Historia y Desarrollo de la Inteligencia
+Artificial <strong>Sesiones:</strong> 8, 9 y 10 <strong>Horas:</strong>
+14 teóricas + 4 prácticas</p>
+<hr />
+<h2 id="de-qué-trata-este-bloque">¿De qué trata este bloque?</h2>
+<p>Este bloque cierra el módulo mirando hacia adelante: la
+<strong>inteligencia artificial</strong>. Recorremos su historia,
+entendemos sus dos grandes enfoques (determinista e indeterminista),
+vemos cómo aprenden las redes neuronales —y por qué a veces fallan al
+salir de la demo— y llegamos a la IA actual: los <strong>modelos de
+lenguaje (LLM)</strong> que usamos en chats, y los
+<strong>agentes</strong> que automatizan tareas.</p>
+<p>El objetivo no es programar, sino <strong>entender las ideas</strong>
+y saber <strong>trabajar con estas herramientas</strong> de forma
+crítica y útil en la gestión pública. En todo el bloque rige una regla
+de cuidado: <strong>no subir datos de ciudadanos, documentos reservados
+ni información no pública a un chat externo</strong>.</p>
+<hr />
+<h2 id="lectura">Lectura</h2>
+<h3 id="1-historia-de-las-reglas-fijas-al-aprendizaje">1. Historia: de
+las reglas fijas al aprendizaje</h3>
+<p>La IA no es un solo método. A lo largo de su historia conviven dos
+filosofías:</p>
+<ul>
+<li><strong>Determinista</strong> — el sistema sigue <strong>reglas
+fijas</strong> escritas por un humano. Ante la misma entrada, siempre da
+la misma salida. Es predecible y explicable. <em>Ejemplo:</em> un
+semáforo programado, un sistema que valida campos de un formulario.</li>
+<li><strong>Indeterminista</strong> — el sistema <strong>aprende
+patrones de los datos</strong>. No hay reglas escritas a mano; la salida
+es probabilística y a veces no es del todo explicable. <em>Ejemplo:</em>
+un sistema de recomendación, un filtro de spam.</li>
+</ul>
+<p>Cinco momentos que resumen el recorrido:</p>
+<table>
+<thead>
+<tr>
+<th>Momento</th>
+<th>Aportación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1950s — La pregunta</td>
+<td>Turing: ¿puede una máquina comportarse como un humano?</td>
+</tr>
+<tr>
+<td>1960–70s — Las reglas</td>
+<td>Sistemas expertos: conocimiento codificado en reglas "si…
+entonces".</td>
+</tr>
+<tr>
+<td>1980–90s — El aprendizaje</td>
+<td>Codificar todas las reglas es imposible → dar ejemplos.</td>
+</tr>
+<tr>
+<td>2000s — Datos y cómputo</td>
+<td>Internet produce datos masivos y hay potencia de cálculo.</td>
+</tr>
+<tr>
+<td>Hoy — IA generativa</td>
+<td>No solo clasifica: genera texto, imágenes y código.</td>
+</tr>
+</tbody>
+</table>
+<p>La regla práctica: si las reglas son claras y estables →
+determinista; si hay muchos datos y patrones difíciles de codificar →
+indeterminista. No hay uno "mejor": depende del problema. Y a veces
+conviene <strong>combinar</strong> ambos (un filtro de correo mezcla
+reglas del remitente con aprendizaje del contenido).</p>
+<h3 id="2-redes-neuronales-cómo-aprenden-y-por-qué-fallan">2. Redes
+neuronales: cómo aprenden y por qué fallan</h3>
+<p>Una <strong>red neuronal</strong> es un modelo inspirado en el
+cerebro: neuronas organizadas en <strong>capas</strong>, conectadas por
+<strong>pesos</strong> (números que indican cuánto importa cada
+conexión). <strong>Aprender es ajustar esos pesos</strong> a partir de
+ejemplos.</p>
+<p>El ciclo de entrenamiento:</p>
+<ol type="1">
+<li>Se presentan <strong>ejemplos</strong>.</li>
+<li>La red produce una <strong>salida</strong>.</li>
+<li>Se compara con la respuesta esperada y se calcula el
+<strong>error</strong> (función de pérdida).</li>
+<li>Se <strong>ajustan los pesos</strong> para reducir ese error.</li>
+<li>Se repite muchas veces (cada pasada completa es una
+<strong>época</strong>).</li>
+</ol>
+<p><strong>Por qué a veces "funciona en la demo y falla en
+producción".</strong> Si medimos el desempeño con los mismos datos con
+que el modelo aprendió, siempre parecerá bueno. Por eso se separa:</p>
+<ul>
+<li><strong>Entrenamiento:</strong> los ejemplos con los que el modelo
+aprende.</li>
+<li><strong>Validación:</strong> un grupo aparte para ajustar decisiones
+durante el desarrollo.</li>
+<li><strong>Prueba:</strong> un grupo que el modelo nunca vio, para
+medir cómo funcionará con <strong>casos nuevos</strong>.</li>
+</ul>
+<p>Cuando el modelo <strong>memoriza</strong> los ejemplos de
+entrenamiento en vez de captar el patrón, tenemos
+<strong>sobreajuste</strong>: acierta en lo conocido y falla en lo
+nuevo. Para detectarlo se usan <strong>métricas</strong>:</p>
+<ul>
+<li><strong>Exactitud:</strong> proporción de aciertos sobre el
+total.</li>
+<li><strong>Precisión:</strong> de los casos que el modelo marcó como
+positivos, cuántos lo eran de verdad.</li>
+</ul>
+<p>Una exactitud alta con precisión baja (o al revés) obliga a preguntar
+<em>para qué</em> se usará el modelo: no es lo mismo filtrar unos pocos
+casos dudosos que decidir sobre un trámite.</p>
+<h3 id="3-tipos-de-aprendizaje">3. Tipos de aprendizaje</h3>
+<p>Según cómo aprende, se distinguen tres tipos:</p>
+<ul>
+<li><strong>Supervisado</strong> — aprende de <strong>datos
+etiquetados</strong> (ejemplos con su respuesta correcta). Cubre la
+<strong>clasificación</strong> (asignar una categoría) y la
+<strong>regresión</strong> (predecir un número). Ej.: clasificar
+trámites como "urgente" o "no urgente"; predecir la demanda de un
+servicio.</li>
+<li><strong>No supervisado</strong> — descubre <strong>patrones y
+agrupaciones</strong> sin etiquetas. Ej.: segmentar contribuyentes por
+comportamiento; detectar trámites que se salen del patrón.</li>
+<li><strong>Por refuerzo</strong> — aprende por <strong>ensayo, error y
+recompensa</strong>, actuando en un entorno. Ej.: optimizar semáforos o
+rutas de recolección.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Qué datos necesita</th>
+<th>Qué aprende</th>
+<th>Señal de aprendizaje</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Supervisado</td>
+<td>Etiquetados</td>
+<td>Predecir etiqueta o valor</td>
+<td>Respuesta correcta</td>
+</tr>
+<tr>
+<td>No supervisado</td>
+<td>Sin etiquetas</td>
+<td>Agrupar y hallar patrones</td>
+<td>Estructura de los datos</td>
+</tr>
+<tr>
+<td>Por refuerzo</td>
+<td>Interacción con el entorno</td>
+<td>Decidir acciones</td>
+<td>Recompensa / penalización</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-llms-y-modelos-generativos">4. LLMs y modelos generativos</h3>
+<p>Un <strong>modelo de lenguaje de gran escala (LLM)</strong> es una
+red neuronal entrenada sobre enormes volúmenes de texto. Su tarea
+central es <strong>predecir la siguiente palabra</strong>: por eso la
+misma pregunta puede dar respuestas distintas cada vez.</p>
+<p><strong>Cuidado con una confusión frecuente.</strong> Durante el
+preentrenamiento, cuando el modelo yerra, <strong>no se
+"refuerza"</strong>: se comparan sus pesos con la palabra que realmente
+seguía y se <strong>corrigen</strong> para reducir el error (el mismo
+ciclo de la red neuronal, a escala gigante). El
+<strong>refuerzo</strong> con recompensas es otra cosa: es el
+aprendizaje por refuerzo del punto 3.</p>
+<p><strong>Conceptos operativos que explican el comportamiento
+real:</strong></p>
+<ul>
+<li><strong>Token:</strong> la unidad en que el modelo parte el texto
+(palabra, parte de palabra o signo).</li>
+<li><strong>Ventana de contexto:</strong> el máximo de texto que el
+modelo puede tener en cuenta; más allá, olvida.</li>
+<li><strong>Temperatura:</strong> cuánto se arriesga a elegir opciones
+menos probables; baja = predecible, alta = variada.</li>
+<li><strong>Embedding (vector):</strong> la representación numérica del
+significado de un texto, que permite comparar y <strong>buscar por
+parecido</strong> (es la base de la recuperación de información).</li>
+</ul>
+<p>Los <strong>modelos generativos</strong> no solo clasifican:
+<strong>generan</strong> texto, imágenes, código, audio y video (algunos
+son <strong>multimodales</strong>). Tienen tres límites que conviene
+tener siempre presentes:</p>
+<table>
+<thead>
+<tr>
+<th>Límite</th>
+<th>Qué es</th>
+<th>Riesgo en la gestión pública</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alucinación</td>
+<td>Inventa información verosímil pero falsa</td>
+<td>Cifras, normas o referencias incorrectas</td>
+</tr>
+<tr>
+<td>Sesgo</td>
+<td>Repite prejuicios del entrenamiento</td>
+<td>Trato desigual, lenguaje estereotipado</td>
+</tr>
+<tr>
+<td>Fecha de corte</td>
+<td>No conoce lo posterior a su entrenamiento</td>
+<td>Normativa o datos desactualizados</td>
+</tr>
+</tbody>
+</table>
+<p>Por eso, <strong>verificar lo que producen</strong> es parte del
+trabajo, no un paso opcional.</p>
+<h3 id="5-trabajo-con-llms-chats-y-prompting">5. Trabajo con LLMs: chats
+y prompting</h3>
+<p>Trabajar con un LLM en formato de <strong>chat</strong> es una
+habilidad práctica. La clave está en el <strong>prompt</strong>: la
+instrucción que le damos. Técnicas básicas:</p>
+<ul>
+<li><strong>Claridad</strong> — pedir exactamente lo que se necesita
+(qué, formato, extensión, tono).</li>
+<li><strong>Contexto</strong> — dar la información necesaria: para quién
+y para qué.</li>
+<li><strong>Ejemplos</strong> (few-shot) — mostrar el formato o estilo
+esperado.</li>
+<li><strong>Rol</strong> — indicar cómo debe comportarse ("actuá como un
+analista de transparencia…").</li>
+</ul>
+<p>Y siempre <strong>iterar</strong> (pedir → revisar → re-pedir) y
+<strong>verificar</strong> (no creer todo sin revisar).</p>
+<blockquote>
+<p><strong>Regla de confidencialidad.</strong> Antes de pegar cualquier
+cosa en un chat público: ¿son datos de ciudadanos, documentos reservados
+o información no pública? Si lo son, <strong>no se pega</strong>. Se
+trabaja con ejemplos ficticios, con datos ya públicos o con documentos
+abiertos. En el Estado, la responsabilidad es del funcionario, no de la
+herramienta.</p>
+</blockquote>
+<h3 id="6-agentes-de-ia">6. Agentes de IA</h3>
+<p>Un <strong>agente de IA</strong> va un paso más allá del chat:
+combina un LLM con <strong>herramientas</strong> para <strong>realizar
+tareas</strong> con cierta autonomía. Sus componentes:</p>
+<ul>
+<li><strong>Modelo</strong> — el LLM que razona.</li>
+<li><strong>Herramientas</strong> — lo que puede hacer (buscar, leer,
+calcular, consultar, enviar).</li>
+<li><strong>Memoria</strong> — lo que recuerda de la conversación o de
+la tarea.</li>
+<li><strong>Planificación</strong> — descomponer una tarea en pasos y
+ordenarlos.</li>
+</ul>
+<p>Usos típicos: <strong>asistentes</strong> que responden sobre
+documentos internos (<strong>RAG</strong>, recuperación aumentada: busca
+en las fuentes y responde <strong>citando</strong>), y
+<strong>automatización</strong> de tareas repetitivas.</p>
+<p>Como <strong>actúa</strong>, un agente <strong>amplifica</strong> los
+límites del LLM: un error no es solo una frase, puede ser una acción. De
+ahí las salvaguardas:</p>
+<ul>
+<li><strong>Supervisión humana (human-in-the-loop):</strong> revisar y
+aprobar las acciones críticas.</li>
+<li><strong>Principio de menor privilegio:</strong> dejar que lea, pero
+no que envíe o publique; que sugiera, no que decida.</li>
+<li><strong>Auditoría y trazabilidad:</strong> registrar qué hizo y con
+qué fuentes.</li>
+</ul>
+<p><strong>La regla de oro:</strong> <em>el agente sugiere, el humano
+decide.</em></p>
+<hr />
+<h2 id="ideas-clave">Ideas clave</h2>
+<ul>
+<li>La IA tiene dos enfoques: <strong>determinista</strong> (reglas) e
+<strong>indeterminista</strong> (aprende de datos).</li>
+<li>Una red neuronal aprende <strong>ajustando pesos</strong> para
+reducir el <strong>error</strong>; hay aprendizaje <strong>supervisado,
+no supervisado y por refuerzo</strong>.</li>
+<li>Medir con los mismos datos del entrenamiento engaña: por eso existen
+<strong>prueba/validación</strong>, el <strong>sobreajuste</strong> y
+las <strong>métricas</strong>.</li>
+<li>Un <strong>LLM</strong> genera texto prediciendo la siguiente
+palabra; puede <strong>alucinar</strong> y su conocimiento tiene
+<strong>fecha de corte</strong>.</li>
+<li>Trabajar con chats es cuestión de <strong>buenos prompts</strong>
+(claridad, contexto, ejemplos, rol) y
+<strong>verificación</strong>.</li>
+<li>Un <strong>agente</strong> combina LLM + herramientas + memoria +
+planificación; exige <strong>supervisión humana</strong>.</li>
+<li>En el sector público, <strong>no se suben datos sensibles a un chat
+externo</strong>.</li>
+</ul>
+<h2 id="glosario">Glosario</h2>
+<table>
+<thead>
+<tr>
+<th>Término</th>
+<th>Definición</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Determinista</td>
+<td>Sistema que sigue reglas fijas y es predecible.</td>
+</tr>
+<tr>
+<td>Indeterminista</td>
+<td>Sistema que aprende patrones de los datos (probabilístico).</td>
+</tr>
+<tr>
+<td>Red neuronal</td>
+<td>Modelo de neuronas conectadas por pesos que se ajustan al
+aprender.</td>
+</tr>
+<tr>
+<td>Sobreajuste</td>
+<td>Memorizar el entrenamiento y fallar con casos nuevos.</td>
+</tr>
+<tr>
+<td>LLM</td>
+<td>Modelo de lenguaje de gran escala que genera texto.</td>
+</tr>
+<tr>
+<td>Token</td>
+<td>Fragmento de texto que el modelo usa como unidad.</td>
+</tr>
+<tr>
+<td>Prompt</td>
+<td>Instrucción que se da a un modelo de lenguaje.</td>
+</tr>
+<tr>
+<td>Alucinación</td>
+<td>Contenido inventado por un LLM con apariencia de verdad.</td>
+</tr>
+<tr>
+<td>Agente de IA</td>
+<td>Sistema que combina un LLM con herramientas para realizar
+tareas.</td>
+</tr>
+<tr>
+<td>Supervisión humana</td>
+<td>Persona que revisa y aprueba las acciones críticas del agente.</td>
+</tr>
+</tbody>
+</table>
+<p>El glosario completo del bloque está en <code>GLOSSARY.md</code>.</p>
+<h2 id="para-repasar-autoevaluación">Para repasar (autoevaluación)</h2>
+<ol type="1">
+<li>¿Cuál es la diferencia entre un enfoque determinista y uno
+indeterminista?</li>
+<li>Nombra los tres tipos de aprendizaje y un ejemplo de cada uno.</li>
+<li>¿Qué es el sobreajuste y por qué se separa un conjunto de
+prueba?</li>
+<li>¿Qué es una alucinación de un LLM y por qué importa
+verificarla?</li>
+<li>Menciona tres técnicas para escribir un buen prompt.</li>
+<li>¿Qué componentes tiene un agente de IA y qué significa "el agente
+sugiere, el humano decide"?</li>
+<li>¿Qué no se debe subir nunca a un chat público?</li>
+</ol>
+<h2 id="referencias-recomendadas">Referencias recomendadas</h2>
+<ul>
+<li>Stuart Russell y Peter Norvig, <em>Inteligencia artificial: un
+enfoque moderno</em> (Pearson). Texto de referencia general.</li>
+<li>Joel Grus, <em>Ciencia de datos desde cero</em> (Anaya). Aprendizaje
+supervisado y no supervisado, sobreajuste y métricas.</li>
+<li>Luis Joyanes Aguilar, <em>Ciencia de datos: un enfoque práctico</em>
+(Alfaomega, 2024).</li>
+<li>Microsoft Learn, <em>Inteligencia artificial generativa para
+principiantes</em> (learn.microsoft.com/es-es).</li>
+<li>OpenAI, <em>Buenas prácticas para la ingeniería de prompts</em>
+(help.openai.com/es-es).</li>
+<li>Microsoft Learn, <em>Fundamentos de IA generativa y agentes</em>
+(learn.microsoft.com/es-es).</li>
+</ul>
+<h2 id="presentaciones-del-bloque">Presentaciones del bloque</h2>
+<ul>
+<li>Sesión 8 — Historia, redes neuronales y aprendizaje:
+<code>presentacion_sesion8.html</code></li>
+<li>Sesión 9 — LLMs y prompting:
+<code>presentacion_sesion9.html</code></li>
+<li>Sesión 10 — Agentes de IA y taller integrador:
+<code>presentacion_sesion10.html</code></li>
+</ul>
+  <footer class="docfoot">Generado desde <a href="06_Inteligencia_Artificial.md"><code>06_Inteligencia_Artificial.md</code></a> · Módulo 6 — Inteligencia Artificial · IDT 601</footer>
+</div>
+</body>
+</html>

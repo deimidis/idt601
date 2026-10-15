@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde guia-prompting.md — no editar a mano. -->
+<title>Guía de prompting — Bloque 6, Sesión 9</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 6 — Inteligencia Artificial · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="guía-de-prompting--bloque-6-sesión-9">Guía de prompting — Bloque
+6, Sesión 9</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601)
+<strong>Uso:</strong> guía de apoyo para escribir prompts en un chat de
+IA (LLM). Incluye las cuatro técnicas básicas, un ejemplo reescrito paso
+a paso y la regla de confidencialidad.</p>
+<hr />
+<h2 id="la-idea-central">La idea central</h2>
+<p>El <strong>prompt</strong> es la instrucción que le damos al modelo.
+Un LLM genera texto <strong>prediciendo la palabra más probable</strong>
+según el contexto; por eso <strong>lo que le damos de contexto es lo que
+condiciona</strong> la respuesta. No hay un prompt "correcto" único: hay
+prompts <strong>más o menos útiles</strong> para una tarea.</p>
+<blockquote>
+<p>Regla simple: <strong>cuanto más claro y contextualizado el pedido,
+menos hay que adivinar desde el otro lado.</strong></p>
+</blockquote>
+<h2 id="las-cuatro-técnicas">Las cuatro técnicas</h2>
+<table>
+<thead>
+<tr>
+<th>Técnica</th>
+<th>Qué es</th>
+<th>Pregunta que responde</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Claridad</strong></td>
+<td>Pedir de forma específica y con formato: qué, extensión, tono.</td>
+<td>¿Qué quiero exactamente y cómo lo quiero?</td>
+</tr>
+<tr>
+<td><strong>Contexto</strong></td>
+<td>Dar los antecedentes: para quién y para qué.</td>
+<td>¿Para quién es y con qué objetivo?</td>
+</tr>
+<tr>
+<td><strong>Ejemplos (few-shot)</strong></td>
+<td>Mostrar uno o dos ejemplos del resultado esperado.</td>
+<td>¿Cómo se ve un buen resultado?</td>
+</tr>
+<tr>
+<td><strong>Rol</strong></td>
+<td>Pedir que asuma un papel para ajustar la voz y el enfoque.</td>
+<td>¿Con qué perspectiva debe responderme?</td>
+</tr>
+</tbody>
+</table>
+<p>Se pueden <strong>combinar</strong>. No es obligatorio usar las
+cuatro: para muchas tareas alcanza con claridad y contexto.</p>
+<hr />
+<h2 id="técnica-1--claridad">Técnica 1 — Claridad</h2>
+<p><strong>Qué pedir:</strong> el contenido (qué), el formato (párrafo,
+viñetas, tabla), la extensión (líneas, palabras) y el tono (formal,
+cercano, técnico).</p>
+<ul>
+<li><strong>Débil:</strong> "Háblame del trámite de licencia."</li>
+<li><strong>Fuerte:</strong> "Explicá en 5 líneas, en tono formal, los
+requisitos para tramitar una licencia de funcionamiento de un comercio
+en un municipio."</li>
+</ul>
+<p><strong>Por qué mejora:</strong> el modelo ya no tiene que adivinar
+extensión ni tono, y la respuesta se puede usar casi tal cual.</p>
+<h2 id="técnica-2--contexto">Técnica 2 — Contexto</h2>
+<p><strong>Qué dar:</strong> quién pide, para quién es, y cuál es el
+objetivo.</p>
+<ul>
+<li><strong>Ejemplo:</strong> "Soy funcionario de un gobierno municipal
+y debo responder una consulta ciudadana. Redactá la respuesta usando
+lenguaje claro, para una persona sin conocimientos técnicos."</li>
+</ul>
+<p><strong>Por qué mejora:</strong> sitúa al modelo en la realidad
+institucional y evita respuestas genéricas.</p>
+<h2 id="técnica-3--ejemplos-few-shot">Técnica 3 — Ejemplos
+(few-shot)</h2>
+<p><strong>Qué dar:</strong> uno o dos ejemplos del formato o estilo
+esperado, para que el modelo lo imite.</p>
+<ul>
+<li><strong>Ejemplo:</strong> "Redactá el aviso siguiendo este modelo:
+'Se informa a la población que…'. Mantené ese encabezado y un párrafo
+breve."</li>
+</ul>
+<p><strong>Por qué mejora:</strong> en vez de describir el estilo, se lo
+<strong>muestra</strong>; el modelo copia la estructura.</p>
+<h2 id="técnica-4--rol">Técnica 4 — Rol</h2>
+<p><strong>Qué dar:</strong> un papel desde el cual responder.</p>
+<ul>
+<li><strong>Ejemplo:</strong> "Actuá como un asesor de transparencia y
+explicá, en lenguaje sencillo, cómo se publica un dato abierto."</li>
+</ul>
+<p><strong>Por qué mejora:</strong> ajusta la voz y el enfoque. No
+cambia los hechos, pero sí el registro y el encuadre.</p>
+<hr />
+<h2 id="el-mismo-pedido-reescrito-paso-a-paso">El mismo pedido,
+reescrito paso a paso</h2>
+<p>Partimos de un pedido vago y lo mejoramos sumando técnicas.</p>
+<p><strong>Versión 0 (vaga):</strong></p>
+<blockquote>
+<p>"Ayudame con un reclamo de basura."</p>
+</blockquote>
+<p><strong>Versión 1 — + claridad:</strong></p>
+<blockquote>
+<p>"Redactá una respuesta de 6 líneas, en tono formal, a un reclamo por
+demora en la recolección de basura."</p>
+</blockquote>
+<p><strong>Versión 2 — + contexto:</strong></p>
+<blockquote>
+<p>"Soy funcionario municipal y debo responder un reclamo ciudadano por
+demora en la recolección de basura en el barrio X. Redactá una respuesta
+de 6 líneas, en tono formal y empático."</p>
+</blockquote>
+<p><strong>Versión 3 — + rol y ejemplo:</strong></p>
+<blockquote>
+<p>"Actuá como responsable de atención al ciudadano. Redactá, en 6
+líneas y tono formal y empático, una respuesta a un reclamo por demora
+en la recolección de basura. Seguí este modelo: 'Le agradecemos su
+comunicación. Lamentamos los inconvenientes…'. Cerrá indicando el canal
+para hacer seguimiento."</p>
+</blockquote>
+<p><strong>Qué ganamos con cada paso:</strong> extensión y tono
+definidos (claridad), realidad institucional (contexto), voz adecuada
+(rol) y estructura lista (ejemplo).</p>
+<hr />
+<h2 id="el-ciclo-pedir--revisar--verificar--re-pedir">El ciclo: pedir →
+revisar → verificar → re-pedir</h2>
+<p>Un prompt no termina en la primera respuesta. La primera salida es un
+<strong>borrador</strong>.</p>
+<ol type="1">
+<li><strong>Pedir.</strong> Escribir el prompt con claridad y
+contexto.</li>
+<li><strong>Revisar.</strong> ¿Responde a lo pedido? ¿El formato y el
+tono son correctos?</li>
+<li><strong>Verificar.</strong> Comprobar <strong>datos, cifras, normas
+y referencias</strong> contra la fuente oficial.</li>
+<li><strong>Re-pedir.</strong> Ajustar: "resumí esto en tres viñetas",
+"cambialo a lenguaje más sencillo", "agregá un párrafo de cierre".</li>
+</ol>
+<p><strong>Frases útiles para re-pedir:</strong></p>
+<ul>
+<li>"Ahora resumilo en tres viñetas."</li>
+<li>"Reescribilo en lenguaje más sencillo, para un ciudadano."</li>
+<li>"Cambiá el tono a más formal."</li>
+<li>"Dejá solo lo que esté respaldado; si no estás seguro de un dato,
+marcalo como 'a verificar'."</li>
+</ul>
+<hr />
+<h2 id="regla-de-confidencialidad-no-se-negocia">Regla de
+confidencialidad (no se negocia)</h2>
+<blockquote>
+<p>Antes de pegar cualquier cosa en un chat público: <strong>¿son datos
+de ciudadanos, documentos reservados o información no pública?</strong>
+Si lo son, <strong>no se pega</strong>.</p>
+</blockquote>
+<ul>
+<li><strong>No subir:</strong> nombres, documentos, domicilios, datos de
+salud, expedientes, borradores reservados, información no
+publicada.</li>
+<li><strong>Sí usar:</strong> casos <strong>ficticios</strong>, datos ya
+<strong>públicos</strong> o información
+<strong>anonimizada</strong>.</li>
+<li>En el Estado, la <strong>responsabilidad es del
+funcionario</strong>, no de la herramienta.</li>
+</ul>
+<h2 id="cuidado-con-los-límites-del-modelo">Cuidado con los límites del
+modelo</h2>
+<ul>
+<li><strong>Alucinación:</strong> puede inventar datos, normas o citas
+con apariencia de verdad.</li>
+<li><strong>Sesgo:</strong> reproduce prejuicios del texto con que se
+entrenó.</li>
+<li><strong>Fecha de corte:</strong> no conoce lo posterior a su
+entrenamiento (salvo que se le dé el contexto).</li>
+</ul>
+<p>Por eso, <strong>verificar es parte del trabajo</strong>. El modelo
+<strong>sugiere</strong>; el criterio experto decide.</p>
+<h2 id="lista-de-control-antes-de-enviar-un-prompt">Lista de control
+antes de enviar un prompt</h2>
+<ul class="task-list">
+<li><label><input type="checkbox" />¿Está claro <strong>qué</strong>
+quiero y en qué <strong>formato</strong>?</label></li>
+<li><label><input type="checkbox" />¿Incluí <strong>para quién</strong>
+es y <strong>para qué</strong>?</label></li>
+<li><label><input type="checkbox" />¿Sumé un <strong>ejemplo</strong> o
+un <strong>rol</strong> si hacía falta?</label></li>
+<li><label><input type="checkbox" />¿Usé un caso <strong>ficticio o
+público</strong> (sin datos de personas)?</label></li>
+<li><label><input type="checkbox" />Cuando llegue la respuesta,
+¿<strong>verificaré</strong> los datos antes de usarlos?</label></li>
+</ul>
+  <footer class="docfoot">Generado desde <a href="guia-prompting.md"><code>guia-prompting.md</code></a> · Módulo 6 — Inteligencia Artificial · IDT 601</footer>
+</div>
+</body>
+</html>

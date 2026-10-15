@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde casos-minisolucion-s10.md — no editar a mano. -->
+<title>Insumo — Los cinco casos de mini-solución (Sesión 10)</title>
+<link rel="stylesheet" href="../assets/styles.css" />
+<link rel="stylesheet" href="../assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 6 — Inteligencia Artificial · IDT 601</p>
+  <nav class="docnav"><a href="../../index.html">← idt601</a></nav>
+<h1 id="insumo--los-cinco-casos-de-mini-solución-sesión-10">Insumo — Los
+cinco casos de mini-solución (Sesión 10)</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601) · Bloque 6 —
+Inteligencia Artificial <strong>Uso:</strong> taller de la Sesión 10.
+Cada equipo elige <strong>un</strong> caso y lo desarrolla con las
+plantillas. <strong>Regla transversal:</strong> se trabaja con
+<strong>datos ficticios o públicos</strong>. No se sube a un chat
+público ningún dato de ciudadanos, documento reservado ni información no
+pública.</p>
+<hr />
+<h2 id="el-caso-institucional">El caso institucional</h2>
+<blockquote>
+<p><em>Una institución pública quiere usar un LLM para aliviar una tarea
+repetitiva. El equipo debe elegir <strong>una</strong> tarea acotada,
+<strong>definir</strong> para quién es y qué resultado espera,
+<strong>armar</strong> el prompt (chat) o el flujo (agente),
+<strong>evaluarlo</strong> con un caso ficticio y
+<strong>mejorarlo</strong>. No hace falta una plataforma de agentes
+real: el flujo del agente <strong>se diseña y se documenta</strong> con
+la plantilla, aunque no se ejecute en vivo.</em></p>
+</blockquote>
+<p><strong>Entregable:</strong> la mini-solución documentada, con tarea,
+prompt/flujo, resultado de una prueba, evaluación crítica y mejora
+aplicada. La defensa es de <strong>2 min por equipo</strong>.</p>
+<p><strong>Cómo se lee cada caso:</strong> destinatario · resultado
+esperado · herramienta (chat o agente) · prompt o flujo sugerido ·
+<strong>punto de control humano</strong> · qué <strong>no</strong> se
+sube.</p>
+<hr />
+<h2 id="caso-1--asistente-de-trámites">Caso 1 — Asistente de
+trámites</h2>
+<ul>
+<li><strong>Destinatario:</strong> la ciudadanía que consulta requisitos
+antes de iniciar un trámite.</li>
+<li><strong>Resultado esperado:</strong> respuestas claras sobre
+requisitos, con la <strong>referencia</strong> de la normativa
+institucional.</li>
+<li><strong>Herramienta:</strong> <strong>chat</strong> con la normativa
+cargada como contexto (o un agente con <strong>RAG</strong> si se quiere
+documentar el flujo de búsqueda).</li>
+<li><strong>Prompt o flujo sugerido:</strong> dar el rol ("asistente de
+atención de trámites"), la lista de requisitos y el formato de
+respuesta; pedir que <strong>cite</strong> el documento usado.</li>
+<li><strong>Punto de control humano:</strong> el contenido final de la
+guía de trámites lo aprueba la unidad responsable antes de
+publicarse.</li>
+<li><strong>Qué NO se sube:</strong> consultas reales de ciudadanos; se
+usa una consulta ficticia ("¿qué necesita para renovar X?").</li>
+<li><strong>Qué se documenta:</strong> si se plantea como agente RAG, el
+flujo <code>buscar en normativa → citar → responder</code> con su punto
+de revisión.</li>
+</ul>
+<h2 id="caso-2--clasificador-de-reclamos-reescrito">Caso 2 —
+Clasificador de reclamos (reescrito)</h2>
+<ul>
+<li><strong>Destinatario:</strong> el área de atención al ciudadano que
+recibe reclamos y debe derivarlos.</li>
+<li><strong>Resultado esperado:</strong> para cada reclamo, una
+<strong>categoría sugerida</strong> (por ejemplo: atención,
+infraestructura, trámites) y el <strong>área</strong> a la que
+correspondería.</li>
+<li><strong>Herramienta:</strong> <strong>chat</strong>. El clasificador
+se resuelve con un <strong>buen prompt</strong> (rol, categorías,
+ejemplos) y <strong>criterio humano</strong>; <strong>no
+requiere</strong> una plataforma de agentes real.</li>
+<li><strong>Cómo se resuelve sin plataforma:</strong>
+<ol type="1">
+<li>Se definen las categorías y se dan <strong>dos o tres
+ejemplos</strong> de cada una (few-shot).</li>
+<li>Se pega un reclamo <strong>ficticio</strong> y se pide la categoría
+en un formato fijo (categoría + área + motivo).</li>
+<li>La persona que atiende <strong>revisa la sugerencia</strong>, la
+corrige si hace falta y <strong>deriva</strong> ella misma.</li>
+</ol></li>
+<li><strong>Flujo del agente (se diseña y documenta, no se ejecuta en
+vivo):</strong> modelo + herramienta "leer planilla de reclamos
+ficticia" + memoria de la conversación + planificación "clasificar →
+asignar área → preparar borrador de derivación", con <strong>punto de
+control humano antes de derivar</strong>.</li>
+<li><strong>Punto de control humano:</strong> la persona
+<strong>confirma o cambia</strong> la categoría y decide la derivación.
+El clasificador <strong>sugiere</strong>; el funcionario
+<strong>decide</strong>.</li>
+<li><strong>Qué NO se sube:</strong> reclamos reales con datos de
+personas. Se usa un reclamo <strong>ficticio</strong> o
+anonimizado.</li>
+<li><strong>Señal de calidad:</strong> la sugerencia acierta en el caso
+de prueba y el equipo explica <strong>qué revisó</strong> antes de
+aceptarla.</li>
+</ul>
+<h2 id="caso-3--resumidor-de-informes">Caso 3 — Resumidor de
+informes</h2>
+<ul>
+<li><strong>Destinatario:</strong> una autoridad que necesita un resumen
+breve de un informe técnico.</li>
+<li><strong>Resultado esperado:</strong> un resumen de extensión y tono
+fijos, fiel al documento.</li>
+<li><strong>Herramienta:</strong> <strong>chat</strong>.</li>
+<li><strong>Prompt o flujo sugerido:</strong> rol ("analista que resume
+para una autoridad"), longitud, secciones (hallazgos, riesgos,
+recomendación) y un ejemplo de estilo.</li>
+<li><strong>Punto de control humano:</strong> quien redactó o conoce el
+informe <strong>verifica las cifras</strong> del resumen contra el
+original antes de enviarlo.</li>
+<li><strong>Qué NO se sube:</strong> informes reservados o con datos no
+públicos; se usa un informe <strong>público</strong> o un texto
+<strong>ficticio</strong>.</li>
+<li><strong>Señal de calidad:</strong> el resumen no inventa datos y
+conserva las cifras del original.</li>
+</ul>
+<h2 id="caso-4--verificador-de-expedientes-reescrito">Caso 4 —
+Verificador de expedientes (reescrito)</h2>
+<ul>
+<li><strong>Destinatario:</strong> el área que recibe un expediente y
+debe controlar que estén los documentos obligatorios.</li>
+<li><strong>Resultado esperado:</strong> una <strong>lista de
+verificación</strong> marcada: qué documentos figuran y cuáles
+faltan.</li>
+<li><strong>Herramienta:</strong> <strong>chat</strong>. La verificación
+se resuelve con una <strong>lista de control</strong> y un caso
+<strong>ficticio</strong>; <strong>no requiere</strong> una plataforma
+de agentes real.</li>
+<li><strong>Cómo se resuelve sin plataforma:</strong>
+<ol type="1">
+<li>Se escribe la <strong>lista de documentos obligatorios</strong> y se
+pide una respuesta en formato tabla (documento · presente ·
+observación).</li>
+<li>Se pega el <strong>índice de un expediente ficticio</strong>
+(nombres de documentos, sin contenido reservado).</li>
+<li>La persona <strong>confirma</strong> qué falta y revisa cualquier
+duda contra el expediente.</li>
+</ol></li>
+<li><strong>Flujo del agente (se diseña y documenta, no se ejecuta en
+vivo):</strong> modelo + herramienta "leer índice del expediente" +
+memoria del checklist + planificación "comparar con la lista → marcar
+faltantes → preparar observación", con <strong>punto de control humano
+antes de dar por válido el expediente</strong>.</li>
+<li><strong>Punto de control humano:</strong> una persona
+<strong>confirma</strong> la lista y <strong>decide</strong> si el
+expediente está completo. El agente <strong>sugiere</strong>; el
+funcionario <strong>valida</strong>.</li>
+<li><strong>Qué NO se sube:</strong> expedientes reales ni documentos
+reservados. Se usa un <strong>índice ficticio</strong> con nombres de
+documentos.</li>
+<li><strong>Señal de calidad:</strong> la lista marca correctamente lo
+faltante en el caso de prueba y el equipo explica <strong>qué
+confirmó</strong> a mano.</li>
+</ul>
+<h2 id="caso-5--avisos-a-la-ciudadanía">Caso 5 — Avisos a la
+ciudadanía</h2>
+<ul>
+<li><strong>Destinatario:</strong> la ciudadanía a la que se comunica un
+servicio, corte o trámite.</li>
+<li><strong>Resultado esperado:</strong> un aviso claro, breve y sin
+tecnicismos, con qué, cuándo y dónde.</li>
+<li><strong>Herramienta:</strong> <strong>chat</strong>.</li>
+<li><strong>Prompt o flujo sugerido:</strong> rol ("comunicador
+público"), tono cercano, longitud máxima y datos concretos que debe
+incluir; pedir una versión para redes y una para web.</li>
+<li><strong>Punto de control humano:</strong> comunicación institucional
+<strong>revisa y aprueba</strong> el texto antes de publicarlo.</li>
+<li><strong>Qué NO se sube:</strong> datos personales de las personas
+afectadas ni información reservada.</li>
+<li><strong>Señal de calidad:</strong> el aviso es comprensible para un
+público no especialista y no promete nada que la institución no pueda
+cumplir.</li>
+</ul>
+<hr />
+<h2 id="cómo-elegir-el-caso-2-min-al-inicio-del-taller">Cómo elegir el
+caso (2 min al inicio del taller)</h2>
+<ul>
+<li>Elijan <strong>uno</strong> de los cinco y
+<strong>acótenlo</strong>: un paso pequeño y útil rinde más que un
+proyecto enorme.</li>
+<li>Prefieran el que puedan <strong>probar</strong> con un caso ficticio
+o público en los 60 minutos de taller.</li>
+<li>Escriban el <strong>problema</strong> y el
+<strong>destinatario</strong> en una frase antes de empezar.</li>
+</ul>
+<h2
+id="advertencia-de-confidencialidad-repetirla-en-voz-alta">Advertencia
+de confidencialidad (repetirla en voz alta)</h2>
+<blockquote>
+<p>Antes de pegar cualquier cosa en un chat público: ¿son <strong>datos
+de ciudadanos</strong>, <strong>documentos reservados</strong> o
+<strong>información no pública</strong>? Si lo son, <strong>no se
+pegan</strong>. Se trabaja con <strong>ejemplos ficticios</strong>,
+datos ya <strong>públicos</strong> o documentos
+<strong>abiertos</strong>. En el Estado, la responsabilidad es del
+<strong>funcionario</strong>, no de la herramienta.</p>
+</blockquote>
+  <footer class="docfoot">Generado desde <a href="casos-minisolucion-s10.md"><code>casos-minisolucion-s10.md</code></a> · Módulo 6 — Inteligencia Artificial · IDT 601</footer>
+</div>
+</body>
+</html>

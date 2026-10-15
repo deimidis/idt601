@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde plantilla-diseno-flujo-agente.md — no editar a mano. -->
+<title>Plantilla — Diseño del flujo de un agente</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 6 — Inteligencia Artificial · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="plantilla--diseño-del-flujo-de-un-agente">Plantilla — Diseño del
+flujo de un agente</h1>
+<p><strong>Módulo:</strong> IDT 601 · Bloque 6 · Sesión 10
+<strong>Equipo:</strong> ____________________ <strong>Caso
+elegido:</strong> ☐ 1 asistente de trámites ☐ 2 clasificador de reclamos
+☐ 3 resumidor de informes ☐ 4 verificador de expedientes ☐ 5 avisos a la
+ciudadanía</p>
+<blockquote>
+<p>Esta plantilla <strong>diseña y documenta</strong> el flujo del
+agente. No hace falta ejecutarlo en vivo: se completa con el criterio
+del equipo. El flujo define <strong>qué haría</strong> el agente y
+<strong>dónde</strong> interviene una persona.</p>
+</blockquote>
+<h2 id="1-la-tarea">1. La tarea</h2>
+<ul>
+<li><strong>Problema que resolvemos:</strong>
+<hr /></li>
+<li><strong>Para quién (destinatario):</strong>
+<hr /></li>
+<li><strong>Resultado esperado:</strong>
+<hr /></li>
+<li><strong>Criterio de éxito (¿cómo sabremos que sirvió?):</strong>
+<hr /></li>
+</ul>
+<h2 id="2-los-cuatro-componentes">2. Los cuatro componentes</h2>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Cómo lo definimos en nuestro caso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Modelo</strong> (el cerebro)</td>
+<td>Qué LLM usamos como motor y para qué razona:
+______________________________________</td>
+</tr>
+<tr>
+<td><strong>Herramientas</strong> (las manos)</td>
+<td>Qué debe poder hacer: ☐ buscar ☐ leer documentos ☐ consultar una
+base ☐ calcular ☐ enviar. Detalle: ______________________</td>
+</tr>
+<tr>
+<td><strong>Memoria</strong> (la agenda)</td>
+<td>Qué debe recordar de la tarea: conversación, pasos hechos, fuentes
+usadas: ______________________</td>
+</tr>
+<tr>
+<td><strong>Planificación</strong> (el método)</td>
+<td>Cómo ordena los pasos: ☐ flujo definido por nosotros ☐ decide pasos
+por su cuenta. Pasos: ______________________</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-pasos-del-flujo-en-orden">3. Pasos del flujo (en orden)</h2>
+<ol type="1">
+<li><hr /></li>
+<li><hr /></li>
+<li><hr /></li>
+<li><hr /></li>
+</ol>
+<blockquote>
+<p>Cuidado: si el agente "decide por su cuenta", el
+<strong>control</strong> debe ser mayor. Preferimos un flujo definido
+por una persona.</p>
+</blockquote>
+<h2 id="4-punto-de-control-humano-obligatorio">4. Punto de control
+humano (obligatorio)</h2>
+<ul>
+<li><strong>¿En qué paso revisa una persona?</strong>
+<hr /></li>
+<li><strong>¿Qué revisa exactamente?</strong> (un dato, una cifra, una
+categoría, un listado, un texto)
+<hr /></li>
+<li><strong>¿Qué decide la persona?</strong> (aprobar, corregir,
+derivar, publicar, firmar)
+<hr /></li>
+<li><strong>Menor privilegio (marcar):</strong> el agente ☐ lee pero no
+envía ☐ sugiere pero no publica ☐ no modifica datos.</li>
+<li><strong>Trazabilidad:</strong> registramos qué hizo y con qué
+fuentes: ☐ sí. Detalle: ______________________</li>
+</ul>
+<h2 id="5-confidencialidad">5. Confidencialidad</h2>
+<ul>
+<li><strong>¿Con qué datos trabajamos?</strong> ☐ caso ficticio ☐ dato
+ya público ☐ documento abierto.</li>
+<li><strong>¿Qué NO se subiría al chat?</strong> (datos de ciudadanos,
+documentos reservados, información no pública)
+_________________________________________________________</li>
+<li><strong>Regla:</strong> si hay duda, <strong>no se pega</strong>. La
+responsabilidad es del funcionario, no de la herramienta.</li>
+</ul>
+<h2 id="6-riesgos-anticipados">6. Riesgos anticipados</h2>
+<table>
+<thead>
+<tr>
+<th>Riesgo</th>
+<th>Cómo lo prevenimos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alucinación (dato inventado)</td>
+<td></td>
+</tr>
+<tr>
+<td>Sesgo (trato desigual)</td>
+<td></td>
+</tr>
+<tr>
+<td>Acción indebida (envío o publicación)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Entrega:</strong> esta plantilla completada, junto con la
+plantilla de entrega de la mini-solución.</p>
+  <footer class="docfoot">Generado desde <a href="plantilla-diseno-flujo-agente.md"><code>plantilla-diseno-flujo-agente.md</code></a> · Módulo 6 — Inteligencia Artificial · IDT 601</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde notas-sesion-10.md — no editar a mano. -->
+<title>Notas del orador — Sesión 10</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 6 — Inteligencia Artificial · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="notas-del-orador--sesión-10">Notas del orador — Sesión 10</h1>
+<p><strong>Deck:</strong> <code>deck-sesion-10.html</code> · 20
+diapositivas · 180 min <strong>Tema:</strong> Agentes de IA y taller
+integrador</p>
+<blockquote>
+<p>Guion punteado por diapositiva. Cada viñeta es algo para decir en voz
+alta; <strong>No olvidar</strong> marca lo imprescindible.</p>
+</blockquote>
+<hr />
+<h2 id="slide-1--agentes-de-ia-y-taller-integrador">Slide 1 — Agentes de
+IA y taller integrador</h2>
+<ul>
+<li>Dar la bienvenida y ubicar esta sesión como la <strong>última del
+módulo</strong> y del Bloque 6.</li>
+<li>Hacer el puente: "Aprendimos a conversar con un LLM y a armar
+prompts; hoy lo vemos <strong>actuar con herramientas</strong> y
+cerramos integrando todo en una mini-solución".</li>
+<li>Anunciar el tono de la jornada: más práctica que teórica, con un
+taller que ocupa la mayor parte del tiempo.</li>
+<li><strong>No olvidar:</strong> avisar que hay una <strong>pausa de 10
+minutos</strong> a mitad de sesión y que hoy se entrega y defiende una
+mini-solución.</li>
+</ul>
+<h2 id="slide-2--hoja-de-ruta">Slide 2 — Hoja de ruta</h2>
+<ul>
+<li>Recorrer los tramos del cuadro de un vistazo: apertura (10), del
+chat al agente (15), componentes (20), ejemplos y RAG (15), pausa (10),
+riesgos y supervisión (10), método y consigna (15), taller definir y
+armar (35), <strong>evaluar, mejorar y preparar la defensa
+(25)</strong>, defensa (15) y cierre (10).</li>
+<li>Subrayar que <strong>75 minutos</strong> son taller (35 + 25 + 15 de
+defensa): la sesión se juega en el trabajo en equipos.</li>
+<li>Señalar la pausa tras el bloque de ejemplos y RAG.</li>
+<li><strong>No olvidar:</strong> el bloque "evaluar, mejorar y preparar
+la defensa" dura <strong>25 min</strong> y la defensa es de <strong>2
+min por equipo</strong>; el cronograma suma 180 min.</li>
+</ul>
+<h2 id="slide-3--tres-preguntas">Slide 3 — Tres preguntas</h2>
+<ul>
+<li>Escribir las tres preguntas en la pizarra y dejarlas visibles toda
+la sesión como columna vertebral: qué es un agente, cómo se diseña su
+flujo, cómo integrarlo en una solución útil.</li>
+<li>Enganche: comparar "¿qué trámites se pueden hacer en línea?" con
+"buscá y armá una tabla comparando requisitos".</li>
+<li>Preguntar al grupo: "¿qué cambió entre las dos respuestas?".</li>
+<li><strong>No olvidar:</strong> dejar claro que el agente no "sabe
+más": actúa más y por eso requiere supervisión humana.</li>
+</ul>
+<h2 id="slide-4--del-chat-al-agente">Slide 4 — Del chat al agente</h2>
+<ul>
+<li>Contrastar las dos columnas: el <strong>chat responde</strong> con
+texto; el <strong>agente actúa</strong> decidiendo pasos y usando
+herramientas.</li>
+<li>Usar la analogía del colega: preguntarle algo es el chat;
+<strong>encargarle una tarea completa</strong> es el agente.</li>
+<li>Escribir en la pizarra los dos flujos: Chat = entrada → respuesta;
+Agente = tarea → plan → pasos → resultado →
+<strong>revisión</strong>.</li>
+<li><strong>No olvidar:</strong> aclarar que un error del chat es una
+frase; un error del agente puede ser una <strong>acción</strong> con
+consecuencias.</li>
+</ul>
+<h2 id="slide-5--herramientas">Slide 5 — Herramientas</h2>
+<ul>
+<li>Recorrer el flujo de izquierda a derecha: <strong>buscar</strong>,
+<strong>leer y consultar</strong>, <strong>ejecutar</strong>.</li>
+<li>Dar ejemplos concretos: buscar en la normativa institucional, leer
+una planilla de trámites, calcular o enviar un correo.</li>
+<li>Explicar que cada herramienta trae su <strong>descripción</strong>
+para que el modelo sepa cuándo usarla.</li>
+<li><strong>No olvidar:</strong> el agente solo puede actuar con las
+herramientas que se le habilitan; nada más.</li>
+</ul>
+<h2 id="slide-6--cuatro-componentes">Slide 6 — Cuatro componentes</h2>
+<ul>
+<li>Presentar los cuatro componentes con su analogía: modelo (el
+cerebro), herramientas (las manos), memoria (la agenda) y planificación
+(el método).</li>
+<li>Explicar que un agente no es solo el modelo: es la combinación de
+las cuatro piezas.</li>
+<li><strong>No olvidar:</strong> remarcar que la
+<strong>planificación</strong> puede seguir un flujo definido por una
+persona o decidir los pasos por su cuenta, y que eso cambia el nivel de
+control.</li>
+</ul>
+<h2 id="slide-7--las-cuatro-piezas-en-un-vistazo">Slide 7 — Las cuatro
+piezas, en un vistazo</h2>
+<ul>
+<li><strong>Esquema en pantalla:</strong> recorrer las cuatro piezas
+sobre una fila y su analogía; abajo, la regla de oro "el agente sugiere,
+el humano decide".</li>
+<li>Señalar que las <strong>herramientas</strong> son lo que separa a un
+agente de un chat: actuar sobre el mundo, no solo responder.</li>
+<li><strong>No olvidar:</strong> subrayar la regla de oro: el agente
+sugiere, la decisión final es humana.</li>
+</ul>
+<h2 id="slide-8--componentes-de-cerca">Slide 8 — Componentes de
+cerca</h2>
+<ul>
+<li>Recorrer modelo, herramientas y memoria con un ejemplo local de cada
+uno: razonar sobre una consulta, leer la normativa o una planilla,
+recordar los pasos ya hechos.</li>
+<li>Insistir en las consecuencias: <strong>sin herramientas</strong> un
+LLM solo conversa; <strong>sin planificación</strong> no encadena pasos;
+<strong>sin memoria</strong> pierde el hilo.</li>
+<li><strong>No olvidar:</strong> las cuatro piezas trabajan juntas;
+quitar una rompe el resultado.</li>
+</ul>
+<h2 id="slide-9--ejemplos">Slide 9 — Ejemplos</h2>
+<ul>
+<li>Presentar los tres usos habituales: <strong>asistentes</strong>,
+<strong>RAG</strong> y <strong>automatización</strong>.</li>
+<li>Dar un ejemplo boliviano de cada uno: requisitos de trámites,
+derivación de reclamos y resúmenes de informes para una autoridad.</li>
+<li>Preguntar al grupo: "¿cuál de los tres usaría primero su institución
+y por qué?".</li>
+<li><strong>No olvidar:</strong> distinguir que <strong>RAG cita
+fuentes</strong> y que la automatización <strong>ejecuta pasos
+repetitivos</strong>; no son lo mismo.</li>
+</ul>
+<h2 id="slide-10--rag">Slide 10 — RAG</h2>
+<ul>
+<li>Explicar los dos pasos: primero <strong>buscar</strong> en los
+documentos propios; luego <strong>generar</strong> la respuesta citando
+lo encontrado.</li>
+<li>Señalar el beneficio central: responde <strong>con fuentes</strong>,
+no solo de memoria, y así <strong>reduce las
+alucinaciones</strong>.</li>
+<li>Ejemplo: un agente que consulta el reglamento interno de la alcaldía
+y responde con la referencia exacta.</li>
+<li><strong>No olvidar:</strong> sin documentos internos ordenados y
+confiables, RAG no aporta valor; la calidad de las fuentes es la
+condición.</li>
+</ul>
+<h2 id="slide-11--riesgos">Slide 11 — Riesgos</h2>
+<ul>
+<li>Explicar que el agente <strong>amplifica los límites del
+LLM</strong> porque sus errores se traducen en acciones.</li>
+<li>Recorrer los tres riesgos: <strong>error de datos</strong>,
+<strong>acción indebida</strong> y <strong>falta de
+transparencia</strong>.</li>
+<li>Añadir que también puede usar mal una herramienta, interpretar mal
+una instrucción o encadenar errores.</li>
+<li><strong>No olvidar:</strong> un error de un agente no es solo una
+frase mal escrita; puede ser un envío, una publicación o un cambio
+indebido.</li>
+</ul>
+<h2 id="slide-12--supervisión-humana">Slide 12 — Supervisión humana</h2>
+<ul>
+<li>Presentar los tres controles: <strong>humano en el
+circuito</strong>, <strong>menor privilegio</strong> (leer pero no
+enviar, sugerir pero no publicar) y <strong>trazabilidad</strong>.</li>
+<li>Dejar instalada la regla de oro: <strong>el agente sugiere, el
+humano decide</strong>.</li>
+<li>Enfatizar que en el sector público la responsabilidad es del
+<strong>funcionario</strong>, no del agente.</li>
+<li><strong>No olvidar:</strong> sin registro de qué hizo y con qué
+fuentes no hay auditoría posible.</li>
+</ul>
+<h2 id="slide-13--método">Slide 13 — Método</h2>
+<ul>
+<li>Explicar el ciclo de cuatro pasos: <strong>Definir → Armar → Evaluar
+→ Mejorar</strong>, y que vuelve a empezar.</li>
+<li>Detallar cada paso brevemente: problema y destinatario; prompts o
+flujo con control humano; prueba con casos reales; ajuste e
+iteración.</li>
+<li>Repetir la regla: mejor un paso útil y concreto que un proyecto
+enorme.</li>
+<li><strong>No olvidar:</strong> este es el método que usarán tanto en
+el taller de hoy como en el trabajo final integrador.</li>
+</ul>
+<h2 id="slide-14--consigna-del-taller">Slide 14 — Consigna del
+taller</h2>
+<ul>
+<li>Formar equipos de <strong>3 a 4</strong> personas y repartir las dos
+plantillas (diseño del flujo y entrega).</li>
+<li>Dar la consigna y los tiempos: definir y armar <strong>35
+min</strong>; evaluar, mejorar y preparar la defensa <strong>25
+min</strong>; defensa <strong>2 min por equipo</strong>.</li>
+<li>Recordar que hay un chat LLM disponible para apoyar el trabajo,
+siempre con datos ficticios o públicos.</li>
+<li><strong>No olvidar:</strong> antes de empezar, cada equipo debe
+anotar el problema y su destinatario.</li>
+</ul>
+<h2 id="slide-15--los-cinco-casos">Slide 15 — Los cinco casos</h2>
+<ul>
+<li>Leer los cinco casos y pedir que cada equipo elija <strong>uno
+acotado</strong>.</li>
+<li>Explicar que los casos <strong>2 (clasificador de reclamos)</strong>
+y <strong>4 (verificador de expedientes)</strong> se resuelven con
+<strong>chat + criterio + supervisión humana</strong>, sin plataforma de
+agentes real.</li>
+<li>Aclarar que el <strong>flujo del agente se diseña y se
+documenta</strong> con la plantilla de diseño, aunque no se ejecute en
+vivo.</li>
+<li><strong>No olvidar:</strong> se trabaja con un caso <strong>ficticio
+o público</strong>; nunca con reclamos o expedientes reales.</li>
+</ul>
+<h2 id="slide-16--control-humano-y-confidencialidad">Slide 16 — Control
+humano y confidencialidad</h2>
+<ul>
+<li>Explicar dónde se ubica el <strong>punto de control humano</strong>
+en cada caso: una persona revisa el dato, confirma la categoría y decide
+la acción.</li>
+<li>Dejar instalada la regla de <strong>confidencialidad</strong>: no
+subir datos de ciudadanos ni documentos reservados a un chat
+público.</li>
+<li>Recordar que la responsabilidad en el sector público es del
+funcionario, no de la herramienta.</li>
+<li><strong>No olvidar:</strong> pedir a cada equipo que escriba
+<strong>dónde</strong> revisa una persona su resultado.</li>
+</ul>
+<h2 id="slide-17--entrega-y-defensa">Slide 17 — Entrega y defensa</h2>
+<ul>
+<li>Mostrar la plantilla de entrega: <strong>tarea</strong>,
+<strong>prompt o flujo</strong>, <strong>resultado</strong>,
+<strong>evaluación crítica</strong> y <strong>mejora
+aplicada</strong>.</li>
+<li>Explicar que la defensa es de <strong>2 minutos</strong> por equipo
+y que se apoya en esa plantilla.</li>
+<li>Aclarar que no se busca la perfección técnica, sino la
+<strong>integración consciente</strong> de lo aprendido.</li>
+<li><strong>No olvidar:</strong> cada equipo debe mostrar <strong>qué
+tuvo que verificar o corregir</strong> y qué dato no subiría a un chat
+público.</li>
+</ul>
+<h2 id="slide-18--el-módulo-en-una-cadena">Slide 18 — El módulo en una
+cadena</h2>
+<ul>
+<li>Recorrer los seis eslabones: datos y calidad, ingesta, arquitectura,
+integración, licencias y datos abiertos, IA y agentes.</li>
+<li>Señalar que cada eslabón <strong>habilita al siguiente</strong> y
+que el módulo culmina en la capa de IA.</li>
+<li>Pedir que cada equipo conecte su mini-solución con alguno de esos
+eslabones.</li>
+<li><strong>No olvidar:</strong> sin datos de calidad, los eslabones
+siguientes no sostienen nada; el dato es el activo de partida.</li>
+</ul>
+<h2 id="slide-19--cierre-del-módulo">Slide 19 — Cierre del módulo</h2>
+<ul>
+<li>Reforzar la idea fuerza: la IA <strong>no reemplaza</strong> al
+profesional público, lo <strong>potencia</strong> cuando hay
+criterio.</li>
+<li>Enunciar las condiciones: <strong>datos de calidad</strong>,
+<strong>método de trabajo</strong> y <strong>supervisión
+humana</strong>.</li>
+<li>Presentar el <strong>trabajo final integrador</strong> e insistir en
+sus <strong>dos componentes obligatorios</strong>: (a) la
+<strong>declaración de licencia del dataset</strong> usado (Bloque 5) y
+(b) un <strong>prompt o flujo de agente documentado con su punto de
+control humano</strong> (Bloque 6).</li>
+<li><strong>No olvidar:</strong> el trabajo final se entrega
+<strong>fuera de clase</strong> y se evalúa con la rúbrica del
+módulo.</li>
+</ul>
+<h2 id="slide-20--gracias">Slide 20 — Gracias</h2>
+<ul>
+<li>Agradecer la participación del grupo a lo largo del módulo.</li>
+<li>Recordar la entrega del trabajo final integrador, con la declaración
+de licencia del dataset y el prompt/flujo con punto de control
+humano.</li>
+<li>Abrir el espacio para preguntas y cerrar la cursada.</li>
+<li><strong>No olvidar:</strong> confirmar el canal y la fecha límite de
+entrega del trabajo final.</li>
+</ul>
+  <footer class="docfoot">Generado desde <a href="notas-sesion-10.md"><code>notas-sesion-10.md</code></a> · Módulo 6 — Inteligencia Artificial · IDT 601</footer>
+</div>
+</body>
+</html>

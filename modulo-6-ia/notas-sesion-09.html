@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde notas-sesion-09.md — no editar a mano. -->
+<title>Notas del orador — Sesión 9</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 6 — Inteligencia Artificial · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="notas-del-orador--sesión-9">Notas del orador — Sesión 9</h1>
+<p><strong>Deck:</strong> <code>deck-sesion-09.html</code> · 21
+diapositivas · 180 min <strong>Tema:</strong> Modelos de lenguaje (LLM)
+y prompting</p>
+<blockquote>
+<p>Guion punteado por diapositiva. Cada viñeta es algo para decir en voz
+alta; <strong>No olvidar</strong> marca lo imprescindible.</p>
+</blockquote>
+<hr />
+<h2 id="slide-1--modelos-de-lenguaje-llm-y-prompting">Slide 1 — Modelos
+de lenguaje (LLM) y prompting</h2>
+<ul>
+<li>Dar la bienvenida, presentarse y ubicar la sesión en el
+<strong>Bloque 6 — Historia y Desarrollo de la Inteligencia
+Artificial</strong>.</li>
+<li>Encuadrar el puente con la Sesión 8: "Vimos la red neuronal y cómo
+aprende; hoy la vemos a escala gigante, en los chats que usamos a
+diario".</li>
+<li>Aclarar que el público no es especialista: <strong>no hace falta
+saber programar</strong> para entender ni para usar un LLM.</li>
+<li>Anunciar las dos preguntas del día: ¿qué es un LLM y cómo genera
+contenido? y ¿cómo le pedimos para obtener una buena respuesta?</li>
+<li><strong>No olvidar:</strong> pedir que tengan a mano un chat de IA
+(o el documento compartido del Plan B) y avisar la <strong>pausa de 10
+minutos</strong> y la <strong>práctica de 30 min</strong>.</li>
+</ul>
+<h2 id="slide-2--hoja-de-ruta">Slide 2 — Hoja de ruta</h2>
+<ul>
+<li>Recorrer los <strong>once tramos</strong> de la tabla leyendo el
+hilo y los tiempos, sin entrar todavía en contenido.</li>
+<li>Marcar el ritmo: teoría hasta la mitad, <strong>pausa de 10
+minutos</strong> y luego foco en prompting, práctica y cierre.</li>
+<li>Señalar que la <strong>práctica (30 min)</strong> es el corazón del
+día y que la <strong>puesta en común</strong> se hace al cierre.</li>
+<li><strong>No olvidar:</strong> avisar la hora exacta de la pausa y
+dónde retoman, para que nadie se disperse.</li>
+</ul>
+<h2 id="slide-3--dos-preguntas">Slide 3 — Dos preguntas</h2>
+<ul>
+<li>Escribir las dos preguntas en la pizarra y dejarlas visibles toda la
+sesión como columna vertebral: qué es un LLM y cómo le pedimos.</li>
+<li>Explicar que la primera mitad responde la pregunta 1 y la segunda,
+la pregunta 2.</li>
+<li>Aclarar que entender el modelo y saber pedirle bien son <strong>dos
+habilidades distintas</strong>, y las dos se aprenden.</li>
+<li><strong>No olvidar:</strong> pedir que anoten sus respuestas ahora,
+para compararlas al final.</li>
+</ul>
+<h2 id="slide-4--el-poder-del-prompt">Slide 4 — El poder del prompt</h2>
+<ul>
+<li>Abrir un chat real y mostrar en vivo las dos respuestas: el pedido
+<strong>vago</strong> ("háblame de impuestos") y el
+<strong>preciso</strong> ("explicá en 5 líneas y para un funcionario
+municipal qué es el impuesto predial").</li>
+<li>Preguntar al grupo "¿qué diferencia notan?, ¿qué cambió?" y dejarlos
+responder antes de explicar.</li>
+<li>Subrayar que el <strong>modelo es el mismo</strong>: lo único que
+cambió fue la forma de pedir.</li>
+<li>Conectar el ejemplo del impuesto predial con su trabajo cotidiano en
+la gestión pública.</li>
+<li><strong>No olvidar:</strong> destacar que este enganche es el
+corazón de la sesión; todo lo demás explica por qué el prompt
+manda.</li>
+</ul>
+<h2 id="slide-5--qué-es-un-llm">Slide 5 — Qué es un LLM</h2>
+<ul>
+<li>Definir LLM como <strong>red neuronal a gran escala</strong>
+entrenada sobre enormes volúmenes de texto.</li>
+<li>Explicar "gran escala" en lenguaje llano: miles de millones de
+<strong>parámetros (pesos)</strong> y textos de libros, sitios,
+documentos públicos y código.</li>
+<li>Usar la analogía del <strong>lector incansable</strong>: leyó una
+biblioteca entera y aprendió qué palabras suelen ir juntas y en qué
+orden.</li>
+<li>Subrayar la tarea central: <strong>predecir la siguiente
+palabra</strong>; no piensa ni busca, completa patrones.</li>
+<li><strong>No olvidar:</strong> dejar claro que nadie escribió las
+reglas del idioma dentro del modelo: las descubrió solo.</li>
+</ul>
+<h2 id="slide-6--cómo-se-entrena">Slide 6 — Cómo se entrena</h2>
+<ul>
+<li>Dibujar la red neuronal de la sesión anterior en la pizarra y
+"agrandarla" millones de veces.</li>
+<li>Recorrer los pasos: <strong>mostrar</strong> frases,
+<strong>predecir</strong> la siguiente palabra, <strong>comparar con la
+palabra que realmente seguía</strong> y <strong>corregir los
+pesos</strong>.</li>
+<li><strong>Corrección técnica (no equivocarse):</strong> en el
+preentrenamiento <strong>no hay refuerzo por acertar</strong>. Se
+<strong>compara</strong> con la palabra real y se <strong>corrigen los
+pesos</strong> para reducir el error (descenso de gradiente). El
+refuerzo con recompensas es el <strong>aprendizaje por refuerzo</strong>
+de la Sesión 8, que es otra cosa.</li>
+<li>Hacer la demostración: pedir al chat que complete "La recaudación
+tributaria del municipio aumentó porque…".</li>
+<li><strong>No olvidar:</strong> insistir en que el modelo no guarda
+respuestas, sino que aprende <strong>cómo suele continuar</strong> una
+frase.</li>
+</ul>
+<h2 id="slide-7--generación-por-probabilidad">Slide 7 — Generación por
+probabilidad</h2>
+<ul>
+<li>Explicar que ante un pedido el modelo calcula <strong>qué palabra es
+más probable que siga</strong>, según todo lo que leyó.</li>
+<li>Aclarar que <strong>no busca en una base de datos</strong>: genera
+palabra por palabra, y cada una pasa a ser contexto de la
+siguiente.</li>
+<li>Mostrar el ejemplo: "El informe de gestión del año 2025…" con
+<strong>señala 42%</strong>, <strong>muestra 31%</strong>,
+<strong>indica 18%</strong>.</li>
+<li>Usar esto para explicar por qué la misma pregunta da respuestas
+parecidas pero no idénticas.</li>
+<li><strong>No olvidar:</strong> remarcar que elige la palabra
+<strong>probable</strong>, no necesariamente la
+<strong>verdadera</strong>; ahí nacen su utilidad y su riesgo.</li>
+</ul>
+<h2 id="slide-8--conceptos-operativos">Slide 8 — Conceptos
+operativos</h2>
+<ul>
+<li>Presentar los cuatro conceptos como la explicación de por qué el
+modelo <strong>a veces olvida, repite o inventa</strong>.</li>
+<li><strong>Token:</strong> el modelo no "lee" letras ni palabras
+completas, sino fragmentos; por eso se equivoca al contar letras o al
+escribir palabras raras.</li>
+<li><strong>Ventana de contexto:</strong> dar el ejemplo de una
+conversación larga donde el modelo "olvida" lo dicho al principio.</li>
+<li><strong>Temperatura:</strong> explicar que no es creatividad mágica,
+sino cuánto se arriesga a elegir opciones menos probables (baja =
+predecible, alta = variada).</li>
+<li><strong>Embedding:</strong> definirlo como "significado en números"
+y anunciar que es la base de la recuperación de información que se verá
+en la Sesión 10.</li>
+<li><strong>No olvidar:</strong> decir que estos conceptos
+<strong>explican el comportamiento real</strong>, no son teoría de
+laboratorio.</li>
+</ul>
+<h2 id="slide-9--modelos-generativos">Slide 9 — Modelos generativos</h2>
+<ul>
+<li>Presentar los dos tipos con un ejemplo local de cada uno:
+<strong>texto</strong> (respuesta a un reclamo) y
+<strong>código</strong> (fórmula o script para ordenar un archivo).</li>
+<li>Mencionar que también existen modelos de <strong>imagen, audio y
+video</strong>, y que algunos son <strong>multimodales</strong>
+(combinan tipos de contenido en la misma conversación).</li>
+<li>Aclarar que en esta sesión el foco está en <strong>texto</strong>,
+que es lo que se usa en la práctica.</li>
+<li><strong>No olvidar:</strong> cerrar con la idea puente "palabra a
+palabra o línea a línea" y pasar a los límites.</li>
+</ul>
+<h2 id="slide-10--alcances-y-límites">Slide 10 — Alcances y límites</h2>
+<ul>
+<li>Explicar la <strong>alucinación</strong>: inventa con seguridad
+citas, datos y leyes que no existen.</li>
+<li>Dar el ejemplo del "artículo 45 de la Ley N° 1234": texto coherente
+pero falso.</li>
+<li>Explicar el <strong>sesgo</strong> (reproduce prejuicios del texto
+de entrenamiento) y la <strong>fecha de corte</strong> (solo sabe hasta
+que terminó su entrenamiento).</li>
+<li>Traducir cada límite a un <strong>riesgo concreto</strong> en
+gestión pública: cifras incorrectas, trato desigual y normativa
+desactualizada.</li>
+<li><strong>No olvidar:</strong> dejar grabada la regla práctica: todo
+lo que salga de un LLM debe <strong>verificarse</strong> contra la
+fuente oficial.</li>
+</ul>
+<h2 id="slide-11--confidencialidad">Slide 11 — Confidencialidad</h2>
+<ul>
+<li>Instalar la <strong>regla de confidencialidad</strong> con la
+pregunta guía: "¿son datos de ciudadanos, documentos reservados o
+información no pública?".</li>
+<li>Enlazar con el <strong>Bloque 5</strong>: una cosa es publicar un
+dato abierto con su licencia y otra es subir datos personales o
+información reservada a un servicio externo.</li>
+<li>Dar las alternativas: trabajar con <strong>ejemplos
+ficticios</strong>, datos ya <strong>públicos</strong> o casos
+<strong>anonimizados</strong>.</li>
+<li><strong>No olvidar:</strong> repetir que la <strong>responsabilidad
+es del funcionario</strong>, no de la herramienta.</li>
+</ul>
+<h2 id="slide-12--el-chat">Slide 12 — El chat</h2>
+<ul>
+<li>Mostrar la interfaz real: el cuadro de texto, el historial y la
+respuesta que se apoya en lo anterior.</li>
+<li>Explicar que es una <strong>plataforma genérica</strong>: cualquiera
+de las conocidas sirve (<strong>ChatGPT, Gemini o Copilot</strong>, por
+ejemplo); no hay una obligatoria.</li>
+<li><strong>Resolver el acceso:</strong> mencionar el <strong>Plan B sin
+cuenta</strong> (documento compartido + demostración guiada del docente)
+para quien no pueda crear cuenta.</li>
+<li>Dar buenas prácticas: <strong>una pregunta por vez</strong> y pedir
+aclaración o reformulación si la respuesta no sirve.</li>
+<li><strong>No olvidar:</strong> reforzar que la salida es una
+<strong>propuesta a revisar</strong>, nunca la verdad.</li>
+</ul>
+<h2 id="slide-13--qué-es-un-prompt">Slide 13 — Qué es un prompt</h2>
+<ul>
+<li>Definir el <strong>prompt</strong> como el texto que le damos al
+modelo: la instrucción o pedido.</li>
+<li>Enfatizar que la calidad de la respuesta depende, en gran parte, de
+cómo está redactado el prompt.</li>
+<li>Presentar las cuatro técnicas: <strong>claridad, contexto, ejemplos
+y rol</strong>.</li>
+<li>Señalar que se pueden combinar varias en un mismo prompt, sin que
+sea obligatorio usar todas.</li>
+<li><strong>No olvidar:</strong> enmarcar que estas cuatro técnicas son
+la herramienta central que se llevan de la sesión.</li>
+</ul>
+<h2 id="slide-14--claridad-y-contexto">Slide 14 — Claridad y
+contexto</h2>
+<ul>
+<li>Explicar la <strong>claridad</strong> como "qué, formato, extensión
+y tono" y el <strong>contexto</strong> como "para quién y para
+qué".</li>
+<li>Leer en voz alta el ejemplo <strong>débil</strong> y el
+<strong>fuerte</strong> para que se escuche la diferencia.</li>
+<li>Dar el ejemplo de contexto: "Soy funcionario de un gobierno
+municipal y debo responder una consulta ciudadana. Redactá la respuesta
+usando lenguaje claro".</li>
+<li><strong>No olvidar:</strong> anticipar que estas dos técnicas son
+las mínimas que se piden en la práctica.</li>
+</ul>
+<h2 id="slide-15--ejemplos-y-rol">Slide 15 — Ejemplos y rol</h2>
+<ul>
+<li>Explicar los <strong>ejemplos (few-shot)</strong> como mostrar el
+resultado esperado para guiar formato y tono.</li>
+<li>Explicar el <strong>rol</strong> como pedirle que asuma un papel
+para ajustar la voz y el enfoque.</li>
+<li>Mostrar un ejemplo combinado de las cuatro técnicas en un mismo
+prompt institucional.</li>
+<li>Preguntar quién ya usa alguna de estas técnicas sin saber su
+nombre.</li>
+<li><strong>No olvidar:</strong> repetir que las cuatro técnicas se
+pueden combinar y que no hay una única forma correcta de pedir.</li>
+</ul>
+<h2 id="slide-16--resumen-de-técnicas">Slide 16 — Resumen de
+técnicas</h2>
+<ul>
+<li>Repasar la tabla técnica por técnica con un ejemplo breve dicho en
+voz alta.</li>
+<li>Insistir en que esta tabla es la <strong>síntesis práctica</strong>
+de toda la parte teórica.</li>
+<li>Pedir que la copien o la fotografíen, porque se usa en la práctica y
+en el cierre.</li>
+<li>Conectar cada técnica con un pedido real que hacen a diario en la
+oficina.</li>
+<li><strong>No olvidar:</strong> anunciar que la práctica de 30 minutos
+aplicará al menos claridad y contexto.</li>
+</ul>
+<h2 id="slide-17--iterar-y-verificar">Slide 17 — Iterar y verificar</h2>
+<ul>
+<li>Explicar que la primera respuesta es un <strong>borrador</strong> y
+que trabajar con un LLM es <strong>diálogo</strong>.</li>
+<li>Recorrer el ciclo: <strong>pedir, revisar, verificar y
+re-pedir</strong>.</li>
+<li><strong>Esquema en pantalla (ciclo):</strong> los cuatro pasos del
+ciclo y la nota de que se repite hasta obtener una versión presentable;
+destacar "verificar" como el paso obligatorio.</li>
+<li>Dar ejemplos de re-pedido: "resumí eso en tres viñetas", "escribilo
+en lenguaje más sencillo, para un ciudadano".</li>
+<li><strong>No olvidar:</strong> usar el <strong>criterio
+experto</strong>: el funcionario conoce su área y detecta lo incorrecto
+que el modelo no ve.</li>
+</ul>
+<h2 id="slide-18--práctica">Slide 18 — Práctica</h2>
+<ul>
+<li>Dar la consigna: elegir una tarea institucional real y armar un
+prompt con al menos <strong>claridad + contexto</strong>.</li>
+<li>Leer las cinco tareas sugeridas (reclamo, aviso, resumen, requisito
+y lista de verificación); aclarar que puede ser una tarea propia.</li>
+<li>Explicar los tres pasos: redactar el prompt, evaluar la respuesta e
+<strong>iterar</strong> al menos una vez.</li>
+<li><strong>Resolver el acceso:</strong> plataforma genérica de chat
+(cualquiera sirve) y <strong>Plan B sin cuenta</strong> con documento
+compartido + demo guiada del docente.</li>
+<li><strong>No olvidar:</strong> cronometrar los <strong>30 minutos
+completos</strong>; la puesta en común va al cierre.</li>
+</ul>
+<h2 id="slide-19--puesta-en-común">Slide 19 — Puesta en común</h2>
+<ul>
+<li>Pedir a cada persona exponer en 1–2 minutos: <strong>el prompt
+mejorado y qué cambió</strong> respecto del primero.</li>
+<li>Pedir que cada uno nombre <strong>un dato que verificaría</strong>
+antes de usar la respuesta.</li>
+<li>Contrastar los prompts y criterios: ¿qué hizo la diferencia?</li>
+<li><strong>No olvidar:</strong> valorar que el prompt incluya claridad
+y contexto y que se identifique un punto a verificar.</li>
+</ul>
+<h2 id="slide-20--cierre">Slide 20 — Cierre</h2>
+<ul>
+<li>Releer los tres mensajes de síntesis: <strong>modelo</strong>
+(genera palabra por palabra con probabilidades), <strong>prompt</strong>
+(claridad, contexto, ejemplos y rol) y <strong>verificar</strong> (datos
+y normas contra la fuente oficial).</li>
+<li>Volver a las dos preguntas del inicio y verificar que el grupo ya
+puede responderlas.</li>
+<li>Repetir la <strong>regla de confidencialidad</strong> y anticipar la
+Sesión 10: los <strong>agentes de IA</strong> y el taller
+integrador.</li>
+<li><strong>No olvidar:</strong> cerrar con la entrega: el prompt
+mejorado de una tarea real con una observación de verificación.</li>
+</ul>
+<h2 id="slide-21--gracias">Slide 21 — Gracias</h2>
+<ul>
+<li>Agradecer la asistencia y el trabajo de la práctica.</li>
+<li>Recordar la entrega pendiente: <strong>prompt mejorado más la
+observación de verificación</strong>.</li>
+<li>Aclarar que no hace falta memorizar la teoría, sino quedarse con el
+hábito de <strong>pedir bien y verificar</strong>.</li>
+<li><strong>No olvidar:</strong> dejar a mano el material y confirmar la
+fecha y el tema de la Sesión 10.</li>
+</ul>
+  <footer class="docfoot">Generado desde <a href="notas-sesion-09.md"><code>notas-sesion-09.md</code></a> · Módulo 6 — Inteligencia Artificial · IDT 601</footer>
+</div>
+</body>
+</html>

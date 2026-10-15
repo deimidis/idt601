@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde notas-sesion-08.md — no editar a mano. -->
+<title>Notas del orador — Sesión 8</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 6 — Inteligencia Artificial · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="notas-del-orador--sesión-8">Notas del orador — Sesión 8</h1>
+<p><strong>Deck:</strong> <code>deck-sesion-08.html</code> · 22
+diapositivas · 180 min <strong>Tema:</strong> Inteligencia artificial:
+historia, redes neuronales y aprendizaje</p>
+<blockquote>
+<p>Guion punteado por diapositiva. Cada viñeta es algo para decir en voz
+alta; <strong>No olvidar</strong> marca lo imprescindible.</p>
+</blockquote>
+<hr />
+<h2
+id="slide-1--inteligencia-artificial-historia-redes-neuronales-y-aprendizaje">Slide
+1 — Inteligencia artificial: historia, redes neuronales y
+aprendizaje</h2>
+<ul>
+<li>Dar la bienvenida, presentarse y ubicar el <strong>Bloque 6 —
+Historia y Desarrollo de la Inteligencia Artificial</strong>.</li>
+<li>Encuadrar la sesión como un recorrido: <strong>de las reglas fijas
+al aprendizaje con datos</strong>.</li>
+<li>Aclarar que el público no es especialista: "no hace falta programar;
+vamos a entender las ideas y cómo se usan".</li>
+<li>Anunciar las palabras clave del día: <strong>regla, dato, modelo,
+predicción, probabilidad, neurona, peso, entrenamiento, etiqueta,
+sobreajuste, métrica</strong>.</li>
+<li><strong>No olvidar:</strong> avisar que habrá una <strong>pausa de
+10 minutos</strong> tras el bloque de las dos perspectivas y que el
+cierre incluye una dinámica en equipos.</li>
+</ul>
+<h2 id="slide-2--hoja-de-ruta">Slide 2 — Hoja de ruta</h2>
+<ul>
+<li>Presentar los <strong>nueve tramos</strong> contando esta apertura:
+historia, dos perspectivas, pausa, redes neuronales, tipos de
+aprendizaje, ejemplos, dinámica y cierre.</li>
+<li>Marcar los tiempos: 20 min de historia, 25 de perspectivas, 35 de
+redes, 25 de tipos, 10 de ejemplos, 30 de dinámica y 15 de cierre.</li>
+<li>Explicar que la teoría y la práctica se alternan para que nadie se
+canse de escuchar.</li>
+<li><strong>No olvidar:</strong> remarcar la <strong>pausa</strong> y el
+bloque de la dinámica, porque son los dos respiros de las tres
+horas.</li>
+</ul>
+<h2 id="slide-3--las-preguntas">Slide 3 — Las preguntas</h2>
+<ul>
+<li>Plantear las tres preguntas que ordenan toda la sesión: <strong>¿qué
+es la IA y de dónde viene?</strong>, <strong>¿sigue reglas o aprende de
+los datos?</strong>, <strong>¿cómo aprende una red
+neuronal?</strong>.</li>
+<li>Usar el enganche: "¿cómo aprendiste a distinguir un trámite
+<strong>urgente</strong> de uno normal? ¿con ejemplos etiquetados,
+agrupando o a los golpes?".</li>
+<li>Señalar que cada respuesta anticipa uno de los <strong>tres tipos de
+aprendizaje</strong> que veremos.</li>
+<li><strong>No olvidar:</strong> decir que quien logre responder estas
+tres preguntas entiende cómo piensa —y cómo falla— la IA actual.</li>
+</ul>
+<h2 id="slide-4--dos-caminos">Slide 4 — Dos caminos</h2>
+<ul>
+<li>Presentar los dos caminos como el hilo conductor de toda la sesión:
+<strong>determinista e indeterminista</strong>.</li>
+<li>Explicar el primer camino: <strong>decirle qué hacer</strong>; el
+sistema cumple reglas fijas escritas por un humano.</li>
+<li>Explicar el segundo: <strong>dejar que descubra</strong>; el sistema
+aprende patrones de los datos y no le escribimos las reglas.</li>
+<li>Preguntar al grupo en qué camino ubicarían el trabajo que hacen a
+diario.</li>
+<li><strong>No olvidar:</strong> advertir que la IA real casi siempre
+<strong>mezcla</strong> los dos caminos y no hay uno superior al
+otro.</li>
+</ul>
+<h2 id="slide-5--historia-en-cinco-momentos">Slide 5 — Historia en cinco
+momentos</h2>
+<ul>
+<li>Recorrer los cinco momentos sin tecnicismos, como un relato:
+<strong>1950s la pregunta</strong>, <strong>1960–70s las
+reglas</strong>, <strong>1980–90s el aprendizaje</strong>, <strong>2000s
+datos y cómputo</strong>, <strong>hoy IA generativa</strong>.</li>
+<li>Contar el punto de partida: <strong>Turing</strong> y su pregunta
+por una máquina que se comporte como humano.</li>
+<li>Explicar el giro de los 80–90: codificar todas las reglas del mundo
+es imposible, mejor dar <strong>ejemplos</strong>.</li>
+<li><strong>No olvidar:</strong> el mensaje puente: en toda esta
+historia conviven las <strong>dos filosofías</strong> que veremos ahora
+en detalle.</li>
+</ul>
+<h2 id="slide-6--cinco-momentos-en-una-línea-de-tiempo">Slide 6 — Cinco
+momentos en una línea de tiempo</h2>
+<ul>
+<li><strong>Esquema en pantalla (línea de tiempo):</strong> recorrer los
+cinco hitos de izquierda a derecha y conectar cada uno con la vida
+cotidiana (traducción, asistentes de chat, reconocimiento de
+imágenes).</li>
+<li>Señalar la flecha continua y el último punto, más oscuro: la
+historia no terminó, hoy es la IA generativa.</li>
+<li><strong>No olvidar:</strong> insistir en que en toda esta historia
+conviven las <strong>dos filosofías</strong> (decirle qué hacer o dejar
+que descubra).</li>
+</ul>
+<h2 id="slide-7--dos-perspectivas">Slide 7 — Dos perspectivas</h2>
+<ul>
+<li>Leer la tabla comparativa con el grupo, fila por fila, y detenerse
+en <strong>explicabilidad</strong> y <strong>cantidad de
+datos</strong>.</li>
+<li>Aclarar que el determinista es <strong>predecible y
+auditable</strong>; el indeterminista es <strong>probabilístico</strong>
+y a veces "caja negra".</li>
+<li>Decir con claridad: <strong>no es cuál es mejor, sino cuál se ajusta
+al problema</strong>.</li>
+<li>Preguntar: "¿qué trámites de su institución son 100% verificables y
+cuáles requieren criterio?".</li>
+<li><strong>No olvidar:</strong> remarcar que un sistema indeterminista
+<strong>puede equivocarse</strong> y a veces no sabemos por qué; por eso
+exige control humano.</li>
+</ul>
+<h2 id="slide-8--perspectiva-determinista">Slide 8 — Perspectiva
+determinista</h2>
+<ul>
+<li>Explicar la regla <code>si (condición) entonces (acción)</code>:
+misma entrada, <strong>siempre</strong> la misma salida.</li>
+<li>Destacar las ventajas: <strong>predecible, auditable y fácil de
+explicar</strong>.</li>
+<li>Usar los ejemplos: la verificación de documentos de un trámite y un
+<strong>semáforo programado</strong> que cumple un plan, no
+"piensa".</li>
+<li>Señalar el límite: ante un caso <strong>no previsto</strong>, el
+sistema no sabe qué hacer.</li>
+<li><strong>No olvidar:</strong> su fuerza y su debilidad son la misma:
+solo hace lo que <strong>alguien escribió</strong> antes.</li>
+</ul>
+<h2 id="slide-9--perspectiva-indeterminista">Slide 9 — Perspectiva
+indeterminista</h2>
+<ul>
+<li>Explicar que el sistema <strong>aprende patrones de
+ejemplos</strong> y que las reglas se construyen de los datos, no se
+escriben.</li>
+<li>Señalar que la salida es <strong>probabilística</strong>: da una
+respuesta con un nivel de confianza, no con certeza.</li>
+<li>Ilustrar con el clasificador de <strong>reclamos por tema</strong>,
+que aprendió de miles de reclamos ya derivados.</li>
+<li>Hablar del límite: <strong>menos explicable a veces</strong>, la
+llamada "caja negra".</li>
+<li><strong>No olvidar:</strong> aclarar que "caja negra" no significa
+magia, sino que nos cuesta <strong>seguir el razonamiento</strong> de la
+máquina.</li>
+</ul>
+<h2 id="slide-10--cuándo-conviene-cada-uno">Slide 10 — ¿Cuándo conviene
+cada uno?</h2>
+<ul>
+<li>Recorrer las tres tarjetas: determinista para <strong>requisitos
+claros</strong>, indeterminista cuando <strong>hay patrones</strong>,
+combinada con <strong>reglas + datos</strong>.</li>
+<li>Aterrizar con lo local: un trámite municipal de documentos, la
+predicción de demanda de un servicio según estación y clima.</li>
+<li>Explicar la combinada con el <strong>filtro de spam</strong>: reglas
+del remitente más aprendizaje del contenido.</li>
+<li>Dar la regla práctica: "¿puedo escribir la regla en una frase? →
+determinista; ¿necesito ver muchos ejemplos? → indeterminista".</li>
+<li><strong>No olvidar:</strong> hacer la transición: "cuando el sistema
+realmente aprende de los datos, aparece la herramienta estrella:
+<strong>la red neuronal</strong>".</li>
+</ul>
+<h2 id="slide-11--la-neurona-artificial">Slide 11 — La neurona
+artificial</h2>
+<ul>
+<li>Explicar la neurona artificial con la analogía del
+<strong>funcionario de ventanilla</strong>: recibe papeles (entradas),
+da más peso a unos y decide una respuesta (salida).</li>
+<li>Definir <strong>entradas</strong>, <strong>ponderación</strong> y
+<strong>salida</strong> con palabras simples.</li>
+<li>Dibujar en la pizarra una neurona con varias entradas y una
+salida.</li>
+<li>Anticipar que esas "importancias" se llaman <strong>pesos</strong> y
+serán la clave del aprendizaje.</li>
+<li><strong>No olvidar:</strong> quedarse en la analogía cotidiana, sin
+fórmulas, porque el público no es especialista.</li>
+</ul>
+<h2 id="slide-12--las-capas-de-la-red">Slide 12 — Las capas de la
+red</h2>
+<ul>
+<li>Presentar las tres capas: <strong>entrada</strong> (recibe los
+datos), <strong>ocultas</strong> (combinan y procesan) y
+<strong>salida</strong> (entrega el resultado).</li>
+<li>Usar la analogía de la <strong>cadena de decisiones</strong>: cada
+oficina recibe lo que resolvió la anterior y lo refina.</li>
+<li>Aclarar que las capas ocultas son las que permiten combinar
+información compleja.</li>
+<li><strong>No olvidar:</strong> decir que todas las conexiones entre
+capas tienen <strong>pesos</strong> que la red aprenderá a ajustar.</li>
+</ul>
+<h2 id="slide-13--la-red-de-un-vistazo">Slide 13 — La red, de un
+vistazo</h2>
+<ul>
+<li><strong>Esquema en pantalla (red):</strong> mostrar 3 entradas →
+capa oculta → salida y señalar que cada flecha es un peso
+(<code>w</code>, <code>v</code>).</li>
+<li>Recorrer el diagrama de izquierda a derecha: los datos entran, las
+capas ocultas combinan la información y la salida responde.</li>
+<li><strong>No olvidar:</strong> repetir que aprender es <strong>ajustar
+esos pesos</strong> para reducir el error, la frase que cierra el
+esquema.</li>
+</ul>
+<h2 id="slide-14--pesos-y-entrenamiento">Slide 14 — Pesos y
+entrenamiento</h2>
+<ul>
+<li>Definir el <strong>peso</strong> como cuánto importa cada entrada, y
+sentenciar: <strong>aprender = ajustar los pesos</strong>.</li>
+<li>Recorrer el ciclo: ejemplos → salida → <strong>error</strong> →
+ajuste de pesos → repetir. Nombrar la <strong>función de
+pérdida</strong> como la medida del error.</li>
+<li>Explicar la <strong>época</strong>: una pasada completa sobre
+<strong>todos</strong> los ejemplos de entrenamiento.</li>
+<li>Usar la analogía de <strong>afinar un instrumento</strong> o de
+<strong>tirar al aro</strong>: repetir y corregir según el error.</li>
+<li><strong>No olvidar:</strong> recalcar que el <strong>error</strong>
+es el motor del aprendizaje; sin comparar con la respuesta esperada la
+red no aprende.</li>
+</ul>
+<h2 id="slide-15--funciona-en-la-demo-falla-en-producción">Slide 15 —
+Funciona en la demo, falla en producción</h2>
+<ul>
+<li>Explicar por qué medir con los <strong>mismos datos</strong> del
+entrenamiento engaña: el modelo los <strong>memoriza</strong>.</li>
+<li>Presentar los tres grupos: <strong>entrenamiento</strong> (con él
+aprende), <strong>validación</strong> (ajustes durante el desarrollo) y
+<strong>prueba</strong> (nunca lo vio).</li>
+<li>Definir <strong>sobreajuste</strong>: acierta en lo conocido y falla
+en lo nuevo; es la causa típica del "en la demo andaba y en producción
+no".</li>
+<li>Aclarar que el conjunto de prueba <strong>no se usa para
+aprender</strong>: es el espejo de la realidad.</li>
+<li><strong>No olvidar:</strong> sin conjunto de prueba no podemos saber
+si el modelo servirá fuera de la demo.</li>
+</ul>
+<h2 id="slide-16--cómo-medimos-exactitud-y-precisión">Slide 16 — Cómo
+medimos: exactitud y precisión</h2>
+<ul>
+<li>Definir <strong>exactitud</strong>: proporción de aciertos sobre el
+<strong>total</strong> de casos evaluados.</li>
+<li>Definir <strong>precisión</strong>: de los casos que el modelo marcó
+como <strong>positivos</strong>, cuántos lo eran de verdad.</li>
+<li>Aclarar que <strong>no son lo mismo</strong>: una exactitud alta con
+precisión baja (o al revés) obliga a preguntar <em>para qué</em> se
+usará el modelo.</li>
+<li>Dar un ejemplo de gestión: no es lo mismo filtrar unos pocos casos
+dudosos que decidir sobre un trámite.</li>
+<li><strong>No olvidar:</strong> elegir la métrica es una decisión de
+gestión, porque depende del costo del error.</li>
+</ul>
+<h2 id="slide-17--tres-tipos-de-aprendizaje">Slide 17 — Tres tipos de
+aprendizaje</h2>
+<ul>
+<li>Presentar la tabla central: <strong>supervisado</strong> (datos
+etiquetados), <strong>no supervisado</strong> (sin etiquetas) y
+<strong>por refuerzo</strong> (interacción).</li>
+<li>Explicar la señal de cada uno: <strong>respuesta correcta</strong>,
+<strong>estructura de los datos</strong>, <strong>recompensa o
+penalización</strong>.</li>
+<li>Precisar el vocabulario: el preentrenamiento <strong>corrige los
+pesos</strong> comparando con la respuesta correcta; el
+<strong>refuerzo</strong> es la recompensa del aprendizaje por
+refuerzo.</li>
+<li>Adelantar que esta tabla se retomará en el cierre y que es la clave
+de la dinámica.</li>
+<li><strong>No olvidar:</strong> decir que la elección del tipo depende
+de <strong>qué datos tenemos</strong> y de <strong>qué problema queremos
+resolver</strong>.</li>
+</ul>
+<h2 id="slide-18--los-tres-tipos-de-cerca">Slide 18 — Los tres tipos, de
+cerca</h2>
+<ul>
+<li>Profundizar el <strong>supervisado</strong>: etiquetas,
+clasificación y regresión; ejemplo, clasificar un trámite como "urgente"
+o "no urgente".</li>
+<li>Profundizar el <strong>no supervisado</strong>: agrupar y hallar
+patrones; ejemplo, segmentar ciudadanos según su uso de servicios.</li>
+<li>Profundizar el <strong>refuerzo</strong>: ensayo, error y
+recompensa; ejemplo, optimizar semáforos probando combinaciones.</li>
+<li>Dar las tres preguntas de control: <strong>¿hay etiquetas? ¿se busca
+agrupar? ¿hay una acción y una recompensa?</strong>.</li>
+<li><strong>No olvidar:</strong> anunciar que esas tres preguntas son
+exactamente lo que se usará en la <strong>Ronda 2</strong> de la
+dinámica.</li>
+</ul>
+<h2 id="slide-19--casos-en-la-gestión-pública">Slide 19 — Casos en la
+gestión pública</h2>
+<ul>
+<li>Mostrar que las técnicas <strong>ya se usan en el Estado</strong>,
+no son ciencia ficción.</li>
+<li>Supervisado: <strong>clasificar reclamos</strong> por tema y
+<strong>predecir la demanda</strong> de un servicio para planificar
+turnos.</li>
+<li>No supervisado: <strong>segmentar beneficiarios</strong> de
+programas sociales y <strong>detectar anomalías</strong> en gastos.</li>
+<li>Por refuerzo: <strong>optimizar rutas</strong> de recolección de
+residuos y asignar recursos dinámicamente.</li>
+<li><strong>No olvidar:</strong> aterrizar con ejemplos bolivianos
+concretos de alcaldías, gobernaciones y centros de salud.</li>
+</ul>
+<h2 id="slide-20--dinámica">Slide 20 — Dinámica</h2>
+<ul>
+<li>Explicar la consigna: <strong>3 equipos</strong> de 3–4 personas,
+repartir las tarjetas; 30 minutos en total.</li>
+<li>Describir la <strong>Ronda 1</strong> (¿regla o dato? determinista,
+indeterminista o combinada) y la <strong>Ronda 2</strong> (supervisado,
+no supervisado o refuerzo), con <strong>4 casos por ronda</strong>.</li>
+<li>Indicar la <strong>puesta en común</strong>: cada equipo comparte el
+caso más fácil, el más discutido y por qué (2–3 min por equipo).</li>
+<li>Recordar que la opción <strong>"combinada"</strong> suele ser
+válida, como la verificación de formularios que mezcla reglas y
+aprendizaje.</li>
+<li><strong>No olvidar:</strong> valorar la
+<strong>justificación</strong> del equipo, no solo la respuesta; el
+entregable es la <strong>ficha de la dinámica</strong> y los criterios
+están en la rúbrica (Sesión 8).</li>
+</ul>
+<h2 id="slide-21--cierre">Slide 21 — Cierre</h2>
+<ul>
+<li>Repetir el criterio central: <strong>no es cuál es mejor, sino cuál
+se ajusta al problema</strong>.</li>
+<li>Recordar que la red aprende <strong>ajustando pesos</strong> para
+reducir el <strong>error</strong>, y que se evalúa con un conjunto que
+<strong>nunca vio</strong> (prueba), vigilando el sobreajuste.</li>
+<li>Repasar los tres tipos: <strong>supervisado, no supervisado y por
+refuerzo</strong>, según los datos y el problema.</li>
+<li>Anticipar la próxima sesión: <strong>los LLM y el
+prompting</strong>, los modelos que generan texto.</li>
+<li><strong>No olvidar:</strong> abrir el espacio de preguntas y dejar
+claro que las técnicas ya se aplican a trámites, anomalías, segmentación
+y optimización de recursos.</li>
+</ul>
+<h2 id="slide-22--gracias">Slide 22 — Gracias</h2>
+<ul>
+<li>Agradecer la participación y el trabajo en la dinámica.</li>
+<li>Recordar que la próxima sesión abre los <strong>modelos de lenguaje
+(LLM)</strong> y el prompting.</li>
+<li>Indicar dónde quedan los materiales y a quién dirigirse por
+dudas.</li>
+<li><strong>No olvidar:</strong> cerrar con la idea fuerza de la sesión:
+<strong>reglas + datos + aprendizaje = manera de entender la IA de
+hoy</strong>.</li>
+</ul>
+  <footer class="docfoot">Generado desde <a href="notas-sesion-08.md"><code>notas-sesion-08.md</code></a> · Módulo 6 — Inteligencia Artificial · IDT 601</footer>
+</div>
+</body>
+</html>

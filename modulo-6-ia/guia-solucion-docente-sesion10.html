@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde guia-solucion-docente-sesion10.md — no editar a mano. -->
+<title>Guía de solución del docente — Taller Sesión 10</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 6 — Inteligencia Artificial · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="guía-de-solución-del-docente--taller-sesión-10">Guía de solución
+del docente — Taller Sesión 10</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601) · Bloque 6 —
+Inteligencia Artificial <strong>Taller:</strong>
+<code>taller_sesion10_minisolucion_ia.md</code> <strong>Uso:</strong>
+criterios, casos resueltos de ejemplo, errores frecuentes y rúbrica con
+niveles (Sesión 10 y trabajo final integrador).</p>
+<hr />
+<h2 id="1-qué-se-espera-de-la-entrega">1. Qué se espera de la
+entrega</h2>
+<p>Cada equipo entrega <strong>dos</strong> piezas, cerradas en la
+sesión:</p>
+<ol type="1">
+<li><strong>Mini-solución documentada</strong>
+(<code>plantilla-entrega-minisolucion.md</code>): tarea, prompt/flujo,
+resultado de una prueba, evaluación crítica y mejora aplicada.</li>
+<li><strong>Flujo del agente diseñado</strong>
+(<code>plantilla-diseno-flujo-agente.md</code>): modelo, herramientas,
+memoria, planificación y <strong>punto de control humano</strong>.</li>
+</ol>
+<p>Criterios rectores:</p>
+<ul>
+<li>La tarea debe ser <strong>acotada y útil</strong>, con destinatario
+y criterio de éxito.</li>
+<li>El flujo debe nombrar los <strong>cuatro componentes</strong> y
+justificarlos según la tarea.</li>
+<li>Debe existir un <strong>punto de control humano</strong> explícito
+(qué revisa y qué decide una persona).</li>
+<li>La prueba se hace con un caso <strong>ficticio o público</strong>;
+nunca con datos de ciudadanos.</li>
+<li>Debe haber <strong>al menos una mejora</strong> y la conciencia de
+<strong>qué se verificó</strong>.</li>
+</ul>
+<hr />
+<h2
+id="2-caso-resuelto-de-ejemplo--caso-2-clasificador-de-reclamos-chat">2.
+Caso resuelto de ejemplo — Caso 2: clasificador de reclamos (chat)</h2>
+<p><strong>Cómo se resuelve:</strong> con <strong>chat + criterio +
+supervisión humana</strong>, sin plataforma de agentes real.</p>
+<p><strong>Tarea:</strong> para un reclamo, sugerir la
+<strong>categoría</strong> y el <strong>área</strong> a la que
+corresponde. <strong>Destinatario:</strong> el área de atención al
+ciudadano. <strong>Criterio de éxito:</strong> la categoría sugerida
+coincide con la esperada en el caso de prueba y el equipo explica qué
+revisó.</p>
+<p><strong>Prompt final (ejemplo):</strong></p>
+<blockquote>
+<p>Actuá como clasificador de reclamos de una alcaldía. Categorías:
+<strong>Atención</strong> (trato del personal),
+<strong>Infraestructura</strong> (calles, alumbrado, parques),
+<strong>Trámites</strong> (demoras o errores en un trámite). Devolvé
+solo: <code>categoría | área | motivo (una frase)</code>. Si no estás
+seguro, escribí <code>REVISIÓN HUMANA</code>. Ejemplos:</p>
+<ul>
+<li>"El funcionario de la ventanilla 3 no me quiso atender" →
+<code>Atención | Recursos Humanos | Trato del personal</code></li>
+<li>"La calle Sucre lleva dos meses sin luz" →
+<code>Infraestructura | Servicios | Alumbrado público</code></li>
+<li>"Mi trámite lleva un mes sin respuesta" →
+<code>Trámites | Ventanilla Única | Demora en trámite</code> Ahora
+clasificá: "El ascensor del edificio municipal está roto desde hace una
+semana".</li>
+</ul>
+</blockquote>
+<p><strong>Resultado de la prueba (ficticio):</strong>
+<code>Infraestructura | Servicios | Ascensor fuera de servicio</code>.
+<strong>Evaluación crítica:</strong> fue correcto, pero el caso límite
+"no estoy seguro" debe forzar <code>REVISIÓN HUMANA</code>; se verificó
+que la sugerencia <strong>no invente</strong> un área inexistente.
+<strong>Mejora aplicada:</strong> se agregó la instrucción "si la duda
+es entre dos categorías, elegí la dominante y marcá
+<code>REVISIÓN HUMANA</code>".</p>
+<p><strong>Punto de control humano:</strong> la persona que atiende
+<strong>confirma o corrige</strong> la categoría y
+<strong>deriva</strong> ella misma. El clasificador sugiere; el
+funcionario decide.</p>
+<p><strong>Flujo del agente (documentado, no ejecutado):</strong> modelo
+(LLM) + herramienta "leer planilla de reclamos ficticia" + memoria de la
+conversación + planificación
+<code>clasificar → asignar área → preparar borrador de derivación</code>,
+con <strong>punto de control humano antes de derivar</strong>.</p>
+<p><strong>Confidencialidad:</strong> se usa un reclamo
+<strong>ficticio</strong>; no se suben reclamos reales.</p>
+<hr />
+<h2
+id="3-caso-resuelto-de-ejemplo--caso-4-verificador-de-expedientes-chat">3.
+Caso resuelto de ejemplo — Caso 4: verificador de expedientes
+(chat)</h2>
+<p><strong>Cómo se resuelve:</strong> con <strong>chat + criterio +
+supervisión humana</strong>, usando una lista de verificación y un
+expediente <strong>ficticio</strong>.</p>
+<p><strong>Tarea:</strong> marcar qué documentos obligatorios figuran y
+cuáles faltan. <strong>Destinatario:</strong> el área que recibe el
+expediente. <strong>Criterio de éxito:</strong> la lista marca
+correctamente los faltantes del caso ficticio.</p>
+<p><strong>Prompt final (ejemplo):</strong></p>
+<blockquote>
+<p>Actuá como verificador de expedientes. Lista obligatoria: <strong>1)
+solicitud, 2) fotocopia de DNI, 3) informe técnico, 4) declaración
+jurada</strong>. Te paso el índice de un expediente y devolvés una tabla
+<code>documento | presente (sí/no) | observación</code>. No inventes
+documentos que no estén en el índice. Índice: "solicitud, declaración
+jurada, informe técnico".</p>
+</blockquote>
+<p><strong>Resultado de la prueba (ficticio):</strong></p>
+<table>
+<thead>
+<tr>
+<th>documento</th>
+<th>presente</th>
+<th>observación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>solicitud</td>
+<td>sí</td>
+<td>—</td>
+</tr>
+<tr>
+<td>fotocopia de DNI</td>
+<td>no</td>
+<td>falta</td>
+</tr>
+<tr>
+<td>informe técnico</td>
+<td>sí</td>
+<td>—</td>
+</tr>
+<tr>
+<td>declaración jurada</td>
+<td>sí</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Evaluación crítica:</strong> correcto en el caso de prueba;
+se verificó que <strong>no</strong> inventara el DNI. <strong>Mejora
+aplicada:</strong> se pidió además "resaltá la primera fila con
+<code>FALTA</code>" para que el revisor la vea.</p>
+<p><strong>Punto de control humano:</strong> una persona
+<strong>confirma</strong> la lista y <strong>decide</strong> si el
+expediente está completo. El agente sugiere; el funcionario valida.</p>
+<p><strong>Flujo del agente (documentado, no ejecutado):</strong> modelo
++ herramienta "leer índice del expediente" + memoria del checklist +
+planificación
+<code>comparar con la lista → marcar faltantes → preparar observación</code>,
+con <strong>punto de control humano antes de dar por válido el
+expediente</strong>.</p>
+<p><strong>Confidencialidad:</strong> se usa un <strong>índice
+ficticio</strong> con nombres de documentos; no se sube el expediente
+real ni documentos reservados.</p>
+<hr />
+<h2 id="4-respuestas-modelo-de-los-otros-casos-síntesis">4. Respuestas
+modelo de los otros casos (síntesis)</h2>
+<table>
+<thead>
+<tr>
+<th>Caso</th>
+<th>Tarea acotada</th>
+<th>Punto de control humano</th>
+<th>Mejora típica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 Asistente de trámites</td>
+<td>Responder requisitos citando la normativa</td>
+<td>La unidad aprueba la guía antes de publicar</td>
+<td>Pedir que cite el documento usado</td>
+</tr>
+<tr>
+<td>3 Resumidor de informes</td>
+<td>Resumen de 150 palabras para una autoridad</td>
+<td>Quien conoce el informe verifica las cifras</td>
+<td>"No inventes cifras; cita el párrafo"</td>
+</tr>
+<tr>
+<td>5 Avisos a la ciudadanía</td>
+<td>Aviso claro para redes y web</td>
+<td>Comunicación revisa y aprueba antes de publicar</td>
+<td>Ajustar el tono a público no especialista</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Común a los cinco: los <strong>cuatro componentes</strong> del flujo
+están nombrados y el <strong>punto de control humano</strong> indica
+<strong>qué</strong> revisa una persona y <strong>qué</strong>
+decide.</p>
+</blockquote>
+<hr />
+<h2 id="5-errores-frecuentes-y-cómo-orientarlos">5. Errores frecuentes y
+cómo orientarlos</h2>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Cómo se detecta</th>
+<th>Cómo orientar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tarea desmedida</td>
+<td>"Un asistente para todo el municipio"</td>
+<td>Reducir a <strong>un paso</strong>: un tipo de consulta, de reclamo
+o de informe.</td>
+</tr>
+<tr>
+<td>Prompt vago</td>
+<td>"Resumime esto"</td>
+<td>Pedir rol, formato, longitud y un ejemplo de estilo.</td>
+</tr>
+<tr>
+<td>Sin supervisión humana</td>
+<td>No aparece quién revisa</td>
+<td>Exigir el <strong>punto de control</strong>: qué revisa y qué decide
+la persona.</td>
+</tr>
+<tr>
+<td>Confundir ejecutar con diseñar</td>
+<td>"No tengo plataforma de agentes"</td>
+<td>El flujo <strong>se diseña y se documenta</strong> con la plantilla;
+no hace falta ejecutarlo.</td>
+</tr>
+<tr>
+<td>Pegar datos reales</td>
+<td>Prueban con datos del trabajo</td>
+<td>Detener, borrar y usar un <strong>caso ficticio</strong>; repetir la
+confidencialidad.</td>
+</tr>
+<tr>
+<td>No verificar</td>
+<td>Aceptan la primera respuesta</td>
+<td>Verificar <strong>una cifra o un dato</strong> contra la fuente
+original.</td>
+</tr>
+<tr>
+<td>No hay mejora</td>
+<td>Cierran con la versión 1</td>
+<td>Pedir el "<strong>antes y después</strong>" de un cambio
+concreto.</td>
+</tr>
+<tr>
+<td>Confundir RAG con automatización</td>
+<td>Todo lo llaman "agente"</td>
+<td>RAG <strong>busca y cita</strong>; automatización <strong>ejecuta
+pasos repetitivos</strong>.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="6-rúbrica-con-niveles--sesión-10-mini-solución">6. Rúbrica con
+niveles — Sesión 10 (mini-solución)</h2>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Insuficiente (1–59)</th>
+<th>Suficiente (70–84)</th>
+<th>Excelente (95–100)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Define la tarea</strong></td>
+<td>Tarea vaga o desmedida.</td>
+<td>Tarea acotada, con destinatario y resultado esperado.</td>
+<td>Tarea acotada y <strong>útil</strong>, con criterio de éxito
+explícito.</td>
+</tr>
+<tr>
+<td><strong>Diseña el flujo</strong> (modelo, herramientas, memoria,
+planificación)</td>
+<td>No identifica los componentes.</td>
+<td>Identifica los cuatro componentes.</td>
+<td>Identifica los componentes y los justifica según la tarea.</td>
+</tr>
+<tr>
+<td><strong>Incorpora supervisión humana</strong></td>
+<td>No prevé control humano.</td>
+<td>Menciona revisión humana al final.</td>
+<td>Define <strong>puntos de control</strong> y aplica menor privilegio
+y trazabilidad.</td>
+</tr>
+<tr>
+<td><strong>Prueba y evalúa</strong></td>
+<td>No prueba o no evalúa.</td>
+<td>Prueba un caso y evalúa con las tres preguntas.</td>
+<td>Prueba, detecta alucinación/sesgo y lo documenta.</td>
+</tr>
+<tr>
+<td><strong>Mejora y defiende</strong></td>
+<td>No aplica mejoras.</td>
+<td>Aplica una mejora y la explica.</td>
+<td>Aplica mejoras y justifica la decisión con criterio experto.</td>
+</tr>
+<tr>
+<td><strong>Confidencialidad</strong></td>
+<td>Usa datos sensibles.</td>
+<td>Usa datos ficticios o públicos.</td>
+<td>Usa datos ficticios o públicos y <strong>prevé el resguardo</strong>
+de datos de ciudadanos.</td>
+</tr>
+</tbody>
+</table>
+<h2
+id="7-rúbrica-con-niveles--trabajo-final-integrador-cierre-del-arco">7.
+Rúbrica con niveles — Trabajo final integrador (cierre del arco)</h2>
+<p>El trabajo final recorre el módulo y suma <strong>dos componentes
+obligatorios</strong>: <strong>(a)</strong> la declaración de licencia
+del dataset usado (Bloque 5) y <strong>(b)</strong> un prompt o flujo de
+agente documentado con su punto de control humano (Bloque 6).</p>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Insuficiente (1–59)</th>
+<th>Suficiente (70–84)</th>
+<th>Excelente (95–100)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Pertinencia del caso</strong></td>
+<td>Caso trivial o mal delimitado.</td>
+<td>Caso institucional acotado y relevante.</td>
+<td>Caso relevante, acotado y con criterio de éxito claro.</td>
+</tr>
+<tr>
+<td><strong>Calidad de la ingesta y transformación</strong></td>
+<td>Datos sin procesar o mal documentados.</td>
+<td>Ingesta y transformación documentadas.</td>
+<td>Ingesta, limpieza y transformación documentadas y verificables.</td>
+</tr>
+<tr>
+<td><strong>Orquestación e integración</strong></td>
+<td>No hay flujo o no está ordenado.</td>
+<td>Flujo con tareas y dependencias.</td>
+<td>Flujo con dependencias, manejo de fallos y trazabilidad.</td>
+</tr>
+<tr>
+<td><strong>Limpieza y preparación</strong></td>
+<td>Pierde filas o inventa datos.</td>
+<td>Limpia y marca faltantes.</td>
+<td>Limpia, documenta decisiones y marca faltantes con
+<code>SIN DATO</code>.</td>
+</tr>
+<tr>
+<td><strong>Licencia del dataset (nuevo)</strong></td>
+<td>No declara licencia.</td>
+<td>Declara la licencia y su condición.</td>
+<td>Declara licencia, atribución lista y límites por datos
+personales.</td>
+</tr>
+<tr>
+<td><strong>Prompt/flujo de IA (nuevo)</strong></td>
+<td>No incluye componente de IA.</td>
+<td>Incluye un prompt con claridad y contexto.</td>
+<td>Incluye prompt o flujo, resultado de prueba y <strong>punto de
+control humano</strong>.</td>
+</tr>
+<tr>
+<td><strong>Documentación y defensa</strong></td>
+<td>Documento incompleto; defensa desordenada.</td>
+<td>Documento completo y defensa clara.</td>
+<td>Documento sólido, defensa convincente y respuestas a las
+preguntas.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Escala del módulo (Plan de Clases): 1–59 inicial · 60–69 muy parcial
+· 70–84 suficiente · 85–94 alto porcentaje · 95–100 logro total
+esperado.</p>
+</blockquote>
+<hr />
+<h2 id="8-cómo-cerrar-la-devolución">8. Cómo cerrar la devolución</h2>
+<ul>
+<li>Reconocer el <strong>paso útil</strong> que logró cada equipo,
+aunque sea pequeño.</li>
+<li>Insistir en que <strong>el agente sugiere y el humano
+decide</strong>, y en que un error del agente puede ser una
+<strong>acción</strong>, no una frase.</li>
+<li>Recordar el <strong>trabajo final integrador</strong> y sus dos
+componentes obligatorios: la <strong>licencia del dataset</strong> y el
+<strong>prompt/flujo con punto de control humano</strong>.</li>
+</ul>
+  <footer class="docfoot">Generado desde <a href="guia-solucion-docente-sesion10.md"><code>guia-solucion-docente-sesion10.md</code></a> · Módulo 6 — Inteligencia Artificial · IDT 601</footer>
+</div>
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde guia-solucion-docente-sesion8.md — no editar a mano. -->
+<title>Guía de solución del docente — Taller Sesión 8</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 6 — Inteligencia Artificial · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="guía-de-solución-del-docente--taller-sesión-8">Guía de solución
+del docente — Taller Sesión 8</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601) · Bloque 6 —
+Inteligencia Artificial <strong>Taller:</strong>
+<code>taller_sesion8_regla_dato_aprendizaje.md</code>
+<strong>Tarjetas:</strong> <code>insumos/tarjetas-dinamica-s8.md</code>
+· <strong>Entregable:</strong> <code>plantilla-ficha-dinamica.md</code>
+<strong>Uso:</strong> clave de las dos rondas, criterios de corrección y
+rúbrica con niveles.</p>
+<hr />
+<h2 id="1-clave-de-la-ronda-1--regla-o-dato">1. Clave de la Ronda 1 —
+¿regla o dato?</h2>
+<blockquote>
+<p>Criterio: <strong>determinista</strong> = reglas escritas, misma
+entrada → misma salida; <strong>indeterminista</strong> = aprende
+patrones de ejemplos; <strong>combinada</strong> = mezcla reglas y
+aprendizaje.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Tarjeta</th>
+<th>Caso</th>
+<th>Respuesta esperada</th>
+<th>Matiz</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1-1</td>
+<td>Verificación de un formulario</td>
+<td>Determinista</td>
+<td>Puede ser <strong>combinada</strong> si además aprende de casos
+dudosos o de texto libre.</td>
+</tr>
+<tr>
+<td>R1-2</td>
+<td>Buscador que ordena por clics</td>
+<td>Indeterminista</td>
+<td>Aprende de la conducta de los usuarios, no de una regla
+escrita.</td>
+</tr>
+<tr>
+<td>R1-3</td>
+<td>Asistente que clasifica correos</td>
+<td>Indeterminista / Combinada</td>
+<td>Combinada si suma reglas del remitente (dominios, palabras) al
+contenido aprendido.</td>
+</tr>
+<tr>
+<td>R1-4</td>
+<td>Semáforo con horarios fijos</td>
+<td>Determinista</td>
+<td>Cumple un plan; no aprende del tránsito.</td>
+</tr>
+<tr>
+<td>R1-5</td>
+<td>Predicción de uso de un servicio</td>
+<td>Indeterminista</td>
+<td>Hay patrones (día, clima, estación), no una regla simple.</td>
+</tr>
+<tr>
+<td>R1-6</td>
+<td>Control de accesos con credenciales</td>
+<td>Determinista</td>
+<td>Regla fija: si las credenciales son válidas, deja pasar.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Lo que hay que premiar:</strong> reconocer que
+<strong>"combinada" es una respuesta válida y frecuente</strong>, y
+justificar con el problema y los datos disponibles, no solo con la
+etiqueta.</p>
+<hr />
+<h2 id="2-clave-de-la-ronda-2--cómo-aprende">2. Clave de la Ronda 2 —
+¿cómo aprende?</h2>
+<blockquote>
+<p>Criterio: <strong>supervisado</strong> = hay
+<strong>etiquetas</strong> (respuesta correcta); <strong>no
+supervisado</strong> = sin etiquetas, se busca
+<strong>estructura/grupos</strong>; <strong>por refuerzo</strong> = hay
+una <strong>acción</strong> con <strong>recompensa o
+penalización</strong>.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Tarjeta</th>
+<th>Caso</th>
+<th>Respuesta esperada</th>
+<th>Señal de aprendizaje</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R2-1</td>
+<td>Fotos de baches ya calificadas</td>
+<td>Supervisado</td>
+<td>Respuesta correcta: cada foto trae su gravedad asignada.</td>
+</tr>
+<tr>
+<td>R2-2</td>
+<td>Perfiles de contribuyentes</td>
+<td>No supervisado</td>
+<td>Estructura de los datos: se agrupa por parecido, sin categorías
+previas.</td>
+</tr>
+<tr>
+<td>R2-3</td>
+<td>Ordenar expedientes con recompensa</td>
+<td>Por refuerzo</td>
+<td>Recompensa: prueba órdenes y aprende cuáles reducen la espera.</td>
+</tr>
+<tr>
+<td>R2-4</td>
+<td>Predicción de pacientes</td>
+<td>Supervisado (regresión)</td>
+<td>Respuesta correcta: se conocen las cifras históricas de
+atención.</td>
+</tr>
+<tr>
+<td>R2-5</td>
+<td>Trámites fuera de patrón</td>
+<td>No supervisado</td>
+<td>Estructura de los datos: se detectan casos que se alejan del patrón,
+sin ejemplos de fraude.</td>
+</tr>
+<tr>
+<td>R2-6</td>
+<td>Barrios que usan un servicio</td>
+<td>No supervisado</td>
+<td>Estructura de los datos: se descubren grupos sin categorías
+previas.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Matiz importante:</strong> R2-5 suele confundirse con
+<strong>supervisado</strong>; la clave es que <strong>no hay ejemplos
+etiquetados de fraude</strong>, por eso es no supervisado (detección de
+anomalías). Si el docente acepta una respuesta supervisada, debe pedir
+que se justifique con la existencia de etiquetas.</p>
+<hr />
+<h2 id="3-las-tres-señales-en-una-frase">3. Las tres señales, en una
+frase</h2>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>Pregunta de control</th>
+<th>Señal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Supervisado</td>
+<td>¿Cada ejemplo trae su <strong>respuesta correcta</strong>?</td>
+<td>La etiqueta.</td>
+</tr>
+<tr>
+<td>No supervisado</td>
+<td>¿Buscamos <strong>grupos o patrones</strong> sin categorías
+previas?</td>
+<td>La estructura de los datos.</td>
+</tr>
+<tr>
+<td>Por refuerzo</td>
+<td>¿Hay una <strong>acción</strong> con <strong>recompensa o
+penalización</strong>?</td>
+<td>La recompensa.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Precisión de vocabulario.</strong> El preentrenamiento de una
+red <strong>no "refuerza"</strong>: compara la salida con la respuesta
+correcta y <strong>corrige los pesos</strong>. El
+<strong>refuerzo</strong> es la recompensa del aprendizaje por refuerzo
+(R2-3).</p>
+</blockquote>
+<hr />
+<h2 id="4-ficha-de-la-dinámica--solución-orientativa">4. Ficha de la
+dinámica — solución orientativa</h2>
+<ul>
+<li><strong>Caso más fácil (habitual):</strong> R1-4 (semáforo) y R1-6
+(accesos), porque la regla se escribe en una frase.</li>
+<li><strong>Caso más discutido (habitual):</strong> R1-1 / R1-3
+(determinista o combinada) y R2-5 (no supervisado o supervisado).</li>
+<li><strong>Conexión con su institución:</strong> se espera un ejemplo
+propio por tipo (supervisado: clasificar un trámite ya etiquetado; no
+supervisado: agrupar usuarios; refuerzo: optimizar un reparto o una
+ruta).</li>
+</ul>
+<hr />
+<h2 id="5-errores-frecuentes-y-cómo-orientarlos">5. Errores frecuentes y
+cómo orientarlos</h2>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Cómo se detecta</th>
+<th>Cómo orientar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Usa datos, entonces aprende"</td>
+<td>Clasifican todo como indeterminista</td>
+<td>Preguntar si la salida viene de una regla escrita o se descubre de
+ejemplos.</td>
+</tr>
+<tr>
+<td>Ignorar "combinada"</td>
+<td>Fuerzan todo a determinista o indeterminista</td>
+<td>Mostrar que la verificación de formularios puede sumar reglas y
+aprendizaje.</td>
+</tr>
+<tr>
+<td>No supervisado vs. refuerzo</td>
+<td>Eligen uno por otro</td>
+<td>Preguntar: ¿buscamos grupos o hay una acción con recompensa?</td>
+</tr>
+<tr>
+<td>Supervisado vs. no supervisado</td>
+<td>No miran las etiquetas</td>
+<td>Preguntar: ¿cada ejemplo trae su respuesta correcta?</td>
+</tr>
+<tr>
+<td>Justifican repitiendo el enunciado</td>
+<td>No hay un "porque"</td>
+<td>Pedir la frase "porque…"; se evalúa la justificación, no solo la
+etiqueta.</td>
+</tr>
+<tr>
+<td>Confunden sobreajuste con "entrenar mucho"</td>
+<td>Dicen "se pasó de entrenamiento"</td>
+<td>El sobreajuste es <strong>memorizar</strong> el entrenamiento y
+<strong>fallar</strong> con casos nuevos; se detecta con el conjunto de
+prueba.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-rúbrica-con-niveles">6. Rúbrica con niveles</h2>
+<p>Criterios de la <strong>Sesión 8</strong> según
+<code>rubrica-modulo.md</code>, con descriptores observables:</p>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Insuficiente (1–59)</th>
+<th>Suficiente (70–84)</th>
+<th>Excelente (95–100)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Clasifica el enfoque</strong></td>
+<td>Confunde los enfoques; clasifica al azar.</td>
+<td>Clasifica correctamente la mayoría de los casos.</td>
+<td>Clasifica con acierto, incluidos los combinados, y reconoce los
+fronterizos.</td>
+</tr>
+<tr>
+<td><strong>Justifica la elección</strong></td>
+<td>No justifica o repite el enunciado.</td>
+<td>Justifica con la presencia o ausencia de reglas fijas.</td>
+<td>Justifica con el problema, los datos disponibles y el costo de cada
+enfoque.</td>
+</tr>
+<tr>
+<td><strong>Explica cómo aprende una red</strong></td>
+<td>Menciona "aprende" sin describir el ciclo.</td>
+<td>Describe neuronas, capas y ajuste de pesos.</td>
+<td>Explica el ciclo error → ajuste de pesos y por qué se separa un
+conjunto de prueba.</td>
+</tr>
+<tr>
+<td><strong>Distingue los tres tipos</strong></td>
+<td>Confunde supervisado, no supervisado y refuerzo.</td>
+<td>Distingue supervisado (etiquetas) y no supervisado (sin
+etiquetas).</td>
+<td>Distingue los tres y reconoce la señal de cada uno (etiqueta,
+estructura, recompensa).</td>
+</tr>
+<tr>
+<td><strong>Conecta con la gestión pública</strong></td>
+<td>No da ejemplos o da ejemplos genéricos.</td>
+<td>Da un ejemplo pertinente por tipo.</td>
+<td>Da ejemplos de su propio contexto y explica por qué ese tipo es el
+adecuado.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Nivel intermedio (60–69, "Básico"):</strong> cumple
+parcialmente; identifica ideas sueltas pero no las conecta ni justifica.
+<strong>Nivel Alto (85–94):</strong> cumple con solidez, justifica con
+criterio y aporta ejemplos propios de la gestión pública.</p>
+<blockquote>
+<p>Escala del módulo (Plan de Clases): 1–59 logro inicial · 60–69 muy
+parcial · 70–84 suficiente · 85–94 alto porcentaje · 95–100 logro total
+esperado.</p>
+</blockquote>
+  <footer class="docfoot">Generado desde <a href="guia-solucion-docente-sesion8.md"><code>guia-solucion-docente-sesion8.md</code></a> · Módulo 6 — Inteligencia Artificial · IDT 601</footer>
+</div>
+</body>
+</html>

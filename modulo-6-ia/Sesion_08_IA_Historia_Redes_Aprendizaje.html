@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde Sesion_08_IA_Historia_Redes_Aprendizaje.md — no editar a mano. -->
+<title>Sesión 8 — Inteligencia artificial: historia, redes neuronales y aprendizaje</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 6 — Inteligencia Artificial · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1
+id="sesión-8--inteligencia-artificial-historia-redes-neuronales-y-aprendizaje">Sesión
+8 — Inteligencia artificial: historia, redes neuronales y
+aprendizaje</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601)
+<strong>Bloque:</strong> 6 — Historia y Desarrollo de la Inteligencia
+Artificial <strong>Duración:</strong> 3 horas (180 min) — teóricas y
+prácticas <strong>Público:</strong> Profesionales no especializados en
+ingeniería de datos <strong>Modalidad:</strong> 100 % virtual</p>
+<hr />
+<h2 id="objetivos-de-la-sesión">Objetivos de la sesión</h2>
+<ul>
+<li>Comprender qué es la inteligencia artificial y cómo evolucionó desde
+las reglas fijas hasta el aprendizaje con datos.</li>
+<li>Distinguir la perspectiva <strong>determinista</strong> (reglas
+fijas) de la <strong>indeterminista</strong> (aprendizaje desde datos) y
+reconocer cuándo conviene cada una.</li>
+<li>Entender qué es una red neuronal: neurona, capas, pesos y el ciclo
+de entrenamiento (error, ajuste de pesos, épocas).</li>
+<li>Explicar por qué un modelo que "funciona en la demo" puede
+<strong>fallar en producción</strong>, y qué papel cumplen la separación
+entrenamiento/validación/prueba, el <strong>sobreajuste</strong> y las
+<strong>métricas</strong> (exactitud y precisión).</li>
+<li>Diferenciar los tres grandes tipos de aprendizaje:
+<strong>supervisado</strong>, <strong>no supervisado</strong> y
+<strong>por refuerzo</strong>.</li>
+<li>Relacionar estos conceptos con problemas reales de la gestión
+pública boliviana.</li>
+</ul>
+<h2 id="ideas-clave-qué-debe-quedar-al-final">Ideas clave (qué debe
+quedar al final)</h2>
+<ol type="1">
+<li>La IA no es un solo método: hay un espectro entre <strong>reglas
+explícitas</strong> (determinista) y <strong>aprendizaje desde
+datos</strong> (indeterminista).</li>
+<li><strong>Determinista</strong> = el sistema sigue reglas escritas por
+un humano; misma entrada, misma salida; comportamiento predecible y
+explicable.</li>
+<li><strong>Indeterminista</strong> = el sistema aprende patrones de
+ejemplos; la salida es probabilística y a veces poco explicable ("caja
+negra").</li>
+<li>Elegir el enfoque depende del problema: reglas claras y estables →
+determinista; muchos datos y patrones difíciles de codificar →
+indeterminista.</li>
+<li>Una <strong>red neuronal</strong> es una estructura inspirada en el
+cerebro: neuronas organizadas en <strong>capas</strong> que ajustan
+<strong>pesos</strong> durante el <strong>entrenamiento</strong>.</li>
+<li>Aprender, en una red, es <strong>ajustar pesos</strong> para reducir
+el error: se compara la salida con la respuesta esperada (función de
+<strong>pérdida</strong>) y se corrige; cada pasada completa sobre los
+ejemplos es una <strong>época</strong>.</li>
+<li>Un modelo que se evalúa con los mismos datos con que aprendió
+siempre parece bueno. Por eso se separan <strong>entrenamiento,
+validación y prueba</strong>, y se vigila el
+<strong>sobreajuste</strong> con <strong>métricas</strong> como la
+<strong>exactitud</strong> y la <strong>precisión</strong>.</li>
+<li>Hay <strong>tres grandes tipos de aprendizaje</strong>:
+<strong>supervisado</strong> (datos etiquetados), <strong>no
+supervisado</strong> (agrupar y hallar patrones sin etiquetas) y
+<strong>por refuerzo</strong> (ensayo, error y recompensa).</li>
+<li>Elegir el tipo depende de los <strong>datos disponibles</strong> y
+del <strong>problema</strong>; en gestión pública ya se aplican a
+trámites, anomalías, segmentación y optimización de recursos.</li>
+</ol>
+<h2 id="cronograma-sugerido-180-min">Cronograma sugerido (180 min)</h2>
+<table>
+<thead>
+<tr>
+<th>Bloque</th>
+<th>Duración</th>
+<th>Qué ocurre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apertura y encuadre</td>
+<td>10 min</td>
+<td>Bienvenida, preguntas de la sesión y palabras clave.</td>
+</tr>
+<tr>
+<td>Historia de la IA</td>
+<td>20 min</td>
+<td>Relato guiado en cinco momentos, sin tecnicismos.</td>
+</tr>
+<tr>
+<td>Dos perspectivas</td>
+<td>25 min</td>
+<td>Determinista vs. indeterminista: comparación y criterios.</td>
+</tr>
+<tr>
+<td>Pausa</td>
+<td>10 min</td>
+<td>Receso.</td>
+</tr>
+<tr>
+<td>Qué es una red neuronal</td>
+<td>35 min</td>
+<td>Neurona, capas, pesos, entrenamiento, sobreajuste y métricas.</td>
+</tr>
+<tr>
+<td>Tipos de aprendizaje</td>
+<td>25 min</td>
+<td>Supervisado, no supervisado y por refuerzo.</td>
+</tr>
+<tr>
+<td>Ejemplos en la gestión pública</td>
+<td>10 min</td>
+<td>Casos aplicados a datos del Estado.</td>
+</tr>
+<tr>
+<td>Dinámica: ¿regla, dato o aprendizaje?</td>
+<td>30 min</td>
+<td>Dos rondas de 4 casos y puesta en común (3 equipos).</td>
+</tr>
+<tr>
+<td>Cierre y preguntas</td>
+<td>15 min</td>
+<td>Síntesis, dudas y puente a los LLM.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Ajuste de tiempos:</strong> el bloque de redes sube de 30 a
+35 min para incorporar <strong>sobreajuste, separación
+entrenamiento/validación/prueba, función de pérdida, épocas y
+métricas</strong>, y explicar por qué un modelo "funciona en la demo y
+falla en producción". Los 5 min extra se recuperan recortando tipos de
+aprendizaje (30→25) y ejemplos de gestión pública (15→10). La dinámica
+sube de 25 a 30 min para dejar 4 casos por ronda y una puesta en común
+cómoda para 3 equipos, sin salir de las 3 horas.</p>
+</blockquote>
+<hr />
+<h2 id="apertura-y-encuadre-10-min">Apertura y encuadre (10 min)</h2>
+<ul>
+<li>Presentar el Bloque 6 — Historia y Desarrollo de la Inteligencia
+Artificial y ubicar la sesión como un recorrido: <strong>de las reglas
+fijas al aprendizaje con datos</strong>.</li>
+<li>Advertir que el público no es especialista: <em>"no hace falta
+programar; vamos a entender las ideas y cómo se usan"</em>.</li>
+<li>Prender la curiosidad con la pregunta central: <em>"¿Cómo decide una
+máquina? ¿Sigue reglas o aprende por su cuenta?"</em></li>
+<li>Palabras clave de la sesión: <strong>regla, dato, modelo,
+predicción, probabilidad, neurona, peso, entrenamiento, etiqueta,
+sobreajuste, métrica</strong>.</li>
+<li>Presentar las tres preguntas que ordenan el día: <strong>¿qué es la
+IA y de dónde viene?</strong>, <strong>¿reglas fijas o aprendizaje con
+datos?</strong> y <strong>¿cómo aprende una red neuronal?</strong></li>
+</ul>
+<blockquote>
+<p>Momento de enganche: preguntar al grupo <em>"¿cómo aprendiste a
+distinguir un trámite 'urgente' de uno 'normal'? ¿Te enseñaron con
+ejemplos etiquetados, lo dedujiste agrupando, o lo aprendiste a los
+golpes?"</em> Cada respuesta anticipa uno de los tres tipos de
+aprendizaje que se verán más adelante.</p>
+</blockquote>
+<hr />
+<h2 id="historia-de-la-ia-20-min">Historia de la IA (20 min)</h2>
+<p>Recorrer de forma cronológica y sin tecnicismos:</p>
+<ol type="1">
+<li><strong>La idea de máquinas que piensan</strong> (años 1950). Turing
+y el test que lleva su nombre: la pregunta es <em>"¿puede una máquina
+comportarse como un humano?"</em>.</li>
+<li><strong>La lógica simbólica — la era de las reglas</strong>
+(1960s–1970s). Sistemas expertos que codifican el conocimiento de
+especialistas como reglas <em>"si... entonces..."</em>. Ejemplo: un
+sistema que diagnostica averías siguiendo el manual de un experto.</li>
+<li><strong>El giro al aprendizaje</strong> (1980s–1990s). Codificar
+todas las reglas del mundo real es imposible: mejor dar ejemplos a la
+máquina para que ella descubra los patrones.</li>
+<li><strong>La explosión de datos y cómputo</strong> (2000s–2010s).
+Internet genera enormes cantidades de datos y las máquinas tienen
+potencia para procesarlos → aprendizaje automático a escala.</li>
+<li><strong>Hoy: la IA generativa</strong> (2010s–actualidad). Modelos
+que no solo clasifican, sino que generan texto, imágenes y código.</li>
+</ol>
+<p><strong>Idea para la pizarra:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Momento</th>
+<th>Aportación</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1950s — La pregunta</td>
+<td>Turing: ¿puede una máquina comportarse como un humano?</td>
+</tr>
+<tr>
+<td>1960–70s — Las reglas</td>
+<td>Sistemas expertos: conocimiento codificado en reglas.</td>
+</tr>
+<tr>
+<td>1980–90s — El aprendizaje</td>
+<td>Imposible escribir todas las reglas → dar ejemplos.</td>
+</tr>
+<tr>
+<td>2000s — Datos y cómputo</td>
+<td>Internet produce datos masivos y hay potencia de cálculo.</td>
+</tr>
+<tr>
+<td>Hoy — IA generativa</td>
+<td>No solo clasifica: genera texto, imágenes y código.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Esquema en pantalla:</strong>
+<code>assets/esquema-linea-tiempo-ia.svg</code> (los cinco momentos
+sobre una línea de tiempo).</p>
+<p><strong>Mensaje puente:</strong> <em>"A lo largo de esta historia
+conviven dos filosofías: decirle a la máquina qué hacer (determinista) o
+dejar que descubra los patrones (indeterminista). Veamos bien la
+diferencia."</em></p>
+<hr />
+<h2 id="dos-perspectivas-25-min">Dos perspectivas (25 min)</h2>
+<h3 id="la-perspectiva-determinista">La perspectiva determinista</h3>
+<ul>
+<li>El sistema funciona <strong>con reglas fijas</strong> escritas por
+un humano.</li>
+<li>Ante la misma entrada, <strong>siempre da la misma salida</strong>:
+comportamiento predecible.</li>
+<li>Es <strong>explicable</strong>: podemos seguir el razonamiento paso
+a paso.</li>
+<li><strong>Ejemplo en gestión pública:</strong> un sistema de
+verificación que aprueba un trámite solo si están todos los documentos
+obligatorios. Un semáforo programado también: cambia de color según una
+regla, no "piensa", cumple un plan.</li>
+</ul>
+<p><strong>Ideas para la pizarra:</strong></p>
+<ul>
+<li>Regla: <code>si (condición) entonces (acción)</code>.</li>
+<li>Ventajas: predecible, fácil de auditar y explicar.</li>
+<li>Límites: si aparece un caso no previsto, el sistema no sabe qué
+hacer.</li>
+</ul>
+<h3 id="la-perspectiva-indeterminista">La perspectiva
+indeterminista</h3>
+<ul>
+<li>El sistema <strong>aprende patrones a partir de ejemplos
+(datos)</strong>.</li>
+<li>No hay reglas escritas a mano; se construyen a partir de los
+datos.</li>
+<li>La salida es <strong>probabilística</strong>: da una respuesta con
+un nivel de confianza, no con certeza total.</li>
+<li>Es <strong>menos explicable</strong> a veces: la "caja negra".</li>
+<li><strong>Ejemplo en gestión pública:</strong> un sistema que
+clasifica reclamos por tema. No le dijimos la regla; aprendió de miles
+de reclamos ya derivados al área correcta.</li>
+</ul>
+<p><strong>Ideas para la pizarra:</strong></p>
+<ul>
+<li>En vez de reglas, se usan <strong>ejemplos</strong> para entrenar un
+<strong>modelo</strong>.</li>
+<li>Ventajas: captura patrones que un humano no sabría escribir.</li>
+<li>Límites: puede equivocarse y a veces no sabemos por qué.</li>
+</ul>
+<h3 id="tabla-comparativa">Tabla comparativa</h3>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>Determinista</th>
+<th>Indeterminista</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reglas</td>
+<td>Escritas a mano</td>
+<td>Aprendidas de los datos</td>
+</tr>
+<tr>
+<td>Comportamiento</td>
+<td>Predecible</td>
+<td>Probabilístico</td>
+</tr>
+<tr>
+<td>Explicabilidad</td>
+<td>Alta</td>
+<td>Puede ser baja</td>
+</tr>
+<tr>
+<td>Datos necesarios</td>
+<td>Pocos</td>
+<td>Muchos</td>
+</tr>
+<tr>
+<td>Ideal para</td>
+<td>Reglas claras y estables</td>
+<td>Patrones complejos y cambiantes</td>
+</tr>
+<tr>
+<td>Ejemplos</td>
+<td>Verificación de documentos, semáforo</td>
+<td>Recomendación, reconocimiento, predicción</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cuándo-conviene-cada-enfoque">Cuándo conviene cada enfoque</h3>
+<ul>
+<li><strong>Trámite administrativo</strong> con requisitos claros y
+fijos → <strong>determinista</strong> (verificación de documentos).</li>
+<li><strong>Predicción de demanda</strong> de un servicio según estación
+y clima → <strong>indeterminista</strong> (hay patrones, no reglas
+simples).</li>
+<li><strong>Combinada:</strong> un filtro de correo no deseado mezcla
+reglas del remitente con aprendizaje del contenido.</li>
+</ul>
+<p><strong>Mensaje puente:</strong> <em>"No se trata de cuál es mejor,
+sino de cuál se ajusta al problema. Cuando el sistema realmente aprende
+de los datos, aparece la herramienta estrella: la red
+neuronal."</em></p>
+<hr />
+<h2 id="pausa-10-min">Pausa (10 min)</h2>
+<hr />
+<h2 id="qué-es-una-red-neuronal-35-min">Qué es una red neuronal (35
+min)</h2>
+<p>Explicar sin tecnicismos, con analogías cercanas.</p>
+<h3 id="la-neurona-artificial">La neurona artificial</h3>
+<ul>
+<li>Inspirada en la neurona biológica: recibe <strong>entradas</strong>,
+las <strong>pondera</strong> y produce una <strong>salida</strong>.</li>
+<li>Analogía: una neurona es como un <strong>funcionario de
+ventanilla</strong> que recibe varios papeles (entradas), da más
+importancia a unos que a otros (pesos) y decide una respuesta
+(salida).</li>
+</ul>
+<h3 id="capas">Capas</h3>
+<ul>
+<li>Las neuronas se organizan en <strong>capas</strong>:
+<ul>
+<li><strong>Capa de entrada</strong> — recibe los datos.</li>
+<li><strong>Capas ocultas</strong> — procesan y combinan la
+información.</li>
+<li><strong>Capa de salida</strong> — entrega el resultado (una
+etiqueta, un número, una decisión).</li>
+</ul></li>
+<li>Analogía: una <strong>cadena de decisiones</strong>, donde cada
+oficina recibe lo que resolvió la anterior y lo refina.</li>
+</ul>
+<h3 id="pesos">Pesos</h3>
+<ul>
+<li>Cada conexión entre neuronas tiene un <strong>peso</strong>: un
+número que indica cuánto importa esa entrada.</li>
+<li>Aprender = <strong>ajustar esos pesos</strong>.</li>
+</ul>
+<h3 id="entrenamiento-el-ciclo">Entrenamiento: el ciclo</h3>
+<p>El proceso de aprendizaje sigue un ciclo:</p>
+<ol type="1">
+<li>Se presentan <strong>ejemplos</strong> (datos).</li>
+<li>La red produce una <strong>salida</strong>.</li>
+<li>Se compara con la respuesta esperada y se calcula el
+<strong>error</strong> con una <strong>función de pérdida</strong>.</li>
+<li>Se <strong>ajustan los pesos</strong> para reducir ese error.</li>
+<li>Se repite muchas veces: cada pasada completa sobre
+<strong>todos</strong> los ejemplos es una <strong>época</strong>.</li>
+</ol>
+<ul>
+<li>Analogía: aprender a <strong>afinar un instrumento</strong> o a
+<strong>tirar al aro</strong> — repetir y corregir en función del
+error.</li>
+</ul>
+<p><strong>Idea para la pizarra:</strong>
+<code>assets/esquema-red-neuronal.svg</code> (3 entradas → capa oculta →
+salida, con pesos <code>w</code> y <code>v</code> en cada conexión).</p>
+<h3 id="por-qué-funciona-en-la-demo-y-falla-en-producción">Por qué
+"funciona en la demo y falla en producción"</h3>
+<ul>
+<li>Si medimos el desempeño con los <strong>mismos datos</strong> con
+que el modelo aprendió, siempre parecerá bueno.</li>
+<li>Por eso los datos se separan en tres grupos:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Grupo</th>
+<th>Para qué sirve</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Entrenamiento</strong></td>
+<td>Los ejemplos con los que el modelo aprende y ajusta sus pesos.</td>
+</tr>
+<tr>
+<td><strong>Validación</strong></td>
+<td>Un grupo aparte para tomar decisiones durante el desarrollo, sin
+usarlo para aprender.</td>
+</tr>
+<tr>
+<td><strong>Prueba</strong></td>
+<td>Un grupo que el modelo <strong>nunca vio</strong>, que estima cómo
+funcionará con casos nuevos.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Cuando el modelo <strong>memoriza</strong> los ejemplos de
+entrenamiento en vez de captar el patrón, tenemos
+<strong>sobreajuste</strong>: acierta en lo conocido y falla en lo
+nuevo. Es la causa típica del "en la demo andaba y en producción
+no".</li>
+</ul>
+<h3 id="cómo-medimos-métricas">Cómo medimos: métricas</h3>
+<p>Dos métricas básicas, que no son lo mismo:</p>
+<ul>
+<li><strong>Exactitud:</strong> proporción de aciertos sobre el total de
+casos evaluados.</li>
+<li><strong>Precisión:</strong> de los casos que el modelo marcó como
+positivos, cuántos lo eran de verdad.</li>
+</ul>
+<p>Una <strong>exactitud</strong> alta con <strong>precisión</strong>
+baja (o al revés) obliga a preguntar <em>para qué</em> se usará el
+modelo: no es lo mismo filtrar unos pocos casos dudosos que decidir
+sobre un trámite. La elección de la métrica depende del costo del error
+en cada caso.</p>
+<hr />
+<h2 id="tipos-de-aprendizaje-25-min">Tipos de aprendizaje (25 min)</h2>
+<h3 id="aprendizaje-supervisado">Aprendizaje supervisado</h3>
+<ul>
+<li>Se entrena con <strong>datos etiquetados</strong>: cada ejemplo
+viene con su respuesta correcta (<strong>etiqueta</strong>).</li>
+<li>La red aprende a <strong>predecir la etiqueta</strong> de casos
+nuevos.</li>
+<li>Dos subtipos comunes: <strong>clasificación</strong> (asignar una
+categoría) y <strong>regresión</strong> (predecir un número).</li>
+<li><strong>Ejemplo:</strong> clasificar un trámite como "urgente" o "no
+urgente" a partir de miles de trámites ya etiquetados.</li>
+</ul>
+<h3 id="aprendizaje-no-supervisado">Aprendizaje no supervisado</h3>
+<ul>
+<li>Se entrena con <strong>datos sin etiquetas</strong>; no hay
+respuesta correcta.</li>
+<li>La red busca <strong>estructura oculta</strong>: agrupar casos
+parecidos o hallar patrones.</li>
+<li>Técnica típica: <strong>agrupación (clustering)</strong>.</li>
+<li><strong>Ejemplo:</strong> agrupar a los ciudadanos de un municipio
+en segmentos según sus patrones de uso de servicios, sin haber definido
+los grupos de antemano.</li>
+</ul>
+<h3 id="aprendizaje-por-refuerzo">Aprendizaje por refuerzo</h3>
+<ul>
+<li>No se entrena con respuestas correctas, sino con <strong>recompensas
+y penalizaciones</strong>.</li>
+<li>Un <strong>agente</strong> actúa en un entorno, recibe
+<strong>recompensa</strong> o <strong>penalización</strong>, y ajusta su
+comportamiento para maximizar la recompensa.</li>
+<li>Es <strong>ensayo, error y recompensa</strong>.</li>
+<li><strong>Ejemplo:</strong> optimizar la programación de semáforos
+para reducir el tránsito: el sistema prueba combinaciones y aprende
+cuáles funcionan mejor.</li>
+</ul>
+<blockquote>
+<p><strong>Precisión de vocabulario.</strong> El preentrenamiento de una
+red <strong>no "refuerza"</strong>: compara la salida con la respuesta
+correcta y <strong>corrige los pesos</strong> para reducir el error. El
+<strong>refuerzo</strong> es otra cosa: la señal de
+<strong>recompensa</strong> del aprendizaje por refuerzo, la de este
+último bloque.</p>
+</blockquote>
+<h3 id="tabla-comparativa-1">Tabla comparativa</h3>
+<table>
+<thead>
+<tr>
+<th>Tipo</th>
+<th>¿Qué datos necesita?</th>
+<th>¿Qué aprende?</th>
+<th>Señal de aprendizaje</th>
+<th>Ejemplo típico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Supervisado</td>
+<td>Etiquetados</td>
+<td>Predecir etiqueta o valor</td>
+<td>Respuesta correcta</td>
+<td>Clasificar trámites, predecir demanda</td>
+</tr>
+<tr>
+<td>No supervisado</td>
+<td>Sin etiquetas</td>
+<td>Agrupar y hallar patrones</td>
+<td>Estructura de los datos</td>
+<td>Segmentar ciudadanos, detectar anomalías</td>
+</tr>
+<tr>
+<td>Por refuerzo</td>
+<td>Interacción con el entorno</td>
+<td>Decidir acciones</td>
+<td>Recompensa / penalización</td>
+<td>Optimizar semáforos, asignar recursos</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ejemplos-en-la-gestión-pública-10-min">Ejemplos en la gestión
+pública (10 min)</h2>
+<p>Conectar cada tipo con casos reales o plausibles del Estado
+boliviano:</p>
+<ul>
+<li><strong>Supervisado:</strong>
+<ul>
+<li>Clasificación automática de <strong>reclamos</strong> por tema
+(agua, alumbrado, vías) para derivarlos al área correcta.</li>
+<li>Predicción de <strong>demanda</strong> de un servicio para
+planificar turnos y personal.</li>
+</ul></li>
+<li><strong>No supervisado:</strong>
+<ul>
+<li><strong>Segmentación</strong> de beneficiarios de programas sociales
+según características comunes.</li>
+<li><strong>Detección de anomalías</strong> en gastos o en trámites
+(casos que se salen del patrón).</li>
+</ul></li>
+<li><strong>Por refuerzo:</strong>
+<ul>
+<li><strong>Optimización de rutas</strong> de recolección de residuos o
+de patrullaje.</li>
+<li><strong>Asignación dinámica de recursos</strong> (camiones,
+brigadas) según la situación observada.</li>
+</ul></li>
+</ul>
+<p><strong>Mensaje puente:</strong> <em>"No siempre hay etiquetas. A
+veces solo tenemos datos y queremos descubrir grupos; a veces
+necesitamos decidir en secuencia. Por eso hay más de un tipo de
+aprendizaje."</em></p>
+<hr />
+<h2 id="dinámica-regla-dato-o-aprendizaje-30-min">Dinámica: ¿regla, dato
+o aprendizaje? (30 min)</h2>
+<blockquote>
+<p>Insumos y tarjetas listos para copiar:
+<code>insumos/tarjetas-dinamica-s8.md</code>. Entregable:
+<code>plantilla-ficha-dinamica.md</code>. Clave de corrección:
+<code>guia-solucion-docente-sesion8.md</code>.</p>
+</blockquote>
+<p><strong>Objetivo:</strong> aplicar lo aprendido clasificando
+situaciones reales del trabajo y justificando el enfoque, y cerrar con
+la <strong>ficha de la dinámica</strong>.</p>
+<p><strong>Pasos:</strong> conformar <strong>3 equipos</strong> de 3–4
+personas y repartir las tarjetas. La dinámica tiene <strong>dos rondas
+de 4 casos cada una</strong> y una puesta en común.</p>
+<p><strong>Ronda 1 — ¿regla o dato? (10 min).</strong> Cada equipo
+decide si cada situación es claramente <strong>determinista</strong>,
+claramente <strong>indeterminista</strong> o <strong>combinada</strong>,
+y justifica en una frase.</p>
+<ul>
+<li>Un sistema que verifica que un formulario traiga todos los campos
+obligatorios.</li>
+<li>Un buscador que ordena resultados según lo que la gente suele
+abrir.</li>
+<li>Un asistente que clasifica correos según su contenido.</li>
+<li>Un semáforo que regula el tránsito con horarios fijos.</li>
+</ul>
+<p><strong>Ronda 2 — ¿cómo aprende? (10 min).</strong> Cada equipo
+asigna cada caso a <strong>supervisado</strong>, <strong>no
+supervisado</strong> o <strong>por refuerzo</strong>, e identifica la
+señal de aprendizaje.</p>
+<ul>
+<li>Clasificar fotos de baches según su gravedad, con fotos ya
+calificadas.</li>
+<li>Agrupar a los contribuyentes en perfiles según cuánto y cuándo
+pagan.</li>
+<li>Un sistema que ordena expedientes para reducir la espera, probando y
+recibiendo recompensa.</li>
+<li>Predecir cuántos pacientes atenderá un centro de salud el próximo
+mes.</li>
+</ul>
+<p><strong>Puesta en común (8 min, 3 equipos).</strong> Cada equipo
+comparte el caso <strong>más fácil</strong>, el <strong>más
+discutido</strong> y por qué (2–3 min por equipo).</p>
+<p><strong>Cierre de la dinámica (2 min).</strong> El docente contrasta
+las respuestas y refuerza las tres preguntas de control: <em>¿hay
+etiquetas? ¿se busca agrupar? ¿hay una acción y una recompensa?</em></p>
+<p><strong>Guía de corrección:</strong> en la Ronda 1, valorar
+especialmente la opción <strong>"combinada"</strong> (la verificación de
+formularios puede sumar reglas de longitud y formato a un chequeo
+aprendido). En la Ronda 2, la clave es distinguir si hay
+<strong>etiquetas</strong> (supervisado), <strong>sin etiquetas y se
+busca agrupar</strong> (no supervisado) o <strong>una acción con
+recompensa</strong> (refuerzo). No hay una única respuesta correcta
+absoluta; el objetivo es razonar.</p>
+<p><strong>Evaluación de la dinámica:</strong> participación,
+clasificación coherente y justificación. Los criterios con niveles están
+en <code>rubrica-modulo.md</code> (Sesión 8).</p>
+<hr />
+<h2 id="cierre-y-preguntas-15-min">Cierre y preguntas (15 min)</h2>
+<ul>
+<li>Síntesis con el grupo: releer en voz alta la tabla comparativa
+determinista/indeterminista y la de los tres tipos de aprendizaje.</li>
+<li>Reforzar las ideas centrales: <em>"No hay un enfoque mejor, sino el
+que se ajusta al problema"</em> y <em>"una red neuronal aprende
+ajustando pesos; la forma de aprender depende de los datos y del
+problema"</em>.</li>
+<li>Recordar el mensaje de la demo: <em>"un modelo que solo se mide con
+lo que ya vio engaña; por eso se separa el conjunto de prueba y se
+vigilan el sobreajuste y las métricas"</em>.</li>
+<li>Anticipar la próxima sesión: <em>"La red neuronal es la base de la
+IA actual. La próxima vez vemos su versión a gran escala: los modelos de
+lenguaje (LLM) y el prompting, los chats que generan texto que usamos a
+diario."</em></li>
+<li>Espacio de preguntas y dudas.</li>
+</ul>
+<hr />
+<h2 id="recursos">Recursos</h2>
+<ul>
+<li>Presentación <code>presentacion_sesion8.html</code> y deck
+<code>deck-sesion-08.html</code>.</li>
+<li>Esquemas SVG: <code>assets/esquema-linea-tiempo-ia.svg</code>
+(historia) y <code>assets/esquema-red-neuronal.svg</code> (cómo aprende
+una red).</li>
+<li>Pizarra o pizarra digital para el esquema
+determinista/indeterminista y el dibujo de la red (entradas → capas →
+salida).</li>
+<li>Tarjetas de la dinámica:
+<code>insumos/tarjetas-dinamica-s8.md</code>.</li>
+<li>Lecciones del bloque: <code>lessons/0001</code> a
+<code>lessons/0004</code> y hojas de referencia en
+<code>reference/</code>.</li>
+</ul>
+<h2 id="evaluación-de-la-sesión">Evaluación de la sesión</h2>
+<p>Los criterios y sus niveles están en <code>rubrica-modulo.md</code>
+(Sesión 8 — Historia, redes neuronales y aprendizaje).</p>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Clasifica el enfoque (determinista / indeterminista /
+combinada)</td>
+<td>Ficha de la dinámica, Ronda 1</td>
+</tr>
+<tr>
+<td>Justifica la elección del enfoque</td>
+<td>Argumentación en la ficha y en la puesta en común</td>
+</tr>
+<tr>
+<td>Explica cómo aprende una red neuronal</td>
+<td>Ficha de la dinámica y participación en el bloque de redes</td>
+</tr>
+<tr>
+<td>Reconoce el sobreajuste y la utilidad del conjunto de prueba</td>
+<td>Aportes en el bloque de redes y en el cierre</td>
+</tr>
+<tr>
+<td>Diferencia los tres tipos de aprendizaje</td>
+<td>Ficha de la dinámica, Ronda 2</td>
+</tr>
+<tr>
+<td>Relaciona cada tipo con la gestión pública</td>
+<td>Ejemplos aportados en la discusión</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Entrega sugerida:</strong> <strong>ficha de la
+dinámica</strong> con los casos clasificados en las dos rondas, la señal
+de aprendizaje de cada uno y una breve justificación.</p>
+  <footer class="docfoot">Generado desde <a href="Sesion_08_IA_Historia_Redes_Aprendizaje.md"><code>Sesion_08_IA_Historia_Redes_Aprendizaje.md</code></a> · Módulo 6 — Inteligencia Artificial · IDT 601</footer>
+</div>
+</body>
+</html>

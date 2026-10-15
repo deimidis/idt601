@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde taller_sesion9_prompts_gestion_publica.md — no editar a mano. -->
+<title>Taller — Sesión 9: prompts para gestión pública</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 6 — Inteligencia Artificial · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="taller--sesión-9-prompts-para-gestión-pública">Taller — Sesión
+9: prompts para gestión pública</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601) · Bloque 6 —
+Historia y Desarrollo de la Inteligencia Artificial
+<strong>Duración:</strong> 30 min de práctica (dentro de la sesión de 3
+horas) + 10 min de puesta en común en el cierre
+<strong>Modalidad:</strong> 100 % virtual · <strong>Modo A</strong>
+(trabajo individual o en parejas) o <strong>Modo B</strong>
+(demostración del docente) <strong>Herramienta:</strong> ninguna que
+instalar — un chat LLM en el navegador (plataforma genérica) o, si no
+hay cuenta, un <strong>documento compartido</strong>. El entregable es
+la <strong>captura de prompt</strong>. <strong>Insumos:</strong>
+<code>plantilla-captura-prompt.md</code> +
+<code>guia-prompting.md</code> +
+<code>insumos/tareas-practica-s9.md</code></p>
+<hr />
+<h2 id="objetivo">Objetivo</h2>
+<p>Que cada participante <strong>redacte un prompt</strong> para una
+tarea real de gestión pública, <strong>evalúe</strong> la respuesta e
+<strong>itere</strong> al menos una vez, dejando registro de:</p>
+<ol type="1">
+<li>El <strong>prompt versión 1</strong>.</li>
+<li>La <strong>evaluación</strong> de la respuesta con tres
+preguntas.</li>
+<li>El <strong>prompt versión 2 (mejorado)</strong> y qué cambió.</li>
+<li>Una <strong>observación de verificación</strong>: qué dato, cifra o
+norma habría que comprobar.</li>
+</ol>
+<p>No se programa: se pide, se evalúa y se decide.</p>
+<h2 id="consigna">Consigna</h2>
+<blockquote>
+<p><em>Elegí una tarea de tu trabajo (o una de las cinco sugeridas).
+Redactá un prompt que incluya, al menos, <strong>claridad</strong> (qué,
+formato, extensión, tono) y <strong>contexto</strong> (para quién y para
+qué). Probá la respuesta, evaluála con las tres preguntas y
+<strong>mejorá el prompt</strong>. Anotá la comparación en la plantilla.
+<strong>No pegues datos reales de ciudadanos ni documentos
+reservados.</strong></em></p>
+</blockquote>
+<p><strong>Las cinco tareas sugeridas</strong> (el detalle está en
+<code>insumos/tareas-practica-s9.md</code>):</p>
+<ol type="1">
+<li>Redactar una <strong>respuesta a un reclamo</strong> frecuente sobre
+un servicio municipal.</li>
+<li>Elaborar un <strong>aviso institucional</strong> para informar la
+suspensión temporal de un trámite.</li>
+<li>Resumir un <strong>informe técnico</strong> en un párrafo para una
+autoridad.</li>
+<li>Explicar un <strong>requisito de trámite</strong> en lenguaje
+sencillo para la ciudadanía.</li>
+<li>Generar una <strong>lista de verificación</strong> de documentos
+para un expediente.</li>
+</ol>
+<h2 id="acceso-al-chat-resolver-antes-de-empezar">Acceso al chat
+(resolver antes de empezar)</h2>
+<ul>
+<li><strong>Plataforma genérica:</strong> sirve cualquier chat conocido
+(<strong>ChatGPT, Gemini o Copilot</strong>, por ejemplo). No hay una
+obligatoria: el método funciona con cualquiera.</li>
+<li><strong>Plan B sin cuenta:</strong> quien no pueda crear cuenta
+trabaja con un <strong>documento compartido</strong> (Google Docs/Word
+en línea) donde escribe su prompt; el docente corre una
+<strong>demostración guiada</strong> en pantalla con el chat y devuelve
+la respuesta al grupo.</li>
+<li><strong>Sin conexión estable:</strong> se usa la plantilla en papel
+y la demostración del docente (Modo B).</li>
+</ul>
+<h2 id="preparación-previa-el-día-anterior">Preparación previa (el día
+anterior)</h2>
+<ol type="1">
+<li>Publicar en Moodle (o pegar en el chat)
+<code>plantilla-captura-prompt.md</code>, <code>guia-prompting.md</code>
+e <code>insumos/tareas-practica-s9.md</code>.</li>
+<li>Pedir que cada persona piense <strong>una tarea real</strong> de su
+trabajo para traer armada.</li>
+<li>Verificar que el chat elegido abra en el navegador y que el
+<strong>documento compartido</strong> del Plan B esté listo y con
+permiso de edición.</li>
+<li>Tener preparado un <strong>prompt de ejemplo</strong> (vago →
+preciso) para abrir la práctica y para el Modo B.</li>
+<li>Recordar la <strong>regla de confidencialidad</strong>: se practica
+con casos ficticios o datos ya públicos.</li>
+</ol>
+<h2 id="reparto-del-tiempo-30-min-de-práctica">Reparto del tiempo (30
+min de práctica)</h2>
+<table>
+<thead>
+<tr>
+<th>Momento</th>
+<th>Tiempo</th>
+<th>Quién</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Consigna, elección de tarea y recordatorio de confidencialidad</td>
+<td>5 min</td>
+<td>Docente</td>
+</tr>
+<tr>
+<td><strong>Trabajo:</strong> prompt v1 → probar → evaluar → prompt
+v2</td>
+<td>20 min</td>
+<td>Cada participante / pareja</td>
+</tr>
+<tr>
+<td>Cierre de la práctica: completar la plantilla de captura</td>
+<td>5 min</td>
+<td>Cada participante / pareja</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>La <strong>puesta en común (10 min)</strong> no va aquí: se hace en
+el bloque de cierre de la sesión, para no recortar el tiempo de
+trabajo.</p>
+</blockquote>
+<hr />
+<h2 id="pasos-del-trabajo-20-min">Pasos del trabajo (20 min)</h2>
+<p><strong>Consigna:</strong> "Se trata de <strong>pedir bien</strong> y
+<strong>verificar</strong>, no de memorizar. Si el prompt se puede
+reutilizar mañana en la oficina, mejor."</p>
+<ol type="1">
+<li><strong>Elegir la tarea.</strong> Una tarea real, acotada, con un
+destinatario claro.</li>
+<li><strong>Prompt versión 1.</strong> Escribirlo aplicando al menos
+<strong>claridad + contexto</strong>. Si se puede, sumar
+<strong>rol</strong> o <strong>ejemplo</strong>.</li>
+<li><strong>Probar.</strong> Pegarlo en el chat (o en el documento
+compartido, Plan B) y leer la respuesta.</li>
+<li><strong>Evaluar con tres preguntas:</strong>
+<ul>
+<li>¿<strong>Responde a lo pedido</strong>?</li>
+<li>¿El <strong>tono y el formato</strong> son los correctos?</li>
+<li>¿Hay algo <strong>dudoso que verificar</strong> (dato, cifra, norma,
+referencia)?</li>
+</ul></li>
+<li><strong>Prompt versión 2.</strong> Mejorarlo a partir de la
+evaluación (más contexto, un ejemplo, un rol, un formato
+explícito).</li>
+<li><strong>Registrar la verificación.</strong> Anotar <strong>qué dato
+comprobaría y contra qué fuente oficial</strong>.</li>
+</ol>
+<h2 id="entregable">Entregable</h2>
+<p>Completar <code>plantilla-captura-prompt.md</code> (o su copia en el
+documento compartido). Debe tener:</p>
+<ol type="1">
+<li><strong>Prompt v1</strong> (el primero que se probó).</li>
+<li><strong>Evaluación</strong> con las tres preguntas.</li>
+<li><strong>Prompt v2 (mejorado)</strong>.</li>
+<li><strong>Qué cambió</strong> entre v1 y v2.</li>
+<li><strong>Observación de verificación</strong>: qué dato/fuente se
+comprobaría antes de usar la respuesta.</li>
+</ol>
+<h2 id="modo-a--trabajo-de-participantes">Modo A — Trabajo de
+participantes</h2>
+<p><strong>Consigna (pegar en el chat):</strong> "Elegí una tarea real,
+escribí un prompt con claridad y contexto, probalo, evaluá la respuesta
+y mejorá el prompt. Completá la plantilla de captura. Sin datos de
+ciudadanos."</p>
+<ul>
+<li><strong>Individual o en parejas:</strong> quien prefiera, trabaja
+solo; quien quiera, comparte pantalla con un compañero.</li>
+<li>Rol del docente: <strong>rotar por las salas cada 4–5 min</strong>,
+destrabar sobre todo la <strong>diferencia entre un pedido vago y uno
+preciso</strong> y la <strong>identificación de un dato a
+verificar</strong>.</li>
+<li><strong>No hay que instalar nada</strong>: si el chat no abre, se
+pasa al documento compartido sin frenar la práctica.</li>
+</ul>
+<h2
+id="modo-b--demostración-del-docente-guion-para-compartir-pantalla-20-min">Modo
+B — Demostración del docente (guion para compartir pantalla, 20
+min)</h2>
+<p>Versión totalmente guiada. Los participantes siguen con la vista y
+completan la plantilla con el ejemplo.</p>
+<ol type="1">
+<li><strong>Encuadre (2 min).</strong> "Vamos a pedir bien y verificar.
+El modelo no cambia: cambia cómo le pedimos."</li>
+<li><strong>Del vago al preciso (4 min).</strong> Mostrar "háblame de
+impuestos" y luego "explicá en 5 líneas, en tono formal, para un
+funcionario municipal, qué es el impuesto predial". Comparar
+respuestas.</li>
+<li><strong>Sumar contexto y rol (4 min).</strong> Reescribir con
+contexto ("soy funcionario municipal y debo responder una consulta") y
+rol ("actuá como asesor de transparencia").</li>
+<li><strong>Probar y evaluar (4 min).</strong> Leer la respuesta con las
+tres preguntas y detectar un dato dudoso.</li>
+<li><strong>Mejorar y verificar (4 min).</strong> Reescribir el prompt
+(v2), comparar, y decir contra qué fuente oficial se verificaría.</li>
+<li><strong>Cierre (2 min).</strong> Repetir: pedir con claridad y
+contexto, iterar, y <strong>verificar antes de usar</strong>. Y
+<strong>no pegar datos sensibles</strong>.</li>
+</ol>
+<blockquote>
+<p><strong>Consejo de pantalla:</strong> hacerlo despacio, pensar en voz
+alta y mantener a la vista la guía de prompting y la plantilla de
+captura.</p>
+</blockquote>
+<h2 id="puesta-en-común-10-min-en-el-bloque-de-cierre">Puesta en común
+(10 min, en el bloque de cierre)</h2>
+<p>Cada persona o pareja comparte en 1–2 minutos:</p>
+<ul>
+<li>El <strong>prompt mejorado</strong> y <strong>qué cambió</strong>
+respecto del primero.</li>
+<li><strong>Un dato que verificaría</strong> antes de usar la
+respuesta.</li>
+</ul>
+<p>El docente contrasta los prompts y refuerza las ideas fuerza: <em>un
+buen prompt más verificación son la diferencia entre un resultado útil y
+uno engañoso; y la regla de confidencialidad no se negocia.</em></p>
+<hr />
+<h2 id="evaluación-y-entrega">Evaluación y entrega</h2>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Aplica claridad</td>
+<td>El prompt define qué, formato, extensión o tono</td>
+</tr>
+<tr>
+<td>Aplica contexto (y rol/ejemplos si puede)</td>
+<td>El prompt indica para quién y para qué</td>
+</tr>
+<tr>
+<td>Itera al menos una vez</td>
+<td>Prompt v2 con mejora respecto de v1</td>
+</tr>
+<tr>
+<td>Verifica</td>
+<td>Observación de verificación con un dato y su fuente</td>
+</tr>
+<tr>
+<td>Cuida la información</td>
+<td>Caso ficticio o público; sin datos de ciudadanos</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Entrega:</strong> la <strong>captura de prompt</strong>
+completada (o el enlace del documento compartido). Se cierra
+<strong>dentro de la sesión</strong>.</p>
+<h2 id="guía-de-corrección--rúbrica-con-niveles">Guía de corrección /
+rúbrica con niveles</h2>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>A quién corresponde</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Insuficiente</strong></td>
+<td>Prompt vago, sin claridad ni contexto; no itera ni verifica; usaría
+datos reales de ciudadanos.</td>
+</tr>
+<tr>
+<td><strong>Suficiente</strong></td>
+<td>Incluye claridad y contexto; itera al menos una vez; señala algo a
+verificar.</td>
+</tr>
+<tr>
+<td><strong>Alto</strong></td>
+<td>Incluye claridad, contexto y rol o ejemplos; el prompt es
+reutilizable; itera y explica qué cambió.</td>
+</tr>
+<tr>
+<td><strong>Excelente</strong></td>
+<td>Todo lo anterior, más: verifica un dato contra la fuente oficial y
+explicita la regla de confidencialidad.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Escala del módulo (Plan de Clases): 1–59 inicial · 60–69 muy parcial
+· 70–84 suficiente · 85–94 alto porcentaje · 95–100 logro total. La
+rúbrica de la Sesión 9 está en <code>rubrica-modulo.md</code>.</p>
+</blockquote>
+<h2 id="problemas-frecuentes-y-qué-hacer">Problemas frecuentes (y qué
+hacer)</h2>
+<table>
+<thead>
+<tr>
+<th>Síntoma</th>
+<th>Causa</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prompt vago ("resumí esto")</td>
+<td>Falta claridad y contexto</td>
+<td>Pedir formato, extensión, tono y destinatario explícitos.</td>
+</tr>
+<tr>
+<td>No itera</td>
+<td>Cree que la primera respuesta es la definitiva</td>
+<td>Recordar que la primera respuesta es un <strong>borrador</strong>;
+comparar v1 y v2.</td>
+</tr>
+<tr>
+<td>Copia la respuesta sin verificar</td>
+<td>Confía en el modelo</td>
+<td>Pedir que nombre <strong>un dato</strong> y su <strong>fuente
+oficial</strong>.</td>
+</tr>
+<tr>
+<td>Pega un caso real con datos de personas</td>
+<td>No ve el riesgo de confidencialidad</td>
+<td>Reemplazar por un caso <strong>ficticio</strong> o anonimizar;
+repetir la regla del bloque.</td>
+</tr>
+<tr>
+<td>El chat no abre o no hay cuenta</td>
+<td>Problema de acceso</td>
+<td>Pasar al <strong>Plan B</strong>: documento compartido +
+demostración del docente.</td>
+</tr>
+<tr>
+<td>Pide "que busque en internet" y no puede</td>
+<td>Confunde capacidades</td>
+<td>Aclarar que el chat no siempre consulta la web; la verificación es
+humana.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="plan-b-si-falla-la-conexión-la-cuenta-o-el-acceso">Plan B (si
+falla la conexión, la cuenta o el acceso)</h2>
+<ul>
+<li><strong>Sin cuenta:</strong> documento compartido con los prompts +
+demostración guiada del docente.</li>
+<li><strong>Sin salas:</strong> cada persona trabaja sola en el
+documento compartido, coordinada por el chat.</li>
+<li><strong>Sin poder usar el chat en clase:</strong> el docente corre
+los prompts en vivo (Modo B) y los participantes completan la plantilla
+con lo observado; la iteración se hace en la puesta en común.</li>
+<li><strong>Sin audio:</strong> la consigna y la puesta en común se
+hacen por chat y pantalla compartida.</li>
+</ul>
+<hr />
+<h2 id="nota-para-el-docente">Nota para el docente</h2>
+<ul>
+<li>La práctica tiene <strong>30 minutos completos</strong> y la
+<strong>puesta en común se hace en el cierre</strong>: se prioriza que
+todos alcancen a iterar.</li>
+<li>El foco es el <strong>método</strong> (pedir bien + verificar), no
+una plataforma concreta: cualquiera sirve.</li>
+<li>La <strong>solución modelo</strong> (prompt de ejemplo, errores
+frecuentes y rúbrica) está en
+<code>guia-solucion-docente-sesion9.md</code>.</li>
+</ul>
+  <footer class="docfoot">Generado desde <a href="taller_sesion9_prompts_gestion_publica.md"><code>taller_sesion9_prompts_gestion_publica.md</code></a> · Módulo 6 — Inteligencia Artificial · IDT 601</footer>
+</div>
+</body>
+</html>

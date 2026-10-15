@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde taller_sesion8_regla_dato_aprendizaje.md — no editar a mano. -->
+<title>Taller — Sesión 8: ¿regla, dato o aprendizaje?</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 6 — Inteligencia Artificial · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="taller--sesión-8-regla-dato-o-aprendizaje">Taller — Sesión 8:
+¿regla, dato o aprendizaje?</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601) · Bloque 6 —
+Inteligencia Artificial <strong>Duración:</strong> 30 min de taller (3
+de consigna + 10 de Ronda 1 + 10 de Ronda 2 + 7 de puesta en común y
+cierre), dentro de la sesión de 3 horas <strong>Modalidad:</strong> 100
+% en línea (Zoom + salas) · <strong>Modo A</strong> (equipos) o
+<strong>Modo B</strong> (demostración del docente)
+<strong>Herramienta:</strong> ninguna que instalar — lectura + documento
+compartido (Google Docs/Word en línea) o
+<code>plantilla-ficha-dinamica.md</code>. <strong>Insumos:</strong>
+<code>insumos/tarjetas-dinamica-s8.md</code> (12 tarjetas, 2 rondas) ·
+<code>plantilla-ficha-dinamica.md</code> <strong>Entregable:</strong> la
+<strong>ficha de la dinámica</strong>, cerrada en la sesión.
+<strong>Evaluación:</strong> <code>rubrica-modulo.md</code> — Sesión 8
+(Historia, redes neuronales y aprendizaje).</p>
+<hr />
+<h2 id="objetivo">Objetivo</h2>
+<p>Que cada equipo <strong>clasifique situaciones reales</strong> de la
+gestión pública y <strong>justifique</strong> su elección:</p>
+<ol type="1">
+<li><strong>Ronda 1 — ¿regla o dato?</strong> Decidir si el caso es
+<strong>determinista</strong>, <strong>indeterminista</strong> o
+<strong>combinada</strong>.</li>
+<li><strong>Ronda 2 — ¿cómo aprende?</strong> Asignar cada caso a
+<strong>supervisado</strong>, <strong>no supervisado</strong> o
+<strong>por refuerzo</strong>, e identificar la <strong>señal de
+aprendizaje</strong>.</li>
+<li><strong>Puesta en común:</strong> compartir el caso más fácil, el
+más discutido y por qué.</li>
+</ol>
+<p>No se escribe código: se clasifica, se justifica y se documenta en
+una ficha.</p>
+<h2 id="caso-institucional">Caso institucional</h2>
+<blockquote>
+<p><em>En un municipio boliviano, la <strong>Unidad de Atención al
+Ciudadano</strong> convive a diario con dos mundos. Por un lado, hay
+trámites que se resuelven con <strong>reglas claras</strong> (¿trajo
+todos los documentos?, ¿el formulario está completo?). Por otro, hay
+<strong>patrones que nadie escribió en un manual</strong>: qué días
+llegan más reclamos, qué trámites se parecen a un fraude, cómo conviene
+ordenar la atención para reducir la espera. La unidad necesita decidir,
+caso por caso, cuándo conviene una <strong>regla fija</strong> y cuándo
+un sistema que <strong>aprenda de los datos</strong> —y, cuando aprende,
+<strong>de qué manera</strong>.</em></p>
+<p>Las 12 tarjetas del taller son exactamente esas situaciones. El
+equipo las clasifica y justifica, como lo haría al diseñar la próxima
+mejora de la unidad.</p>
+</blockquote>
+<p><strong>Tarjetas de trabajo:</strong>
+<code>insumos/tarjetas-dinamica-s8.md</code> — 6 casos en la Ronda 1 y 6
+en la Ronda 2; en clase se trabajan <strong>4 por ronda</strong> y las
+otras 2 quedan como reserva.</p>
+<h2 id="insumo-y-preparación-previa-el-día-anterior">Insumo y
+preparación previa (el día anterior)</h2>
+<ol type="1">
+<li>Subir a Moodle (o tener listo para pegar en el chat) el archivo
+<code>insumos/tarjetas-dinamica-s8.md</code>.</li>
+<li>Subir la <code>plantilla-ficha-dinamica.md</code> (una copia por
+equipo, o un documento compartido).</li>
+<li>Tener preparada una <strong>ficha de ejemplo</strong> (para el Modo
+B) con las respuestas de una ronda.</li>
+<li>Tener listo un <strong>documento compartido o pizarra</strong> para
+pegar las fichas en la puesta en común.</li>
+<li>Revisar <code>guia-solucion-docente-sesion8.md</code>: contiene la
+clave de las dos rondas y los criterios con niveles.</li>
+</ol>
+<h2 id="reparto-del-tiempo-30-min-en-línea">Reparto del tiempo (30 min,
+en línea)</h2>
+<table>
+<thead>
+<tr>
+<th>Momento</th>
+<th>Tiempo</th>
+<th>Quién</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Consigna, conformación de <strong>3 equipos</strong> (3–4 personas)
+y reparto de tarjetas</td>
+<td>3 min</td>
+<td>Docente</td>
+</tr>
+<tr>
+<td><strong>Ronda 1 — ¿regla o dato?</strong> (4 casos)</td>
+<td>10 min</td>
+<td>Equipos</td>
+</tr>
+<tr>
+<td><strong>Ronda 2 — ¿cómo aprende?</strong> (4 casos)</td>
+<td>10 min</td>
+<td>Equipos</td>
+</tr>
+<tr>
+<td>Puesta en común (3 equipos, 2 min cada uno) y cierre</td>
+<td>7 min</td>
+<td>Todos</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Ajuste de tiempos.</strong> Con las 4 tarjetas por ronda,
+cada ronda entra en 10 min. Si el grupo es rápido y se suman las
+tarjetas de <strong>reserva</strong>, cada ronda puede extenderse hasta
+<strong>15 min</strong> sin salir de las 3 horas.</p>
+</blockquote>
+<hr />
+<h2 id="pasos-del-trabajo">Pasos del trabajo</h2>
+<p><strong>Consigna:</strong> "Clasifiquen cada caso y
+<strong>justifiquen en una frase</strong>. No se trata de memorizar
+definiciones: se trata de <strong>decidir</strong> y
+<strong>fundamentar</strong>."</p>
+<p><strong>Ronda 1 (10 min) — ¿regla o dato?</strong></p>
+<ol type="1">
+<li>Lean los 4 casos <strong>en uso</strong> de la Ronda 1.</li>
+<li>Para cada uno decidan: <strong>determinista</strong> (reglas fijas),
+<strong>indeterminista</strong> (aprende de datos) o
+<strong>combinada</strong>.</li>
+<li>Justifiquen: ¿puedo escribir la regla en una frase? ¿necesito ver
+muchos ejemplos?</li>
+</ol>
+<p><strong>Ronda 2 (10 min) — ¿cómo aprende?</strong></p>
+<ol type="1">
+<li>Lean los 4 casos <strong>en uso</strong> de la Ronda 2.</li>
+<li>Para cada uno decidan: <strong>supervisado</strong>, <strong>no
+supervisado</strong> o <strong>por refuerzo</strong>.</li>
+<li>Identifiquen la <strong>señal de aprendizaje</strong>: ¿hay
+<strong>etiquetas</strong>? ¿se busca <strong>agrupar</strong>? ¿hay una
+<strong>acción</strong> con <strong>recompensa</strong>?</li>
+</ol>
+<h2 id="plantilla-de-entrega">Plantilla de entrega</h2>
+<p>Completar <code>plantilla-ficha-dinamica.md</code> (o su copia en el
+documento compartido). Debe tener:</p>
+<ol type="1">
+<li>Ronda 1: enfoque elegido y justificación por caso.</li>
+<li>Ronda 2: tipo de aprendizaje, <strong>señal</strong> y justificación
+por caso.</li>
+<li>El caso más fácil y el más discutido, con el por qué.</li>
+<li>Una conexión con un caso propio de su institución.</li>
+</ol>
+<h2 id="modo-a--trabajo-de-participantes-salas">Modo A — Trabajo de
+participantes (salas)</h2>
+<p><strong>Consigna (pegar en el chat):</strong> "Clasifiquen los 4
+casos de cada ronda y completen la ficha. Entregan la ficha al cerrar la
+sesión. Guarden el enlace con permiso de edición."</p>
+<ul>
+<li>Roles del equipo: <strong>coordinador</strong> (cuida el tiempo de
+cada ronda) y <strong>relator</strong> (comparte pantalla en la puesta
+en común).</li>
+<li>Rol del docente: <strong>rotar por las salas cada 4–5 min</strong>,
+destrabar sobre todo dos puntos:
+<ul>
+<li>La diferencia entre <strong>determinista</strong> y
+<strong>combinada</strong> (una verificación de formularios puede sumar
+reglas y aprendizaje).</li>
+<li>La diferencia entre <strong>no supervisado</strong> y <strong>por
+refuerzo</strong> (agrupar por estructura <strong>no</strong> es lo
+mismo que actuar y recibir recompensa).</li>
+</ul></li>
+</ul>
+<h2
+id="modo-b--demostración-del-docente-guion-para-compartir-pantalla-20-min">Modo
+B — Demostración del docente (guion para compartir pantalla, 20
+min)</h2>
+<p>Versión totalmente guiada. Los participantes siguen con la vista y
+anotan.</p>
+<ol type="1">
+<li><strong>Encuadre (2 min).</strong> "Vamos a decidir, caso por caso,
+cuándo conviene una regla y cuándo un sistema que aprende de los
+datos."</li>
+<li><strong>Ronda 1 (6 min).</strong> Leer en voz alta los 4 casos y
+pensar en voz alta la clasificación y la justificación.</li>
+<li><strong>Ronda 2 (6 min).</strong> Repetir con los 4 casos de la
+segunda ronda, nombrando cada vez la <strong>señal de
+aprendizaje</strong>.</li>
+<li><strong>Momentos de duda (4 min).</strong> Mostrar el caso de la
+verificación de formularios (determinista o combinada) y el de los
+trámites fuera de patrón (no supervisado o por refuerzo).</li>
+<li><strong>Cierre (2 min).</strong> Repetir el criterio:
+<strong>reglas, datos o aprendizaje</strong> según el problema; y
+recordar que medir solo con lo que ya vio <strong>engaña</strong>
+(sobreajuste).</li>
+</ol>
+<blockquote>
+<p><strong>Consejo de pantalla:</strong> tener la tabla comparativa
+(determinista/indeterminista) y la tabla de los tres tipos de
+aprendizaje a la vista mientras se clasifica.</p>
+</blockquote>
+<h2 id="puesta-en-común-7-min">Puesta en común (7 min)</h2>
+<p>El <strong>relator</strong> de cada equipo comparte pantalla (2 min
+por equipo, 3 equipos). Cuenta:</p>
+<ul>
+<li><strong>El caso más fácil</strong> y por qué.</li>
+<li><strong>El caso más discutido</strong> y qué los hizo dudar.</li>
+</ul>
+<p>El docente contrasta las respuestas y refuerza las ideas fuerza:
+<em>no hay un enfoque mejor, sino el que se ajusta al problema; y medir
+un modelo solo con los datos con que aprendió engaña.</em></p>
+<hr />
+<h2 id="evaluación-y-entrega">Evaluación y entrega</h2>
+<p>Criterios de la Sesión 8 en <code>rubrica-modulo.md</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Evidencia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Clasifica el enfoque (determinista / indeterminista /
+combinada)</td>
+<td>Ronda 1 de la ficha</td>
+</tr>
+<tr>
+<td>Justifica la elección</td>
+<td>Justificación por caso, en la ficha y en la puesta en común</td>
+</tr>
+<tr>
+<td>Explica cómo aprende una red</td>
+<td>Aportes en el bloque de redes y en la ficha</td>
+</tr>
+<tr>
+<td>Distingue los tres tipos de aprendizaje</td>
+<td>Ronda 2 de la ficha</td>
+</tr>
+<tr>
+<td>Conecta con la gestión pública</td>
+<td>Preguntas 4 y 5 de la ficha</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Entrega por equipo:</strong> la <strong>ficha de la
+dinámica</strong> completada (o el enlace del documento). Se cierra
+<strong>dentro de la sesión</strong>.</p>
+<h2 id="problemas-frecuentes-y-qué-hacer">Problemas frecuentes (y qué
+hacer)</h2>
+<table>
+<thead>
+<tr>
+<th>Síntoma</th>
+<th>Causa</th>
+<th>Solución</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Clasifican todo como indeterminista "porque son datos"</td>
+<td>Confunden "usar datos" con "aprender de datos"</td>
+<td>Preguntar: ¿la salida se decide con una regla escrita o se descubre
+de ejemplos?</td>
+</tr>
+<tr>
+<td>Ignoran la opción "combinada"</td>
+<td>Creen que es una dicotomía</td>
+<td>Mostrar que la verificación de formularios puede sumar reglas y
+aprendizaje.</td>
+</tr>
+<tr>
+<td>Confunden no supervisado con por refuerzo</td>
+<td>No distinguen agrupar de actuar</td>
+<td>Preguntar: ¿buscamos grupos o hay una acción con recompensa?</td>
+</tr>
+<tr>
+<td>Confunden supervisado con no supervisado</td>
+<td>No miran las etiquetas</td>
+<td>Preguntar: ¿cada ejemplo trae su respuesta correcta? Si sí, es
+supervisado.</td>
+</tr>
+<tr>
+<td>Justifican con el enunciado repetido</td>
+<td>Creen que alcanza con elegir</td>
+<td>Pedir la frase "porque…" y recordar que se evalúa la
+justificación.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="plan-b-si-falla-la-conexión-o-el-acceso">Plan B (si falla la
+conexión o el acceso)</h2>
+<ul>
+<li><strong>Sin salas:</strong> cada equipo trabaja en un documento
+compartido coordinado por el chat.</li>
+<li><strong>Sin poder abrir las tarjetas:</strong> el docente comparte
+pantalla con las tarjetas y los equipos completan la ficha.</li>
+<li><strong>Sin audio:</strong> la consigna y la puesta en común se
+hacen por chat y pantalla compartida.</li>
+<li><strong>Poco tiempo:</strong> trabajar solo las 4 tarjetas
+<strong>en uso</strong> de cada ronda y usar las de reserva como
+tarea.</li>
+</ul>
+<hr />
+<h2 id="nota-para-el-docente">Nota para el docente</h2>
+<ul>
+<li>El taller <strong>reemplaza</strong> la dinámica original de 25 min
+y la ajusta a <strong>4 casos por ronda</strong> con puesta en común
+para <strong>3 equipos</strong>, dentro de las 3 horas.</li>
+<li>La <strong>solución modelo</strong> (respuestas de las dos rondas,
+errores frecuentes y rúbrica) está en
+<code>guia-solucion-docente-sesion8.md</code>.</li>
+<li>Los criterios y sus niveles están en <code>rubrica-modulo.md</code>
+(Sesión 8).</li>
+</ul>
+  <footer class="docfoot">Generado desde <a href="taller_sesion8_regla_dato_aprendizaje.md"><code>taller_sesion8_regla_dato_aprendizaje.md</code></a> · Módulo 6 — Inteligencia Artificial · IDT 601</footer>
+</div>
+</body>
+</html>

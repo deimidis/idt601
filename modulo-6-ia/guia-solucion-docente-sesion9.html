@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- GENERADO por render-docs.sh desde guia-solucion-docente-sesion9.md — no editar a mano. -->
+<title>Guía de solución del docente — Sesión 9</title>
+<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/docs.css" />
+</head>
+<body>
+<div class="wrap">
+  <p class="kicker">Módulo 6 — Inteligencia Artificial · IDT 601</p>
+  <nav class="docnav"><a href="../index.html">← idt601</a></nav>
+<h1 id="guía-de-solución-del-docente--sesión-9">Guía de solución del
+docente — Sesión 9</h1>
+<p><strong>Módulo:</strong> Ingeniería de Datos (IDT 601) · Bloque 6 —
+Historia y Desarrollo de la Inteligencia Artificial
+<strong>Práctica:</strong>
+<code>taller_sesion9_prompts_gestion_publica.md</code>
+<strong>Uso:</strong> prompt de ejemplo resuelto, criterios de
+corrección, errores frecuentes y rúbrica con niveles.</p>
+<hr />
+<h2 id="1-prompt-de-ejemplo-resuelto-tarea-respuesta-a-un-reclamo">1.
+Prompt de ejemplo resuelto (tarea: respuesta a un reclamo)</h2>
+<p>Sirve como modelo para abrir la práctica o para el Modo B.</p>
+<p><strong>Versión 1 (mejorable):</strong></p>
+<blockquote>
+<p>"Escribí una respuesta a un reclamo de basura."</p>
+</blockquote>
+<p>Problema: sin contexto (quién pide, para quién), sin formato, sin
+extensión ni tono.</p>
+<p><strong>Versión 2 (mejorada, con claridad + contexto + rol +
+ejemplo):</strong></p>
+<blockquote>
+<p>"Actuá como responsable de atención al ciudadano de un gobierno
+municipal. Debo responder un reclamo ciudadano por demora en la
+recolección de basura. Redactá una respuesta de 6 líneas, en tono formal
+y empático, para una persona sin conocimientos técnicos. Seguí este
+modelo: 'Le agradecemos su comunicación. Lamentamos los
+inconvenientes…'. Cerrá indicando el canal para hacer seguimiento."</p>
+</blockquote>
+<p><strong>Qué cambió:</strong> se sumó contexto (quién y para qué),
+claridad (extensión y tono), rol (atención al ciudadano) y un ejemplo de
+estructura. El resultado pasa de genérico a utilizable como
+borrador.</p>
+<p><strong>Observación de verificación (ejemplo):</strong> el plazo o la
+frecuencia de recolección que aparezca en la respuesta debe comprobarse
+contra la <strong>ordenanza o el plan de servicios vigente</strong> del
+municipio, no darse por cierto.</p>
+<h2 id="2-criterios-de-corrección">2. Criterios de corrección</h2>
+<table>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>Qué se observa</th>
+<th>Cumple si…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Claridad</strong></td>
+<td>Qué, formato, extensión, tono</td>
+<td>El prompt define al menos dos de estos elementos</td>
+</tr>
+<tr>
+<td><strong>Contexto</strong></td>
+<td>Para quién y para qué</td>
+<td>El prompt sitúa la tarea en una situación institucional</td>
+</tr>
+<tr>
+<td><strong>Rol o ejemplos</strong></td>
+<td>Papel asumido o modelo a seguir</td>
+<td>Aparece al menos uno (no es obligatorio, pero eleva el nivel)</td>
+</tr>
+<tr>
+<td><strong>Iteración</strong></td>
+<td>Prompt v1 → v2</td>
+<td>Hay dos versiones y una mejora explicada</td>
+</tr>
+<tr>
+<td><strong>Verificación</strong></td>
+<td>Observación de verificación</td>
+<td>Nombra un dato/cifra/norma y una fuente oficial</td>
+</tr>
+<tr>
+<td><strong>Confidencialidad</strong></td>
+<td>Cuidado de la información</td>
+<td>Usa caso ficticio o público y no pega datos de personas</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>Recordar la escala del módulo: 1–59 insuficiente · 60–69 básico ·
+70–84 suficiente · 85–94 alto · 95–100 excelente.</p>
+</blockquote>
+<h2 id="3-errores-frecuentes-y-cómo-orientarlos">3. Errores frecuentes y
+cómo orientarlos</h2>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Cómo se detecta</th>
+<th>Cómo orientar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Prompt vago</td>
+<td>"Resumí esto" sin formato ni destinatario</td>
+<td>Pedir extensión, tono y para quién; comparar antes/después</td>
+</tr>
+<tr>
+<td>No iterar</td>
+<td>Solo hay v1</td>
+<td>Recordar que la primera respuesta es un <strong>borrador</strong>;
+pedir una segunda versión</td>
+</tr>
+<tr>
+<td>Verificar de menos</td>
+<td>No hay observación de verificación</td>
+<td>Preguntar: "¿qué dato comprobarías y dónde?"</td>
+</tr>
+<tr>
+<td>Confiar en datos del modelo</td>
+<td>Repite cifras o normas sin chequear</td>
+<td>Explicar <strong>alucinación</strong> y <strong>fecha de
+corte</strong>; verificar contra la fuente oficial</td>
+</tr>
+<tr>
+<td>Pegar datos reales de ciudadanos</td>
+<td>El prompt contiene nombres, documentos o un expediente real</td>
+<td>Detener, reemplazar por un caso ficticio y repetir la <strong>regla
+de confidencialidad</strong></td>
+</tr>
+<tr>
+<td>Confundir el chat con un buscador</td>
+<td>"Que me diga la normativa exacta"</td>
+<td>Aclarar que genera lo probable; puede inventar. El chat no siempre
+consulta la web</td>
+</tr>
+<tr>
+<td>Describir el estilo en vez de mostrarlo</td>
+<td>Pide "con estilo formal" sin ejemplo</td>
+<td>Usar <strong>few-shot</strong>: dar un ejemplo del formato
+esperado</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-rúbrica-con-niveles-sesión-9">4. Rúbrica con niveles (Sesión
+9)</h2>
+<table>
+<thead>
+<tr>
+<th>Nivel</th>
+<th>Descriptor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Insuficiente (1–59)</strong></td>
+<td>Prompt vago, sin claridad ni contexto; no itera ni verifica; usaría
+datos reales de ciudadanos.</td>
+</tr>
+<tr>
+<td><strong>Suficiente (70–84)</strong></td>
+<td>Incluye claridad y contexto; itera al menos una vez y señala algo a
+verificar.</td>
+</tr>
+<tr>
+<td><strong>Alto (85–94)</strong></td>
+<td>Incluye claridad, contexto y rol o ejemplos; el prompt es
+reutilizable; itera y explica qué cambió.</td>
+</tr>
+<tr>
+<td><strong>Excelente (95–100)</strong></td>
+<td>Todo lo anterior, más: verifica un dato contra la <strong>fuente
+oficial</strong> y explicita la <strong>regla de
+confidencialidad</strong>.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>La rúbrica completa del bloque (sesiones 8, 9 y 10 y trabajo final)
+está en <code>rubrica-modulo.md</code>.</p>
+</blockquote>
+<h2 id="5-confidencialidad--recordatorio-para-el-docente">5.
+Confidencialidad — recordatorio para el docente</h2>
+<ul>
+<li>La práctica se hace con <strong>casos ficticios o públicos</strong>;
+si alguien trae un caso real, se <strong>anonimiza</strong> antes de
+pegar nada.</li>
+<li>Enlazar con el <strong>Bloque 5</strong>: publicar un dato abierto
+con licencia es distinto de subir datos personales a un servicio
+externo.</li>
+<li>Mensaje para el grupo: <strong>el agente sugiere, el humano
+decide</strong>; y la <strong>responsabilidad es del
+funcionario</strong>, no de la herramienta.</li>
+</ul>
+  <footer class="docfoot">Generado desde <a href="guia-solucion-docente-sesion9.md"><code>guia-solucion-docente-sesion9.md</code></a> · Módulo 6 — Inteligencia Artificial · IDT 601</footer>
+</div>
+</body>
+</html>
