@@ -16,37 +16,37 @@
 
     <rect x="110" y="200" width="220" height="210" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
     <rect x="110" y="200" width="220" height="8" fill="#DABC6E"/>
-    <text x="132" y="248" font-size="24" font-weight="700" fill="#2A4D40">1950s — La pregunta</text>
-    <text x="132" y="292" font-size="18" fill="#3D6558">Turing: ¿puede una máquina</text>
-    <text x="132" y="316" font-size="18" fill="#3D6558">comportarse como un</text>
-    <text x="132" y="340" font-size="18" fill="#3D6558">humano?</text>
+    <text x="132" y="248" font-size="17" font-weight="700" fill="#2A4D40">1950s — La pregunta</text>
+    <text x="132" y="292" font-size="14" fill="#3D6558">Turing: ¿puede una máquina</text>
+    <text x="132" y="316" font-size="14" fill="#3D6558">comportarse como un</text>
+    <text x="132" y="340" font-size="14" fill="#3D6558">humano?</text>
 
     <rect x="350" y="200" width="220" height="210" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
     <rect x="350" y="200" width="220" height="8" fill="#DABC6E"/>
-    <text x="372" y="248" font-size="24" font-weight="700" fill="#2A4D40">1960–70s — Reglas</text>
-    <text x="372" y="292" font-size="18" fill="#3D6558">Sistemas expertos:</text>
-    <text x="372" y="316" font-size="18" fill="#3D6558">conocimiento en reglas</text>
-    <text x="372" y="340" font-size="18" fill="#3D6558">"si… entonces".</text>
+    <text x="372" y="248" font-size="17" font-weight="700" fill="#2A4D40">1960–70s — Reglas</text>
+    <text x="372" y="292" font-size="14" fill="#3D6558">Sistemas expertos:</text>
+    <text x="372" y="316" font-size="14" fill="#3D6558">conocimiento en reglas</text>
+    <text x="372" y="340" font-size="14" fill="#3D6558">"si… entonces".</text>
 
     <rect x="590" y="200" width="220" height="210" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
     <rect x="590" y="200" width="220" height="8" fill="#507A6E"/>
-    <text x="612" y="248" font-size="24" font-weight="700" fill="#2A4D40">1980–90s — Aprender</text>
-    <text x="612" y="292" font-size="18" fill="#3D6558">Escribir todas las reglas</text>
-    <text x="612" y="316" font-size="18" fill="#3D6558">es imposible: mejor dar</text>
-    <text x="612" y="340" font-size="18" fill="#3D6558">ejemplos.</text>
+    <text x="612" y="248" font-size="17" font-weight="700" fill="#2A4D40">1980–90s — Aprender</text>
+    <text x="612" y="292" font-size="14" fill="#3D6558">Escribir todas las reglas</text>
+    <text x="612" y="316" font-size="14" fill="#3D6558">es imposible: mejor dar</text>
+    <text x="612" y="340" font-size="14" fill="#3D6558">ejemplos.</text>
 
     <rect x="830" y="200" width="220" height="210" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
     <rect x="830" y="200" width="220" height="8" fill="#507A6E"/>
-    <text x="852" y="248" font-size="24" font-weight="700" fill="#2A4D40">2000s — Datos</text>
-    <text x="852" y="292" font-size="18" fill="#3D6558">Internet produce datos</text>
-    <text x="852" y="316" font-size="18" fill="#3D6558">masivos y hay potencia</text>
-    <text x="852" y="340" font-size="18" fill="#3D6558">de cálculo.</text>
+    <text x="852" y="248" font-size="17" font-weight="700" fill="#2A4D40">2000s — Datos</text>
+    <text x="852" y="292" font-size="14" fill="#3D6558">Internet produce datos</text>
+    <text x="852" y="316" font-size="14" fill="#3D6558">masivos y hay potencia</text>
+    <text x="852" y="340" font-size="14" fill="#3D6558">de cálculo.</text>
 
     <rect x="1070" y="200" width="220" height="210" rx="6" fill="#FFFFFF" stroke="#A9BEBD"/>
     <rect x="1070" y="200" width="220" height="8" fill="#2A4D40"/>
-    <text x="1092" y="248" font-size="24" font-weight="700" fill="#2A4D40">Hoy — Generativa</text>
-    <text x="1092" y="292" font-size="18" fill="#3D6558">No solo clasifica:</text>
-    <text x="1092" y="316" font-size="18" fill="#3D6558">genera texto, imágenes</text>
-    <text x="1092" y="340" font-size="18" fill="#3D6558">y código.</text>
+    <text x="1092" y="248" font-size="17" font-weight="700" fill="#2A4D40">Hoy — Generativa</text>
+    <text x="1092" y="292" font-size="14" fill="#3D6558">No solo clasifica:</text>
+    <text x="1092" y="316" font-size="14" fill="#3D6558">genera texto, imágenes</text>
+    <text x="1092" y="340" font-size="14" fill="#3D6558">y código.</text>
   </g>
 </svg>

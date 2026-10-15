@@ -107,15 +107,26 @@ Note:
       <tr><td>Planificación</td><td>Cómo ordena los pasos.</td><td>El método</td></tr>
     </tbody>
   </table>
-  <img class="diagram diagram--sm" src="assets/esquema-componentes-agente.svg" alt="Cuatro componentes de un agente: modelo, herramientas, memoria y planificación; regla de oro: el agente sugiere, el humano decide." />
 </div>
 <div class="footer"><span>Componentes</span><span>06</span></div>
 
 Note:
 - Presentar los cuatro componentes con su analogía: cerebro, manos, agenda y método.
 - Explicar que un agente no es solo el modelo: es la combinación de las cuatro piezas.
-- **Esquema en pantalla:** modelo, herramientas, memoria y planificación sobre una fila; abajo, la regla de oro "el agente sugiere, el humano decide".
 - **No olvidar:** la planificación puede seguir un flujo definido por una persona o decidir pasos por su cuenta, y eso cambia el nivel de control.
+
+---
+
+<div class="topline"><span class="kicker">05 / Componentes</span><span class="mark">La anatomía</span></div>
+<div class="content single"><h2 class="slide-title">Las cuatro piezas, en un vistazo</h2>
+  <img class="diagram" src="assets/esquema-componentes-agente.svg" alt="Cuatro componentes de un agente: modelo, herramientas, memoria y planificación; regla de oro: el agente sugiere, el humano decide." />
+</div>
+<div class="footer"><span>Componentes</span><span>07</span></div>
+
+Note:
+- **Esquema en pantalla:** recorrer las cuatro piezas sobre una fila y su analogía; abajo, la regla de oro "el agente sugiere, el humano decide".
+- Señalar que las herramientas son lo que lo separa de un chat: actuar sobre el mundo, no solo responder.
+- **No olvidar:** subrayar la regla de oro: el agente sugiere, la decisión final es humana.
 
 ---
 
@@ -128,7 +139,7 @@ Note:
   </div>
   <p class="body-copy">La <strong>planificación</strong> es el método: descompone la tarea en pasos y los ordena; puede seguir un flujo definido por una persona o decidir por su cuenta.</p>
 </div>
-<div class="footer"><span>Componentes</span><span>07</span></div>
+<div class="footer"><span>Componentes</span><span>08</span></div>
 
 Note:
 - Recorrer modelo, herramientas y memoria con un ejemplo local: razonar sobre una consulta, leer la normativa o una planilla, recordar los pasos hechos.
@@ -147,7 +158,7 @@ Note:
   </div>
   <p class="body-copy">Ejemplos locales: requisitos de trámites, derivación de reclamos y resúmenes de informes para una autoridad.</p>
 </div>
-<div class="footer"><span>Ejemplos</span><span>08</span></div>
+<div class="footer"><span>Ejemplos</span><span>09</span></div>
 
 Note:
 - Presentar los tres usos: asistentes, RAG y automatización.
@@ -162,7 +173,7 @@ Note:
   <div><h2 class="slide-title">Responder con fuentes, no solo de memoria</h2><p class="body-copy"><strong>Retrieval-Augmented Generation:</strong> primero el agente <strong>busca</strong> en los documentos propios; luego <strong>genera</strong> la respuesta <strong>citando</strong> lo encontrado. Así reduce las alucinaciones.</p></div>
   <div><div class="card"><h3>Dos pasos</h3><div class="code">buscar → citar</div><p>Un agente que consulta el reglamento interno de la alcaldía y responde con la referencia exacta.</p></div></div>
 </div>
-<div class="footer"><span>RAG</span><span>09</span></div>
+<div class="footer"><span>RAG</span><span>10</span></div>
 
 Note:
 - Explicar los dos pasos: primero buscar en los documentos propios; luego generar citando lo encontrado.
@@ -181,7 +192,7 @@ Note:
   </div>
   <p class="body-copy">Sus errores no son solo una frase: pueden ser una <strong>acción</strong>. Por eso exige controles.</p>
 </div>
-<div class="footer"><span>Riesgos</span><span>10</span></div>
+<div class="footer"><span>Riesgos</span><span>11</span></div>
 
 Note:
 - Explicar que el agente **amplifica los límites del LLM** porque sus errores se traducen en acciones.
@@ -199,7 +210,7 @@ Note:
   </div>
   <p class="quote">El agente sugiere, <em>el humano decide</em>.</p>
 </div>
-<div class="footer"><span>Supervisión humana</span><span>11</span></div>
+<div class="footer"><span>Supervisión humana</span><span>12</span></div>
 
 Note:
 - Presentar los tres controles: **humano en el circuito**, **menor privilegio** (leer pero no enviar, sugerir pero no publicar) y **trazabilidad**.
@@ -221,7 +232,7 @@ Note:
     <div class="flow-step"><strong>Mejorar</strong><p>Ajustar prompts, flujos o fuentes e iterar.</p></div>
   </div>
 </div>
-<div class="footer"><span>Aplicación integrada</span><span>12</span></div>
+<div class="footer"><span>Aplicación integrada</span><span>13</span></div>
 
 Note:
 - Explicar el ciclo de cuatro pasos: **Definir → Armar → Evaluar → Mejorar**, y que vuelve a empezar.
@@ -240,7 +251,7 @@ Note:
   </div>
   <p class="body-copy">Tiempos: definir y armar <strong>35 min</strong> · evaluar, mejorar y preparar la defensa <strong>25 min</strong> · defensa <strong>2 min por equipo</strong>.</p>
 </div>
-<div class="footer"><span>Taller</span><span>13</span></div>
+<div class="footer"><span>Taller</span><span>14</span></div>
 
 Note:
 - Formar equipos de **3 a 4** personas y repartir las dos plantillas (flujo y entrega).
@@ -264,7 +275,7 @@ Note:
   </table>
   <p class="body-copy">Los casos <strong>2 y 4</strong> se resuelven con <strong>chat + criterio + supervisión humana</strong>: no hace falta una plataforma de agentes real. El <strong>flujo del agente se diseña y se documenta</strong> con la plantilla, aunque no se ejecute en vivo.</p>
 </div>
-<div class="footer"><span>Taller</span><span>14</span></div>
+<div class="footer"><span>Taller</span><span>15</span></div>
 
 Note:
 - Leer los cinco casos y pedir que cada equipo elija **uno acotado**.
@@ -281,7 +292,7 @@ Note:
     <div class="split-panel"><h3>Confidencialidad</h3><p><strong>No se suben</strong> datos de ciudadanos ni documentos reservados a un chat público. Se usa un caso ficticio, un dato ya público o un documento abierto.</p></div>
   </div>
 </div>
-<div class="footer"><span>Taller</span><span>15</span></div>
+<div class="footer"><span>Taller</span><span>16</span></div>
 
 Note:
 - Explicar dónde se ubica el punto de control humano en cada caso.
@@ -305,7 +316,7 @@ Note:
   </table>
   <p class="body-copy">Defensa de <strong>2 min</strong> por equipo. No se busca la perfección técnica, sino la <strong>integración consciente</strong> de lo aprendido.</p>
 </div>
-<div class="footer"><span>Taller</span><span>16</span></div>
+<div class="footer"><span>Taller</span><span>17</span></div>
 
 Note:
 - Mostrar la plantilla de entrega: tarea, prompt o flujo, resultado, evaluación crítica y mejora aplicada.
@@ -329,7 +340,7 @@ Note:
     </tbody>
   </table>
 </div>
-<div class="footer"><span>Síntesis del módulo</span><span>17</span></div>
+<div class="footer"><span>Síntesis del módulo</span><span>18</span></div>
 
 Note:
 - Recorrer los seis eslabones: datos y calidad, ingesta, arquitectura, integración, licencias y datos abiertos, IA y agentes.
@@ -348,7 +359,7 @@ Note:
   </div>
   <p class="quote">Datos de calidad + método + <em>supervisión humana</em> = valor público.</p>
 </div>
-<div class="footer"><span>Cierre del módulo</span><span>18</span></div>
+<div class="footer"><span>Cierre del módulo</span><span>19</span></div>
 
 Note:
 - Reforzar la idea fuerza: la IA no reemplaza al profesional público, lo potencia cuando hay criterio.
@@ -365,7 +376,7 @@ Note:
   <p class="lead">Bloque 6 · Sesión 10 · Agentes y taller</p>
   <p class="quote">La IA potencia al profesional público cuando los datos son buenos y hay supervisión humana.</p>
 </div>
-<div class="footer"><span>EGPP · Escuela de Gestión Pública Plurinacional</span><span>19</span></div>
+<div class="footer"><span>EGPP · Escuela de Gestión Pública Plurinacional</span><span>20</span></div>
 
 Note:
 - Agradecer la participación del grupo a lo largo del módulo.

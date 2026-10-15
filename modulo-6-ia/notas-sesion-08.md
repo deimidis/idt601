@@ -1,5 +1,5 @@
 # Notas del orador — Sesión 8
-**Deck:** `deck-sesion-08.html` · 20 diapositivas · 180 min
+**Deck:** `deck-sesion-08.html` · 22 diapositivas · 180 min
 **Tema:** Inteligencia artificial: historia, redes neuronales y aprendizaje
 
 > Guion punteado por diapositiva. Cada viñeta es algo para decir en voz alta;
@@ -37,108 +37,116 @@
 - Recorrer los cinco momentos sin tecnicismos, como un relato: **1950s la pregunta**, **1960–70s las reglas**, **1980–90s el aprendizaje**, **2000s datos y cómputo**, **hoy IA generativa**.
 - Contar el punto de partida: **Turing** y su pregunta por una máquina que se comporte como humano.
 - Explicar el giro de los 80–90: codificar todas las reglas del mundo es imposible, mejor dar **ejemplos**.
-- **Esquema en pantalla (línea de tiempo):** cinco hitos sobre la línea; conectar el presente con la vida cotidiana (traducción, asistentes de chat, reconocimiento de imágenes).
 - **No olvidar:** el mensaje puente: en toda esta historia conviven las **dos filosofías** que veremos ahora en detalle.
 
-## Slide 6 — Dos perspectivas
+## Slide 6 — Cinco momentos en una línea de tiempo
+- **Esquema en pantalla (línea de tiempo):** recorrer los cinco hitos de izquierda a derecha y conectar cada uno con la vida cotidiana (traducción, asistentes de chat, reconocimiento de imágenes).
+- Señalar la flecha continua y el último punto, más oscuro: la historia no terminó, hoy es la IA generativa.
+- **No olvidar:** insistir en que en toda esta historia conviven las **dos filosofías** (decirle qué hacer o dejar que descubra).
+
+## Slide 7 — Dos perspectivas
 - Leer la tabla comparativa con el grupo, fila por fila, y detenerse en **explicabilidad** y **cantidad de datos**.
 - Aclarar que el determinista es **predecible y auditable**; el indeterminista es **probabilístico** y a veces "caja negra".
 - Decir con claridad: **no es cuál es mejor, sino cuál se ajusta al problema**.
 - Preguntar: "¿qué trámites de su institución son 100% verificables y cuáles requieren criterio?".
 - **No olvidar:** remarcar que un sistema indeterminista **puede equivocarse** y a veces no sabemos por qué; por eso exige control humano.
 
-## Slide 7 — Perspectiva determinista
+## Slide 8 — Perspectiva determinista
 - Explicar la regla `si (condición) entonces (acción)`: misma entrada, **siempre** la misma salida.
 - Destacar las ventajas: **predecible, auditable y fácil de explicar**.
 - Usar los ejemplos: la verificación de documentos de un trámite y un **semáforo programado** que cumple un plan, no "piensa".
 - Señalar el límite: ante un caso **no previsto**, el sistema no sabe qué hacer.
 - **No olvidar:** su fuerza y su debilidad son la misma: solo hace lo que **alguien escribió** antes.
 
-## Slide 8 — Perspectiva indeterminista
+## Slide 9 — Perspectiva indeterminista
 - Explicar que el sistema **aprende patrones de ejemplos** y que las reglas se construyen de los datos, no se escriben.
 - Señalar que la salida es **probabilística**: da una respuesta con un nivel de confianza, no con certeza.
 - Ilustrar con el clasificador de **reclamos por tema**, que aprendió de miles de reclamos ya derivados.
 - Hablar del límite: **menos explicable a veces**, la llamada "caja negra".
 - **No olvidar:** aclarar que "caja negra" no significa magia, sino que nos cuesta **seguir el razonamiento** de la máquina.
 
-## Slide 9 — ¿Cuándo conviene cada uno?
+## Slide 10 — ¿Cuándo conviene cada uno?
 - Recorrer las tres tarjetas: determinista para **requisitos claros**, indeterminista cuando **hay patrones**, combinada con **reglas + datos**.
 - Aterrizar con lo local: un trámite municipal de documentos, la predicción de demanda de un servicio según estación y clima.
 - Explicar la combinada con el **filtro de spam**: reglas del remitente más aprendizaje del contenido.
 - Dar la regla práctica: "¿puedo escribir la regla en una frase? → determinista; ¿necesito ver muchos ejemplos? → indeterminista".
 - **No olvidar:** hacer la transición: "cuando el sistema realmente aprende de los datos, aparece la herramienta estrella: **la red neuronal**".
 
-## Slide 10 — La neurona artificial
+## Slide 11 — La neurona artificial
 - Explicar la neurona artificial con la analogía del **funcionario de ventanilla**: recibe papeles (entradas), da más peso a unos y decide una respuesta (salida).
 - Definir **entradas**, **ponderación** y **salida** con palabras simples.
 - Dibujar en la pizarra una neurona con varias entradas y una salida.
 - Anticipar que esas "importancias" se llaman **pesos** y serán la clave del aprendizaje.
 - **No olvidar:** quedarse en la analogía cotidiana, sin fórmulas, porque el público no es especialista.
 
-## Slide 11 — Las capas de la red
+## Slide 12 — Las capas de la red
 - Presentar las tres capas: **entrada** (recibe los datos), **ocultas** (combinan y procesan) y **salida** (entrega el resultado).
 - Usar la analogía de la **cadena de decisiones**: cada oficina recibe lo que resolvió la anterior y lo refina.
-- **Esquema en pantalla (red):** mostrar 3 entradas → capa oculta → salida, y que cada flecha tiene un peso (`w`, `v`).
 - Aclarar que las capas ocultas son las que permiten combinar información compleja.
 - **No olvidar:** decir que todas las conexiones entre capas tienen **pesos** que la red aprenderá a ajustar.
 
-## Slide 12 — Pesos y entrenamiento
+## Slide 13 — La red, de un vistazo
+- **Esquema en pantalla (red):** mostrar 3 entradas → capa oculta → salida y señalar que cada flecha es un peso (`w`, `v`).
+- Recorrer el diagrama de izquierda a derecha: los datos entran, las capas ocultas combinan la información y la salida responde.
+- **No olvidar:** repetir que aprender es **ajustar esos pesos** para reducir el error, la frase que cierra el esquema.
+
+## Slide 14 — Pesos y entrenamiento
 - Definir el **peso** como cuánto importa cada entrada, y sentenciar: **aprender = ajustar los pesos**.
 - Recorrer el ciclo: ejemplos → salida → **error** → ajuste de pesos → repetir. Nombrar la **función de pérdida** como la medida del error.
 - Explicar la **época**: una pasada completa sobre **todos** los ejemplos de entrenamiento.
 - Usar la analogía de **afinar un instrumento** o de **tirar al aro**: repetir y corregir según el error.
 - **No olvidar:** recalcar que el **error** es el motor del aprendizaje; sin comparar con la respuesta esperada la red no aprende.
 
-## Slide 13 — Funciona en la demo, falla en producción
+## Slide 15 — Funciona en la demo, falla en producción
 - Explicar por qué medir con los **mismos datos** del entrenamiento engaña: el modelo los **memoriza**.
 - Presentar los tres grupos: **entrenamiento** (con él aprende), **validación** (ajustes durante el desarrollo) y **prueba** (nunca lo vio).
 - Definir **sobreajuste**: acierta en lo conocido y falla en lo nuevo; es la causa típica del "en la demo andaba y en producción no".
 - Aclarar que el conjunto de prueba **no se usa para aprender**: es el espejo de la realidad.
 - **No olvidar:** sin conjunto de prueba no podemos saber si el modelo servirá fuera de la demo.
 
-## Slide 14 — Cómo medimos: exactitud y precisión
+## Slide 16 — Cómo medimos: exactitud y precisión
 - Definir **exactitud**: proporción de aciertos sobre el **total** de casos evaluados.
 - Definir **precisión**: de los casos que el modelo marcó como **positivos**, cuántos lo eran de verdad.
 - Aclarar que **no son lo mismo**: una exactitud alta con precisión baja (o al revés) obliga a preguntar *para qué* se usará el modelo.
 - Dar un ejemplo de gestión: no es lo mismo filtrar unos pocos casos dudosos que decidir sobre un trámite.
 - **No olvidar:** elegir la métrica es una decisión de gestión, porque depende del costo del error.
 
-## Slide 15 — Tres tipos de aprendizaje
+## Slide 17 — Tres tipos de aprendizaje
 - Presentar la tabla central: **supervisado** (datos etiquetados), **no supervisado** (sin etiquetas) y **por refuerzo** (interacción).
 - Explicar la señal de cada uno: **respuesta correcta**, **estructura de los datos**, **recompensa o penalización**.
 - Precisar el vocabulario: el preentrenamiento **corrige los pesos** comparando con la respuesta correcta; el **refuerzo** es la recompensa del aprendizaje por refuerzo.
 - Adelantar que esta tabla se retomará en el cierre y que es la clave de la dinámica.
 - **No olvidar:** decir que la elección del tipo depende de **qué datos tenemos** y de **qué problema queremos resolver**.
 
-## Slide 16 — Los tres tipos, de cerca
+## Slide 18 — Los tres tipos, de cerca
 - Profundizar el **supervisado**: etiquetas, clasificación y regresión; ejemplo, clasificar un trámite como "urgente" o "no urgente".
 - Profundizar el **no supervisado**: agrupar y hallar patrones; ejemplo, segmentar ciudadanos según su uso de servicios.
 - Profundizar el **refuerzo**: ensayo, error y recompensa; ejemplo, optimizar semáforos probando combinaciones.
 - Dar las tres preguntas de control: **¿hay etiquetas? ¿se busca agrupar? ¿hay una acción y una recompensa?**.
 - **No olvidar:** anunciar que esas tres preguntas son exactamente lo que se usará en la **Ronda 2** de la dinámica.
 
-## Slide 17 — Casos en la gestión pública
+## Slide 19 — Casos en la gestión pública
 - Mostrar que las técnicas **ya se usan en el Estado**, no son ciencia ficción.
 - Supervisado: **clasificar reclamos** por tema y **predecir la demanda** de un servicio para planificar turnos.
 - No supervisado: **segmentar beneficiarios** de programas sociales y **detectar anomalías** en gastos.
 - Por refuerzo: **optimizar rutas** de recolección de residuos y asignar recursos dinámicamente.
 - **No olvidar:** aterrizar con ejemplos bolivianos concretos de alcaldías, gobernaciones y centros de salud.
 
-## Slide 18 — Dinámica
+## Slide 20 — Dinámica
 - Explicar la consigna: **3 equipos** de 3–4 personas, repartir las tarjetas; 30 minutos en total.
 - Describir la **Ronda 1** (¿regla o dato? determinista, indeterminista o combinada) y la **Ronda 2** (supervisado, no supervisado o refuerzo), con **4 casos por ronda**.
 - Indicar la **puesta en común**: cada equipo comparte el caso más fácil, el más discutido y por qué (2–3 min por equipo).
 - Recordar que la opción **"combinada"** suele ser válida, como la verificación de formularios que mezcla reglas y aprendizaje.
 - **No olvidar:** valorar la **justificación** del equipo, no solo la respuesta; el entregable es la **ficha de la dinámica** y los criterios están en la rúbrica (Sesión 8).
 
-## Slide 19 — Cierre
+## Slide 21 — Cierre
 - Repetir el criterio central: **no es cuál es mejor, sino cuál se ajusta al problema**.
 - Recordar que la red aprende **ajustando pesos** para reducir el **error**, y que se evalúa con un conjunto que **nunca vio** (prueba), vigilando el sobreajuste.
 - Repasar los tres tipos: **supervisado, no supervisado y por refuerzo**, según los datos y el problema.
 - Anticipar la próxima sesión: **los LLM y el prompting**, los modelos que generan texto.
 - **No olvidar:** abrir el espacio de preguntas y dejar claro que las técnicas ya se aplican a trámites, anomalías, segmentación y optimización de recursos.
 
-## Slide 20 — Gracias
+## Slide 22 — Gracias
 - Agradecer la participación y el trabajo en la dinámica.
 - Recordar que la próxima sesión abre los **modelos de lenguaje (LLM)** y el prompting.
 - Indicar dónde quedan los materiales y a quién dirigirse por dudas.
