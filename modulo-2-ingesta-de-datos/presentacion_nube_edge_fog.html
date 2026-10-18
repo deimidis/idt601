@@ -7,8 +7,8 @@
 		<title>La nube y sus bordes — contenido extra (IDT 601)</title>
 
 		<!-- Tema reveal.js — EGPP (assets/theme-egpp.css) -->
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/reset.css" />
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/reveal.css" />
+		<link rel="stylesheet" href="../../../Presentaciones%20Revealjs/reveal.js/dist/reset.css" />
+		<link rel="stylesheet" href="../../../Presentaciones%20Revealjs/reveal.js/dist/reveal.css" />
 		<link rel="stylesheet" href="assets/theme-egpp.css" />
 	</head>
 	<body>
@@ -41,7 +41,7 @@ Note:
   <p class="body-copy">Durante décadas los datos vivieron en <strong>servidores propios</strong>. Después se mudaron a la <strong>nube</strong>. Hoy, además, se procesan <strong>cerca de donde nacen</strong>: en el borde.</p>
   <div class="diagram" style="margin-top:26px">
   <svg viewBox="0 0 1520 300" width="100%" role="img" aria-label="Del servidor propio a la nube y de la nube al borde">
-    <g font-family="Calibri, Segoe UI, Arial, sans-serif">
+    <g font-family="IBM Plex Sans, Calibri, Segoe UI, Arial, sans-serif">
       <rect x="20" y="60" width="430" height="170" rx="10" fill="#ffffff" stroke="#a4bfbe" stroke-width="2"/>
       <text x="235" y="130" text-anchor="middle" font-size="36" fill="#2a4d40" font-weight="600">Servidor propio</text>
       <text x="235" y="180" text-anchor="middle" font-size="26" fill="#3d6558">en casa (on-premise)</text>
@@ -101,7 +101,7 @@ Note:
   </div>
   <div>
     <svg viewBox="0 0 720 600" width="100%" role="img" aria-label="Instituciones y personas usan servicios alquilados en la nube">
-      <g font-family="Calibri, Segoe UI, Arial, sans-serif">
+      <g font-family="IBM Plex Sans, Calibri, Segoe UI, Arial, sans-serif">
         <rect x="60" y="40" width="600" height="360" rx="18" fill="#eaf0ed" stroke="#a4bfbe" stroke-width="3"/>
         <text x="360" y="95" text-anchor="middle" font-size="34" fill="#2a4d40" font-weight="600">NUBE</text>
         <rect x="110" y="130" width="500" height="70" rx="10" fill="#ffffff" stroke="#a4bfbe" stroke-width="2"/>
@@ -134,7 +134,7 @@ Note:
   <div class="split">
     <div>
       <svg viewBox="0 0 720 460" width="100%" role="img" aria-label="Servicios de nube: IaaS, PaaS y SaaS">
-        <g font-family="Calibri, Segoe UI, Arial, sans-serif">
+        <g font-family="IBM Plex Sans, Calibri, Segoe UI, Arial, sans-serif">
           <rect x="80" y="40" width="560" height="110" rx="10" fill="#ffffff" stroke="#dabc6e" stroke-width="4"/>
           <text x="360" y="90" text-anchor="middle" font-size="34" fill="#2a4d40" font-weight="600">SaaS</text>
           <text x="360" y="128" text-anchor="middle" font-size="24" fill="#3d6558">aplicación lista para usar</text>
@@ -197,7 +197,7 @@ Note:
   <p class="body-copy">Todo dato enviado a la nube hace un <strong>viaje de ida y vuelta</strong>. Cuanto más lejos el centro de datos, más tarda en volver la respuesta.</p>
   <div class="diagram" style="margin-top:24px">
   <svg viewBox="0 0 1520 300" width="100%" role="img" aria-label="La latencia crece con la distancia al centro de datos">
-    <g font-family="Calibri, Segoe UI, Arial, sans-serif">
+    <g font-family="IBM Plex Sans, Calibri, Segoe UI, Arial, sans-serif">
       <line x1="80" y1="150" x2="1450" y2="150" stroke="#a4bfbe" stroke-width="4"/>
       <circle cx="120" cy="150" r="14" fill="#507a6e"/>
       <circle cx="560" cy="150" r="14" fill="#507a6e"/>
@@ -235,7 +235,7 @@ Note:
   </div>
   <div>
     <svg viewBox="0 0 720 600" width="100%" role="img" aria-label="El edge procesa en el lugar y solo envía lo necesario a la nube">
-      <g font-family="Calibri, Segoe UI, Arial, sans-serif">
+      <g font-family="IBM Plex Sans, Calibri, Segoe UI, Arial, sans-serif">
         <rect x="60" y="120" width="600" height="360" rx="18" fill="#eaf0ed" stroke="#a4bfbe" stroke-width="3"/>
         <text x="360" y="180" text-anchor="middle" font-size="32" fill="#2a4d40" font-weight="600">EN EL LUGAR</text>
         <rect x="120" y="210" width="220" height="220" rx="12" fill="#ffffff" stroke="#a4bfbe" stroke-width="2"/>
@@ -263,7 +263,7 @@ Note:
 <div class="content">
   <div>
     <svg viewBox="0 0 720 640" width="100%" role="img" aria-label="Capas de procesamiento: dispositivos, edge, fog y nube">
-      <g font-family="Calibri, Segoe UI, Arial, sans-serif">
+      <g font-family="IBM Plex Sans, Calibri, Segoe UI, Arial, sans-serif">
         <rect x="40" y="500" width="640" height="90" rx="10" fill="#ffffff" stroke="#a4bfbe" stroke-width="2"/>
         <text x="360" y="552" text-anchor="middle" font-size="28" fill="#2a4d40">dispositivos y sensores</text>
         <rect x="80" y="380" width="560" height="90" rx="10" fill="#ffffff" stroke="#a4bfbe" stroke-width="2"/>
@@ -321,7 +321,7 @@ Note:
   <p class="body-copy">Decidir <strong>dónde</strong> procesar es parte de diseñar la ingesta. Lo urgente se resuelve en el borde (<strong>streaming</strong>); lo agregado sube al fog; la nube guarda y analiza el histórico (<strong>batch</strong>).</p>
   <div class="diagram" style="margin-top:24px">
   <svg viewBox="0 0 1520 320" width="100%" role="img" aria-label="Flujo de datos del borde al fog y a la nube">
-    <g font-family="Calibri, Segoe UI, Arial, sans-serif">
+    <g font-family="IBM Plex Sans, Calibri, Segoe UI, Arial, sans-serif">
       <rect x="40" y="70" width="400" height="180" rx="12" fill="#ffffff" stroke="#a4bfbe" stroke-width="2"/>
       <text x="240" y="135" text-anchor="middle" font-size="32" fill="#2a4d40" font-weight="600">Borde</text>
       <text x="240" y="180" text-anchor="middle" font-size="24" fill="#3d6558">streaming: decide ya</text>
@@ -368,10 +368,10 @@ Note:
 			</div>
 		</div>
 
-		<script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/reveal.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/plugin/notes.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/plugin/markdown.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/reveal.js@6.0.1/dist/plugin/highlight.js"></script>
+		<script src="../../../Presentaciones%20Revealjs/reveal.js/dist/reveal.js"></script>
+		<script src="../../../Presentaciones%20Revealjs/reveal.js/dist/plugin/notes.js"></script>
+		<script src="../../../Presentaciones%20Revealjs/reveal.js/dist/plugin/markdown.js"></script>
+		<script src="../../../Presentaciones%20Revealjs/reveal.js/dist/plugin/highlight.js"></script>
 		<script>
 			Reveal.initialize({
 				width: 1920,
